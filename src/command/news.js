@@ -36,7 +36,7 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if (GameModeType === "stw") {
     Fortnite.NewsSTW(lang).then(res => {
       const embedNewsSTW = new Discord.MessageEmbed()
-        .setTitle(`**Creative Mode News**`)
+        .setTitle(`**Save The World News**`)
         .setImage(res.data.image)
         .setColor(0x262626);
       console.log(res);
@@ -50,7 +50,7 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if (GameModeType === "creative") {
     Fortnite.NewsCreative(lang).then(res => {
       const embedNewsCreative = new Discord.MessageEmbed()
-        .setTitle(`**Save The World News**`)
+        .setTitle(`**Creative Mode News**`)
         .setImage(res.data.image)
         .setColor(0x262626);
       if (res.data.image == null) {
@@ -58,7 +58,7 @@ exports.run = async (client, message, args, Fortnite) => {
           `No hay noticias del idioma o modo seleccionado.`
         );
       }
-      
+/*
   var gamemodeType = args[0];
     if (!args[0] && !args[1]) {
     (lang = 'en'), (gamemodeType = 'br');
@@ -72,6 +72,7 @@ exports.run = async (client, message, args, Fortnite) => {
         .setTitle(`**${__title__}**`)
         .setColor(0x262326)
       message.channel.send({ embed: news });
+*/
       message.channel.send({ embed: embedNewsCreative });
     });
   }
