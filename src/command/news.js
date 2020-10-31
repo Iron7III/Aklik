@@ -25,7 +25,7 @@ exports.run = async (client, message, args, Fortnite) => {
   if (GameModeType === "br" || !GameModeType) {
     Fortnite.NewsBR(lang).then(res => {
       const embedNewsBR = new Discord.MessageEmbed()
-        .setTitle(`<:590234859486707752:590432801556267008> **${LANG.news_BR[lang]}**`)
+        .setTitle(`<:590234859486707752:590432801556267008> **Battle Royale News**`)
         .setImage(res.data.image)
         .setColor(0x262626);
       if (res.data.image == null) {
@@ -38,7 +38,7 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if (GameModeType === "stw") {
     Fortnite.NewsSTW(lang).then(res => {
       const embedNewsSTW = new Discord.MessageEmbed()
-        .setTitle(`**__${LANG.news_STW[lang]}__**`)
+        .setTitle(`**Creative Mode News**`)
         .setImage(res.data.image)
         .setColor(0x262626);
       console.log(res);
@@ -52,7 +52,7 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if (GameModeType === "creative") {
     Fortnite.NewsCreative(lang).then(res => {
       const embedNewsCreative = new Discord.MessageEmbed()
-        .setTitle(`**__${LANG.news_CREATIVE[lang]}__**`)
+        .setTitle(`**Save The World News**`)
         .setImage(res.data.image)
         .setColor(0x262626);
       if (res.data.image == null) {
