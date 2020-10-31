@@ -5,6 +5,12 @@ const client = new Discord.Client({
   fetchAllMembers: true
 });
 const { MessageEmbed } = require("discord.js");
+const FortniteAPI = require("fortnite-api-com");
+const config = {
+  apikey: "f932b4642b7f68bee1f619a073524a174b03e942498cbaa0626e245b11905e1b",
+  language: "es"
+};
+var Fortnite = new FortniteAPI(config);
 
 //EVENTO ready
 client.on("ready", () => {
@@ -29,7 +35,7 @@ client.on("message", async message => {
   if (message.channel.nsfw) return;
   try {
     let archivo = require(`./command/${cmd}.js`);
-    archivo.run(client, message, args);
+    archivo.run(client, message, args, Fortnite);
   } catch (e) {
     message.channel.send({ embed: commandNotFound }), console.log(e.stack);
   } finally {
