@@ -29,7 +29,7 @@ client.on("message", async message => {
   if (message.channel.nsfw) return;
   try {
     let archivo = require(`./command/${cmd}.js`);
-    archivo.run(client, message, args, Fortnite);
+    archivo.run(client, message, args);
   } catch (e) {
     message.channel.send({ embed: commandNotFound }), console.log(e.stack);
   } finally {
