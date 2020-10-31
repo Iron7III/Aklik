@@ -7,8 +7,6 @@ const client = new Discord.Client({
 });
 // {MessageEmbed}
 const { MessageEmbed } = require("discord.js");
-// LANGUAGES JSON
-const LANG = require("../languages.json");
 
 exports.run = async (client, message, args, Fortnite) => {
   var GameModeType = args[0];
