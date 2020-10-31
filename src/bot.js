@@ -5,12 +5,6 @@ const client = new Discord.Client({
   fetchAllMembers: true
 });
 const { MessageEmbed } = require("discord.js");
-const FortniteAPI = require("fortnite-api-com");
-const config = {
-  apikey: "f932b4642b7f68bee1f619a073524a174b03e942498cbaa0626e245b11905e1b",
-  language: "es"
-};
-var Fortnite = new FortniteAPI(config);
 
 //EVENTO ready
 client.on("ready", () => {
