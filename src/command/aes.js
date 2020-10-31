@@ -16,9 +16,7 @@ exports.run = async (client, message, args, Fortnite) => {
       .addField(`<:1F511_color:769615338538139679> **KEY**`, `\`\`\`fix\n${res.data.mainKey}\n\`\`\``, false)
       .addField(
         `<:1F511_color:769615338538139679> **DYNAMIC KEYS [\`${res.data.dynamicKeys.length}\`]**`,
-        res.data.dynamicKeys
-          .map(t => `\`\`\`md\n< ${t.pakFilename} >\n${t.key}\n\`\`\``)
-          .join("\n"),
+        res.data.dynamicKeys.map(t => `\`\`\`md\n< ${t.pakFilename} >\n${t.key}\n\`\`\``).join("\n"),
         false
       )
       .addField(
