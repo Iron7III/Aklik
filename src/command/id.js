@@ -13,8 +13,16 @@ exports.run = async (client, message, args, Fortnite) => {
     console.log(res);
     const embed = new Discord.MessageEmbed()
       .setTitle(`**__${res.data.name}__**`)
-      .addField(`**DESCRIPCIÓN**`, `\`\`\`${res.data.description}\`\`\``, false)
-      .addField(`**TIPO**`, `\`\`\`${res.data.type.displayValue}\`\`\``, true)
+      .addField(
+        `**DESCRIPCIÓN**`,
+        `\`\`\`${res.data.description}\`\`\``,
+        false
+      )
+      .addField(
+        `**TIPO**`,
+        `\`\`\`${res.data.type.displayValue}\`\`\``,
+        true
+      )
       .addField(
         `**Rareza**`,
         `\`\`\`${res.data.rarity.displayValue}\`\`\``,
@@ -25,11 +33,23 @@ exports.run = async (client, message, args, Fortnite) => {
         `\`\`\`CAPITULO ${res.data.introduction.chapter} | TEMPORADA ${res.data.introduction.season}\`\`\``,
         false
       )
-      .addField(`**PATH**`, `\`\`\`${res.data.path}\`\`\``, false);
+      .addField(
+        `**PATH**`,
+        `\`\`\`${res.data.path}\`\`\``,
+        false
+      )
     if (res.data.set != null) {
-      embed.addField(`**CONJUNTO**`, `\`\`\`${res.data.set.text}\`\`\``, false);
+      embed.addField(
+        `**CONJUNTO**`,
+        `\`\`\`${res.data.set.text}\`\`\``,
+        false
+      )
     } else if (res.data.set == null) {
-      embed.addField(`**CONJUNTO**`, `\`\`\`No tiene\`\`\``, false);
+      embed.addField(
+        `**CONJUNTO**`,
+        `\`\`\`No tiene\`\`\``,
+        false
+      )
     }
     if (res.data.images.featured != null) {
       embed.setImage(res.data.images.featured);

@@ -14,7 +14,7 @@ exports.run = async (client, message, args, Fortnite) => {
     .setColor("#98ff98");
   const m = await message.channel.send({embed: PingEmbed});
   const FinalPingEmbed = new Discord.MessageEmbed()
-    .setDescription(`**__Ping:__** \`${m.createdTimestamp-message.createdTimestamp}ms\``)
+    .addField(`**Ping**`,` \`${m.createdTimestamp-message.createdTimestamp}ms\``,false)
     .setColor("#98ff98");
   m.edit({embed: FinalPingEmbed});
 };
