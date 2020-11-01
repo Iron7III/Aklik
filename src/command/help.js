@@ -9,8 +9,9 @@ const client = new Discord.Client({
 const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args, Fortnite) => {
-    const embedAES = new Discord.MessageEmbed()
+   /* const embedAES = new Discord.MessageEmbed()
       .setTitle('xd')
-    message.channel.send(client.uptime)
-    client.guild('514150100575191040').emojis()
+    message.channel.send(client.uptime)*/
+    let emoji = client.emojis('768962558299602964');
+    message.channel.send(emoji)
 }
