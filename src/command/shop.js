@@ -34,7 +34,7 @@ exports.run = async (client, message, args, Fortnite) => {
         false
       );
     }
-    if (res.data.specialDailyy != null) {
+    if (res.data.specialDaily != null) {
       ItemShop.addField(
         `<:1F383_color:768962558299602964> **__${res.data.specialDaily.name.toUpperCase()}__**`,
         `\`\`\`md\n${res.data.specialDaily.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
