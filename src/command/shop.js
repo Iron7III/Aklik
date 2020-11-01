@@ -29,14 +29,14 @@ exports.run = async (client, message, args, Fortnite) => {
     }
     if (res.data.specialFeatured != null) {
       ItemShop.addField(
-        `**__${res.data.specialFeatured.name.toUpperCase()}__**`,
+        `**${res.data.specialFeatured.name.toUpperCase()}**`,
         `\`\`\`md\n${res.data.specialFeatured.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.specialDaily != null) {
       ItemShop.addField(
-        `<:1F383_color:768962558299602964> **__${res.data.specialDaily.name.toUpperCase()}__**`,
+        `<:1F383_color:768962558299602964> **${res.data.specialDaily.name.toUpperCase()}**`,
         `\`\`\`md\n${res.data.specialDaily.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
