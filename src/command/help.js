@@ -13,5 +13,5 @@ exports.run = async (client, message, args, Fortnite) => {
       .setTitle('xd')
     message.channel.send(client.uptime)*/
     let emoji = client.emojis('768962558299602964');
-    message.channel.send(emoji)
+    console.log(client)
 }
