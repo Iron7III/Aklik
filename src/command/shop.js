@@ -16,28 +16,28 @@ exports.run = async (client, message, args, Fortnite) => {
     if (res.data.featured != null) {
       ItemShop.addField(
         `<:2B50_color:768962558132092938> **${res.data.featured.name.toUpperCase()}**`,
-        `\`\`\`md\n${res.data.featured.entries.map(t => `< ${t.finalPrice}ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
+        `\`\`\`md\n${res.data.featured.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.daily != null) {
       ItemShop.addField(
         `<:E0AB_color:769568936077033482> **${res.data.daily.name.toUpperCase()}**`,
-        `\`\`\`md\n${res.data.daily.entries.map(t => `< ${t.finalPrice}ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
+        `\`\`\`md\n${res.data.daily.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.specialFeatured != null) {
       ItemShop.addField(
         `**__${res.data.specialFeatured.name.toUpperCase()}__**`,
-        `\`\`\`md\n${res.data.specialFeatured.entries.map(t => `< ${t.finalPrice}ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
+        `\`\`\`md\n${res.data.specialFeatured.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.specialDailyy != null) {
       ItemShop.addField(
         `<:1F383_color:768962558299602964> **__${res.data.specialDaily.name.toUpperCase()}__**`,
-        `\`\`\`md\n${res.data.specialDaily.entries.map(t => `< ${t.finalPrice}ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
+        `\`\`\`md\n${res.data.specialDaily.entries.map(t => `< ${t.finalPrice} ⓥ > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
