@@ -23,21 +23,21 @@ exports.run = async (client, message, args, Fortnite) => {
     if (res.data.daily != null) {
       ItemShop.addField(
         `<:E0AB_color:769568936077033482> **${res.data.daily.name.toUpperCase()}**`,
-        `\`\`\`\n${res.data.daily.entries.map(t => t.items[0].name).join("\n")}\n\`\`\``,
+        `\`\`\`\n${res.data.daily.entries.map(t => `< ${t.finalPrice} > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.specialFeatured != null) {
       ItemShop.addField(
         `**__${res.data.specialFeatured.name.toUpperCase()}__**`,
-        `\`\`\`\n${res.data.specialFeatured.entries.map(t => t.items[0].name).join("\n")}\n\`\`\``,
+        `\`\`\`\n${res.data.specialFeatured.entries.map(t => `< ${t.finalPrice} > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.specialDailyy != null) {
       ItemShop.addField(
         `<:1F383_color:768962558299602964> **__${res.data.specialDaily.name.toUpperCase()}__**`,
-        `\`\`\`\n${res.data.specialDaily.entries.map(t => t.items[0].name).join("\n")}\n\`\`\``,
+        `\`\`\`\n${res.data.specialDaily.entries.map(t => `< ${t.finalPrice} > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
