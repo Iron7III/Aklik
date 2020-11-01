@@ -15,7 +15,7 @@ var Fortnite = new FortniteAPI(config);
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]");
-  console.log(client.guilds.cache)
+  console.log(client.emojis.cache.get("768962558299602964"))
   client.user.setActivity("NEW UPDATE!", { type: "WATCHING" });
 });
 

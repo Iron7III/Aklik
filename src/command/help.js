@@ -12,6 +12,5 @@ exports.run = async (client, message, args, Fortnite) => {
    /* const embedAES = new Discord.MessageEmbed()
       .setTitle('xd')
     message.channel.send(client.uptime)*/
-    let emoji = client.emojis('768962558299602964');
-    console.log(client)
+
 }
