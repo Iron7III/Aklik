@@ -34,18 +34,22 @@ client.on("message", async message => {
   if (!message.content.startsWith(`${prefix}${cmd}`)) return;
   if (message.channel.type === "dm") return;
   if (message.channel.nsfw) return;
+  var commandStatus;
   try {
     let archivo = require(`./command/${cmd}.js`);
     archivo.run(client, message, args, Fortnite);
+    commandStatus=true
   } catch (e) {
     message.channel.send({ embed: commandNotFound }),
-    console.log(
-      `[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[31m${cmd}\x1b[0m]`
-    );
-  } finally {
+    console.log(e.stack),
+    commandStatus=false,
     console.log(
       `[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[32m${cmd}\x1b[0m]`
     );
+  } finally {
+    if(commandStatus==true){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[${cmd}]`)}
+    else if(commandStatus==false)
+    
   }
 });
 
