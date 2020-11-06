@@ -12,7 +12,12 @@ exports.run = async (client, message, args, Fortnite) => {
   Fortnite.CosmeticsSearchByID(args[0], "es").then(res => {
     console.log(res);
     const embed = new Discord.MessageEmbed()
-      .setTitle(`**__${res.data.name}__**`)
+      .setTitle(`**${res.data.name.toUpperCase()}**`)
+      .addField(
+        `**ID**`,
+        `\`\`\`${res.data.id}\`\`\``,
+        false
+      )
       .addField(
         `**DESCRIPCIÓN**`,
         `\`\`\`${res.data.description}\`\`\``,
@@ -24,8 +29,8 @@ exports.run = async (client, message, args, Fortnite) => {
         true
       )
       .addField(
-        `**Rareza**`,
-        `\`\`\`${res.data.rarity.displayValue}\`\`\``,
+        `**RAREZA**`,
+        `\`\`\`${res.data.rarity.displayValue.toUpperCase()}\`\`\``,
         false
       )
       .addField(
@@ -55,6 +60,12 @@ exports.run = async (client, message, args, Fortnite) => {
       embed.setImage(res.data.images.featured);
     } else if (res.data.images.featured == null) {
       embed.setImage(res.data.images.icon);
+    } else if(res.data.shopHistory != null) {
+      embed.addField(
+        `**HISTORIAL DE TIENDA**`,
+        `${res.data.shopHistory.join(`\n`)}`,
+        false
+      )
     }
     message.channel.send({ embed: embed });
   });

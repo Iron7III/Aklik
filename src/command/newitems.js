@@ -13,7 +13,8 @@ exports.run = async (client, message, args, Fortnite) => {
     console.log(res.data.items[0]);
     const embedAES = new Discord.MessageEmbed()
       .setTitle(`**__COSMETICOS NUEVOS DEL ULTIMO PARCHE__**`)
-      .setDescription(`<:26A0_color1:769572886662610945> Cosmetics added in 14.40 aren't in the list\n\`\`\`\n${res.data.items.map(t => t.name).join("\n")}\n\`\`\``)
+      .addField(`**COSMETICS [NAME]**`,`\`\`\`\n${res.data.items.map(t => `${t.name}`).join("\n")}\n\`\`\``,false)
+      .addField(`COSMETICS [ID]`,`\`\`\`\n${res.data.items.map(t => `${t.id}`).join("\n")}\n\`\`\``,false)
       .setColor("#ceedff");
     message.channel.send({ embed: embedAES });
   });
