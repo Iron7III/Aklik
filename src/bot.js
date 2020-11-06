@@ -42,14 +42,10 @@ client.on("message", async message => {
   } catch (e) {
     message.channel.send({ embed: commandNotFound }),
     console.log(e.stack),
-    commandStatus=false,
-    console.log(
-      `[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[32m${cmd}\x1b[0m]`
-    );
+    commandStatus=false
   } finally {
-    if(commandStatus==true){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[${cmd}]`)}
-    else if(commandStatus==false)
-    
+    if(commandStatus==true){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[32m${cmd}\x1b[0m]`)}
+    else if(commandStatus==false){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[31m${cmd}\x1b[0m]`)}
   }
 });
 
