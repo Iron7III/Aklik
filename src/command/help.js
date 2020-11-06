@@ -12,5 +12,17 @@ exports.run = async (client, message, args, Fortnite) => {
    /* const embedAES = new Discord.MessageEmbed()
       .setTitle('xd')
     message.channel.send(client.uptime)*/
-
+  console.log(client.uptime)
+  var uptime;
+  if(client.uptime < 1000){
+    uptime=`${client.uptime} miliseconds`
+  } else if(client.uptime < 60000){
+    uptime=`${client.uptime/1000} seconds`
+  } else if(client.uptime < 3600000){
+    uptime=`${(client.uptime/1000)/60} minutes`
+  } else if(client.uptime < 86400000){
+    uptime=`${((client.uptime/1000)/60)/24} hours`
+  }
+console.log(uptime)
+console.log('\x1b[34mEsto estara de color azul\x1b[0m y esto estara normal')
 }

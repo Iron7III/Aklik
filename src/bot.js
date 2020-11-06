@@ -15,7 +15,7 @@ var Fortnite = new FortniteAPI(config);
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]");
-  console.log(client.emojis.cache.get("768962558299602964"))
+  console.log(client)
   client.user.setActivity("NEW UPDATE!", { type: "WATCHING" });
 });
 
@@ -38,10 +38,13 @@ client.on("message", async message => {
     let archivo = require(`./command/${cmd}.js`);
     archivo.run(client, message, args, Fortnite);
   } catch (e) {
-    message.channel.send({ embed: commandNotFound }), console.log(e.stack);
+    message.channel.send({ embed: commandNotFound }),
+    console.log(
+      `[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[31m${cmd}\x1b[0m]`
+    );
   } finally {
     console.log(
-      `[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[${cmd}]`
+      `[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[32m${cmd}\x1b[0m]`
     );
   }
 });
