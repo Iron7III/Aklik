@@ -15,7 +15,7 @@ var Fortnite = new FortniteAPI(config);
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-  (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`${client.user.username} **>** STARTED`);
+  (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`[BOT] **>** [${client.user.username}] **>** [CONNECTED]`);
   //console.log(client);
   client.user.setActivity("IMPROVING", { type: "WATCHING" });
 });
@@ -47,6 +47,7 @@ client.on("message", async message => {
   } finally {
     if(commandStatus==true){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[32m${cmd}\x1b[0m]`)}
     else if(commandStatus==false){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[31m${cmd}\x1b[0m]`)}
+    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`[BOT] **>** [${client.user.username}] **>** [COMMAND] **>** [${message.guild.name}] **>** [#${message.channel.name}] **>** [@${message.channel.author.tag}] **>** [${cmd.toUpperCase()}]`);
   }
 });
 
