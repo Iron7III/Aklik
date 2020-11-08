@@ -1,8 +1,8 @@
 {
   "name": "fortnite-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Discord BOT using Fortnite-API",
+  "main": "bot.js",
   "scripts": {
     "start": "node src/bot.js"
   },

@@ -16,8 +16,8 @@ var Fortnite = new FortniteAPI(config);
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
   (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`${client.user.username} **>** STARTED`);
-  console.log(client);
-  client.user.setActivity("NEW UPDATE!", { type: "WATCHING" });
+  //console.log(client);
+  client.user.setActivity("IMPROVING", { type: "WATCHING" });
 });
 
 //EVENTO message
@@ -29,7 +29,7 @@ client.on("message", async message => {
     .split(" ");
   const cmd = args.shift().toLowerCase();
   const commandNotFound = new Discord.MessageEmbed()
-    .setTitle(`**__NO__ __EXISTE__ __EL__ __COMANDO__ \`${cmd}\`**`)
+    .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)
     .setColor(0xf50000);
   if (cmd === "") return;
   if (!message.content.startsWith(`${prefix}${cmd}`)) return;
@@ -51,4 +51,4 @@ client.on("message", async message => {
 });
 
 // TOKEN
-client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPrMg.zP9NwE20FvGVuG3Wj70Q5rPYJoQ').catch(err => console.log(err));
+client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPrMg.zP9NwE20FvGVuG3Wj70Q5rPYJoQ').catch(e => console.log(e));
