@@ -27,4 +27,5 @@ exports.run = async (client, message, args, Fortnite) => {
   }
 console.log(ConvertedUptime)
 console.log('\x1b[34mEsto estara de color azul\x1b[0m y esto estara normal')
+message.channel.send(ConvertedUptime)
 }
