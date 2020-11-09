@@ -23,10 +23,7 @@ client.on("ready", () => {
 //EVENTO message
 client.on("message", async message => {
   let prefix = "f*";
-  const args = message.content
-    .slice(prefix.length)
-    .trim()
-    .split(" ");
+  const args = message.content.slice(prefix.length).trim().split(" ");
   const cmd = args.shift().toLowerCase();
   const commandNotFound = new Discord.MessageEmbed()
     .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)

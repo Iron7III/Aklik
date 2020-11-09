@@ -21,7 +21,9 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if(client.uptime < 3600000){
     uptime=`${(client.uptime/1000)/60} minutes`
   } else if(client.uptime < 86400000){
-    uptime=`${((client.uptime/1000)/60)/24} hours`
+    uptime=`${((client.uptime/1000)/60)/60} hours`
+  } else if(client.uptime < 604800000000){
+    uptime=`${(((client.uptime/1000)/60)/60)/24} days`
   }
 console.log(uptime)
 console.log('\x1b[34mEsto estara de color azul\x1b[0m y esto estara normal')
