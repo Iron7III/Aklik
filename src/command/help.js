@@ -13,18 +13,18 @@ exports.run = async (client, message, args, Fortnite) => {
       .setTitle('xd')
     message.channel.send(client.uptime)*/
   console.log(client.uptime)
-  var uptime;
+  var ConvertedUptime;
   if(client.uptime < 1000){
-    uptime=`${client.uptime} miliseconds`
+    ConvertedUptime=`${client.uptime} miliseconds`
   } else if(client.uptime < 60000){
-    uptime=`${client.uptime/1000} seconds`
+    ConvertedUptime=`${client.uptime/1000} seconds`
   } else if(client.uptime < 3600000){
-    uptime=`${(client.uptime/1000)/60} minutes`
+    ConvertedUptime=`${(client.uptime/1000)/60} minutes`
   } else if(client.uptime < 86400000){
-    uptime=`${((client.uptime/1000)/60)/60} hours`
+    ConvertedUptime=`${((client.uptime/1000)/60)/60} hours`
   } else if(client.uptime < 604800000000){
-    uptime=`${(((client.uptime/1000)/60)/60)/24} days`
+    ConvertedUptime=`${(((client.uptime/1000)/60)/60)/24} days`
   }
-console.log(uptime)
+console.log(ConvertedUptime)
 console.log('\x1b[34mEsto estara de color azul\x1b[0m y esto estara normal')
 }
