@@ -52,7 +52,7 @@ client.on("message", async message => {
       s='-';
       __DEVlog.setDescription(`${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]`)
     }
-    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`[BOT] **>** [COMMAND] **>** [${message.guild.name}] **>** [#${message.channel.name}] **>** [@${message.author.tag}] **>** [${cmd.toUpperCase()}]`);
+    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(__DEVlog);
   }
 });
 
