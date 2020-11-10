@@ -33,7 +33,7 @@ client.on("message", async message => {
   if (message.channel.type==="dm") return;
   if (message.channel.nsfw) return;
   var commandStatus;
-  const __DEVlog = new Discord.MessageEmbed().setColor('#262626');
+  var __DEVlog;
   var s;
   try {
     let archivo = require(`./command/${cmd}.js`);
@@ -46,11 +46,11 @@ client.on("message", async message => {
   } finally {
     if(commandStatus===true){
       s='+';
-      __DEVlog.setDescription(`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``)
+      __DEVlog=`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``;
     }
     else if(commandStatus===false){
       s='-';
-      __DEVlog.setDescription(`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``)
+      __DEVlog=`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``;
     }
     (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(__DEVlog);
   }
