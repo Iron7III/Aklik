@@ -30,9 +30,11 @@ client.on("message", async message => {
     .setColor(0xf50000);
   if (cmd === "") return;
   if (!message.content.startsWith(`${prefix}${cmd}`)) return;
-  if (message.channel.type === "dm") return;
+  if (message.channel.type==="dm") return;
   if (message.channel.nsfw) return;
   var commandStatus;
+  const __DEVlog = new Discord.MessageEmbed().setColor('#262626');
+  var s;
   try {
     let archivo = require(`./command/${cmd}.js`);
     archivo.run(client, message, args, Fortnite);
@@ -42,8 +44,14 @@ client.on("message", async message => {
     console.log(e.stack),
     commandStatus=false
   } finally {
-    if(commandStatus==true){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[32m${cmd}\x1b[0m]`)}
-    else if(commandStatus==false){console.log(`[${message.guild.name}]➧[#${message.channel.name}]➧[@${message.author.tag}]➧[\x1b[31m${cmd}\x1b[0m]`)}
+    if(commandStatus===true){
+      s='+';
+      __DEVlog.setDescription(`${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]`)
+    }
+    else if(commandStatus===false){
+      s='-';
+      __DEVlog.setDescription(`${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]`)
+    }
     (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`[BOT] **>** [COMMAND] **>** [${message.guild.name}] **>** [#${message.channel.name}] **>** [@${message.author.tag}] **>** [${cmd.toUpperCase()}]`);
   }
 });
