@@ -46,11 +46,11 @@ client.on("message", async message => {
   } finally {
     if(commandStatus===true){
       s='+';
-      __DEVlog.setDescription(`${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]`)
+      __DEVlog.setDescription(`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``)
     }
     else if(commandStatus===false){
       s='-';
-      __DEVlog.setDescription(`${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]`)
+      __DEVlog.setDescription(`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``)
     }
     (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(__DEVlog);
   }
