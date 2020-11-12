@@ -9,9 +9,6 @@ const client = new Discord.Client({
 const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args, Fortnite) => {
-   /* const embedAES = new Discord.MessageEmbed()
-      .setTitle('xd')
-    message.channel.send(client.uptime)*/
   console.log(client.uptime)
   var ConvertedUptime;
   if(client.uptime < 1000){
@@ -25,7 +22,13 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if(client.uptime < 604800000000){
     ConvertedUptime=`${(((client.uptime/1000)/60)/60)/24} days`
   }
+
+const embed = new Discord.MessageEmbed()
+  .setTitle(`**${client.user.username} HELP**`)
+  .addField(`**LISTA DE COMANDOS**`,`a`,false)
+  .addField(`**INFORMACIÓN**`,
+  `**UPTIME - **${ConvertedUptime}\n**SERVERS - **${client.guilds.length}`
+  )
 console.log(ConvertedUptime)
-console.log('\x1b[34mEsto estara de color azul\x1b[0m y esto estara normal')
 message.channel.send(ConvertedUptime)
 }
