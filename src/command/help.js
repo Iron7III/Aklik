@@ -22,13 +22,26 @@ exports.run = async (client, message, args, Fortnite) => {
   } else if(client.uptime < 604800000000){
     ConvertedUptime=`${(((client.uptime/1000)/60)/60)/24} days`
   }
+let CommandsArray=[
+  ``,
+  ``,
+  ``,
+  ``,
+];
+let InformationArray=[
+  `**UPTIME - **\`${ConvertedUptime}\``,
+  `**SERVERS - **\`${client.guilds.length}\``,
+  `**LENGUAJE - **\`Node.js\``,
+  `**LIBRERIAS - **\`discord.js\`\n                    \`axios\`\n                    \`express\`\n                    \`fortnite-api-com\``,
+];
 
 const embed = new Discord.MessageEmbed()
   .setTitle(`**${client.user.username} HELP**`)
   .addField(`**LISTA DE COMANDOS**`,`a`,false)
   .addField(`**INFORMACIÓN**`,
-  `**UPTIME - **${ConvertedUptime}\n**SERVERS - **${client.guilds.length}`
+  `${InformationArray.join(`\n`)}`
   )
+message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
 message.channel.send(ConvertedUptime)
 }
