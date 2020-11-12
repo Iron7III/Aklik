@@ -29,10 +29,10 @@ let CommandsArray=[
   ``,
 ];
 let InformationArray=[
-  `**UPTIME - **\`${ConvertedUptime}\``,
-  `**SERVERS - **\`${client.guilds.length}\``,
+  `**UPTIME - **\`${ConvertedUptime.toFixed(2)}\``,
+  `**SERVERS - **\`${client.guilds.cache.length}\``,
   `**LENGUAJE - **\`Node.js\``,
-  `**LIBRERIAS - **\`discord.js\`\n                    \`axios\`\n                    \`express\`\n                    \`fortnite-api-com\``,
+  `**LIBRERIAS - **\`discord.js\`\n\t\t\t\`axios\`\n\t\t\t\`express\`\n\t\t\t\`fortnite-api-com\``,
 ];
 
 const embed = new Discord.MessageEmbed()
@@ -42,6 +42,6 @@ const embed = new Discord.MessageEmbed()
   `${InformationArray.join(`\n`)}`
   )
 message.channel.send({ embed: embed })
-console.log(ConvertedUptime)
+console.log(ConvertedUptime.toFixed(2))
 message.channel.send(ConvertedUptime)
 }
