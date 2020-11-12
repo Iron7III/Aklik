@@ -29,7 +29,7 @@ let CommandsArray=[
   ``,
 ];
 let InformationArray=[
-  `**UPTIME - **\`${ConvertedUptime.toFixed(2)}\``,
+  `**UPTIME - **\`${ConvertedUptime.parseFloat().toFixed(2)}\``,
   `**SERVERS - **\`${client.guilds.cache.length}\``,
   `**LENGUAJE - **\`Node.js\``,
   `**LIBRERIAS - **\`discord.js\`\n\t\t\t\`axios\`\n\t\t\t\`express\`\n\t\t\t\`fortnite-api-com\``,
@@ -42,6 +42,6 @@ const embed = new Discord.MessageEmbed()
   `${InformationArray.join(`\n`)}`
   )
 message.channel.send({ embed: embed })
-console.log(ConvertedUptime.toFixed(2))
+console.log(ConvertedUptime)
 message.channel.send(ConvertedUptime)
 }
