@@ -29,10 +29,10 @@ let CommandsArray=[
   ``,
 ];
 let InformationArray=[
-  `**UPTIME - **\`${ConvertedUptime}\``,
-  `**SERVERS - **\`${client.guilds.cache.length}\``,
-  `**LENGUAJE - **\`Node.js\``,
-  `**LIBRERIAS - **\`discord.js\`\n\t\t\t\t\t\t\`axios\`\n\t\t\t\t\t\t\`express\`\n\t\t\t\t\t\t\`fortnite-api-com\``,
+  `**UPTIME\n- **\`${ConvertedUptime}\``,
+  `**SERVERS\n- **\`${client.guilds.cache.length}\``,
+  `**LENGUAJE\n- **\`Node.js\``,
+  `**LIBRERIAS\n- **\`discord.js\`\n**- **\`axios\`\n**- **\`express\`\n**- **\`fortnite-api-com\``,
 ];
 
 const embed = new Discord.MessageEmbed()
