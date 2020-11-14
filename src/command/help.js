@@ -29,14 +29,10 @@ let CommandsArray=[
   ``,
 ];
 let InformationArray=[
-  `**UPTIME\n- **\`${ConvertedUptime}\``,
-  `**SERVERS\n- **\`${client.guilds.cache.size}\``,
+  `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${ConvertedUptime}\``,
+  `${client.emojis.cache.get("768962558144938014")} **SERVERS\n- **\`${client.guilds.cache.size}\``,
   `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
-  `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n
-  - **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n
-  **- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n
-  **- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n
-  **- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
+  `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n- **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
 ];
 
 const embed = new Discord.MessageEmbed()
@@ -47,7 +43,7 @@ const embed = new Discord.MessageEmbed()
     false)
   .addField(
     `**INFORMACIÓN**`,
-    `${InformationArray.join(`\n`)}`
+    `${InformationArray.join(`\n\n`)}`
   )
 message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
