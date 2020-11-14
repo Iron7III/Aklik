@@ -31,8 +31,12 @@ let CommandsArray=[
 let InformationArray=[
   `**UPTIME\n- **\`${ConvertedUptime}\``,
   `**SERVERS\n- **\`${client.guilds.cache.size}\``,
-  `**LENGUAJE\n- **\`Node.js\``,
-  `**LIBRERIAS\n- **\`discord.js\`\n**- **\`axios\`\n**- **\`express\`\n**- **\`fortnite-api-com\``,
+  `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
+  `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n
+  - **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n
+  **- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n
+  **- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n
+  **- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
 ];
 
 const embed = new Discord.MessageEmbed()
