@@ -32,7 +32,7 @@ let InformationArray=[
   `**UPTIME - **\`${ConvertedUptime}\``,
   `**SERVERS - **\`${client.guilds.cache.length}\``,
   `**LENGUAJE - **\`Node.js\``,
-  `**LIBRERIAS - **\`discord.js\`\n\t\t\t\`axios\`\n\t\t\t\`express\`\n\t\t\t\`fortnite-api-com\``,
+  `**LIBRERIAS - **\`discord.js\`\n\t\t\t\t\t\t\`axios\`\n\t\t\t\t\t\t\`express\`\n\t\t\t\t\t\t\`fortnite-api-com\``,
 ];
 
 const embed = new Discord.MessageEmbed()
