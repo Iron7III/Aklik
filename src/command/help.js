@@ -33,7 +33,7 @@ if(week > 0){
 if(minutes > 60){
         minutes = 0;
     }
-uptime += `${days} Dias, ${hours} Horas, ${minutes} Minutos ${seconds} seconds`;
+uptime += `${days} D, ${hours} H, ${minutes} M, ${seconds} S`;
 //--------------------------------------------------
   var ConvertedUptime;
   if(client.uptime < 1000){
