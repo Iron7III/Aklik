@@ -30,7 +30,7 @@ let CommandsArray=[
 ];
 let InformationArray=[
   `**UPTIME\n- **\`${ConvertedUptime}\``,
-  `**SERVERS\n- **\`${client.guilds.cache.length}\``,
+  `**SERVERS\n- **\`${client.guilds.cache.size}\``,
   `**LENGUAJE\n- **\`Node.js\``,
   `**LIBRERIAS\n- **\`discord.js\`\n**- **\`axios\`\n**- **\`express\`\n**- **\`fortnite-api-com\``,
 ];
@@ -48,6 +48,5 @@ const embed = new Discord.MessageEmbed()
 message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
 console.log(client.guilds.cache)
-console.log(client.guilds.cacheType)
 message.channel.send(ConvertedUptime)
 }
