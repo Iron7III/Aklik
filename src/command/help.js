@@ -37,11 +37,16 @@ let InformationArray=[
 
 const embed = new Discord.MessageEmbed()
   .setTitle(`**${client.user.username} HELP**`)
-  .addField(`**LISTA DE COMANDOS**`,`a`,false)
-  .addField(`**INFORMACIÓN**`,
-  `${InformationArray.join(`\n`)}`
+  .addField(
+    `**LISTA DE COMANDOS**`,
+    `a`,
+    false)
+  .addField(
+    `**INFORMACIÓN**`,
+    `${InformationArray.join(`\n`)}`
   )
 message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
+console.log(client)
 message.channel.send(ConvertedUptime)
 }
