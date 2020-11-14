@@ -47,6 +47,7 @@ const embed = new Discord.MessageEmbed()
   )
 message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
-console.log(client)
+console.log(client.guilds.cache)
+console.log(client.guilds.cacheType)
 message.channel.send(ConvertedUptime)
 }
