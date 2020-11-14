@@ -12,15 +12,15 @@ exports.run = async (client, message, args, Fortnite) => {
   console.log(client.uptime)
   var ConvertedUptime;
   if(client.uptime < 1000){
-    ConvertedUptime=`${client.uptime} miliseconds`
+    ConvertedUptime=`${(client.uptime).toFixed(2)} miliseconds`
   } else if(client.uptime < 60000){
-    ConvertedUptime=`${client.uptime/1000} seconds`
+    ConvertedUptime=`${(client.uptime/1000).toFixed(2)} seconds`
   } else if(client.uptime < 3600000){
-    ConvertedUptime=`${(client.uptime/1000)/60} minutes`
+    ConvertedUptime=`${(client.uptime/1000/60).toFixed(2)} minutes`
   } else if(client.uptime < 86400000){
-    ConvertedUptime=`${((client.uptime/1000)/60)/60} hours`
+    ConvertedUptime=`${(client.uptime/1000/60/60).toFixed(2)} hours`
   } else if(client.uptime < 604800000000){
-    ConvertedUptime=`${(((client.uptime/1000)/60)/60)/24} days`
+    ConvertedUptime=`${(client.uptime/1000/60/60/24).toFixed(2)} days`
   }
 let CommandsArray=[
   ``,
@@ -29,7 +29,7 @@ let CommandsArray=[
   ``,
 ];
 let InformationArray=[
-  `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${ConvertedUptime.toFixed(1)}\``,
+  `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${ConvertedUptime}\``,
   `${client.emojis.cache.get("768962558144938014")} **SERVERS\n- **\`${client.guilds.cache.size}\``,
   `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
   `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n- **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
