@@ -15,7 +15,7 @@ var Fortnite = new FortniteAPI(config);
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-  (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
+  (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`${client.users.cache.get('438390132538605589').author}\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
   //console.log(client);
   client.user.setActivity("IMPROVING", { type: "WATCHING" });
 });
