@@ -48,8 +48,8 @@ uptime += `${days} D, ${hours} H, ${minutes} M, ${seconds} S`;
     ConvertedUptime=`${(client.uptime/1000/60/60/24).toFixed(2)} days`
   }
 let Commands=[
-  `**INFORMACION / SOPORTE\n- **\`f*help\`n**- **\`f*ping\``,
-  `**FORTNITE\n- **\`f*aes\`\n**- **\`f*map <language | blank>\`n**- **\`f*shop\`n**- **\`f*news <gamemode> <language>\`n**- **\`f*newitems\``,
+  `**INFORMACION / SOPORTE\n- **\`f*help\`\n**- **\`f*ping\``,
+  `**FORTNITE\n- **\`f*aes\`\n**- **\`f*map <language | blank>\`\n**- **\`f*shop\`\n**- **\`f*news <gamemode> <language>\`\n**- **\`f*newitems\``,
   `||PlaceHolder||`,
   `||PlaceHolder||`,
 ];
@@ -72,6 +72,4 @@ const embed = new Discord.MessageEmbed()
   )
 message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
-console.log(client.guilds.cache)
-message.channel.send(ConvertedUptime)
 }
