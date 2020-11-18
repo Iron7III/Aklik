@@ -11,7 +11,7 @@ const { MessageEmbed } = require("discord.js");
 exports.run = async (client, message, args, Fortnite) => {
   Fortnite.AES().then(res => {
     const embedAES = new Discord.MessageEmbed()
-      .setTitle(`**__Información AES__**`)
+      .setTitle(`**Información AES**`)
       .addField(
         `${client.emojis.cache.get("768962558144544818")} **BUILD [\`${res.data.build.substring(19,24)}\`]**`,
         `\`\`\`fix\n${res.data.build}\n\`\`\``,
@@ -24,7 +24,7 @@ exports.run = async (client, message, args, Fortnite) => {
       )
       .addField(
         `${client.emojis.cache.get("769615338538139679")} **DYNAMIC KEYS [\`${res.data.dynamicKeys.length}\`]**`,
-        res.data.dynamicKeys.map(t => `\`\`\`md\n< ${t.pakFilename} >\n${t.key}\n\`\`\``).join("\n"),
+        res.data.dynamicKeys.map(t => `\`\`\`md\n< FortniteGame/Content/Paks/${t.pakFilename} >\n${t.key}\n\`\`\``).join("\n"),
         false
       )
       .addField(

@@ -47,13 +47,13 @@ uptime += `${days} D, ${hours} H, ${minutes} M, ${seconds} S`;
   } else if(client.uptime < 604800000000){
     ConvertedUptime=`${(client.uptime/1000/60/60/24).toFixed(2)} days`
   }
-let CommandsArray=[
-  ``,
-  ``,
-  ``,
-  ``,
+let Commands=[
+  `**INFORMACION / SOPORTE\n- **\`f*help\`n**- **\`f*ping\``,
+  `**FORTNITE\n- **\`f*aes\`\n**- **\`f*map <language | blank>\`n**- **\`f*shop\`n**- **\`f*news <gamemode> <language>\`n**- **\`f*newitems\``,
+  `||PlaceHolder||`,
+  `||PlaceHolder||`,
 ];
-let InformationArray=[
+let Statistics=[
   `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${uptime}\``,
   `${client.emojis.cache.get("768962558144938014")} **SERVERS\n- **\`${client.guilds.cache.size}\``,
   `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
@@ -64,11 +64,11 @@ const embed = new Discord.MessageEmbed()
   .setTitle(`**${client.user.username} HELP**`)
   .addField(
     `**LISTA DE COMANDOS**`,
-    `a`,
+    `${Commands.join(`\n\n`)}`,
     false)
   .addField(
     `**INFORMACIÓN**`,
-    `${InformationArray.join(`\n\n`)}`
+    `${Statistics.join(`\n\n`)}`
   )
 message.channel.send({ embed: embed })
 console.log(ConvertedUptime)
