@@ -19,35 +19,35 @@ exports.run = async (client, message, args, Fortnite) => {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
     if(hours > 23){
-            days = days + 1;
-            hours = 0;
+        days = days + 1;
+        hours = 0;
     }
     if(days == 7){
-            days = 0;
-            week = week + 1;
+        days = 0;
+        week = week + 1;
     }
     if(week > 0){   
-            uptime += `${week} week, `;
+        uptime += `${week} week, `;
     }
     if(minutes > 60){
-            minutes = 0;
+        minutes = 0;
     }
     uptime += `${days} D, ${hours} H, ${minutes} M, ${seconds} S`;
     let Statistics=[
-            `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${uptime}\``,
-            `${client.emojis.cache.get("768962558144938014")} **SERVERS\n- **\`${client.guilds.cache.size}\``,
-            `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
-            `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n- **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
+        `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${uptime}\``,
+        `${client.emojis.cache.get("768962558144938014")} **SERVERS\n- **\`${client.guilds.cache.size}\``,
+        `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
+        `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n- **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
     ];
     const embed = new Discord.MessageEmbed()
-            .setTitle(`**${client.user.username} HELP**`)
-            .addField(
-                `**INFORMACIÓN**`,
-                `${Statistics.join(`\n\n`)}`
-            )
-            .addField(
-                `**ACTUALIZACIONES**`,
-                `||PlaceHolder||`
-            )
+        .setTitle(`**${client.user.username} HELP**`)
+        .addField(
+            `**INFORMACIÓN**`,
+            `${Statistics.join(`\n\n`)}`
+        )
+        .addField(
+            `**ACTUALIZACIONES**`,
+            `¡He sido añadido en [top.gg](top.gg)!`
+        )
     message.channel.send({ embed: embed })
 }

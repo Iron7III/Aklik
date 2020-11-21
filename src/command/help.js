@@ -10,18 +10,36 @@ const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args, Fortnite) => {
   console.log(client.uptime)
-let Commands=[
-  `**INFORMACION / SOPORTE\n- **\`f*help\`\n**- **\`f*ping\``,
-  `**FORTNITE\n- **\`f*aes\`\n**- **\`f*map <language | blank>\`\n**- **\`f*shop\`\n**- **\`f*news <gamemode> <language>\`\n**- **\`f*newitems\``,
-  `||PlaceHolder||`,
-  `||PlaceHolder||`,
-];
+    let CommandsInformation={
+        "header":"**INFORMACION / SOPORTE**",
+        "list":[
+            "f*help",
+            "f*ping"
+        ]
+    };
+    let CommandsFortnite={
+        "header":"**INFORMACION / SOPORTE**",
+        "list":[
+            "f*aes",
+            "f*map <language | blank>",
+            "f*shop",
+            "f*news <gamemode> <language>",
+            "f*newitems"
+        ]
+    };
+    let Commands=[
+        `${CommandsInformation.header}\n\`\`\`${CommandsInformation.list.join('\n')}\n\`\`\``,
+        `${CommandsFortnite.header}\n\`\`\`${CommandsFortnite.list.join('\n')}\n\`\`\``,
+        `||PlaceHolder||`,
+        `||PlaceHolder||`,
+    ];
 
-const embed = new Discord.MessageEmbed()
-  .setTitle(`**${client.user.username} HELP**`)
-  .addField(
-    `**LISTA DE COMANDOS**`,
-    `${Commands.join(`\n\n`)}`,
-    false)
-message.channel.send({ embed: embed })
+    const embed = new Discord.MessageEmbed()
+        .setTitle(`**${client.user.username} HELP**`)
+        .addField(
+            `**LISTA DE COMANDOS**`,
+            `${Commands.join('\n\n')}`,
+            false
+        )
+    message.channel.send({ embed: embed })
 }
