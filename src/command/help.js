@@ -14,17 +14,19 @@ exports.run = async (client, message, args, Fortnite) => {
         "header":"**INFORMACION / SOPORTE**",
         "list":[
             "f*help",
-            "f*ping"
+            "f*ping",
+            "f*info"
         ]
     };
     let CommandsFortnite={
-        "header":"**INFORMACION / SOPORTE**",
+        "header":"**FORTNITE**",
         "list":[
             "f*aes",
             "f*map <language | blank>",
             "f*shop",
             "f*news <gamemode> <language>",
-            "f*newitems"
+            "f*newitems",
+            "f*id <id>"
         ]
     };
     let Commands=[
@@ -38,7 +40,7 @@ exports.run = async (client, message, args, Fortnite) => {
         .setTitle(`**${client.user.username} HELP**`)
         .addField(
             `**LISTA DE COMANDOS**`,
-            `${Commands.join('\n\n')}`,
+            `${Commands.join('\n')}`,
             false
         )
     message.channel.send({ embed: embed })
