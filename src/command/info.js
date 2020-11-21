@@ -47,7 +47,7 @@ exports.run = async (client, message, args, Fortnite) => {
         )
         .addField(
             `**ACTUALIZACIONES**`,
-            `¡He sido añadido en (top.gg)[top.gg]!`
+            `¡He sido añadido en [top.gg](https://top.gg/)!`
         )
     message.channel.send({ embed: embed })
 }
