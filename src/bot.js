@@ -15,6 +15,10 @@ const config = {
 var Fortnite = new FortniteAPI(config);
 
 //votes
+dbl.webhook.on('ready', hook => {
+    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+  });
+
 dbl.webhook.on('vote', vote => {
     console.log(`User with ID ${vote.user} just voted!`);
 });
