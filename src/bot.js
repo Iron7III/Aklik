@@ -14,22 +14,20 @@ const config = {
 };
 var Fortnite = new FortniteAPI(config);
 
-//votes
-dbl.webhook.on('ready', hook => {
-    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-  });
-
-dbl.webhook.on('vote', vote => {
-    console.log(`User with ID ${vote.user} just voted!`);
-});
-
-
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
   (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
   console.log(client);
   client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
+});
+
+dbl.webhook.on('ready', hook => {
+    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+  });
+
+dbl.webhook.on('vote', vote => {
+    console.log(`User with ID ${vote.user} just voted!`);
 });
 
 //EVENTO message
