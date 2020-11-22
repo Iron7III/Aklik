@@ -30,8 +30,8 @@ exports.run = async (client, message, args, Fortnite) => {
         ]
     };
     let Commands=[
-        `${CommandsInformation.header}\n\`\`\`md\n${CommandsInformation.list.join('\n')}\n\`\`\``,
-        `${CommandsFortnite.header}\n\`\`\`md\n${CommandsFortnite.list.join('\n')}\n\`\`\``,
+        `${CommandsInformation.header}\n\`\`\`\n${CommandsInformation.list.join('\n')}\n\`\`\``,
+        `${CommandsFortnite.header}\n\`\`\`\n${CommandsFortnite.list.join('\n')}\n\`\`\``,
         `||PlaceHolder||`,
         `||PlaceHolder||`,
     ];

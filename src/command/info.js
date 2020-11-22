@@ -33,11 +33,40 @@ exports.run = async (client, message, args, Fortnite) => {
         minutes = 0;
     }
     uptime += `${days} D, ${hours} H, ${minutes} M, ${seconds} S`;
+    let Stats={
+        "uptime":{
+            "header":`${client.emojis.cache.get("769568936077033482")} **UPTIME**`,
+            "list":[
+                `\`${uptime}\``
+            ]
+        },
+        "servers":{
+            "header":`${client.emojis.cache.get("768962558144938014")} **SERVERS**`,
+            "list":[
+                `\`${client.guilds.cache.size}\``
+            ]
+        },
+        "idioms":{
+            "header":`**LENGUAJE**`,
+            "list":[
+                `\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`
+            ]
+        },
+        "dependices":{
+            "header":`${client.emojis.cache.get("768962690508783646")} **LIBRERIAS**`,
+            "list":[
+                `\`discord.js\` ${client.emojis.cache.get("777189460655341600")}`,
+                `\`axios\` ${client.emojis.cache.get("777189460655341600")}`,
+                `\`express\` ${client.emojis.cache.get("777189460655341600")}`,
+                `\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`
+            ]
+        }
+    }
     let Statistics=[
-        `${client.emojis.cache.get("769568936077033482")} **UPTIME\n- **\`${uptime}\``,
-        `${client.emojis.cache.get("768962558144938014")} **SERVERS\n- **\`${client.guilds.cache.size}\``,
-        `**LENGUAJE\n- **\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
-        `${client.emojis.cache.get("768962690508783646")} **LIBRERIAS\n- **\`discord.js\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`axios\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`express\` ${client.emojis.cache.get("777189460655341600")}\n**- **\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`,
+        [Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`)].join('\n'),
+        [Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`)].join('\n'),
+        [Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`)].join('\n'),
+        [Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`)].join('\n')
     ];
     const embed = new Discord.MessageEmbed()
         .setTitle(`**${client.user.username} HELP**`)
@@ -47,7 +76,7 @@ exports.run = async (client, message, args, Fortnite) => {
         )
         .addField(
             `**ACTUALIZACIONES**`,
-            `¡He sido añadido en [top.gg](https://top.gg/)!`
+            `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!`
         )
     message.channel.send({ embed: embed })
 }
