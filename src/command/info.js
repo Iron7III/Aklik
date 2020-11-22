@@ -64,7 +64,9 @@ exports.run = async (client, message, args, Fortnite) => {
         "links":{
             "header":`**LINKS**`,
             "list":[
-                `\`[top.gg](https://top.gg/bot/685919845233197100)\``
+                `\`top.gg\`[${client.emojis.cache.get("780150734779056170")}](https://top.gg/bot/685919845233197100)`,
+                `\`VOTAME\`[${client.emojis.cache.get("780150734779056170")}](https://top.gg/bot/685919845233197100/vote)`,
+                `\`INVITAME\`[${client.emojis.cache.get("780150734779056170")}](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=8&scope=bot)`
             ]
         }
     }
