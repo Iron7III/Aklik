@@ -15,7 +15,7 @@ const config = {
 var Fortnite = new FortniteAPI(config);
 
 //votes
-dbl.on('vote', vote => {
+dbl.webhook.on('vote', vote => {
     console.log(`User with ID ${vote.user} just voted!`);
 });
 
@@ -25,7 +25,7 @@ client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
   (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
   console.log(client);
-  client.user.setActivity("IMPROVING", { type: "WATCHING" });
+  client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
 });
 
 //EVENTO message
