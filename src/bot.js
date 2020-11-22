@@ -5,7 +5,7 @@ const client = new Discord.Client({
   fetchAllMembers: true
 });
 const DBL = require("dblapi.js");
-const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTkxOTg0NTIzMzE5NzEwMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA2MDc0NDUzfQ.9sqHhqgm2LoF7di2NZ-p07SvRovfclxoMu3_VfM5KPo', client);
+const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTkxOTg0NTIzMzE5NzEwMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA2MDc0NDUzfQ.9sqHhqgm2LoF7di2NZ-p07SvRovfclxoMu3_VfM5KPo', { webhookPort: 5000, webhookAuth: 'password' });
 const { MessageEmbed } = require("discord.js");
 const FortniteAPI = require("fortnite-api-com");
 const config = {
