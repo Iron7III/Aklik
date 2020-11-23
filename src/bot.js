@@ -65,11 +65,11 @@ client.on("message", async message => {
   } finally {
     if(commandStatus===true){
       s='+';
-      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
+      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] > ${args.map(a=>`< ${a} >`).join(' ')}\n\`\`\``;
     }
     else if(commandStatus===false){
       s='-';
-      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
+      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] > ${args.map(a=>`< ${a} >`).join(' ')}\n\`\`\``;
     }
     DevLogChannel.send(DevLogMessage);
   }
