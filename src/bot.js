@@ -13,7 +13,7 @@ const config = {
   language: "es"
 };
 var Fortnite = new FortniteAPI(config);
-var DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
+const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
