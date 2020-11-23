@@ -13,19 +13,19 @@ const config = {
   language: "es"
 };
 var Fortnite = new FortniteAPI(config);
-
+var DevLogChannel=client.guilds.cache.get('514150100575191040').channels.cache.get('589422434134917134');
 //EVENTO ready
 client.on("ready", () => {
   console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-  (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
+  DevLogChannel.send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
   console.log(client);
   client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
 });
 
+//--------------------------------------------------------------
 dbl.on('posted', () => {
     console.log('Server count posted!');
   })
-  
   dbl.on('error', e => {
    console.log(`Oops! ${e}`);
   })
@@ -36,6 +36,7 @@ dbl.on('posted', () => {
     console.log(`User with ID ${vote.user} just voted!`);
     (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
   });
+//--------------------------------------------------------------
 
 //EVENTO message
 client.on("message", async message => {
@@ -50,7 +51,7 @@ client.on("message", async message => {
   if (message.channel.type==="dm") return;
   if (message.channel.nsfw) return;
   var commandStatus;
-  var __DEVlog;
+  var DevLogMessage;
   var s;
   try {
     let archivo = require(`./command/${cmd}.js`);
@@ -63,13 +64,13 @@ client.on("message", async message => {
   } finally {
     if(commandStatus===true){
       s='+';
-      __DEVlog=`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``;
+      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
     }
     else if(commandStatus===false){
       s='-';
-      __DEVlog=`\`\`\`diff\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}]\n\`\`\``;
+      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}] > [#${message.channel.name}] > [@${message.author.tag}] > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
     }
-    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(__DEVlog);
+    DevLogChannel.send(DevLogMessage);
   }
 });
 
