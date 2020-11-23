@@ -23,19 +23,19 @@ client.on("ready", () => {
 });
 
 //--------------------------------------------------------------
-dbl.on('posted', () => {
-    console.log('Server count posted!');
-  })
-  dbl.on('error', e => {
-   console.log(`Oops! ${e}`);
-  })
-  dbl.webhook.on('ready', hook => {
-    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-  });
-  dbl.webhook.on('vote', vote => {
-    console.log(`User with ID ${vote.user} just voted!`);
-    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
-  });
+//dbl.on('posted', () => {
+//    console.log('Server count posted!');
+//  })
+//  dbl.on('error', e => {
+//   console.log(`Oops! ${e}`);
+//  })
+//  dbl.webhook.on('ready', hook => {
+//    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+//  });
+//  dbl.webhook.on('vote', vote => {
+//    console.log(`User with ID ${vote.user} just voted!`);
+//    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
+//  });
 //--------------------------------------------------------------
 
 //EVENTO message
