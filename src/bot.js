@@ -34,6 +34,7 @@ dbl.on('posted', () => {
   });
   dbl.webhook.on('vote', vote => {
     console.log(`User with ID ${vote.user} just voted!`);
+    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
   });
 
 //EVENTO message
