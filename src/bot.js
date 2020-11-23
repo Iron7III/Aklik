@@ -13,13 +13,13 @@ const config = {
   language: "es"
 };
 var Fortnite = new FortniteAPI(config);
-const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
 //EVENTO ready
 client.on("ready", () => {
-  console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-  DevLogChannel.send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
-  console.log(client);
-  client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
+    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
+    console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
+    DevLogChannel.send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
+    console.log(client);
+    client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
 });
 
 //--------------------------------------------------------------
@@ -42,6 +42,7 @@ client.on("ready", () => {
 client.on("message", async message => {
   let prefix = "f*";
   const args = message.content.slice(prefix.length).trim().split(" ");
+  const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
   const cmd = args.shift().toLowerCase();
   const commandNotFound = new Discord.MessageEmbed()
     .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)
