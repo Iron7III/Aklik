@@ -9,8 +9,8 @@ const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTkxOTg0NT
 const { MessageEmbed } = require("discord.js");
 const FortniteAPI = require("fortnite-api-com");
 const config = {
-  apikey: "f932b4642b7f68bee1f619a073524a174b03e942498cbaa0626e245b11905e1b",
-  language: "es"
+    apikey: "f932b4642b7f68bee1f619a073524a174b03e942498cbaa0626e245b11905e1b",
+    language: "en"
 };
 var Fortnite = new FortniteAPI(config);
 //EVENTO ready
@@ -40,30 +40,27 @@ client.on("ready", () => {
 
 //EVENTO message
 client.on("message", async message => {
-  let prefix = "f*";
-  const args = message.content.slice(prefix.length).trim().split(" ");
-  const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
-  const cmd = args.shift().toLowerCase();
-  const commandNotFound = new Discord.MessageEmbed()
-    .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)
-    .setColor(0xf50000);
-  if (cmd === "") return;
-  if (!message.content.startsWith(`${prefix}${cmd}`)) return;
-  if (message.channel.type==="dm") return;
-  if (message.channel.nsfw) return;
-  var DevLogMessage;
-  var s='+';
-  try {
+    let prefix = "f*";
+    const args = message.content.slice(prefix.length).trim().split(" ");
+    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
+    const cmd = args.shift().toLowerCase();
+    const commandNotFound = new Discord.MessageEmbed()
+        .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)
+        .setColor(0xf50000);
+    if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.type==='dm'||message.channel.nsfw)) return;
+    var DevLogMessage;
+    var s='+';
+    try {
     let file = require(`./command/${cmd}.js`);
-    file.run(client, message, args, Fortnite);
-  } catch (e) {
-    message.channel.send({ embed: commandNotFound }),
-    console.log(e.stack),
-    s='-';
-  } finally {
-      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
-    DevLogChannel.send(DevLogMessage);
-  }
+        file.run(client, message, args, Fortnite);
+    } catch (e) {
+        message.channel.send({ embed: commandNotFound }),
+        console.log(e.stack),
+        s='-';
+    } finally {
+        DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
+        DevLogChannel.send(DevLogMessage);
+    }
 });
 
 // TOKEN
