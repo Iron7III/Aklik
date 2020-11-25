@@ -51,26 +51,17 @@ client.on("message", async message => {
   if (!message.content.startsWith(`${prefix}${cmd}`)) return;
   if (message.channel.type==="dm") return;
   if (message.channel.nsfw) return;
-  var commandStatus;
   var DevLogMessage;
-  var s;
+  var s='+';
   try {
-    let archivo = require(`./command/${cmd}.js`);
-    archivo.run(client, message, args, Fortnite);
-    commandStatus=true
+    let file = require(`./command/${cmd}.js`);
+    file.run(client, message, args, Fortnite);
   } catch (e) {
     message.channel.send({ embed: commandNotFound }),
     console.log(e.stack),
-    commandStatus=false
+    s='-';
   } finally {
-    if(commandStatus===true){
-      s='+';
       DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
-    }
-    else if(commandStatus===false){
-      s='-';
-      DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] > ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
-    }
     DevLogChannel.send(DevLogMessage);
   }
 });

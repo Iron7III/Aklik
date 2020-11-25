@@ -5,8 +5,7 @@ const client = new Discord.Client({
   disableEveryone: true,
   fetchAllMembers: true
 });
-// {MessageEmbed}
-const { MessageEmbed } = require("discord.js");
+
 
 exports.run = async (client, message, args, Fortnite) => {
   Fortnite.AES().then(res => {
