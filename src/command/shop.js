@@ -3,7 +3,6 @@ const client = new Discord.Client({
   disableEveryone: true,
   fetchAllMembers: true
 });
-const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args, Fortnite) => {
   Fortnite.BRShop("es").then(res => {
@@ -29,14 +28,14 @@ exports.run = async (client, message, args, Fortnite) => {
     }
     if (res.data.specialFeatured != null) {
       ItemShop.addField(
-        `${client.emojis.cache.get("768962558299602964")} **${res.data.specialFeatured.name.toUpperCase()}**`,
+        `🎄 **${res.data.specialFeatured.name.toUpperCase()}**`,
         `\`\`\`md\n${res.data.specialFeatured.entries.map(t => `< ⓥ ${t.finalPrice} > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
     }
     if (res.data.specialDaily != null) {
       ItemShop.addField(
-        `${client.emojis.cache.get("768962558299602964")} **${res.data.specialDaily.name.toUpperCase()}**`,
+        `🎄 **${res.data.specialDaily.name.toUpperCase()}**`,
         `\`\`\`md\n${res.data.specialDaily.entries.map(t => `< ⓥ ${t.finalPrice} > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );

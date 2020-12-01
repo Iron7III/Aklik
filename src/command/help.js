@@ -5,8 +5,6 @@ const client = new Discord.Client({
   disableEveryone: true,
   fetchAllMembers: true
 });
-// {MessageEmbed}
-const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args, Fortnite) => {
   console.log(client.uptime)
@@ -24,7 +22,7 @@ exports.run = async (client, message, args, Fortnite) => {
             "f*aes",
             "f*map <language | blank>",
             "f*shop",
-            "f*news <gamemode> <language>",
+            "f*news <br | stw | creative> <language>",
             "f*newitems",
             "f*id <id>"
         ]

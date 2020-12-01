@@ -4,6 +4,8 @@ const client = new Discord.Client({
   disableEveryone: true,
   fetchAllMembers: true
 });
+const express = require("express");
+const https = require('https');
 const DBL = require("dblapi.js");
 const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTkxOTg0NTIzMzE5NzEwMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA2MDc0NDUzfQ.9sqHhqgm2LoF7di2NZ-p07SvRovfclxoMu3_VfM5KPo', { webhookPort: 5000, webhookAuth: 'password' });
 const { MessageEmbed } = require("discord.js");
@@ -13,6 +15,47 @@ const config = {
     language: "en"
 };
 var Fortnite = new FortniteAPI(config);
+
+
+
+//  TEST
+https.get('https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game', (resp) => {
+  let data = '';
+  // Un fragmento de datos ha sido recibido.
+  resp.on('data', (chunk) => {
+    data += chunk;
+    console.log(chunk)
+  });
+  // Toda la respuesta ha sido recibida. Imprimir el resultado.
+  resp.on('end', () => {
+    console.log(JSON.parse(data).shopSections.sectionList.sections.map(t => t.sectionDisplayName).join(','));
+  });
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+})
+//------
+
+//  TEST2
+https.get('https://fortnite-public-service-stage.ol.epicgames.com/fortnite/api/version', (resp) => {
+  let data = '';
+  // Un fragmento de datos ha sido recibido.
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+  // Toda la respuesta ha sido recibida. Imprimir el resultado.
+  resp.on('end', () => {
+    console.log(`${JSON.parse(data).cln}`);
+    console.log(`${JSON.parse(data).build}`);
+    console.log(`${JSON.parse(data).buildDate}`);
+    console.log(`${JSON.parse(data).version}`);
+    console.log(`${JSON.parse(data).branch}`);
+    console.log(`${JSON.parse(data).moduleName}`);
+  });
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+})
+//------
+
 //EVENTO ready
 client.on("ready", () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
