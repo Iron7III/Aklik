@@ -33,7 +33,7 @@ https.get('https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/p
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 })
-//------
+//-------
 
 //  TEST2
 https.get('https://fortnite-public-service-stage.ol.epicgames.com/fortnite/api/version', (resp) => {
