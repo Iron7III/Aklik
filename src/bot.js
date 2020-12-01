@@ -83,7 +83,7 @@ client.on("ready", () => {
 
 //EVENTO message
 client.on("message", async message => {
-    let prefix = "f*";
+    let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(" ");
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
     const cmd = args.shift().toLowerCase();
