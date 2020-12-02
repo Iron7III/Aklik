@@ -20,7 +20,7 @@ exports.run = async (client, message, args, Fortnite) => {
                 loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${res.data.rarity.value}.png?v=1603671079787`).then((image) => {
                     ctx.drawImage(image, 0, 81, 512, 431)
                     ctx.fillStyle = 'white'
-                    registerFont('/app/myFont.ttf', { family: 'Burbank Big Condensed Black' })
+                    registerFont('../burbank-big-condensed-black.otf', { family: 'Burbank Big Condensed Black' })
                     ctx.font = '40px Burbank Big Condensed'
                     var n = res.data.name;
                     var t = ctx.measureText(n)
