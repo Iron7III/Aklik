@@ -24,7 +24,7 @@ exports.run = async (client, message, args, Fortnite) => {
                     ctx.font = '40px Burbank Big Condensed'
                     var n = res.data.name;
                     var t = ctx.measureText(n);
-                    ctx.fillText(n, (512-t.width)/2, 480)
+                    ctx.fillText(n, (512-t.width)/2, 450)
                     const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
                     message.channel.send(attach)
 /*
