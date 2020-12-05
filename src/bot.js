@@ -6,8 +6,6 @@ const client = new Discord.Client({
 });
 const express = require("express");
 const https = require('https');
-const DBL = require("dblapi.js");
-const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTkxOTg0NTIzMzE5NzEwMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA2MDc0NDUzfQ.9sqHhqgm2LoF7di2NZ-p07SvRovfclxoMu3_VfM5KPo', { webhookPort: 5000, webhookAuth: 'password' });
 const { MessageEmbed } = require("discord.js");
 const FortniteAPI = require("fortnite-api-com");
 const config = {
@@ -64,22 +62,6 @@ client.on("ready", () => {
     console.log(client);
     client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
 });
-
-//--------------------------------------------------------------
-//dbl.on('posted', () => {
-//    console.log('Server count posted!');
-//  })
-//  dbl.on('error', e => {
-//   console.log(`Oops! ${e}`);
-//  })
-//  dbl.webhook.on('ready', hook => {
-//    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-//  });
-//  dbl.webhook.on('vote', vote => {
-//    console.log(`User with ID ${vote.user} just voted!`);
-//    (client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134').send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
-//  });
-//--------------------------------------------------------------
 
 //EVENTO message
 client.on("message", async message => {

@@ -1,20 +1,19 @@
 {
-  "name": "fortnite-bot",
-  "version": "1.0.0",
-  "description": "Discord BOT using Fortnite-API",
-  "main": "bot.js",
-  "scripts": {
-    "start": "node src/bot.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.21.0",
-    "canvas": "^2.6.1",
-    "dblapi.js": "^2.4.1",
-    "discord.js": "^12.4.1",
-    "express": "^4.17.1",
-    "fortnite-api-com": "^2.2.0"
-  }
+    "name": "fortnite-bot",
+    "version": "1.0.0",
+    "description": "Discord BOT using Fortnite-API",
+    "main": "bot.js",
+    "scripts": {
+        "start": "node src/bot.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.21.0",
+        "canvas": "^2.6.1",
+        "discord.js": "^12.4.1",
+        "express": "^4.17.1",
+        "fortnite-api-com": "^2.2.0"
+    }
 }
