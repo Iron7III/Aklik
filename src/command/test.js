@@ -12,7 +12,7 @@ exports.run = async (client, message, args, Fortnite) => {
         console.log(res)
         const canvas = createCanvas(512, 512)
         const ctx = canvas.getContext('2d')
-        var gradient = contexto_canvas_1.createLinearGradient(0, 0, 512, 512);
+        var gradient = ctx.createLinearGradient(0, 0, 512, 512);
         gradient.addColorStop(0, "#FF0000");
         gradient.addColorStop(1, "#FFF600");
         ctx.fillStyle = gradient;
