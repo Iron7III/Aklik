@@ -4,17 +4,23 @@ const client = new Discord.Client({
   disableEveryone: true,
   fetchAllMembers: true
 });
-
+const FortniteAPI = require("fortnite-api-io");
+const fortniteAPI = new FortniteAPI("1c43003c-41511d50-7062e583-6ea047a7")
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
 exports.run = async (client, message, args, Fortnite) => {
+
+    const upcomingItems = await fortniteAPI.getItemDetails("CID_764_Athena_Commando_F_Loofah","en");
+    console.log(upcomingItems)
+
     Fortnite.BRShop("en").then(res => {
         console.log(res)
         const canvas = createCanvas(512, 512)
         const ctx = canvas.getContext('2d')
         var gradient = ctx.createLinearGradient(0, 0, 512, 512);
-        gradient.addColorStop(0, "#FF0000");
-        gradient.addColorStop(1, "#FFF600");
+        gradient.addColorStop(0, "#FF7700");
+        gradient.addColorStop(1, "#FF9900");
+        gradient.addColorStop(2, "#FF7700");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 512, 512)
 
