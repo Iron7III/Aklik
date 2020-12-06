@@ -10,8 +10,8 @@ const { createCanvas, loadImage, registerFont } = require('canvas')
 
 exports.run = async (client, message, args, Fortnite) => {
 
-    const upcomingItems = await fortniteAPI.getItemDetails("CID_764_Athena_Commando_F_Loofah","en");
-    console.log(upcomingItems)
+    const item = await fortniteAPI.getItemDetails(args[0],"en");
+    console.log(item)
 
     Fortnite.BRShop("en").then(res => {
         console.log(res)
@@ -23,10 +23,6 @@ exports.run = async (client, message, args, Fortnite) => {
         gradient.addColorStop(1, "#FF0000");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 512, 512)
-
-//        loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_top_${res.data.featured.entries[0].items[0].rarity.value}.png?v=1603671088577`).then((image) => {
-//            ctx.drawImage(image, 0, 0, 512, 502)
-
             loadImage(res.data.featured.entries[0].items[0].images.icon).then((image) => {
                 ctx.drawImage(image, 0, 0, 512, 512)
                 loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${res.data.featured.entries[0].items[0].rarity.value}.png?v=1603671079787`).then((image) => {
