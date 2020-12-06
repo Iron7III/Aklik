@@ -14,18 +14,18 @@ exports.run = async (client, message, args, Fortnite) => {
         const ctx = canvas.getContext('2d')
         ctx.fillStyle = 'rgba(255,255,255,1)';
         ctx.fillRect(0, 0, 512, 512)
-        //featured.entries[0].
-        loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_top_${res.data.featured.entries[0].rarity.value}.png?v=1603671088577`).then((image) => {
+        //items[0].
+        loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_top_${res.data.featured.entries[0].items[0].rarity.value}.png?v=1603671088577`).then((image) => {
             ctx.drawImage(image, 0, 0, 512, 502)
-            loadImage(res.data.featured.entries[0].images.icon).then((image) => {
+            loadImage(res.data.featured.entries[0].items[0].images.icon).then((image) => {
                 ctx.drawImage(image, 0, 0, 512, 512)
-                loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${res.data.featured.entries[0].rarity.value}.png?v=1603671079787`).then((image) => {
+                loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${res.data.featured.entries[0].items[0].rarity.value}.png?v=1603671079787`).then((image) => {
                     ctx.drawImage(image, 0, 81, 512, 431)
                     // COSMETIC NAME
                     ctx.fillStyle = 'white'
                     registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
                     ctx.font = '30px Burbank Big Condensed'
-                    var n = res.data.featured.entries[0].name;
+                    var n = res.data.featured.entries[0].items[0].name;
                     var t = ctx.measureText(n);
                     ctx.fillText(n, (512-t.width)/2, 450)
                     // COSMETIC PRICE
