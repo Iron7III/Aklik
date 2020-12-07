@@ -13,11 +13,18 @@ exports.run = async (client, message, args, Fortnite) => {
     var i = item.item;
     console.log(i)
     console.log(i.name)
-    console.log(i.rarity)
+    console.log(i.rarity.trim().join("_"))
     console.log(i.price)
     console.log(i.images.icon)
     const canvas = createCanvas(512, 512)
     const ctx = canvas.getContext('2d')
+    const colors = {
+        "common":[
+            "#8A8A8A",
+            "#CFCFCF",
+            "#8A8A8A"
+        ]
+    }
     var gradient = ctx.createLinearGradient(0, 0, 512, 512);
     gradient.addColorStop(0, "#FF0000");
     gradient.addColorStop(0.5, "#FFBB00");
@@ -41,7 +48,7 @@ exports.run = async (client, message, args, Fortnite) => {
             ctx.font = '36px Burbank Big Condensed'
             var n = i.price;
             var t = ctx.measureText(n);
-            ctx.fillText(n, 420-t.width, 502)
+            ctx.fillText(n, 430-t.width, 502)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
             message.channel.send(attach)
 /*
