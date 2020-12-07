@@ -1,4 +1,3 @@
-const https = require('https');
 const Discord = require("discord.js");
 const client = new Discord.Client({
   disableEveryone: true,
@@ -12,37 +11,38 @@ exports.run = async (client, message, args, Fortnite) => {
 
     const item = await fortniteAPI.getItemDetails(args[0],"en");
     console.log(item)
-
-    Fortnite.BRShop("en").then(res => {
-        console.log(res)
-        const canvas = createCanvas(512, 512)
-        const ctx = canvas.getContext('2d')
-        var gradient = ctx.createLinearGradient(0, 0, 512, 512);
-        gradient.addColorStop(0, "#FF0000");
-        gradient.addColorStop(0.5, "#FFBB00");
-        gradient.addColorStop(1, "#FF0000");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 512, 512)
-            loadImage(res.data.featured.entries[0].items[0].images.icon).then((image) => {
-                ctx.drawImage(image, 0, 0, 512, 512)
-                loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${res.data.featured.entries[0].items[0].rarity.value}.png?v=1603671079787`).then((image) => {
-                    ctx.drawImage(image, 0, 81, 512, 431)
-                    // COSMETIC NAME
-                    ctx.fillStyle = 'white'
-                    registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-                    ctx.font = '30px Burbank Big Condensed'
-                    var n = res.data.featured.entries[0].items[0].name;
-                    var t = ctx.measureText(n);
-                    ctx.fillText(n, (512-t.width)/2, 450)
-                    // COSMETIC PRICE
-                    ctx.fillStyle = 'white'
-                    registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-                    ctx.font = '36px Burbank Big Condensed'
-                    var n = res.data.featured.entries[0].finalPrice;
-                    var t = ctx.measureText(n);
-                    ctx.fillText(n, (512-t.width)/2+150, 502)
-                    const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
-                    message.channel.send(attach)
+    console.log(item.name)
+    console.log(item.rarity.replace(' ', ''))
+    console.log(item.price)
+    console.log(item.images.icon)
+    const canvas = createCanvas(512, 512)
+    const ctx = canvas.getContext('2d')
+    var gradient = ctx.createLinearGradient(0, 0, 512, 512);
+    gradient.addColorStop(0, "#FF0000");
+    gradient.addColorStop(0.5, "#FFBB00");
+    gradient.addColorStop(1, "#FF0000");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 512, 512)
+    loadImage(item.images.icon).then((image) => {
+        ctx.drawImage(image, 0, 0, 512, 512)
+        loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${item.rarity.replace(' ', '')}.png?v=1603671079787`).then((image) => {
+            ctx.drawImage(image, 0, 81, 512, 431)
+            // COSMETIC NAME
+            ctx.fillStyle = 'white'
+            registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
+            ctx.font = '30px Burbank Big Condensed'
+            var n = item.name;
+            var t = ctx.measureText(n);
+            ctx.fillText(n, (512-t.width)/2, 450)
+            // COSMETIC PRICE
+            ctx.fillStyle = 'white'
+            registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
+            ctx.font = '36px Burbank Big Condensed'
+            var n = item.price;
+            var t = ctx.measureText(n);
+            ctx.fillText(n, (512-t.width)/2+150, 502)
+            const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
+            message.channel.send(attach)
 /*
 const embed = new Discord.RichEmbed()
 .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -50,8 +50,6 @@ const embed = new Discord.RichEmbed()
 .setImage('attachment://nombre.png') <- El mismo nombre y formato.
 message.channel.send(embed)
 */
-                })
-            })
         })
-//    })
+    })
 }
