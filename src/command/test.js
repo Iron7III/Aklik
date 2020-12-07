@@ -51,7 +51,7 @@ exports.run = async (client, message, args, Fortnite) => {
         ],
         "icon_series":[
             "#316958",
-            "#28C797",
+            "#2ee6aa",
             "#316958"
         ]
     }
