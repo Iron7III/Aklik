@@ -29,17 +29,17 @@ exports.run = async (client, message, args, Fortnite) => {
             "#0DD000",
             "#088800"
         ],
-        "common":[
+        "rare":[
+            "#0080F0",
+            "#009FFF",
+            "#0080F0"
+        ],
+        "epic":[
             "#8A8A8A",
             "#CFCFCF",
             "#8A8A8A"
         ],
-        "common":[
-            "#8A8A8A",
-            "#CFCFCF",
-            "#8A8A8A"
-        ],
-        "common":[
+        "legendary":[
             "#8A8A8A",
             "#CFCFCF",
             "#8A8A8A"
