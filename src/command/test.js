@@ -12,7 +12,7 @@ exports.run = async (client, message, args, Fortnite) => {
     const item = await fortniteAPI.getItemDetails(args[0],"en");
     console.log(item)
     console.log(item.name)
-    console.log(item.rarity.replace(' ', ''))
+    console.log(item.rarity)
     console.log(item.price)
     console.log(item.images.icon)
     const canvas = createCanvas(512, 512)
@@ -25,7 +25,7 @@ exports.run = async (client, message, args, Fortnite) => {
     ctx.fillRect(0, 0, 512, 512)
     loadImage(item.images.icon).then((image) => {
         ctx.drawImage(image, 0, 0, 512, 512)
-        loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_${item.rarity.replace(' ', '')}.png?v=1603671079787`).then((image) => {
+        loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_mythic.png?v=1603671079787`).then((image) => {
             ctx.drawImage(image, 0, 81, 512, 431)
             // COSMETIC NAME
             ctx.fillStyle = 'white'
