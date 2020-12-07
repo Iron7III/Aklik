@@ -13,8 +13,7 @@ exports.run = async (client, message, args, Fortnite) => {
     var i = item.item;
     console.log(i)
     console.log(i.name)
-    console.log(i.rarity.slice().trim().join("_"))
-    console.log(i.rarity.replace(" ", "_"))
+    console.log(i.rarity.slice("").trim().split(" ").join("_"))
     console.log(i.price)
     console.log(i.images.icon)
     const canvas = createCanvas(512, 512)
@@ -27,9 +26,9 @@ exports.run = async (client, message, args, Fortnite) => {
         ]
     }
     var gradient = ctx.createLinearGradient(0, 0, 512, 512);
-    gradient.addColorStop(0, "#FF0000");
-    gradient.addColorStop(0.5, "#FFBB00");
-    gradient.addColorStop(1, "#FF0000");
+    gradient.addColorStop(0, colors[i.rarity.slice("").trim().split(" ").join("_")][0]);
+    gradient.addColorStop(0.5, colors[i.rarity.slice("").trim().split(" ").join("_")][1]);
+    gradient.addColorStop(1, colors[i.rarity.slice("").trim().split(" ").join("_")][2]);
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 512, 512)
     loadImage(i.images.icon).then((image) => {
