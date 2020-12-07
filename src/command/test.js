@@ -13,7 +13,8 @@ exports.run = async (client, message, args, Fortnite) => {
     var i = item.item;
     console.log(i)
     console.log(i.name)
-    console.log(i.rarity.trim().join("_"))
+    console.log(i.rarity.slice().trim().join("_"))
+    console.log(i.rarity.replace(" ", "_"))
     console.log(i.price)
     console.log(i.images.icon)
     const canvas = createCanvas(512, 512)
