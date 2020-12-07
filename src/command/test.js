@@ -10,11 +10,12 @@ const { createCanvas, loadImage, registerFont } = require('canvas')
 exports.run = async (client, message, args, Fortnite) => {
 
     const item = await fortniteAPI.getItemDetails(args[0],"en");
-    console.log(item)
-    console.log(item.name)
-    console.log(item.rarity)
-    console.log(item.price)
-    console.log(item.images.icon)
+    var i = item.item;
+    console.log(i)
+    console.log(i.name)
+    console.log(i.rarity)
+    console.log(i.price)
+    console.log(i.images.icon)
     const canvas = createCanvas(512, 512)
     const ctx = canvas.getContext('2d')
     var gradient = ctx.createLinearGradient(0, 0, 512, 512);
