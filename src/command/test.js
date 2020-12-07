@@ -23,6 +23,26 @@ exports.run = async (client, message, args, Fortnite) => {
             "#8A8A8A",
             "#CFCFCF",
             "#8A8A8A"
+        ],
+        "uncommon":[
+            "#088000",
+            "#0CC000",
+            "#088000"
+        ],
+        "common":[
+            "#8A8A8A",
+            "#CFCFCF",
+            "#8A8A8A"
+        ],
+        "common":[
+            "#8A8A8A",
+            "#CFCFCF",
+            "#8A8A8A"
+        ],
+        "common":[
+            "#8A8A8A",
+            "#CFCFCF",
+            "#8A8A8A"
         ]
     }
     var gradient = ctx.createLinearGradient(0, 0, 512, 512);
