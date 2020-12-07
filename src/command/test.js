@@ -40,9 +40,9 @@ exports.run = async (client, message, args, Fortnite) => {
             "#BF00FF"
         ],
         "legendary":[
-            "#8A8A8A",
-            "#CFCFCF",
-            "#8A8A8A"
+            "#FF7B00",
+            "#FFBB00",
+            "#FF7B00"
         ]
     }
     var gradient = ctx.createLinearGradient(0, 0, 512, 512);
