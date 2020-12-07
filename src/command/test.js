@@ -24,7 +24,7 @@ exports.run = async (client, message, args, Fortnite) => {
     gradient.addColorStop(1, "#FF0000");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 512, 512)
-    loadImage(item.images.icon).then((image) => {
+    loadImage(i.images.icon).then((image) => {
         ctx.drawImage(image, 0, 0, 512, 512)
         loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_mythic.png?v=1603671079787`).then((image) => {
             ctx.drawImage(image, 0, 81, 512, 431)
@@ -32,14 +32,14 @@ exports.run = async (client, message, args, Fortnite) => {
             ctx.fillStyle = 'white'
             registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
             ctx.font = '30px Burbank Big Condensed'
-            var n = item.name;
+            var n = i.name;
             var t = ctx.measureText(n);
             ctx.fillText(n, (512-t.width)/2, 450)
             // COSMETIC PRICE
             ctx.fillStyle = 'white'
             registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
             ctx.font = '36px Burbank Big Condensed'
-            var n = item.price;
+            var n = i.price;
             var t = ctx.measureText(n);
             ctx.fillText(n, (512-t.width)/2+150, 502)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
