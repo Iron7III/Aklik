@@ -31,17 +31,17 @@ exports.run = async (client, message, args, Fortnite) => {
             // COSMETIC NAME
             ctx.fillStyle = 'white'
             registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-            ctx.font = '30px Burbank Big Condensed'
+            ctx.font = '36px Burbank Big Condensed'
             var n = i.name;
             var t = ctx.measureText(n);
-            ctx.fillText(n, (512-t.width)/2, 450)
+            ctx.fillText(n, (512-t.width)/2, 446)
             // COSMETIC PRICE
             ctx.fillStyle = 'white'
             registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
             ctx.font = '36px Burbank Big Condensed'
             var n = i.price;
             var t = ctx.measureText(n);
-            ctx.fillText(n, 400-t.width, 502)
+            ctx.fillText(n, 420-t.width, 502)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
             message.channel.send(attach)
 /*
