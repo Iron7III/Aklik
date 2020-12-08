@@ -7,7 +7,7 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args, Fortnite) => {
-    Fortnite.CosmeticsSearchByID(args[0], "es").then(res => {
+    Fortnite.CosmeticsSearchByID(args[0], "en").then(res => {
         console.log(res);
         const embed = new Discord.MessageEmbed()
             .setTitle(`**${res.data.name.toUpperCase()}**`)
