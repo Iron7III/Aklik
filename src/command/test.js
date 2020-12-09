@@ -11,15 +11,15 @@ exports.run = async (client, message, args, Fortnite) => {
     
 
     Fortnite.CosmeticsSearch("name",args[0], "en").then(async res => {
-        const item = await fortniteAPI.getItemDetails(res.data.id,"en");
-        var i = item.item;
-        console.log(i)
-        console.log(i.price)
-        console.log('---------------------')
         console.log(res.data)
         console.log(res.data.name)
         console.log(res.data.rarity.value)
         console.log(res.data.images.icon)
+        console.log('---------------------')
+        const item = await fortniteAPI.getItemDetails(res.data.id,"en");
+        var i = item.item;
+        console.log(i)
+        console.log(i.price)
         const canvas = createCanvas(512, 512)
         const ctx = canvas.getContext('2d')
         const colors = {
