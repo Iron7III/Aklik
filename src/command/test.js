@@ -10,7 +10,7 @@ const { createCanvas, loadImage, registerFont } = require('canvas')
 exports.run = async (client, message, args, Fortnite) => {
     
 
-    Fortnite.CosmeticsSearch("name",args[0], "en").then(async res => {
+    Fortnite.CosmeticsSearch({name: args[0], language: "en"}).then(async res => {
         console.log(res.data)
         console.log(res.data.name)
         console.log(res.data.rarity.value)
