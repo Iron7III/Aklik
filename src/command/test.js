@@ -76,6 +76,11 @@ exports.run = async (client, message, args, Fortnite) => {
                 "#FF7B00",
                 "#FFBB00",
                 "#FF7B00"
+            ],
+            "gaminglegends":[
+                "#000000",
+                "#7F168C",
+                "#555EAD"
             ]
         }
         var gradient = ctx.createLinearGradient(0, 0, 512, 512);
@@ -102,7 +107,7 @@ exports.run = async (client, message, args, Fortnite) => {
                 var n = i.price;
                 var t = ctx.measureText(n);
                 ctx.fillText(n, 430-t.width, 502)
-                const attach = new Discord.MessageAttachment(canvas.toBuffer(), 'cosmetic.png')
+                const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${res.data.id}.png`)
                 message.channel.send(attach)
 /*
 const embed = new Discord.RichEmbed()
