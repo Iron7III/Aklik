@@ -11,8 +11,8 @@ exports.run = async (client, message, args, Fortnite) => {
     const item = await fortniteAPI.getItemDetails(args[0],"en");
     var i = item.item;
     console.log(i)
-    console.log(i.rarity.slice("").trim().split(" ").join("_"))
     console.log(i.price)
+
     Fortnite.CosmeticsSearchByID(args[0], "en").then(res => {
         console.log('---------------------')
         console.log(res.data)
@@ -78,9 +78,9 @@ exports.run = async (client, message, args, Fortnite) => {
                 "#FF7B00"
             ],
             "gaminglegends":[
-                "#000000",
+                "#300736",
                 "#7F168C",
-                "#555EAD"
+                "#546794"
             ]
         }
         var gradient = ctx.createLinearGradient(0, 0, 512, 512);
