@@ -9,7 +9,7 @@ const { createCanvas, loadImage, registerFont } = require('canvas')
 
 exports.run = async (client, message, args, Fortnite) => {
     var x = {name: args[0], language: "en"};
-    if(args[0].toLowerCase().startsWith('cid'||'bid'||'eid')) x = {id: args[0], language: "en"};
+    if(args[0].toLowerCase().startsWith('cid_'||'bid_'||'eid_'||'musicpack_'||'toy_'||'trails_id_'||'emoji_'||'wrap_'||'lsid_'||'spid_')||args[0].includes('_')) x = {id: args[0], language: "en"};
 
     Fortnite.CosmeticsSearch(x).then(async res => {
         console.log(res.data)
