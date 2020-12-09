@@ -13,7 +13,7 @@ exports.run = async (client, message, args, Fortnite) => {
     console.log(i)
     console.log(i.price)
 
-    Fortnite.CosmeticsSearchByID(args[0], "en").then(res => {
+    Fortnite.CosmeticsSearch("name",args[0], "en").then(res => {
         console.log('---------------------')
         console.log(res.data)
         console.log(res.data.name)
