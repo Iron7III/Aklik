@@ -8,12 +8,13 @@ const fortniteAPI = new FortniteAPI("1c43003c-41511d50-7062e583-6ea047a7")
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
 exports.run = async (client, message, args, Fortnite) => {
-    const item = await fortniteAPI.getItemDetails(args[0],"en");
-    var i = item.item;
-    console.log(i)
-    console.log(i.price)
+    
 
-    Fortnite.CosmeticsSearch("name",args[0], "en").then(res => {
+    Fortnite.CosmeticsSearch("name",args[0], "en").then(async res => {
+        const item = await fortniteAPI.getItemDetails(res.data.id,"en");
+        var i = item.item;
+        console.log(i)
+        console.log(i.price)
         console.log('---------------------')
         console.log(res.data)
         console.log(res.data.name)
