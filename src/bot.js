@@ -22,7 +22,6 @@ https.get('https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/p
   // Un fragmento de datos ha sido recibido.
   resp.on('data', (chunk) => {
     data += chunk;
-    console.log(chunk)
   });
   // Toda la respuesta ha sido recibida. Imprimir el resultado.
   resp.on('end', () => {
