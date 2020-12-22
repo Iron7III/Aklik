@@ -89,7 +89,7 @@ exports.run = async (client, message, args, Fortnite) => {
         gradient.addColorStop(1, colors[res.data.rarity.value][2]);
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 512, 512)
-        loadImage(res.data.images.featured!==null?res.data.images.featured:i.images.full_size).then((image) => {
+        loadImage(res.data.images.featured!==null&&i.images.full_size!==null?res.data.images.featured:res.data.images.icon).then((image) => {
             ctx.drawImage(image, 0, 0, 512, 512)
             loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_mythic.png?v=1603671079787`).then((image) => {
                 ctx.drawImage(image, 0, 81, 512, 431)
