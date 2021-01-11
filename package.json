@@ -12,9 +12,9 @@
     "dependencies": {
         "axios": "^0.21.0",
         "canvas": "^2.6.1",
-        "discord.js": "^12.4.1",
+        "discord.js": "^12.5.1",
         "express": "^4.17.1",
-        "fortnite-api-com": "^2.2.0",
+        "fortnite-api-com": "^2.2.1",
         "fortnite-api-io": "^1.8.0",
         "node-fetch": "^2.6.1"
     }
