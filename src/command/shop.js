@@ -28,7 +28,7 @@ exports.run = async (client, message, args, Fortnite) => {
     }
     if (res.data.specialFeatured != null) {
       ItemShop.addField(
-        `🎄 **${res.data.specialFeatured.name.toUpperCase()}**`,
+        `🎄 **${res.data.specialFeatured.name!=null?res.data.specialFeatured.name.toUpperCase():"OFERTAS ESPECIALES"}**`,
         `\`\`\`md\n${res.data.specialFeatured.entries.map(t => `< ⓥ ${t.finalPrice} > ${t.items[0].name}`).join("\n")}\n\`\`\``,
         false
       );
