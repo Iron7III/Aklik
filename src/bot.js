@@ -73,7 +73,7 @@ client.on("message", async message => {
         .setColor(0xf50000);
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.type==='dm'||message.channel.nsfw)) return;
     let BannedWords=['puta','pene'];
-    if(message.content.has(BannedWords)) message.delete();
+    if(message.content.has(BannedWords)) message.delete(), console.log('PALABRA PROHIBIDA');
     var DevLogMessage;
     var s='+';
     try {
