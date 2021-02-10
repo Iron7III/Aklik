@@ -72,6 +72,8 @@ client.on("message", async message => {
         .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)
         .setColor(0xf50000);
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.type==='dm'||message.channel.nsfw)) return;
+    let BannedWords=['puta','pene'];
+    if(message.content.has(BannedWords)) message.delete();
     var DevLogMessage;
     var s='+';
     try {

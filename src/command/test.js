@@ -83,31 +83,31 @@ exports.run = async (client, message, args, Fortnite) => {
                 "#546794"
             ]
         }
-        var gradient = ctx.createLinearGradient(0, 0, 512, 512);
-        gradient.addColorStop(0, colors[res.data.rarity.value][0]);
-        gradient.addColorStop(0.5, colors[res.data.rarity.value][1]);
-        gradient.addColorStop(1, colors[res.data.rarity.value][2]);
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 512, 512)
-        loadImage(res.data.images.featured!==null&&i.images.full_size!==null?res.data.images.featured||i.images.full_size:res.data.images.icon).then((image) => {
-            ctx.drawImage(image, 0, 0, 512, 512)
-            loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_mythic.png?v=1603671079787`).then((image) => {
-                ctx.drawImage(image, 0, 81, 512, 431)
-                // COSMETIC NAME
-                ctx.fillStyle = 'white'
-                registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-                ctx.font = '36px Burbank Big Condensed'
-                var n = res.data.name;
-                var t = ctx.measureText(n);
-                ctx.fillText(n, (512-t.width)/2, 446)
-                // COSMETIC PRICE
-                ctx.fillStyle = 'white'
-                registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-                ctx.font = '36px Burbank Big Condensed'
-                var n = i.price;
-                var t = ctx.measureText(n);
-                ctx.fillText(n, 430-t.width, 502)
-                const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${res.data.id}.jpg`)
+            var gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, colors[res.data.rarity.value][0]);
+            gradient.addColorStop(0.5, colors[res.data.rarity.value][1]);
+            gradient.addColorStop(1, colors[res.data.rarity.value][2]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 512, 512)
+            loadImage(res.data.images.featured!==null&&i.images.full_size!==null?res.data.images.featured||i.images.full_size:res.data.images.icon).then((image) => {
+                ctx.drawImage(image, 0, 0, 512, 512)
+                loadImage(`https://cdn.glitch.com/e0a62737-efb4-4dbe-9768-8579bd913488%2Fcard_bottom_mythic.png?v=1603671079787`).then((image) => {
+                    ctx.drawImage(image, 0, 81, 512, 431)
+                    // COSMETIC NAME
+                    ctx.fillStyle = 'white'
+                    registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
+                    ctx.font = '36px Burbank Big Condensed'
+                    var n = res.data.name;
+                    var t = ctx.measureText(n);
+                    ctx.fillText(n, (512-t.width)/2, 446)
+                    // COSMETIC PRICE
+                    ctx.fillStyle = 'white'
+                    registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
+                    ctx.font = '36px Burbank Big Condensed'
+                    var n = i.price;
+                    var t = ctx.measureText(n);
+                    ctx.fillText(n, 430-t.width, 502)
+                    const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${res.data.id}.jpg`)
                 message.channel.send(attach)
 /*
 const embed = new Discord.RichEmbed()
