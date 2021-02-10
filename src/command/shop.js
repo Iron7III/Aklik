@@ -9,8 +9,7 @@ exports.run = async (client, message, args, Fortnite) => {
     console.log(res)
     const ItemShop = new Discord.MessageEmbed()
       .setTitle(
-        `<:1F383_color:768962558299602964> **Fortnite Item Shop**\n<:calender:768962690617573416> **__${res.data.date.substring(0,10)}__**`)
-      .setDescription(`<:26A0_color1:769572886662610945> Cosmetics added in 14.40 aren't in the list`)
+        `**Fortnite Item Shop**\n**${res.data.date.substring(0,10)}**`)
       .setColor("#ff7514");
     if (res.data.featured != null) {
       ItemShop.addField(
