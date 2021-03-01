@@ -30,6 +30,13 @@ exports.run = async (client, message, args, Fortnite) => {
                 "title":"NSFW",
                 "description":"No envies contenido explicito, gore o que pueda herir la sensibilidad de las personas."
             }
+        },
+        {
+            "properties":
+            {
+                "title":"LINKS EXTERNOS",
+                "description":"Esta prohibido enviar links de Servidores, RRSS o paginas no oficiales de EpicGames."
+            }
         }
     ]
         .setTitle(`**REGLAS**`)
@@ -43,4 +50,9 @@ exports.run = async (client, message, args, Fortnite) => {
         .setTitle(`**ROLES}**`)
         .setDescription()
         .setColor('#fac907')
+
+    message.channel.send(Rules)
+    message.channel.send(Rules2)
+    message.channel.send(Rules3)
+    message.channel.send(Rules4)
 }
