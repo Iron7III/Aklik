@@ -15,14 +15,15 @@ exports.run = async (client, message, args, Fortnite) => {
         "solo":"Solitario",
         "duo":"Duos",
         "trio":"Trios"
-    }
+    };
     var c = 'abcdefghijkmnpqrtuvwxyz';
     var p = '';
     for (i=0;i<8;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
     message.channel.send({embed:Custom})
-        .setTimeout(() => {
+        .then(() => {
             Custom.setTitle('**PARTIDA CUSTOM**')
             Custom.setDescription(`**MODO :: **\`${m[args[0]]}\`\n**CODIGO :: **\`${p}\``)
+        }).setInterval(() => {
             message.edit({embed:Custom})
-        },3000)
-}
+        },3000);
+};
