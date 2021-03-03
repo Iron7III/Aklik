@@ -20,10 +20,8 @@ exports.run = async (client, message, args, Fortnite) => {
     var p = '';
     for (i=0;i<8;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
     message.channel.send({embed:Custom})
-        .then(() => {
-            Custom.setTitle('**PARTIDA CUSTOM**')
-            Custom.setDescription(`**MODO :: **\`${m[args[0]]}\`\n**CODIGO :: **\`${p}\``)
-        })
+    Custom.setTitle('**PARTIDA CUSTOM**')
+    Custom.setDescription(`**MODO :: **\`${m[args[0]]}\`\n**CODIGO :: **\`${p}\``)
     .setTimeout(function(){ 
         message.edit({embed:Custom})
     }, 3000);
