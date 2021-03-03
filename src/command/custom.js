@@ -16,13 +16,19 @@ exports.run = async (client, message, args, Fortnite) => {
         "duo":"Duos",
         "trio":"Trios"
     };
+    let r = {
+        "eu":"Europa",
+        "nae":"EE.UU Costa Este",
+        "naw":"EE.UU Costa Oeste",
+        "oce":"Oceania"
+    }
     var c = 'abcdefghijkmnpqrtuvwxyz';
     var p = '';
     for (i=0;i<8;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
     message.channel.send({embed:Custom})
     .then((msg) => {
         Custom.setTitle('**PARTIDA CUSTOM**')
-        Custom.setDescription(`**MODO :: **\`${m[args[0]]}\`\n**CODIGO :: **\`${p}\``)
+        Custom.setDescription(`**REGIÓN ➔ ${r[args[1]]}\n**MODO ➔ **\`${m[args[0]]}\`\n**CODIGO ➔ **\`${p}\`\n**HOST ➔ ${message.author.username}`)
         setTimeout(function(){ 
             msg.edit({embed:Custom})
         }, 3000);
