@@ -22,7 +22,7 @@ exports.run = async (client, message, args, Fortnite) => {
     message.channel.send({embed:Custom})
     Custom.setTitle('**PARTIDA CUSTOM**')
     Custom.setDescription(`**MODO :: **\`${m[args[0]]}\`\n**CODIGO :: **\`${p}\``)
-    .setTimeout(function(){ 
+    setTimeout(function(){ 
         message.edit({embed:Custom})
     }, 3000);
 };
