@@ -9,7 +9,7 @@ const client = new Discord.Client({
 exports.run = async (client, message, args, Fortnite) => {
     message.delete()
     const Custom = new Discord.MessageEmbed()
-        .setTitle('**GENERANDO CODIGO PARA PARTIDA CUSTOM...**')
+        .setTitle('**𝗚𝗘𝗡𝗘𝗥𝗔𝗡𝗗𝗢 𝗖𝗢𝗗𝗜𝗚𝗢 𝗣𝗔𝗥𝗔 𝗣𝗔𝗥𝗧𝗜𝗗𝗔 𝗖𝗨𝗦𝗧𝗢𝗠...**')
         .setColor('#3498db')
     let m = {
         "solo":"Solitario",
@@ -25,10 +25,10 @@ exports.run = async (client, message, args, Fortnite) => {
     var c = 'abcdefghijkmnpqrtuvwxyz';
     var p = '';
     var u = message.author.id;
-    for (i=0;i<8;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
+    for (i=0;i<6;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
     message.channel.send({embed:Custom})
     .then((msg) => {
-        Custom.setTitle('**PARTIDA CUSTOM**')
+        Custom.setTitle('**𝗣𝗔𝗥𝗧𝗜𝗗𝗔 𝗖𝗨𝗦𝗧𝗢𝗠**')
         Custom.setDescription(`**REGIÓN ➔ **\`${r[args[1]]}\`\n**MODO ➔ **\`${m[args[0]]}\`\n**CODIGO ➔ **\`${p}\`\n**HOST ➔ **<@${u}>`)
         setTimeout(function(){ 
             msg.edit({embed:Custom})
