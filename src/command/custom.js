@@ -33,7 +33,7 @@ exports.run = async (client, message, args, Fortnite) => {
         Custom.addField(`**MODO DE JUEGO ➜**`, `\`\`\`${m[args[0]]}\`\`\``)
         Custom.addField(`**CÓDIGO ➜**`, `\`\`\`${p}\`\`\``)
         Custom.addField(`**HOST ➜**`, `\`\`\`${message.author.username}\`\`\``)
-        setTimeout(function(){ 
+        setTimeout(function(){
             msg.edit({embed:Custom})
         }, 3000);
     });
