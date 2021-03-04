@@ -20,16 +20,20 @@ exports.run = async (client, message, args, Fortnite) => {
         "eu":"Europa",
         "nae":"EE.UU Costa Este",
         "naw":"EE.UU Costa Oeste",
-        "oce":"Oceania"
+        "oce":"Oceania",
+        "br":"Brasil"
     }
     var c = 'abcdefghijkmnpqrtuvwxyz';
-    var p = '';
-    var u = message.author.id;
-    for (i=0;i<6;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
+    var p = `${args[0]}`;
+    for (i=0;i<3;i++) p +=c.charAt(Math.floor(Math.random()*c.length)); 
     message.channel.send({embed:Custom})
     .then((msg) => {
         Custom.setTitle('**𝗣𝗔𝗥𝗧𝗜𝗗𝗔 𝗖𝗨𝗦𝗧𝗢𝗠**')
         Custom.setDescription(`**REGIÓN ➔ **\`${r[args[1]]}\`\n**MODO ➔ **\`${m[args[0]]}\`\n**CODIGO ➔ **\`${p}\`\n**HOST ➔ **<@${u}>`)
+        Custom.addField(`**REGIÓN ➜**`, `\`\`\`${r[args[1]]}\`\`\``)
+        Custom.addField(`**MODO DE JUEGO ➜**`, `\`\`\`${m[args[0]]}\`\`\``)
+        Custom.addField(`**CÓDIGO ➜**`, `\`\`\`${p}\`\`\``)
+        Custom.addField(`**HOST ➜**`, `\`\`\`<@${message.author.username}>\`\`\``)
         setTimeout(function(){ 
             msg.edit({embed:Custom})
         }, 3000);
