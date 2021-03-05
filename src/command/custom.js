@@ -10,7 +10,7 @@ exports.run = async (client, message, args, Fortnite) => {
     message.delete()
     const Custom = new Discord.MessageEmbed()
         .setTitle('**𝗚𝗘𝗡𝗘𝗥𝗔𝗡𝗗𝗢 𝗖𝗢𝗗𝗜𝗚𝗢 𝗣𝗔𝗥𝗔 𝗣𝗔𝗥𝗧𝗜𝗗𝗔 𝗖𝗨𝗦𝗧𝗢𝗠...**')
-        .setColor('#3498db')
+        .setColor('#ff0000')
     let m = {
         "solo":"Solitario",
         "duo":"Duos",

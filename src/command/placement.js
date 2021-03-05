@@ -18,6 +18,7 @@ exports.run = async (client, message, args, Fortnite) => {
     ]
     const PlacementSolo = new Discord.MessageEmbed()
         .setTitle(`**𝗣𝗨𝗡𝗧𝗨𝗔𝗖𝗜𝗢𝗡 𝗠𝗢𝗗𝗢 𝗦𝗢𝗟𝗜𝗧𝗔𝗥𝗜𝗢**`)
-        .setDescription(p.join('\n'))
+        .setDescription(p.join('\n\n'))
+        .setColor('#ff0000')
     message.channel.send({embed:PlacementSolo})
 };
