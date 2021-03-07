@@ -75,7 +75,7 @@ exports.run = async (client, message, args, Fortnite) => {
   }
 
 Fortnite.News('es').then(res => {
-const canvas = createCanvas(1920*res.data.motds.length,1080)
+const canvas = createCanvas(1920*res.data.br.motds.length,1080)
 const ctx = canvas.getContext('2d')
 loadImage(res.data.br.motds[0].image).then((image) => {
     ctx.drawImage(image, 0, 0)
