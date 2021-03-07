@@ -5,6 +5,7 @@ const client = new Discord.Client({
   disableEveryone: true,
   fetchAllMembers: true
 });
+const { createCanvas, loadImage, registerFont } = require('canvas')
 
 exports.run = async (client, message, args, Fortnite) => {
   var GameModeType = args[0];
@@ -72,4 +73,17 @@ exports.run = async (client, message, args, Fortnite) => {
       message.channel.send({ embed: embedNewsCreative });
     });
   }
+
+Fortnite.NewsBR('es').then(res => {
+const canvas = createCanvas(1920*res.data.motds.length,1080)
+const ctx = canvas.getContext('2d')
+loadImage(res.data.motds[0].image).then((image) => {
+    ctx.drawImage(image, 0, 0, 1920, 1080)
+})
+loadImage(res.data.motds[1].image).then((image) => {
+    ctx.drawImage(image, 0, 0, 1920*2, 1080)
+})
+const attach = new Discord.MessageAttachment(canvas.toBuffer(), `news.jpg`)
+message.channel.send(attach)
+});
 };
