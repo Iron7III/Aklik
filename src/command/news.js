@@ -83,7 +83,11 @@ loadImage(res.data.br.motds[0].image).then((image) => {
     ctx.drawImage(image, 0, 0)
 loadImage(res.data.br.motds[1].image).then((image) => {
     ctx.drawImage(image, 1920, 0)
+loadImage(res.data.br.motds[2].image).then((image) => {
+    ctx.drawImage(image, 1920, 0)
+loadImage(res.data.br.motds[3].image).then((image) => {
+    ctx.drawImage(image, 1920, 0)
 const attach = new Discord.MessageAttachment(canvas.toBuffer(), `news.jpg`)
 message.channel.send(attach)
-})})});
+})})})})});
 };
