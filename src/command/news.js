@@ -88,4 +88,20 @@ loadImage(res.data.br.motds[2].image).then((image) => {
 const attach = new Discord.MessageAttachment(canvas.toBuffer(), `news.jpg`)
 message.channel.send(attach)
 })})})});
+Fortnite.News('es').then(res => {
+const canvas = createCanvas(1920*res.data.br.motds.length,1080)
+const ctx = canvas.getContext('2d')
+ctx.fillStyle = '#ffffff';
+ctx.fillRect(0, 0, 1920*res.data.br.motds.length,1080)
+loadImage(res.data.br.motds[0].image).then((image) => {
+    ctx.drawImage(image, 0, 0)
+loadImage(res.data.br.motds[1].image).then((image) => {
+    ctx.drawImage(image, 1920, 0)
+loadImage(res.data.br.motds[2].image).then((image) => {
+    ctx.drawImage(image, 3840, 0)
+loadImage(res.data.br.motds[3].image).then((image) => {
+    ctx.drawImage(image, 3840, 0)
+const attach = new Discord.MessageAttachment(canvas.toBuffer(), `news.jpg`)
+message.channel.send(attach)
+})})})})});
 };
