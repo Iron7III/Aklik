@@ -83,7 +83,7 @@ exports.run = async (client, message, args, Fortnite) => {
         )
         .addField(
             `**ACTUALIZACIONES**`,
-            `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!`
+            `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! Invitame para apoyarme.`
         )
         .setColor('#FF6B00')
     message.channel.send({ embed: embed })

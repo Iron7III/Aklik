@@ -15,44 +15,6 @@ const config = {
 var Fortnite = new FortniteAPI(config);
 
 
-
-//  TEST
-https.get('https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game', (resp) => {
-  let data = '';
-  // Un fragmento de datos ha sido recibido.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-  // Toda la respuesta ha sido recibida. Imprimir el resultado.
-  resp.on('end', () => {
-    console.log(JSON.parse(data).shopSections.sectionList.sections.map(t => t.sectionDisplayName).join(','));
-  });
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-})
-//-------
-
-//  TEST2
-https.get('https://fortnite-public-service-stage.ol.epicgames.com/fortnite/api/version', (resp) => {
-  let data = '';
-  // Un fragmento de datos ha sido recibido.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-  // Toda la respuesta ha sido recibida. Imprimir el resultado.
-  resp.on('end', () => {
-    console.log(`${JSON.parse(data).cln}`);
-    console.log(`${JSON.parse(data).build}`);
-    console.log(`${JSON.parse(data).buildDate}`);
-    console.log(`${JSON.parse(data).version}`);
-    console.log(`${JSON.parse(data).branch}`);
-    console.log(`${JSON.parse(data).moduleName}`);
-  });
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-})
-//------
-
 //EVENTO ready
 client.on("ready", () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
