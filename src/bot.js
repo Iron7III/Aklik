@@ -52,4 +52,4 @@ client.on("message", async message => {
 });
 
 // TOKEN
-client.login(process.env.TOKEN).catch(e => console.log(e));
+client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
