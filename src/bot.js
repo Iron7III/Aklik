@@ -84,7 +84,7 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id}) > [#${message.channel.name}](${message.channel.id}) > [@${message.author.tag}](${message.author.id}) > [${cmd.toUpperCase()}] ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
+        DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
         DevLogChannel.send(DevLogMessage);
     }
 });

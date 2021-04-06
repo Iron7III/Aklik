@@ -10,7 +10,7 @@ exports.run = async (client, message, args, Fortnite) => {
     const ItemShop = new Discord.MessageEmbed()
       .setTitle(
         `**Fortnite Item Shop**\n**${res.data.date.substring(0,10)}**`)
-      .setColor("#ff7514");
+        .setColor('#ff5e00');
     if (res.data.featured != null) {
       ItemShop.addField(
         `${client.emojis.cache.get("768962558132092938")} **${res.data.featured.name.toUpperCase()}**`,

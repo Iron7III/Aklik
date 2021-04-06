@@ -22,7 +22,7 @@ exports.run = async (client, message, args, Fortnite) => {
       const embedNewsBR = new Discord.MessageEmbed()
         .setTitle(`<:590234859486707752:590432801556267008> **Battle Royale News**`)
         .setImage(res.data.image)
-        .setColor('#8f69d6');
+        .setColor('#ff5e00');
       if (res.data.image == null) {
         embedNewsBR.setDescription(
           `No hay noticias del idioma o modo seleccionado.`
@@ -35,7 +35,7 @@ exports.run = async (client, message, args, Fortnite) => {
       const embedNewsSTW = new Discord.MessageEmbed()
         .setTitle(`**Save The World News**`)
         .setImage(res.data.image)
-        .setColor('#8f69d6');
+        .setColor('#ff5e00');
       console.log(res);
       if (res.data.image == null) {
         embedNewsSTW.setDescription(
@@ -49,7 +49,7 @@ exports.run = async (client, message, args, Fortnite) => {
       const embedNewsCreative = new Discord.MessageEmbed()
         .setTitle(`**Creative Mode News**`)
         .setImage(res.data.image)
-        .setColor('#8f69d6');
+        .setColor('#ff5e00');
       if (res.data.image == null) {
         embedNewsCreative.setDescription(
           `No hay noticias del idioma o modo seleccionado.`

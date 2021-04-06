@@ -39,9 +39,9 @@ exports.run = async (client, message, args, Fortnite) => {
             ]
         },
         "servers":{
-            "header":`${client.emojis.cache.get("768962558144938014")} **SERVERS**`,
+            "header":`${client.emojis.cache.get("768962558144938014")} **SERVIDORES | USUARIOS**`,
             "list":[
-                `\`${client.guilds.cache.size}\``
+                `\`${client.guilds.cache.size}\` **|** \`${client.users.cache.size}\``
             ]
         },
         "idioms":{
@@ -85,5 +85,6 @@ exports.run = async (client, message, args, Fortnite) => {
             `**ACTUALIZACIONES**`,
             `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!`
         )
+        .setColor('#FF6B00')
     message.channel.send({ embed: embed })
 }

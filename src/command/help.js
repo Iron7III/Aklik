@@ -41,5 +41,6 @@ exports.run = async (client, message, args, Fortnite) => {
             `${Commands.join('\n')}`,
             false
         )
+        .setColor('#ff5e00')
     message.channel.send({ embed: embed })
 }
