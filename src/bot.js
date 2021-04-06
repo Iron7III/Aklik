@@ -84,10 +84,10 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogMessage=`\`\`\`md\n${s} [${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
+        DevLogMessage=`\`\`\`md\n[${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${s}\n${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
         DevLogChannel.send(DevLogMessage);
     }
 });
 
 // TOKEN
-client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPrMg.zP9NwE20FvGVuG3Wj70Q5rPYJoQ').catch(e => console.log(e));
+client.login(process.env.TOKEN).catch(e => console.log(e));

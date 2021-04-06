@@ -70,8 +70,8 @@ exports.run = async (client, message, args, Fortnite) => {
     }
     let Statistics=[
         [Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`).join('\n')].join('\n'),
-        [Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n')].join('\n'),
         [Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n')].join('\n'),
+        [Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n')].join('\n'),
         [Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n')].join('\n'),
         [Stats.links.header,Stats.links.list.map(l=>`- ${l}`).join('\n')].join('\n')
     ];
