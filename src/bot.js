@@ -19,30 +19,26 @@ var Fortnite = new FortniteAPI(config);
 client.on("ready", () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-    DevLogChannel.send(`<@438390132538605589>\n\`\`\`ini\n[BOT] > [CONNECTED]\n\`\`\``);
-    console.log(client);
-    client.user.setActivity("NOW IN top.gg", { type: "WATCHING" });
+    const ready = new Discord.MessageEmbed()
+        .setTitle(`CONECTADO`)
+        .setColor('RANDOM')
+    DevLogChannel.send({ embed: ready })
+    client.user.setActivity("Invitame :D", { type: "WATCHING" });
 });
 
 //EVENTO message
 client.on("message", async message => {
     let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(" ");
-    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
+    const DevLogChannel=client.channels.cache.get('589422434134917134');
     const cmd = args.shift().toLowerCase();
-    const commandNotFound = new Discord.MessageEmbed()
-        .setTitle(`**NO EXISTE EL COMANDO \`${cmd}\`**`)
-        .setColor(0xf50000);
-    if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.type==='dm'||message.channel.nsfw)) return;
-    let BannedWords=['puta','pene'];
-    if(message.content.toLowerCase().includes(BannedWords)) message.delete(), console.log('PALABRA PROHIBIDA');
+    if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
     var DevLogMessage;
     var s='+';
     try {
     let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, Fortnite);
     } catch (e) {
-        message.channel.send({ embed: commandNotFound }),
         console.log(e.stack),
         s='-';
     } finally {
@@ -50,6 +46,13 @@ client.on("message", async message => {
         DevLogChannel.send(DevLogMessage);
     }
 });
+
+client.on("guildCreate", (guild) => {
+    client.channels.cache.get("Id del canal").send(`NUEVO SERVIDOR: ${guild.name}`)
+})
+
+
+
 
 // TOKEN
 client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
