@@ -22,6 +22,7 @@ client.on("ready", () => {
     const ready = new Discord.MessageEmbed()
         .setTitle(`CONECTADO`)
         .setColor('RANDOM')
+    DevLogChannel.send('<@!438390132538605589>')
     DevLogChannel.send({ embed: ready })
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 });

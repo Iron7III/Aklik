@@ -87,4 +87,5 @@ exports.run = async (client, message, args, Fortnite) => {
         )
         .setColor('#FF6B00')
     message.channel.send({ embed: embed })
+    console.log(client.users)
 }
