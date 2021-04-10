@@ -8,11 +8,11 @@ const client = new Discord.Client({
 
 exports.run = async (client, message, args, Fortnite) => {
   const PingEmbed = new Discord.MessageEmbed()
-    .setDescription(`Ping:`)
+    .setDescription(`Ping...`)
     .setColor("#98ff98");
   const m = await message.channel.send({embed: PingEmbed});
   const FinalPingEmbed = new Discord.MessageEmbed()
-    .addField(`**Ping**`,` \`${m.createdTimestamp-message.createdTimestamp}ms\``,false)
+    .setDescription(`**Ping** \`${m.createdTimestamp-message.createdTimestamp}\`ms`)
     .setColor("#98ff98");
   m.edit({embed: FinalPingEmbed});
 };

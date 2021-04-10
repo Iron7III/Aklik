@@ -62,9 +62,9 @@ exports.run = async (client, message, args, Fortnite) => {
         "links":{
             "header":`**LINKS**`,
             "list":[
-                `\`top.gg\` [${client.emojis.cache.get("780150734779056170")}](https://top.gg/bot/685919845233197100)`,
-                `\`VOTAME\` [${client.emojis.cache.get("780150734779056170")}](https://top.gg/bot/685919845233197100/vote)`,
-                `\`INVITAME\` [${client.emojis.cache.get("780150734779056170")}](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=8&scope=bot)`
+                `[**top.gg**](https://top.gg/bot/685919845233197100) ${client.emojis.cache.get("780150734779056170")}`,
+                `[**VOTAME**](https://top.gg/bot/685919845233197100/vote) ${client.emojis.cache.get("780150734779056170")}`,
+                `[**INVITAME**](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=8&scope=bot) ${client.emojis.cache.get("780150734779056170")}`
             ]
         }
     }
@@ -83,7 +83,7 @@ exports.run = async (client, message, args, Fortnite) => {
         )
         .addField(
             `**ACTUALIZACIONES**`,
-            `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! Invitame para apoyarme.`
+            `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! [Invitame](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=8&scope=bot) para apoyarme.`
         )
         .setColor('#FF6B00')
     message.channel.send({ embed: embed })

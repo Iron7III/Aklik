@@ -58,7 +58,8 @@ exports.run = async (client, message, args, Fortnite) => {
             embed.setImage(res.data.images.featured);
         } else if (res.data.images.featured == null) {
             embed.setImage(res.data.images.icon);
-        } else if(res.data.shopHistory != null) {
+        } 
+        if(res.data.shopHistory != null) {
             embed.addField(
                 `**HISTORIAL DE TIENDA**`,
                 `${res.data.shopHistory.join(`\n`)}`,
