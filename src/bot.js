@@ -47,6 +47,7 @@ client.on("message", async message => {
 
 client.on("guildCreate", (guild) => {
     client.channels.cache.get("830421823782256670").send(`NUEVO SERVIDOR: ${guild.name}`)
+    console.log('NUEVO SERVIDOR')
 })
 
 
