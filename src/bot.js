@@ -109,7 +109,7 @@ const createAPIMessage = async (interaction, content) => {
     )
         .resolveData()
         .resolveFiles()
-    return{...data, files }
+    return{ ...data, files }
 }
 
 //EVENTO message
