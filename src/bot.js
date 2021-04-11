@@ -21,7 +21,7 @@ const getApp = (guildID) => {
     }
     return app;
 }
-client.on("ready", () => {
+client.on("ready", async () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     const ready = new Discord.MessageEmbed()
