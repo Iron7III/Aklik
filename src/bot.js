@@ -13,6 +13,14 @@ var Fortnite = new FortniteAPI(config);
 
 
 //EVENTO ready
+const guildID = '712022694727647313';
+const getApp = (guildID) => {
+    const app = client.api.applications(client.user.id)
+    if(guildID) {
+        app.guilds(guildID)
+    }
+    return app;
+}
 client.on("ready", () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
@@ -22,6 +30,31 @@ client.on("ready", () => {
     DevLogChannel.send('<@!438390132538605589>')
     DevLogChannel.send({ embed: ready })
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
+
+    const commands = await getApp(guildID).commands.get()
+    console.log(commands)
+    
+    await getApp(guildID).commands.post({
+        data: {
+            name: 'ping',
+            description: 'Testing slash commands'
+        }
+    })
+
+    client.ws.on('INTERACTION_CREATE', async (interaction) => {
+        const command = interaction.data.name.toLowerCase()
+
+        if(command === 'ping') {
+            client.api.interactions(interaction.id, interaction.token).callback.post({
+                data: {
+                    type: 4,
+                    data: {
+                        content: 'pong'
+                    }
+                }
+            })
+        }
+    })
 });
 
 //EVENTO message
