@@ -103,7 +103,7 @@ const reply = async (interaction, response) => {
     })
 }
 const createAPIMessage = async (interaction, content) => {
-    const { data, files } = await Discord.APIMessage().create(
+    const { data, files } = await Discord.APIMessage.create(
         client.channels.resolve(interaction.channel_id),
         content
     )
