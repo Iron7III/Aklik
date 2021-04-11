@@ -37,25 +37,80 @@ client.on("ready", async () => {
     await getApp(guildID).commands.post({
         data: {
             name: 'ping',
-            description: 'Testing slash commands'
+            description: 'Testing slash commands [ping command]'
+        }
+    })
+
+    await getApp(guildID).commands.post({
+        data: {
+            name: 'embed',
+            description: 'Envia un embed personalizado',
+            options: [
+                {
+                    name: 'Name',
+                    description: 'Tu nombre',
+                    required: true,
+                    type: 3 // string
+                },
+                {
+                    name: 'Age',
+                    description: 'Tu edad',
+                    required: false,
+                    type: 4 // integer
+                }
+            ]
         }
     })
 
     client.ws.on('INTERACTION_CREATE', async (interaction) => {
-        const command = interaction.data.name.toLowerCase()
-
+        const { name, options } = interaction.data;
+        const command = name.toLowerCase()
+        const args = {}
+        console.log(options)
+        if(options) {
+            for(const option of options) {
+                const {name, value} = option;
+                args[name] = value
+            }
+        }
+        console.log(args)
         if(command === 'ping') {
-            client.api.interactions(interaction.id, interaction.token).callback.post({
-                data: {
-                    type: 4,
-                    data: {
-                        content: 'pong'
-                    }
-                }
-            })
+            reply(interaction, 'pong')
+        } else if(command === 'embed') {
+            const embed = new Discord.MessageEmbed()
+                .setTitle('Soy un embed :D')
+            for(const arg in args) {
+                const value = args[arg]
+                embed.addField(arg, value)
+            }
+            reply(interaction, embed)
         }
     })
-});
+})
+
+const reply = async (interaction, response) => {
+    let data = {
+        content: response
+    }
+    if(typeof response === 'object') {
+        data = await createAPIMessage(interaction, response)
+    }
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+            type: 4,
+            data,
+        },
+    })
+}
+const createAPIMessage = async (interaction, content) => {
+    const { data, files } = await Discord.APIMessage().create(
+        client.channels.resolve(interaction.channel_id),
+        content
+    )
+        .resolveData()
+        .resolveFiles()
+    return{...data, files }
+}
 
 //EVENTO message
 client.on("message", async message => {
