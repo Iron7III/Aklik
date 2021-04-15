@@ -133,13 +133,11 @@ client.on("message", async message => {
     }
 });
 
+//EVENTO guildCreate
 client.on("guildCreate", (guild) => {
     client.channels.cache.get("830421823782256670").send(`NUEVO SERVIDOR: ${guild.name}`)
     console.log('NUEVO SERVIDOR')
 })
-
-
-
 
 // TOKEN
 client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
