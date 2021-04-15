@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
         .setColor('#EF9237')
     const Rules3 = new Discord.MessageEmbed()
         .setTitle(`**CANALES**`)
-        .setDescription(`<>`)
+        .setDescription(`<testing>`)
         .setColor('#EF9237')
     const Rules4 = new Discord.MessageEmbed()
         .setTitle(`**ROLES DEL SERVIDOR**`)
@@ -33,6 +33,7 @@ exports.run = async (client, message, args) => {
         .addField(`${client.emojis.cache.get("832268444682027009")} **- NITRO BOOSTER**`, `¡Mejora el servidor y disfruta de este rol y muchas otras cosas!`)
         .addField(`${client.emojis.cache.get("832275664131981313")} **- LLAMA MITICA**`, `Son los maximos Administradores del servidor.`)
         .setColor('#EF9237')
+        .setThumbnail(message.guild.icon)
 
     message.channel.send(Rules)
     message.channel.send(Rules2)
