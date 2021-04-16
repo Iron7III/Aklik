@@ -27,7 +27,6 @@ exports.run = async (client, message, args) => {
         .setColor('#EF9237')
     const Rules4 = new Discord.MessageEmbed()
         .setTitle(`**ROLES DEL SERVIDOR**`)
-        //.setDescription(`<@&712296340364853249> **-** Este rol es otorgado a todos los usuarios.\n\n<@&825061928095055894> **-** ¡Mejorando el servidor consseguiras este rol y muchas ventajas!`)
         .addField(`${client.emojis.cache.get("832275998950031370")} **- MIEMBRO**`, `Todos los usuarios tienen este rol y te proporciona acceso al uso del servidor.`)
         .addField(`${client.emojis.cache.get("832275998950031370")} **- LLAMA REPORTERA**`, `Los usuarios con este rol tienen permisos para publicar noticias en sus respectivos canales.`)
         .addField(`${client.emojis.cache.get("832275355254915123")} **- LLAMA HONORIFICA**`, `Este rol le pertenece a los usuarios que son parte del Staff de Fortnite Hispanohablante.`)

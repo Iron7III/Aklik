@@ -41,13 +41,14 @@ exports.run = async (client, message, args, Fortnite) => {
         "servers":{
             "header":`${client.emojis.cache.get("768962558144938014")} **SERVIDORES | USUARIOS**`,
             "list":[
-                `\`${client.guilds.cache.size}\` **|** \`${client.users.cache.size}\``
+                `\`${client.guilds.cache.size}\` **|** \`${client.users.size}\``
             ]
         },
         "idioms":{
-            "header":`**LENGUAJE**`,
+            "header":`**LENGUAJES**`,
             "list":[
-                `\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`
+                `\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
+                `\`Git\` ${client.emojis.cache.get("832355210885464066")}`
             ]
         },
         "dependices":{
