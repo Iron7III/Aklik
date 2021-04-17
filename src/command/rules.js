@@ -38,6 +38,8 @@ exports.run = async (client, message, args) => {
         .addField(`${client.emojis.cache.get("832907180990267412")} **- SUGERENCIAS**`, `Si tienes cualquier idea para cambiar o mejorar el servidor compartela aqui.`,false)
         .addField(`${client.emojis.cache.get("832914760344403969")} **- FORTNITE**`, `Enterate de todo lo nuevo de Fortnite y sus actualizaciones en estos canales.`,false)
         .addField(`${client.emojis.cache.get("832915749487378433")} **- CHARLAS**`, `Aqui puedes hablar con miembros y divertirte compartiendo tus juegos.`,false)
+        .addField(`${client.emojis.cache.get("832918216564539463")} **- DISCORTECA**`, `Disfruta de musica a gran calidad sin ser molestado por la voz de otros usuarios.`,false)
+        .addField(`${client.emojis.cache.get("832907181027491850")} **- NSFW**`, `Comparte y ve todo el contenido NSFW que quieras en este canal oculto.`,false)
         .setColor('#EF9237')
     const Rules4 = new Discord.MessageEmbed()
         .setTitle(`**ROLES DEL SERVIDOR**`)
