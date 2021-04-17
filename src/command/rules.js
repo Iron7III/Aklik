@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
         .setTitle(`**${message.guild.name}**`)
         .setDescription(`**Bienvenido/a a esta pequeña comunidad de gente. Aqui podras hablar de cualquier tema sin tener que censurarte, aqui eres libre, habla y disfruta como quieras!**`)
         .setColor('#EF9237')
-        .setThumbnail(message.guild.iconURL)
+        .setThumbnail(message.guild.iconURL())
     const Rules2 = new Discord.MessageEmbed()
         .setTitle(`**REGLAS I INFORMACIÓN**`)
         .setDescription('**:warning: - Estas reglas son una base y puedes ser sancionado por otros motivos no nombrados a continuacion, se racional a la hora de actuar y no causes problemas. Tambien añadir que al ser un servidor para pasar el rato y divertirse, a la minima seras sancionado si no mantienes un buen ambiente.**')
@@ -54,4 +54,5 @@ exports.run = async (client, message, args) => {
     message.channel.send(Rules4)
     message.channel.send(Rules5)
     message.channel.send(Rules6)
+    console.log(message.guild.iconURL())
 }
