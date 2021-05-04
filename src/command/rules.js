@@ -59,6 +59,11 @@ exports.run = async (client, message, args) => {
         .setDescription('**Se agradece el apoyo y soporte del servidor manteniendolo vivo y con funciones extras al mejorarlo con Nitro, aedmas consigues un asombroso rol y permisos extras.**')
         .setColor('#FF73FA')
         .setThumbnail('https://i.imgur.com/wwJXbul.png')
+    const Rules7 = new Discord.MessageEmbed()
+        .setTitle('**INVITA A TUS AMIGOS**')
+        .setDescription('**Invita a tus amigos al servidor para ayudar a crecer y mejorar esta comunidad, cualquier persona es bienvenida al servidor y disfrutar de un buen servidor y ambiente.')
+        .setColor('#59BA50')
+        .setThumbnail('https://i.imgur.com/18gYPWa.png')
 
     message.channel.send(Rules)
     message.channel.send(Rules2)
