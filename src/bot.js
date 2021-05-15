@@ -125,9 +125,11 @@ client.on("message", async message => {
     let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, Fortnite);
     } catch (e) {
+        message.channel.send('Este comando no existe').then((msg) => {msg.delete(5000)})
         console.log(e.stack),
         s='-';
     } finally {
+        DevLogMessage=`\`\`\`COMMAND EXECUTED\`\`\`\n**GUILD ➧ **\`${message.guild.name}\`** | **\`${message.guild.id}\`\n**CHANNEL ➧ **\`#${message.channel.name}\`** | **\`${message.channel.id}\`\n**USER ➧ **\`@${message.author.tag}\`** | **\`${message.author.id}\``
         DevLogMessage=`\`\`\`md\n[${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${s}\n${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
         DevLogChannel.send(DevLogMessage);
     }
