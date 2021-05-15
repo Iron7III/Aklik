@@ -129,8 +129,8 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogMessage=`\`\`\`COMMAND EXECUTED\`\`\`\n**GUILD ➧ **\`${message.guild.name}\`** | **\`${message.guild.id}\`\n**CHANNEL ➧ **\`#${message.channel.name}\`** | **\`${message.channel.id}\`\n**USER ➧ **\`@${message.author.tag}\`** | **\`${message.author.id}\``
-        DevLogMessage=`\`\`\`md\n[${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${s}\n${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
+        DevLogMessage=`\`\`\`COMMAND EXECUTED\`\`\`\n**GUILD ➧ **\`${message.guild.name}\`** | **\`${message.guild.id}\`\n**CHANNEL ➧ **\`#${message.channel.name}\`** | **\`${message.channel.id}\`\n**USER ➧ **\`@${message.author.tag}\`** | **\`${message.author.id}\`\n\n**CMD ➧ **\`${prefix}${cmd}\`\n**ARGS ➧ **${args.map(a=>`\`${a}\``).join(' ')}`
+        //DevLogMessage=`\`\`\`md\n[${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${s}\n${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
         DevLogChannel.send(DevLogMessage);
     }
 });
