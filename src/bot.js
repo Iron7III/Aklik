@@ -136,7 +136,7 @@ client.on("message", async message => {
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
-    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner}\`** | **\`${guild.owner.id}\`\n**Region ➧ **\`@${guild.region}\`\n**Members ➧ **\`@${guild.members}\``;
+    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner}\`** | **\`${guild.ownerId}\`\n**Region ➧ **\`@${guild.region}\`\n**Members ➧ **\`@${guild.members}\``;
     client.channels.cache.get("830421823782256670").send(DevLogGuildCreate)
     console.log('NUEVO SERVIDOR')
 })
