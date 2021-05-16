@@ -1,8 +1,13 @@
 //VARIABLES GENERALES
 const Discord = require("discord.js");
 const client = new Discord.Client({
-  disableEveryone: true,
-  fetchAllMembers: true
+    disableEveryone: true,
+    fetchAllMembers: true,
+    ws: {
+        properties: {
+            $browser: "Discord Android"
+        }
+    }
 });
 const FortniteAPI = require("fortnite-api-com");
 const config = {
@@ -136,7 +141,7 @@ client.on("message", async message => {
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
-    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner}\`** | **\`${guild.ownerId}\`\n**Region ➧ **\`@${guild.region}\`\n**Members ➧ **\`@${guild.members}\``;
+    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➧ **\`${guild.region}\`\n**Members ➧ **\`${guild.members.size}\``;
     client.channels.cache.get("830421823782256670").send(DevLogGuildCreate)
     console.log('NUEVO SERVIDOR')
 })
