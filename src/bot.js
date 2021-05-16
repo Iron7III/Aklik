@@ -119,26 +119,32 @@ client.on("message", async message => {
     const DevLogChannel=client.channels.cache.get('589422434134917134');
     const cmd = args.shift().toLowerCase();
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
-    var DevLogMessage;
+    var DevLogCommand;
     var s='+';
     try {
     let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, Fortnite);
     } catch (e) {
-        message.channel.send('Este comando no existe').then((msg) => {msg.delete(5000)})
+        message.channel.send('Este comando no existe').then(msg => {msg.delete(5000)})
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogMessage=`\`\`\`COMMAND EXECUTED\`\`\`\n**GUILD ➧ **\`${message.guild.name}\`** | **\`${message.guild.id}\`\n**CHANNEL ➧ **\`#${message.channel.name}\`** | **\`${message.channel.id}\`\n**USER ➧ **\`@${message.author.tag}\`** | **\`${message.author.id}\`\n\n**CMD ➧ **\`${prefix}${cmd}\`\n**ARGS ➧ **${args.map(a=>`\`${a}\``).join(' ')}`
-        //DevLogMessage=`\`\`\`md\n[${message.guild.name}](${message.guild.id})\n[#${message.channel.name}](${message.channel.id})\n[@${message.author.tag}](${message.author.id})\n[${cmd.toUpperCase()}] ${s}\n${args.map(a=>`<${a}>`).join(' ')}\n\`\`\``;
-        DevLogChannel.send(DevLogMessage);
+        DevLogCommand=`\`\`\`COMMAND EXECUTED\`\`\`\n**GUILD ➧ **\`${message.guild.name}\`** | **\`${message.guild.id}\`\n**CHANNEL ➧ **\`#${message.channel.name}\`** | **\`${message.channel.id}\`\n**USER ➧ **\`@${message.author.tag}\`** | **\`${message.author.id}\`\n\n**CMD ➧ **\`${prefix}${cmd}\`\n**ARGS ➧ **${args?args.map(a=>`\`${a}\``).join(' '):'There is no args.'}`
+        DevLogChannel.send(DevLogCommand);
     }
 });
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
-    client.channels.cache.get("830421823782256670").send(`NUEVO SERVIDOR: ${guild.name}`)
+    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner}\`** | **\`${guild.owner.id}\`\n**Region ➧ **\`@${guild.region}\`\n**Members ➧ **\`@${guild.members}\``;
+    client.channels.cache.get("830421823782256670").send(DevLogGuildCreate)
     console.log('NUEVO SERVIDOR')
+})
+
+//EVENTO guildDelete
+client.on("guildDelete", (guild) => {
+    client.channels.cache.get("830421823782256670").send(`NUEVO SERVIDOR: ${guild.name}`)
+    console.log('ME han expulsado de un servidor')
 })
 
 // TOKEN
