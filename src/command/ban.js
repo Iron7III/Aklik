@@ -26,7 +26,7 @@ exports.run = async (client, message, args, Fortnite) => {
             }
         )
         .then(()=>{
-                embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido baneado con motivo: \`${args[1]?args.slice(args[0].length):'No hay motivo.'}\`_`).setColor('#57F287')
+                embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido baneado con motivo: \`${args[1]?args.slice(0):'No hay motivo.'}\`_`).setColor('#57F287')
                 console.log(args.slice(args[0].length))
                 message.channel.send({embed: embed})
             }
