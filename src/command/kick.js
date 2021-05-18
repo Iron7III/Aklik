@@ -10,6 +10,7 @@ const client = new Discord.Client({
     const user = args[0];
     if(user){
         const member = message.guild.member(user);
+        console.log(message.guild.member(user))
         if(member){
             member.kick(args[1]?args.slice(1).join(' '):'No hay motivo.')
             .then(()=>{
