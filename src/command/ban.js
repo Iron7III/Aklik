@@ -13,20 +13,26 @@ exports.run = async (client, message, args, Fortnite) => {
     if(!user){
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
         message.channel.send({embed: embed})
-    }
+    }else
     if(!member){
         embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
         message.channel.send({embed: embed})
-    }
+    }else
     if(member){
         member.ban(
-                {
+            {
                 reason: args[1]?args[1]:'No hay motivo.'
-                }
-            )
-            .then(()=>{
-                embed.setDescription(`_${user.tag} ha sido baneado con motivo: \`${args[1]?args[1]:'No hay motivo.'}\`_`).setColor('#ED4245')
+            }
+        )
+        .then(()=>{
+                embed.setDescription(`_${user.tag} ha sido baneado con motivo: \`${args[1]?args[1]:'No hay motivo.'}\`_`).setColor('#57F287')
                 message.channel.send({embed: embed})
+            }
+        )
+        .catch(err => {
+                embed.setDescription(`_No puedo banear a este usuario._`).setColor('#ED4245')
+                message.channel.send({embed: embed})
+                console.error(err);
             }
         )
     }
