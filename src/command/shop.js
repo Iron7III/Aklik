@@ -1,4 +1,8 @@
 const Discord = require("discord.js");
+const client = new Discord.Client({
+  disableEveryone: true,
+  fetchAllMembers: true
+});
 
 exports.run = async (client, message, args, Fortnite) => {
   Fortnite.BRShop("es").then(res => {
