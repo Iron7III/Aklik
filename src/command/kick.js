@@ -7,7 +7,7 @@ const client = new Discord.Client({
 
   exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
-    const user = await message.mentions.members.first()||client.users.fetch(args[0]);
+    const user = await message.mentions.members.first()||client.users.resolve(args[0]);
     if(user){
         const member = message.guild.member(user);
         if(member){
