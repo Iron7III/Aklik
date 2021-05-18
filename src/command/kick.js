@@ -23,12 +23,11 @@ exports.run = async (client, message, args, Fortnite) => {
         member.kick(args[1]?args.slice(1).join(' '):'No hay motivo.')
         .then(()=>{
                 embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
-                console.log(args.slice(args[0].length))
                 message.channel.send({embed: embed})
             }
         )
         .catch(err => {
-                embed.setDescription(`_No puedo kickeado a este usuario._`).setColor('#ED4245')
+                embed.setDescription(`_No puedo kickear a este usuario._`).setColor('#ED4245')
                 message.channel.send({embed: embed})
                 console.error(err);
             }
