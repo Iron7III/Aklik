@@ -10,7 +10,6 @@ exports.run = async (client, message, args, Fortnite) => {
     const user = message.mentions.users.first()||args[0];
     console.log(message.mentions.users.first())
     const member = message.guild.member(user);
-    console.log(member.tag)
     if(!user){
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
         message.channel.send({embed: embed})
