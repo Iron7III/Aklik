@@ -8,8 +8,8 @@ const client = new Discord.Client({
 exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
     const user = message.mentions.users.first()||args[0];
-    const member = message.guild.member(user);
     if(user){
+        const member = message.guild.member(user);
         if(member){
             if(member){
                 member.ban(
