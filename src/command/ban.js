@@ -8,7 +8,7 @@ const client = new Discord.Client({
 exports.run = async (client, message, args, Fortnite) => {
     const embed = new Discord.MessageEmbed();
     const user = message.mentions.users.first()||args[0];
-    const member = message.guild.member(message.mentions.users.first().id||args[0]);
+    const member = message.guild.member(user);
     if(!user){
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
         message.channel.send({embed: embed})
