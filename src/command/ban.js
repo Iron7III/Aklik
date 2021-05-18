@@ -22,7 +22,7 @@ exports.run = async (client, message, args, Fortnite) => {
     if(member){
         member.ban(
             {
-                reason: args[1]?args.slice(1).trim().split(" "):'No hay motivo.'
+                reason: args[1]?args.slice(1).join(' '):'No hay motivo.'
             }
         )
         .then(()=>{
