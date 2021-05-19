@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
         message.channel.send({embed: embed})
     } else {
-        const member = message.guild.members.cache.get(args[0]);
+        const member = message.users.cache.get(args[0]);
         console.log(message.guild.members)
         if(!member) {
             embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')

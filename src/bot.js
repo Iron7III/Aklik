@@ -102,8 +102,7 @@ const reply = async (interaction, response) => {
     }
     client.api.interactions(interaction.id, interaction.token).callback.post({
         data: {
-            type: 5,
-            data,
+            type: 5
         },
     })
 }
