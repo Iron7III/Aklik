@@ -7,14 +7,14 @@ const client = new Discord.Client({
 
   exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
-    const user = client.users.cache.get(args[0]);
+    const user = args[0];
     console.log(user)
     const reason = args[1]?args.slice(1).join(' '):'No hay motivo.';
     if(!user) {
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
         message.channel.send({embed: embed})
     } else {
-        const member = message.guild.members.fetch(user.id);
+        const member = message.guild.members.fetch(user);
         if(!member) {
             embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
             message.channel.send({embed: embed})
