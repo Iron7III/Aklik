@@ -8,13 +8,19 @@ const client = new Discord.Client({
   exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
     const user = client.users.cache.get(args[0]);
-    if(user){
-        const member = message.guild.members.fetch(user);
-        console.log(message.guild.members.fetch(user))
-        if(member){
-            member.kick(args[1]?args.slice(1).join(' '):'No hay motivo.')
-            .then(()=>{
-                    embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
+    const member = message.guild.members.fetch(user);
+    const reason = args[1]?args.slice(1).join(' '):'No hay motivo.';
+    if(!user) {
+        embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
+        message.channel.send({embed: embed})
+    } else {
+        if(!member) {
+            embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
+            message.channel.send({embed: embed})
+        } else {
+            member.kick(reason)
+            .then(() => {
+                    embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${reason}\`_`).setColor('#57F287')
                     message.channel.send({embed: embed})
                 }
             )
@@ -24,12 +30,6 @@ const client = new Discord.Client({
                     console.error(err);
                 }
             )
-        } else {
-            embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
-            message.channel.send({embed: embed})
         }
-    } else {
-        embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
-        message.channel.send({embed: embed})
     }
 }
