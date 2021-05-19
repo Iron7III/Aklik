@@ -8,6 +8,7 @@ const client = new Discord.Client({
   exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
     const user = client.users.cache.get(args[0]);
+    console.log(user)
     const member = message.guild.members.fetch(user);
     const reason = args[1]?args.slice(1).join(' '):'No hay motivo.';
     if(!user) {
