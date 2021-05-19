@@ -9,7 +9,7 @@ const client = new Discord.Client({
     const embed = new Discord.MessageEmbed();
     const user = client.users.cache.get(args[0]);
     if(user){
-        const member = message.guild.members(user);
+        const member = message.guild.members.fetch(user);
         console.log(message.guild.members.fetch(user))
         if(member){
             member.kick(args[1]?args.slice(1).join(' '):'No hay motivo.')
