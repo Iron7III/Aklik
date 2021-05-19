@@ -14,7 +14,7 @@ const client = new Discord.Client({
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
         message.channel.send({embed: embed})
     } else {
-        const member = message.guild.members.fetch(user);
+        const member = message.guild.member(user);
         if(!member) {
             embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
             message.channel.send({embed: embed})
