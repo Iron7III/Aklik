@@ -3,9 +3,9 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
     fetchAllMembers: true
-  });
+});
 
-  exports.run = async (client, message, args) => {
+exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
     const user = args[0];
     console.log(user)
@@ -15,6 +15,7 @@ const client = new Discord.Client({
         message.channel.send({embed: embed})
     } else {
         const member = message.guild.members.cache.get(args[0]);
+        console.log(member)
         if(!member) {
             embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
             message.channel.send({embed: embed})
