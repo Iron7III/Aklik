@@ -18,7 +18,7 @@ var Fortnite = new FortniteAPI(config);
 
 
 //EVENTO ready
-const guildID = '712022694727647313';
+const guildID = '514150100575191040';
 const getApp = (guildID) => {
     const app = client.api.applications(client.user.id)
     if(guildID) {
@@ -102,7 +102,7 @@ const reply = async (interaction, response) => {
     }
     client.api.interactions(interaction.id, interaction.token).callback.post({
         data: {
-            type: 4,
+            type: 5,
             data,
         },
     })
