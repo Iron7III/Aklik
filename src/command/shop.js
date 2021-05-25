@@ -40,5 +40,6 @@ exports.run = async (client, message, args, Fortnite) => {
       );
     }
     message.channel.send({ embed: ItemShop });
+    message.channel.send('./shop-cataba.png')
   });
 };

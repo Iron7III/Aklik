@@ -36,6 +36,14 @@ client.on("ready", async () => {
     DevLogChannel.send({ embed: ready })
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 
+    const { generateShop, getShopItems } = require("./shop");
+    const { apiKey, language, watermark } = require("./config.json");
+
+    (async () => {
+        const items = await getShopItems(apiKey, language);
+        await generateShop(items, watermark);
+    })()
+    // Slash commands
     const commands = await getApp(guildID).commands.get()
     console.log(commands)
     
@@ -46,26 +54,7 @@ client.on("ready", async () => {
         }
     })
 
-    await getApp(guildID).commands.post({
-        data: {
-            name: 'embed',
-            description: 'Envia un embed personalizado',
-            options: [
-                {
-                    name: 'Name',
-                    description: 'Tu nombre',
-                    required: true,
-                    type: 3 // string
-                },
-                {
-                    name: 'Age',
-                    description: 'Tu edad',
-                    required: false,
-                    type: 4 // integer
-                }
-            ]
-        }
-    })
+    await getApp(guildID).commands('').delete()
 
     client.ws.on('INTERACTION_CREATE', async (interaction) => {
         const { name, options } = interaction.data;
