@@ -46,6 +46,6 @@ exports.run = async (client, message, args, Fortnite) => {
     message.channel.send({embed: test})
 
     const attach = new Discord.MessageAttachment(`shop-cataba.jpg`)
-                message.channel.send(attach)
+    message.channel.send(attach)
   });
 };

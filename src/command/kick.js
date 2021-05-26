@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
             embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
             message.channel.send({embed: embed})
         } else {
-            member.kick(reason)
+            user.kick(reason)
             .then(() => {
                     embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${reason}\`_`).setColor('#57F287')
                     message.channel.send({embed: embed})
