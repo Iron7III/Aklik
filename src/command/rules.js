@@ -80,6 +80,6 @@ exports.run = async (client, message, args) => {
         message.channel.send({embed: Panas_7})
     } else
     if(args[0]==='aklik'){
-        message.channel.send('')
+        message.channel.send({embed: Error})
     }
 }
