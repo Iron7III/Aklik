@@ -223,7 +223,7 @@ module.exports = {
 		// Save image
 		const buf = canvas.toBuffer("image/png");
 
-		fs.writeFileSync("shop-cataba.png", buf);
+		fs.writeFileSync("shop-cataba.jpg", buf);
 
 		// Return path
 		console.log(`Successfully rendered Item Shop image in ${(Date.now() - beforeFinish) / 1000}s`);

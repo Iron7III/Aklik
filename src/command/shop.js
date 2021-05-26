@@ -39,7 +39,13 @@ exports.run = async (client, message, args, Fortnite) => {
         false
       );
     }
-    message.channel.send({ embed: ItemShop });
-    message.channel.send('./shop-cataba.png')
+    const test = new Discord.MessageEmbed()
+      .setTitle('awdaw')
+      .setImage('attachment://shop-cataba.jpg')
+      .setColor('RANDOM')
+    message.channel.send({embed: test})
+
+    const attach = new Discord.MessageAttachment(`shop-cataba.jpg`)
+                message.channel.send(attach)
   });
 };
