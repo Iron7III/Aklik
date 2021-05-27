@@ -61,13 +61,23 @@ exports.run = async (client, message, args) => {
     const Panas_6 = new Discord.MessageEmbed()
         .setTitle('**MEJORA EL SERVIDOR**')
         .setDescription('**Se agradece el apoyo y soporte del servidor manteniendolo vivo y con funciones extras al mejorarlo con Nitro, aedmas consigues un asombroso rol y permisos extras.**')
-        .setColor('#FF73FA')
+        .setColor('#EB459E')
         .setThumbnail('https://i.imgur.com/wwJXbul.png')
     const Panas_7 = new Discord.MessageEmbed()
         .setTitle('**INVITA A TUS AMIGOS**')
-        .setDescription('**Invita a tus amigos al servidor para ayudar a crecer y mejorar esta comunidad, cualquier persona es bienvenida al servidor y disfrutar de un buen servidor y ambiente.')
-        .setColor('#59BA50')
+        .setDescription('**Invita a tus amigos al servidor para ayudar a crecer y mejorar esta comunidad, cualquier persona es bienvenida al servidor y disfrutar de un buen servidor y ambiente.**')
+        .setColor('#57F287')
         .setThumbnail('https://i.imgur.com/18gYPWa.png')
+
+//==Panas==//
+    const Aklik_1 = new Discord.MessageEmbed()
+        .setTitle('ASSETS Y INFORMACIÓN UTIL')
+        .setDescription('A continuación hay una lista de imagenes, colores, referencias y todo tipo de información util a la hora de desarrollar cualquier sistema que utilice Discord; inlcuye los colores y proporciones oficiales de discord junto a muchos recurso que no se proporcionan directamente.')
+    const Aklik_2 = new Discord.MessageEmbed()
+        .setTitle('**BLURPLE**')
+        .setDescription('**HEX :: **\`5865F2\`\n**RGB :: **\`88, 101, 242\`\n**CMYK :: **\`80, 60, 0, 0\`\n**PMS :: **\`2726 C\`')
+        .setImage('')
+        .setColor('#5865F2')
 
 //  New rules function
     if(args[0]==='panas'){
