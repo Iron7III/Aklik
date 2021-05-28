@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
                                 .then(m => m.delete({ timeout: 5000 }))
                         } else {
                             const reason = args.slice(1).join(" ")?args.slice(1).join(" "):'No se ha especificado una razón.'
-                            message.guild.members.kick(member.id,{reason: reason})
+                            message.guild.member(member.id||args[0]).kick(reason)
                                 .then(()=>{
                                     embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
                                     message.channel.send({embed: embed})
