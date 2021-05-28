@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
                         message.channel.send({embed: embed})
                             .then(m => m.delete({ timeout: 5000 }))
                     } else {
-                        if(!member.kickeable){
+                        if(!member.kickable){
                             embed.setDescription(`_El usuario no puede ser kickeado._`).setColor('#ED4245')
                             message.channel.send({embed: embed})
                                 .then(m => m.delete({ timeout: 5000 }))
