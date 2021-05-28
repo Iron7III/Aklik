@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                             const reason = args.slice(1).join(" ")?args.slice(1).join(" "):'No se ha especificado una razón.'
                             message.guild.members.unban(member)
                                 .then(()=>{
-                                    embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido desbaneado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
+                                    embed.setDescription(`_${member} ha sido desbaneado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
                                     message.channel.send({embed: embed})
                                 })
                                 .catch(err => {
