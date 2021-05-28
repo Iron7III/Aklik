@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
                                 .then(m => m.delete({ timeout: 5000 }))
                         } else {
                             const reason = args.slice(1).join(" ")?args.slice(1).join(" "):'No se ha especificado una razón.'
-                            message.guild.members.unban(member.id)
+                            message.guild.members.unban(member)
                                 .then(()=>{
                                     embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido desbaneado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
                                     message.channel.send({embed: embed})
