@@ -7,40 +7,47 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args, Fortnite) => {
-  console.log(client.uptime)
-    let CommandsInformation={
-        "header":"**INFORMACION / SOPORTE**",
-        "list":[
-            "f*help",
-            "f*ping",
-            "f*info"
-        ]
-    };
-    let CommandsFortnite={
-        "header":"**FORTNITE**",
-        "list":[
-            "f*aes",
-            "f*map <language | blank>",
-            "f*shop",
-            "f*news <br | stw | creative> <language>",
-            "f*newitems",
-            "f*id <id>"
-        ]
-    };
+    console.log(client.uptime)
+    const prefix = 'f-'
+    let Global = [
+        {
+            'header':'**INFORMACION / SOPORTE**',
+            'cmds':[
+                `**\`${prefix}help\`**`,
+                `**\`${prefix}ping\`**`,
+                `**\`${prefix}info\`**`
+            ]
+        },
+        {
+            'header':'**FORTNITE**',
+            'cmds':[
+                `**\`${prefix}aes\`**`,
+                `**\`${prefix}map\`** \`[LANGUAGE•BLANK]\``,
+                `**\`${prefix}shop\`** (Beta)`,
+                `**\`${prefix}news\`** \`[BR•STW•CREATIVE]\` \`[LANGUAGE]\``,
+                `**\`${prefix}id\`** \`<COSMETIC_ID>\``
+            ]
+        },
+        {
+            'header':'**MODERACION**',
+            'cmds':[
+                `**\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\` (Only works with @)`,
+                `**\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\` (Only works with @)`,
+                `**\`${prefix}unban\`** \`<MEMBER>\``
+            ]
+        }
+    ]
+
     let Commands=[
-        `${CommandsInformation.header}\n\`\`\`\n${CommandsInformation.list.join('\n')}\n\`\`\``,
-        `${CommandsFortnite.header}\n\`\`\`\n${CommandsFortnite.list.join('\n')}\n\`\`\``,
-        `||PlaceHolder||`,
-        `||PlaceHolder||`,
+        `${CommandsInformation.header}\n${CommandsInformation.commands.join('\n')}`,
+        `${CommandsFortnite.header}\n${CommandsFortnite.commands.join('\n\n')}`,
+        `${CommandsModeration.header}\n${CommandsModeration.commands.join('\n')}`
     ];
 
     const embed = new Discord.MessageEmbed()
         .setTitle(`**${client.user.username} HELP**`)
-        .addField(
-            `**LISTA DE COMANDOS**`,
-            `${Commands.join('\n')}`,
-            false
-        )
+        .setDescription(`**\`<>\` - Campo Obligatorio\n\`[]\` - Campo Opcional\n\`()\` - Campo Informativo**`)
+        .addField('**LISTA DE COMANDOS**',`${Global.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n')}`)
         .setColor('#ff5e00')
     message.channel.send({ embed: embed })
 }

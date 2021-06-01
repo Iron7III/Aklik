@@ -6,6 +6,7 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
+    console.log(message.guild.members)
     const embed = new Discord.MessageEmbed();
     if(!args[0]){
         embed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
@@ -53,3 +54,24 @@ exports.run = async (client, message, args) => {
         }
     }
 }
+
+
+// V2
+/*
+const Base = new Discord.MessageEmbed();
+const user = args[0];
+if(!user||user==message.author.id){
+    Base.setDescription(`_Has de mencionar a un usuario o escribir una ID._`).setColor('#ED4245')
+    message.channel.send({embed: Base})
+        .then(m => m.delete({timeout: 5000}))
+        .catch(e => console.log(e))
+    return
+}
+if(!message.member.permissions.has('BAN_MEMBERS')){
+    Base.setDescription(`_No tienes permisos para kickear usuarios._`).setColor('#ED4245')
+    message.channel.send({embed: Base})
+        .then(m => m.delete({ timeout: 5000 }))
+        .catch(e => console.log(e))
+    return
+}
+*/

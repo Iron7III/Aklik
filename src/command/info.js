@@ -77,7 +77,8 @@ exports.run = async (client, message, args, Fortnite) => {
         [Stats.links.header,Stats.links.list.map(l=>`- ${l}`).join('\n')].join('\n')
     ];
     const embed = new Discord.MessageEmbed()
-        .setTitle(`**${client.user.username} HELP**`)
+        .setTitle(`**INFORMACION DE ${client.user.username}**`)
+        .setDescription('Soy un BOT en constante desarrollo, tengo algunas funciones sobre Fortnite y mi principal funcion es la Moderacion, aunque tenga pocos comandos soy actualizado constantemente con fixes y mejoras, no te pierdas ninguna y disfruta de todas mis funciones :)')
         .addField(
             `**INFORMACIÓN**`,
             `${Statistics.join(`\n\n`)}`
@@ -88,5 +89,4 @@ exports.run = async (client, message, args, Fortnite) => {
         )
         .setColor('#FF6B00')
     message.channel.send({ embed: embed })
-    console.log(client.users)
 }
