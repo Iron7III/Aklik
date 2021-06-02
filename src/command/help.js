@@ -37,13 +37,6 @@ exports.run = async (client, message, args, Fortnite) => {
             ]
         }
     ]
-
-    let Commands=[
-        `${CommandsInformation.header}\n${CommandsInformation.commands.join('\n')}`,
-        `${CommandsFortnite.header}\n${CommandsFortnite.commands.join('\n\n')}`,
-        `${CommandsModeration.header}\n${CommandsModeration.commands.join('\n')}`
-    ];
-
     const embed = new Discord.MessageEmbed()
         .setTitle(`**${client.user.username} HELP**`)
         .setDescription(`**\`<>\` - Campo Obligatorio\n\`[]\` - Campo Opcional\n\`()\` - Campo Informativo**`)
