@@ -63,22 +63,13 @@ exports.run = async (client, message, args, Fortnite) => {
                 `\`express v4.17.1\`${client.emojis.cache.get("777189460655341600")}`,
                 `\`fortnite-api-com v2.2.1\` ${client.emojis.cache.get("777189460655341600")}`
             ]
-        },
-        "links":{
-            "header":`**LINKS**`,
-            "list":[
-                `[**top.gg**](https://top.gg/bot/685919845233197100) ${client.emojis.cache.get("780150734779056170")}`,
-                `[**VOTAME**](https://top.gg/bot/685919845233197100/vote) ${client.emojis.cache.get("780150734779056170")}`,
-                `[**INVITAME**](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=8&scope=bot) ${client.emojis.cache.get("780150734779056170")}`
-            ]
         }
     }
     let Statistics=[
         [Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`).join('\n')].join('\n'),
         [Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n')].join('\n'),
         [Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n')].join('\n'),
-        [Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n')].join('\n'),
-        [Stats.links.header,Stats.links.list.map(l=>`- ${l}`).join('\n')].join('\n')
+        [Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n')].join('\n')
     ];
     const embed = new Discord.MessageEmbed()
         .setTitle(`**INFORMACION DE ${client.user.username}**`)
