@@ -6,7 +6,8 @@ const client = new Discord.Client({
     ws: {
         properties: {
             $browser: "Discord Android"
-        }
+        },
+        intents: Discord.Intents.ALL
     }
 });
 const FortniteAPI = require("fortnite-api-com");
