@@ -3,8 +3,14 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
-    fetchAllMembers: true
-  });
+    fetchAllMembers: true,
+    ws: {
+        properties: {
+            $browser: "Discord Android"
+        },
+    },
+    intents: Discord.Intents.NON_PRIVILEGED
+});
 
 exports.run = async (client, message, args) => {
     const UserInfoEmbed = new Discord.MessageEmbed()

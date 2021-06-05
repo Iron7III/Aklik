@@ -1,11 +1,16 @@
-//  npm Discord
 const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
-    fetchAllMembers: true
-  });
+    fetchAllMembers: true,
+    ws: {
+        properties: {
+            $browser: "Discord Android"
+        },
+    },
+    intents: Discord.Intents.NON_PRIVILEGED
+});
 
-  exports.run = async (client, message, args) => {
+exports.run = async (client, message, args) => {
     console.log(message.guild.members)
     const embed = new Discord.MessageEmbed();
     if(!args[0]){

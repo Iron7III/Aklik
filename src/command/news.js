@@ -1,9 +1,13 @@
-//  npm Discord
 const Discord = require("discord.js");
-//  Usuario del Bot de Discord
 const client = new Discord.Client({
-  disableEveryone: true,
-  fetchAllMembers: true
+    disableEveryone: true,
+    fetchAllMembers: true,
+    ws: {
+        properties: {
+            $browser: "Discord Android"
+        },
+    },
+    intents: Discord.Intents.NON_PRIVILEGED
 });
 const { createCanvas, loadImage, registerFont } = require('canvas')
 

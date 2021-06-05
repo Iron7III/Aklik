@@ -1,12 +1,17 @@
 //  ⌚STATUS⌚
 //  Comando 100% Completado y Funcional
 
-//  npm Discord
 const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
-    fetchAllMembers: true
-  });
+    fetchAllMembers: true,
+    ws: {
+        properties: {
+            $browser: "Discord Android"
+        },
+    },
+    intents: Discord.Intents.NON_PRIVILEGED
+});
 
 exports.run = async (client, message, args) => {
     const UnbanEmbed = new Discord.MessageEmbed();

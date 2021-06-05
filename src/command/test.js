@@ -1,7 +1,13 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({
-  disableEveryone: true,
-  fetchAllMembers: true
+    disableEveryone: true,
+    fetchAllMembers: true,
+    ws: {
+        properties: {
+            $browser: "Discord Android"
+        },
+    },
+    intents: Discord.Intents.NON_PRIVILEGED
 });
 const FortniteAPI = require("fortnite-api-io");
 const fortniteAPI = new FortniteAPI("1c43003c-41511d50-7062e583-6ea047a7")
