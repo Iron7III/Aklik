@@ -69,7 +69,7 @@ exports.run = async (client, message, args) => {
         .setColor('#57F287')
         .setThumbnail('https://i.imgur.com/18gYPWa.png')
 
-//==Panas==//
+//==Aklik==//
     const Aklik_1 = new Discord.MessageEmbed()
         .setTitle('ASSETS Y INFORMACIÓN UTIL')
         .setDescription('A continuación hay una lista de imagenes, colores, referencias y todo tipo de información util a la hora de desarrollar cualquier sistema que utilice Discord; inlcuye los colores y proporciones oficiales de discord junto a muchos recurso que no se proporcionan directamente.')

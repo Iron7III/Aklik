@@ -30,7 +30,7 @@ exports.run = async (client, message, args, Fortnite) => {
     if(minutes > 60){
         minutes = 0;
     }
-    uptime += `${days} D, ${hours} H, ${minutes} M, ${seconds} S`;
+    uptime += `${days} D, ${hours}:${minutes}:${seconds}`;
     let Stats={
         "uptime":{
             "header":`${client.emojis.cache.get("769568936077033482")} **UPTIME**`,
@@ -54,10 +54,10 @@ exports.run = async (client, message, args, Fortnite) => {
         "dependices":{
             "header":`${client.emojis.cache.get("768962690508783646")} **LIBRERIAS**`,
             "list":[
-                `\`discord.js\` ${client.emojis.cache.get("777189460655341600")}`,
-                `\`axios\` ${client.emojis.cache.get("777189460655341600")}`,
-                `\`express\` ${client.emojis.cache.get("777189460655341600")}`,
-                `\`fortnite-api-com\` ${client.emojis.cache.get("777189460655341600")}`
+                `\`discord.js v13.0.0-dev\` ${client.emojis.cache.get("777189460655341600")}`,
+                `\`axios v0.21.0\`${client.emojis.cache.get("777189460655341600")}`,
+                `\`express v4.17.1\`${client.emojis.cache.get("777189460655341600")}`,
+                `\`fortnite-api-com v2.2.1\` ${client.emojis.cache.get("777189460655341600")}`
             ]
         },
         "links":{

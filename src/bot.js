@@ -6,7 +6,8 @@ const client = new Discord.Client({
     ws: {
         properties: {
             $browser: "Discord Android"
-        }
+        },
+        intents: Discord.Intents.NON_PRIVILEGED
     }
 });
 const FortniteAPI = require("fortnite-api-com");
@@ -68,7 +69,7 @@ client.on("guildCreate", (guild) => {
 
 //EVENTO guildDelete
 client.on("guildDelete", (guild) => {
-    client.channels.cache.get("830421823782256670").send(`NUEVO SERVIDOR: ${guild.name}`)
+    client.channels.cache.get("830421823782256670").send(`ME han expulsado de un servidor: ${guild.name}`)
     console.log('ME han expulsado de un servidor')
 })
 

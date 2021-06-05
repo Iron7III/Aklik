@@ -33,14 +33,14 @@ exports.run = async (client, message, args, Fortnite) => {
             'cmds':[
                 `**\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\` (Only works with @)`,
                 `**\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\` (Only works with @)`,
-                `**\`${prefix}unban\`** \`<MEMBER>\``
+                `**\`${prefix}unban\`** \`<MEMBER>\` \`[REASON]\``
             ]
         }
     ]
     const embed = new Discord.MessageEmbed()
         .setTitle(`**${client.user.username} HELP**`)
         .setDescription(`**\`<>\` - Campo Obligatorio\n\`[]\` - Campo Opcional\n\`()\` - Campo Informativo**`)
-        .addField('**LISTA DE COMANDOS**',`${Global.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n')}`)
+        .addField('**LISTA DE COMANDOS**',`${Global.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n\n')}`)
         .setColor('#ff5e00')
     message.channel.send({ embed: embed })
 }

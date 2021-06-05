@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
                                 .then(m => m.delete({ timeout: 5000 }))
                         } else {
                             const reason = args.slice(1).join(" ")?args.slice(1).join(" "):'No se ha especificado una razón.'
-                            message.guild.member(member.id||args[0]).kick(reason)
+                            message.guild.member(member.id).kick(reason)
                                 .then(()=>{
                                     embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${args[1]?args.slice(1).join(' '):'No hay motivo.'}\`_`).setColor('#57F287')
                                     message.channel.send({embed: embed})
@@ -54,24 +54,3 @@ exports.run = async (client, message, args) => {
         }
     }
 }
-
-
-// V2
-/*
-const Base = new Discord.MessageEmbed();
-const user = args[0];
-if(!user||user==message.author.id){
-    Base.setDescription(`_Has de mencionar a un usuario o escribir una ID._`).setColor('#ED4245')
-    message.channel.send({embed: Base})
-        .then(m => m.delete({timeout: 5000}))
-        .catch(e => console.log(e))
-    return
-}
-if(!message.member.permissions.has('BAN_MEMBERS')){
-    Base.setDescription(`_No tienes permisos para kickear usuarios._`).setColor('#ED4245')
-    message.channel.send({embed: Base})
-        .then(m => m.delete({ timeout: 5000 }))
-        .catch(e => console.log(e))
-    return
-}
-*/
