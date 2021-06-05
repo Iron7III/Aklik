@@ -7,8 +7,8 @@ const client = new Discord.Client({
         properties: {
             $browser: "Discord Android"
         },
-        intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES']
-    }
+    },
+    intents: Discord.Intents.NON_PRIVILEGED
 });
 const FortniteAPI = require("fortnite-api-com");
 const config = {
