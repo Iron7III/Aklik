@@ -34,7 +34,7 @@ exports.run = async (client, message, args, Fortnite) => {
     if(minutes > 60){
         minutes = 0;
     }
-    uptime += `${days} D, ${hours}:${minutes}:${seconds}`;
+    uptime += `${days} D, ${hours>9?hours:`0${hours}`}:${minutes>9?minutes:`0${minutes}`}:${seconds>9?seconds:`0${seconds}`}`;
     let Stats={
         "uptime":{
             "header":`${client.emojis.cache.get("769568936077033482")} **UPTIME**`,
@@ -92,5 +92,34 @@ exports.run = async (client, message, args, Fortnite) => {
             `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! [Invitame](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot) para apoyarme.`
         )
         .setColor('#FF6B00')
-    message.channel.send({ embed: embed })
+    //message.channel.send({ embed: embed })
+    client.api.channels(message.channel.id).messages.post({
+        type: 1,
+        data: {
+            content: ' ',
+            embed: embed,
+            components: [
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 2,
+                            label: 'Top.gg',
+                            style: 5,
+                            url: 'https://top.gg/bot/685919845233197100'
+                        }
+                    ],
+                    type: 1,
+                    components: [
+                        {
+                            type: 2,
+                            label: 'Invitame',
+                            style: 5,
+                            url: 'https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot'
+                        }
+                    ]
+                }
+            ]
+        }
+    })
 }
