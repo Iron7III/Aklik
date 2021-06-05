@@ -92,7 +92,6 @@ exports.run = async (client, message, args, Fortnite) => {
             `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! [Invitame](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot) para apoyarme.`
         )
         .setColor('#FF6B00')
-    //message.channel.send({ embed: embed })
     client.api.channels(message.channel.id).messages.post({
         type: 1,
         data: {
@@ -106,13 +105,22 @@ exports.run = async (client, message, args, Fortnite) => {
                             type: 2,
                             label: 'Top.gg',
                             style: 5,
-                            url: 'https://top.gg/bot/685919845233197100'
+                            url: 'https://top.gg/bot/685919845233197100',
+                            emoji: 'client.emojis.cache.get("780150734779056170")'
+                        },
+                        {
+                            type: 2,
+                            label: 'Votar',
+                            style: 5,
+                            url: 'https://top.gg/bot/685919845233197100/vote',
+                            emoji: 'client.emojis.cache.get("780150734779056170")'
                         },
                         {
                             type: 2,
                             label: 'Invitame',
                             style: 5,
-                            url: 'https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot'
+                            url: 'https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot',
+                            emoji: 'client.emojis.cache.get("780150734779056170")'
                         }
                     ]
                 }
