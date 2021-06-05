@@ -107,10 +107,7 @@ exports.run = async (client, message, args, Fortnite) => {
                             label: 'Top.gg',
                             style: 5,
                             url: 'https://top.gg/bot/685919845233197100'
-                        }
-                    ],
-                    type: 1,
-                    components: [
+                        },
                         {
                             type: 2,
                             label: 'Invitame',
