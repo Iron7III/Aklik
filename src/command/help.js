@@ -46,5 +46,39 @@ exports.run = async (client, message, args, Fortnite) => {
         .setDescription(`**\`<>\` - Campo Obligatorio\n\`[]\` - Campo Opcional\n\`()\` - Campo Informativo**`)
         .addField('**LISTA DE COMANDOS**',`${Global.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n\n')}`)
         .setColor('#ff5e00')
-    message.channel.send({ embed: embed })
+        client.api.channels(message.channel.id).messages.post({
+            type: 1,
+            data: {
+                content: ' ',
+                embed: embed,
+                components: [
+                    {
+                        type: 1,
+                        components: [
+                            {
+                                type: 2,
+                                label: 'Información',
+                                style: 1,
+                                emoji: client.emojis.cache.get("780150734779056170"),
+                                custom_id: 'button_1'
+                            },
+                            {
+                                type: 2,
+                                label: 'Fortnite',
+                                style: 1,
+                                emoji: client.emojis.cache.get("780150734779056170"),
+                                custom_id: 'button_2'
+                            },
+                            {
+                                type: 2,
+                                label: 'Moderación',
+                                style: 1,
+                                emoji: client.emojis.cache.get("851146036722008084"),
+                                custom_id: 'button_3'
+                            }
+                        ]
+                    }
+                ]
+            }
+        })
 }
