@@ -78,6 +78,10 @@ exports.run = async (client, message, args, Fortnite) => {
             `**INFORMACIÓN**`,
             `${Statistics.join(`\n\n`)}`
         )
+        .addField(Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`).join('\n'),true)
+        .addField(Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n'),true)
+        .addField(Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n'),true)
+        .addField(Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(
             `**ACTUALIZACIONES**`,
             `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! [Invitame](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot) para apoyarme.`

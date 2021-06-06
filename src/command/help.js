@@ -58,21 +58,21 @@ exports.run = async (client, message, args, Fortnite) => {
                             {
                                 type: 2,
                                 label: 'Información',
-                                style: 1,
+                                style: 4,
                                 emoji: client.emojis.cache.get("780150734779056170"),
                                 custom_id: 'button_1'
                             },
                             {
                                 type: 2,
                                 label: 'Fortnite',
-                                style: 1,
+                                style: 4,
                                 emoji: client.emojis.cache.get("780150734779056170"),
                                 custom_id: 'button_2'
                             },
                             {
                                 type: 2,
                                 label: 'Moderación',
-                                style: 1,
+                                style: 4,
                                 emoji: client.emojis.cache.get("851146036722008084"),
                                 custom_id: 'button_3'
                             }
