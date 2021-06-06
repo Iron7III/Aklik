@@ -108,7 +108,7 @@ exports.run = async (client, message, args, Fortnite) => {
                             label: 'Invitame',
                             style: 5,
                             url: 'https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot',
-                            emoji: client.emojis.cache.get("851166313372319816")
+                            emoji: client.emojis.cache.get("851173104838377502")
                         }
                     ]
                 }
