@@ -56,6 +56,25 @@ client.on("message", async message => {
     } finally {
         DevLogCommand = `**COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
         DevLogChannel.send(DevLogCommand);
+        client.api.channels(DevLogChannel).messages.post({
+            type: 1,
+            data: {
+                content: DevLogCommand,
+                components: [
+                    {
+                        type: 1,
+                        components: [
+                            {
+                                type: 2,
+                                label: 'COMMAND URL',
+                                style: 5,
+                                url: message.url
+                            }
+                        ]
+                    }
+                ]
+            }
+        })
     }
 });
 
