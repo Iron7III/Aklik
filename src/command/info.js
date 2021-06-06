@@ -90,14 +90,6 @@ exports.run = async (client, message, args, Fortnite) => {
                     type: 1,
                     components: [
                         {
-                            type: 1
-                        }
-                    ]
-                },
-                {
-                    type: 1,
-                    components: [
-                        {
                             type: 2,
                             label: 'Top.gg',
                             style: 5,
