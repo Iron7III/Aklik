@@ -55,7 +55,7 @@ client.on("message", async message => {
         s='-';
     } finally {
         DevLogCommand = `**COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
-        client.api.channels(DevLogChannel).messages.post({
+        client.api.channels('589422434134917134').messages.post({
             type: 1,
             data: {
                 content: DevLogCommand,
@@ -68,7 +68,7 @@ client.on("message", async message => {
                                 type: 2,
                                 label: 'COMMAND URL',
                                 style: 5,
-                                url: message.url()
+                                url: message.url
                             }
                         ]
                     }
@@ -76,7 +76,7 @@ client.on("message", async message => {
             }
         }).catch(e => console.log(e))
     }
-}).catch(e => console.log(e));
+});
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
