@@ -47,7 +47,7 @@ client.on("message", async message => {
     var DevLogCommand;
     var s='+';
     try {
-    let file = require(`./command/${cmd}.js`);
+        let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, Fortnite);
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => {msg.delete(5000)})
@@ -55,11 +55,11 @@ client.on("message", async message => {
         s='-';
     } finally {
         DevLogCommand = `**COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
-        DevLogChannel.send(DevLogCommand);
         client.api.channels(DevLogChannel).messages.post({
             type: 1,
             data: {
                 content: DevLogCommand,
+                embed: null,
                 components: [
                     {
                         type: 1,
@@ -68,15 +68,15 @@ client.on("message", async message => {
                                 type: 2,
                                 label: 'COMMAND URL',
                                 style: 5,
-                                url: message.url
+                                url: message.url()
                             }
                         ]
                     }
                 ]
             }
-        })
+        }).catch(e => console.log(e))
     }
-});
+}).catch(e => console.log(e));
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
