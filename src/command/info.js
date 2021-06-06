@@ -101,7 +101,7 @@ exports.run = async (client, message, args, Fortnite) => {
                             label: 'Votar',
                             style: 5,
                             url: 'https://top.gg/bot/685919845233197100/vote',
-                            emoji: client.emojis.cache.get("851166313372319816")
+                            emoji: client.emojis.cache.get("851169432113512477")
                         },
                         {
                             type: 2,
