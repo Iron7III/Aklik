@@ -37,13 +37,13 @@ exports.run = async (client, message, args, Fortnite) => {
     uptime += `${days} D, ${hours>9?hours:`0${hours}`}:${minutes>9?minutes:`0${minutes}`}:${seconds>9?seconds:`0${seconds}`}`;
     let Stats={
         "uptime":{
-            "header":`${client.emojis.cache.get("769568936077033482")} **UPTIME**`,
+            "header":`**UPTIME**`,
             "list":[
                 `\`${uptime}\``
             ]
         },
         "servers":{
-            "header":`${client.emojis.cache.get("768962558144938014")} **SERVIDORES | USUARIOS**`,
+            "header":`**SERVIDORES | USUARIOS**`,
             "list":[
                 `\`${client.guilds.cache.size.toLocaleString()}\` **|** \`${client.users.cache.size.toLocaleString()}\``
             ]
@@ -56,7 +56,7 @@ exports.run = async (client, message, args, Fortnite) => {
             ]
         },
         "dependices":{
-            "header":`${client.emojis.cache.get("768962690508783646")} **LIBRERIAS**`,
+            "header":`**LIBRERIAS**`,
             "list":[
                 `\`discord.js v13.0.0-dev\` ${client.emojis.cache.get("777189460655341600")}`,
                 `\`axios v0.21.0\`${client.emojis.cache.get("777189460655341600")}`,
@@ -74,18 +74,11 @@ exports.run = async (client, message, args, Fortnite) => {
     const embed = new Discord.MessageEmbed()
         .setTitle(`**INFORMACION DE ${client.user.username}**`)
         .setDescription('Soy un BOT en constante desarrollo, tengo algunas funciones sobre Fortnite y mi principal funcion es la Moderacion, aunque tenga pocos comandos soy actualizado constantemente con fixes y mejoras, no te pierdas ninguna y disfruta de todas mis funciones :)')
-        .addField(
-            `**INFORMACIÓN**`,
-            `${Statistics.join(`\n\n`)}`
-        )
         .addField(Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n'),true)
-        .addField(
-            `**ACTUALIZACIONES**`,
-            `¡He sido añadido en [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! [Invitame](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot) para apoyarme.`
-        )
+        .addField(`**ACTUALIZACIONES**`,`¡He sido añadido a [top.gg](https://top.gg/bot/685919845233197100)!\n¡En proceso de verificacion! [Invitame](https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot) para apoyarme.`)
         .setColor('#FF6B00')
     client.api.channels(message.channel.id).messages.post({
         type: 1,
@@ -93,6 +86,14 @@ exports.run = async (client, message, args, Fortnite) => {
             content: ' ',
             embed: embed,
             components: [
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 1
+                        }
+                    ]
+                },
                 {
                     type: 1,
                     components: [
