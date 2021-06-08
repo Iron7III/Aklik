@@ -105,32 +105,6 @@ exports.run = async (client, message, args, Fortnite) => {
             embed: embed,
             components: [
                 row
-                /*{
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            label: 'Top.gg',
-                            style: 5,
-                            url: 'https://top.gg/bot/685919845233197100',
-                            emoji: client.emojis.cache.get("851166313372319816")
-                        },
-                        {
-                            type: 2,
-                            label: 'Votar',
-                            style: 5,
-                            url: 'https://top.gg/bot/685919845233197100/vote',
-                            emoji: client.emojis.cache.get("851169432113512477")
-                        },
-                        {
-                            type: 2,
-                            label: 'Invitame',
-                            style: 5,
-                            url: 'https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot',
-                            emoji: client.emojis.cache.get("851173104838377502")
-                        }
-                    ]
-                }*/
             ]
         }
     })

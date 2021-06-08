@@ -55,23 +55,20 @@ client.on("message", async message => {
         s='-';
     } finally {
         DevLogCommand = `${client.emojis.cache.get("851163076010311710")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
+        const row = new Discord.MessageActionRow()
+            .addComponents(
+                new Discord.MessageButton()
+                    .setLabel('COMMAND URL')
+                    .setStyle('LINK')
+                    .setURL(message.url)
+            )
         client.api.channels('589422434134917134').messages.post({
             type: 1,
             data: {
                 content: DevLogCommand,
                 embed: null,
                 components: [
-                    {
-                        type: 1,
-                        components: [
-                            {
-                                type: 2,
-                                label: 'COMMAND URL',
-                                style: 5,
-                                url: message.url
-                            }
-                        ]
-                    }
+                    row
                 ]
             }
         }).catch(e => console.log(e))
