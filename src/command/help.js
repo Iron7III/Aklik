@@ -53,19 +53,19 @@ exports.run = async (client, message, args, Fortnite) => {
                 .setStyle('DANGER')
                 .setCustomID('information')
                 .setEmoji('851207714465906718')
-                .setDisabled(true),
+                .setDisabled(false),
             new Discord.MessageButton()
                 .setLabel('Fortnite')
                 .setStyle('DANGER')
                 .setCustomID('fortnite')
                 .setEmoji('851207714465906718')
-                .setDisabled(true),
+                .setDisabled(false),
             new Discord.MessageButton()
                 .setLabel('Moderación')
                 .setStyle('DANGER')
                 .setCustomID('moderation')
                 .setEmoji('851146036722008084')
-                .setDisabled(true)
+                .setDisabled(false)
         )
         client.api.channels(message.channel.id).messages.post({
             type: 1,
