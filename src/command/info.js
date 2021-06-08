@@ -80,13 +80,32 @@ exports.run = async (client, message, args, Fortnite) => {
         .addField(Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(`**ACTUALIZACIONES**`,`¡He sido añadido a [top.gg](https://top.gg/bot/685919845233197100)!\n¡En busca de los Intents perdidos...!`)
         .setColor('#FF6B00')
+    const row = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
+                .setLabel('Top.gg')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("851166313372319816"))
+                .setURL('https://top.gg/bot/685919845233197100'),
+            new Discord.MessageButton()
+                .setLabel('Votar')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("851169432113512477"))
+                .setURL('https://top.gg/bot/685919845233197100/vote'),
+            new Discord.MessageButton()
+                .setLabel('Invitame')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("851173104838377502"))
+                .setURL('https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot')
+        )
     client.api.channels(message.channel.id).messages.post({
         type: 1,
         data: {
             content: ' ',
             embed: embed,
             components: [
-                {
+                row
+                /*{
                     type: 1,
                     components: [
                         {
@@ -111,7 +130,7 @@ exports.run = async (client, message, args, Fortnite) => {
                             emoji: client.emojis.cache.get("851173104838377502")
                         }
                     ]
-                }
+                }*/
             ]
         }
     })
