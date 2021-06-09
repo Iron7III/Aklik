@@ -55,15 +55,12 @@ client.on("message", async message => {
         s='-';
     } finally {
         DevLogCommand = `${client.emojis.cache.get("851163076010311710")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
-        const createInvite = message.channel.createInvite()
+        const createInvite = await message.channel.createInvite()
             .then(inv => 
-                {
-                    var a = inv;
-                    return a;
-                }
+                console.log(inv.code)
             )
             .catch(console.error);
-        console.log(`https://discord.gg/${a.code}`)
+        console.log(`https://discord.gg/${createInvite.code}`)
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
