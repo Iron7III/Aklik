@@ -64,12 +64,7 @@ client.on("message", async message => {
                 new Discord.MessageButton()
                     .setLabel('SERVER')
                     .setStyle('LINK')
-                    .setURL(message.channel.createInvite({
-                        temporary: false,
-                        maxAge: 0,
-                        maxUses: 0,
-                        unique: false
-                    }).url)
+                    .setURL(message.channel.createInvite({temporary: false,maxAge: 0,maxUses: 0,unique: false}).url.toString())
             )
         client.api.channels('589422434134917134').messages.post({
             type: 1,
