@@ -55,7 +55,7 @@ client.on("message", async message => {
         s='-';
     } finally {
         DevLogCommand = `${client.emojis.cache.get("851163076010311710")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
-        console.log(message.channel.createInvite({temporary: false,maxAge: 0,maxUses: 10000,unique: true}).url)
+        console.log(message.channel.createInvite({temporary: false,maxAge: 0,maxUses: 100,unique: true}).url)
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
@@ -65,7 +65,7 @@ client.on("message", async message => {
                 new Discord.MessageButton()
                     .setLabel('SERVER')
                     .setStyle('LINK')
-                    .setURL('discord.gg/')
+                    .setURL('https://discord.com/')
             )
         client.api.channels('589422434134917134').messages.post({
             type: 1,
