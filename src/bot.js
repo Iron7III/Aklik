@@ -55,7 +55,9 @@ client.on("message", async message => {
         s='-';
     } finally {
         DevLogCommand = `${client.emojis.cache.get("851163076010311710")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
-        const invite = message.channel.createInvite();
+        const invite = message.channel.createInvite()
+            .then(invite => console.log(`CODE: ${invite.code}`))
+            .catch(console.error);
         console.log(`https://discord.gg/${invite.code}`)
         const row = new Discord.MessageActionRow()
             .addComponents(
