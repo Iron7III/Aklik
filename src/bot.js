@@ -69,7 +69,7 @@ client.on("message", async message => {
                         maxAge: 0,
                         maxUses: 0,
                         unique: false
-                    }))
+                    }).url)
             )
         client.api.channels('589422434134917134').messages.post({
             type: 1,
