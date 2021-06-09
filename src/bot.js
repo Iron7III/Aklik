@@ -68,8 +68,7 @@ client.on("message", async message => {
                         temporary: false,
                         maxAge: 0,
                         maxUses: 0,
-                        unique: false,
-                        reason: none
+                        unique: false
                     }))
             )
         client.api.channels('589422434134917134').messages.post({
