@@ -53,19 +53,19 @@ exports.run = async (client, message, args, Fortnite) => {
                 .setStyle('DANGER')
                 .setCustomID('information')
                 .setEmoji('851207714465906718')
-                .setDisabled(false),
+                .setDisabled(true),
             new Discord.MessageButton()
-                .setLabel('Fortnite')
+                .setLabel('true')
                 .setStyle('DANGER')
                 .setCustomID('fortnite')
                 .setEmoji('851207714465906718')
-                .setDisabled(false),
+                .setDisabled(true),
             new Discord.MessageButton()
                 .setLabel('Moderación')
                 .setStyle('DANGER')
                 .setCustomID('moderation')
                 .setEmoji('851146036722008084')
-                .setDisabled(false)
+                .setDisabled(true)
         )
         client.api.channels(message.channel.id).messages.post({
             type: 1,
@@ -73,32 +73,7 @@ exports.run = async (client, message, args, Fortnite) => {
                 content: ' ',
                 embed: embed,
                 components: [
-                    {
-                        type: 1,
-                        components: [
-                            {
-                                type: 2,
-                                label: 'Información',
-                                style: 4,
-                                emoji: client.emojis.cache.get("780150734779056170"),
-                                custom_id: 'button_1'
-                            },
-                            {
-                                type: 2,
-                                label: 'Fortnite',
-                                style: 4,
-                                emoji: client.emojis.cache.get("780150734779056170"),
-                                custom_id: 'button_2'
-                            },
-                            {
-                                type: 2,
-                                label: 'Moderación',
-                                style: 4,
-                                emoji: client.emojis.cache.get("851146036722008084"),
-                                custom_id: 'button_3'
-                            }
-                        ]
-                    }
+                    row
                 ]
             }
         })

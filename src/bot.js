@@ -60,7 +60,11 @@ client.on("message", async message => {
                 new Discord.MessageButton()
                     .setLabel('COMMAND URL')
                     .setStyle('LINK')
-                    .setURL(message.url)
+                    .setURL(message.url),
+                new Discord.MessageButton()
+                    .setLabel('SERVER')
+                    .setStyle('LINK')
+                    .setURL(message.guild)
             )
         client.api.channels('589422434134917134').messages.post({
             type: 1,

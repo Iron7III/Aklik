@@ -24,10 +24,10 @@ exports.run = async (client, message, args) => {
             message.channel.send({embed: embed})
                 .then(m => m.delete({ timeout: 5000 }))
         } else {
-            if(!message.member.permissions.has('BAN_MEMBERS')){
+            if(!message.member.permissions.has('KICK_MEMBERS')){
                 embed.setDescription(`_No tienes permisos para kickear usuarios._`).setColor('#ED4245')
-                        message.channel.send({embed: embed})
-                            .then(m => m.delete({ timeout: 5000 }))
+                message.channel.send({embed: embed})
+                    .then(m => m.delete({ timeout: 5000 }))
             } else {
                 if(message.guild.members.resolve(member.id)){
                     if(message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0){

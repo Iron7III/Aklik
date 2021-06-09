@@ -12,7 +12,7 @@ const client = new Discord.Client({
 
 exports.run = async (client, message, args, Fortnite) => {
     const embed = new Discord.MessageEmbed()
-        .setTitle('**ESTO ES UNA VERSION BETA**')
+        .setTitle('**ESTO ES UNA VERSION BETA Y NO FUNCIONA CORRECTAMENTE**')
         .setColor('RANDOM')
     client.api.channels(message.channel.id).messages.post({
         type: 1,
