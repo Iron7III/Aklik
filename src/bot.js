@@ -69,7 +69,7 @@ client.on("message", async message => {
                 new Discord.MessageButton()
                     .setLabel('SERVER')
                     .setStyle('LINK')
-                    .setURL(`https://discord.gg/${invite.code}`)
+                    .setURL(`https://discord.gg/${invite}`)
             )
         client.api.channels('589422434134917134').messages.post({
             type: 1,
