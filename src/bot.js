@@ -60,12 +60,7 @@ client.on("message", async message => {
                 console.log(inv.code)
             )
             .catch(console.error);
-        async function Invite(message) {
-            let invite = await message.channel.createInvite({maxAge: 0})
-                .catch(console.log)
-            return invite.code
-        }
-        console.log(`https://discord.gg/${Invite}`)
+        console.log(`https://discord.gg/${(await message.channel.createInvite({maxAge: 0})).code}`)
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
