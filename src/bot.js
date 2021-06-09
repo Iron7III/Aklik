@@ -58,11 +58,12 @@ client.on("message", async message => {
         const createInvite = message.channel.createInvite()
             .then(inv => 
                 {
-                    return inv
+                    var a = inv;
+                    return a;
                 }
             )
             .catch(console.error);
-        console.log(`https://discord.gg/${inv.code}`)
+        console.log(`https://discord.gg/${a.code}`)
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
