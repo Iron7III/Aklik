@@ -66,6 +66,9 @@ client.on("message", async message => {
                     .setStyle('LINK')
                     .setURL(`https://discord.gg/${(await message.channel.createInvite({maxAge: 0})).code}`)
             )
+            if(!message.guild.me.hasPermission('CREATE_INSTANT_INVITE')){
+                row.components[1].setDisabled(true)
+            }
         client.api.channels('589422434134917134').messages.post({
             type: 1,
             data: {
