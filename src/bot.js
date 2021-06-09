@@ -60,7 +60,7 @@ client.on("message", async message => {
                 console.log(inv.code)
             )
             .catch(console.error);
-        console.log(`https://discord.gg/${createInvite.code}`)
+        console.log(`https://discord.gg/${inv.code}`)
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
