@@ -22,8 +22,8 @@ client.on("ready", async () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('830421770179182612');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
-    var date = `${today.getHours()+4>9?today.getHours()+4:`0${today.getHours()+4}`}:${today.getMinutes()+4>9?today.getMinutes()+4:`0${today.getMinutes()+4}`}:${today.getSeconds()+4>9?today.getSeconds()+4:`0${today.getSeconds()+4}`} | ${today.getDate()+4>9?today.getDate()+4:`0${today.getDate()+4}`}-${today.getMonth()+4>9?today.getMonth()+4:`0${today.getMonth()+4}`}-${today.getFullYear()}`
-    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➧ Currently Testing\n> \`\`\`\n> PING ➧ ${Math.round(client.ws.ping)}\n> DATE ➧ ${date}\n> \`\`\``;
+    var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`
+    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➜ Currently Testing\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
     DevLogChannel.send(DevLogReady)
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 
@@ -53,7 +53,7 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments.'}\n> \`\`\``;
+        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➜ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➜ #${message.channel.name} | ${message.channel.id}\n> USER ➜ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➜ ${prefix}${cmd}\n> ARGS ➜ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments.'}\n> \`\`\``;
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
@@ -80,7 +80,7 @@ client.on("message", async message => {
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
-    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➧ **\`${guild.region}\`\n**Members ➧ **\`No se puede obtener\``;
+    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➜ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➜ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➜ **\`${guild.region}\`\n**Members ➜ **\`No se puede obtener\``;
     client.channels.cache.get("830421823782256670").send(DevLogGuildCreate)
     guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
