@@ -22,8 +22,8 @@ client.on("ready", async () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('830421770179182612');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
-    var date = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()} | ${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`
-    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➧ Currently Testing\n>\`\`\`\n> PING ➧ ${Math.round(client.ws.ping)}\n> PING ➧ ${date}\n> \`\`\``;
+    var date = `${today.getHours()+4>9?today.getHours()+4:`0${today.getHours()+4}`}:${today.getMinutes()+4>9?today.getMinutes()+4:`0${today.getMinutes()+4}`}:${today.getSeconds()+4>9?today.getSeconds()+4:`0${today.getSeconds()+4}`} | ${today.getDate()+4>9?today.getDate()+4:`0${today.getDate()+4}`}-${today.getMonth()+4>9?today.getMonth()+4:`0${today.getMonth()+4}`}-${today.getFullYear()}`
+    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➧ Currently Testing\n> \`\`\`\n> PING ➧ ${Math.round(client.ws.ping)}\n> DATE ➧ ${date}\n> \`\`\``;
     DevLogChannel.send(DevLogReady)
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 
