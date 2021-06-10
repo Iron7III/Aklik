@@ -19,13 +19,11 @@ var Fortnite = new FortniteAPI(config);
 
 //ready
 client.on("ready", async () => {
-    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('589422434134917134');
+    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('830421770179182612');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-    const ready = new Discord.MessageEmbed()
-        .setTitle(`CONECTADO`)
-        .setColor('RANDOM')
-    DevLogChannel.send('<@!438390132538605589>')
-    DevLogChannel.send({ embed: ready })
+    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> \`\`\`\n> ANNOUNCE ➧ <@!438390132538605589>\n> PING ➧ ${Math.round(client.ws.ping)}\n> \`\`\``;
+    console.log(Date.now())
+    DevLogChannel.send(DevLogReady)
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 
     const { generateShop, getShopItems } = require("./shop");
@@ -54,7 +52,7 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogCommand = `${client.emojis.cache.get("851163076010311710")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
+        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
@@ -81,7 +79,7 @@ client.on("message", async message => {
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
-    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➧ **\`${guild.region}\`\n**Members ➧ **\`${guild.members.size}\``;
+    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➧ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➧ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➧ **\`${guild.region}\`\n**Members ➧ **\`No se puede obtener\``;
     client.channels.cache.get("830421823782256670").send(DevLogGuildCreate)
     guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
