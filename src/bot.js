@@ -21,8 +21,9 @@ var Fortnite = new FortniteAPI(config);
 client.on("ready", async () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('830421770179182612');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➧ <@!438390132538605589>\n>\`\`\`\n> PING ➧ ${Math.round(client.ws.ping)}\n> \`\`\``;
-    console.log(Date.now())
+    var today = new Date();
+    var date = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()} | ${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`
+    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➧ Currently Testing\n>\`\`\`\n> PING ➧ ${Math.round(client.ws.ping)}\n> PING ➧ ${date}\n> \`\`\``;
     DevLogChannel.send(DevLogReady)
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 
