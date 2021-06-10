@@ -21,7 +21,7 @@ var Fortnite = new FortniteAPI(config);
 client.on("ready", async () => {
     const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('830421770179182612');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> \`\`\`\n> ANNOUNCE ➧ <@!438390132538605589>\n> PING ➧ ${Math.round(client.ws.ping)}\n> \`\`\``;
+    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➧ <@!438390132538605589>\n>\`\`\`\n> PING ➧ ${Math.round(client.ws.ping)}\n> \`\`\``;
     console.log(Date.now())
     DevLogChannel.send(DevLogReady)
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
@@ -52,7 +52,7 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args?args.map(a=>`${a}`).join(' '):'There is no args.'}\n> \`\`\``;
+        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➧ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➧ #${message.channel.name} | ${message.channel.id}\n> USER ➧ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➧ ${prefix}${cmd}\n> ARGS ➧ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments.'}\n> \`\`\``;
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
