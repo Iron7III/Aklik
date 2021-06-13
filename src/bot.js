@@ -87,7 +87,7 @@ client.on("message", async message => {
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
     const DevLogGuildCreate = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
-    guild.me.setNickName('Feltax')
+    //guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
     const row = new Discord.MessageActionRow()
     .addComponents(
