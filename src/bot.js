@@ -110,7 +110,7 @@ client.on("guildCreate", (guild) => {
                 row
             ]
         }
-    })
+    }).catch(e => console.log(e))
 })
 
 //EVENTO guildDelete
