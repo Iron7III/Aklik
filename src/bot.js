@@ -52,7 +52,7 @@ client.on("message", async message => {
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➜ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➜ #${message.channel.name} | ${message.channel.id}\n> USER ➜ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➜ ${prefix}${cmd}\n> ARGS ➜ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments.'}\n> \`\`\``;
+        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➜ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➜ #${message.channel.name} | ${message.channel.id}\n> USER ➜ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➜ ${prefix}${cmd}\n> ARGS ➜ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments provided'}\n> \`\`\``;
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
@@ -80,7 +80,7 @@ client.on("message", async message => {
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
     const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➜ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➜ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➜ **\`${guild.region}\`\n**Members ➜ **\`No se puede obtener\``;
-    const DevLogGuildCreateV2 = `${client.emojis.cache.get("852613781589852210")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ @${guild.owner.displayName} | ${guild.ownerId}\n> \`\`\``;
+    const DevLogGuildCreateV2 = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ @${guild.owner.displayName} | ${guild.ownerId}\n> \`\`\``;
     guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
     const row = new Discord.MessageActionRow()
