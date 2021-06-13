@@ -101,7 +101,7 @@ client.on("guildCreate", (guild) => {
             .setCustomID('leave_server')
             .setDisabled(true)
     )
-    client.api.channel('853697886335008808').messages.post({
+    client.api.channels('853697886335008808').messages.post({
         type: 1,
         data: {
             content: DevLogGuildCreate,
