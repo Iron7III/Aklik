@@ -127,7 +127,7 @@ client.on("guildDelete", (guild) => {
     client.api.channels('853697886335008808').messages.post({
         type: 1,
         data: {
-            content: DevLogGuildCreate,
+            content: DevLogGuildDelete,
             embed: null,
             components: [
                 row
