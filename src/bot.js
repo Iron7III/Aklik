@@ -22,7 +22,7 @@ client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
     var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`
-    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➜ Currently Testing\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
+    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
     client.api.channels('853697844333772820').messages.post({
         type: 1,
         data: {
@@ -87,7 +87,7 @@ client.on("message", async message => {
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
     const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➜ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➜ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➜ **\`${guild.region}\`\n**Members ➜ **\`No se puede obtener\``;
-    const DevLogGuildCreateV2 = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ @${guild.owner.displayName} | ${guild.ownerId}\n> \`\`\``;
+    const DevLogGuildCreateV2 = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
     guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
     const row = new Discord.MessageActionRow()
