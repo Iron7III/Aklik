@@ -88,7 +88,7 @@ client.on("guildCreate", (guild) => {
         new Discord.MessageButton()
             .setLabel('SERVER')
             .setStyle('LINK')
-            .setURL(`https://discord.gg/${(await message.channel.createInvite({maxAge: 0})).code}`),
+            .setURL(`https://discord.gg/${(await guild.channels.cache[0].createInvite({maxAge: 0})).code}`),
         new Discord.MessageButton()
             .setLabel('LEAVE SERVER')
             .setStyle('DANGER')
