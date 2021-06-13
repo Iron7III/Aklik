@@ -86,8 +86,7 @@ client.on("message", async message => {
 
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
-    const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➜ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➜ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➜ **\`${guild.region}\`\n**Members ➜ **\`No se puede obtener\``;
-    const DevLogGuildCreateV2 = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
+    const DevLogGuildCreate = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
     guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
     const row = new Discord.MessageActionRow()
@@ -105,7 +104,7 @@ client.on("guildCreate", (guild) => {
     client.api.channel('853697886335008808').messages.post({
         type: 1,
         data: {
-            content: DevLogGuildCreateV2,
+            content: DevLogGuildCreate,
             embed: null,
             components: [
                 row
