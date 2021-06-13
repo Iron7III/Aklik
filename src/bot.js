@@ -19,17 +19,22 @@ var Fortnite = new FortniteAPI(config);
 
 //ready
 client.on("ready", async () => {
-    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('853697844333772820');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
     var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`
     const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> ANNOUNCE ➜ Currently Testing\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
-    DevLogChannel.send(DevLogReady)
+    client.api.channels('853697844333772820').messages.post({
+        type: 1,
+        data: {
+            content: DevLogReady,
+            embed: null,
+            components: null
+        }
+    })
     client.user.setActivity("Invitame :D", { type: "WATCHING" });
 
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
-
     (async () => {
         const items = await getShopItems(apiKey, language);
         await generateShop(items, watermark);
@@ -48,11 +53,13 @@ client.on("message", async message => {
         let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, Fortnite);
     } catch (e) {
-        message.channel.send('Este comando no existe').then(msg => {msg.delete(5000)})
+        message.channel.send('Este comando no existe').then(msg => msg.delete({timeout: 5000}))
         console.log(e.stack),
         s='-';
     } finally {
-        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➜ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➜ #${message.channel.name} | ${message.channel.id}\n> USER ➜ @${message.author.tag} | ${message.author.id}\n> \n> CMD ➜ ${prefix}${cmd}\n> ARGS ➜ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments provided'}\n> \`\`\``;
+        var today = new Date();
+        var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`    
+        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➜ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➜ #${message.channel.name} | ${message.channel.id}\n> USER ➜ @${message.author.tag} | ${message.author.id}\n> DATE ➜ ${date}\n> CMD ➜ ${prefix}${cmd}\n> ARGS ➜ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments provided'}\n> \`\`\``;
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
@@ -98,7 +105,7 @@ client.on("guildCreate", (guild) => {
     client.api.channel('853697886335008808').messages.post({
         type: 1,
         data: {
-            content: DevLogGuildCreate,
+            content: DevLogGuildCreateV2,
             embed: null,
             components: [
                 row
