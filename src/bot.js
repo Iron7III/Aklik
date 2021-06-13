@@ -19,7 +19,7 @@ var Fortnite = new FortniteAPI(config);
 
 //ready
 client.on("ready", async () => {
-    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('830421770179182612');
+    const DevLogChannel=(client.guilds.cache.get('514150100575191040')).channels.cache.get('853697844333772820');
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
     var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`
@@ -40,7 +40,6 @@ client.on("ready", async () => {
 client.on("message", async message => {
     let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(" ");
-    const DevLogChannel=client.channels.cache.get('589422434134917134');
     const cmd = args.shift().toLowerCase();
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
     var DevLogCommand;
@@ -65,7 +64,7 @@ client.on("message", async message => {
                     .setStyle('LINK')
                     .setURL(`https://discord.gg/${(await message.channel.createInvite({maxAge: 0})).code}`)
             )
-        client.api.channels('589422434134917134').messages.post({
+        client.api.channels('853697754706739250').messages.post({
             type: 1,
             data: {
                 content: DevLogCommand,
@@ -81,14 +80,36 @@ client.on("message", async message => {
 //EVENTO guildCreate
 client.on("guildCreate", (guild) => {
     const DevLogGuildCreate = `\`\`\`SERVER ADDED\`\`\`\n**NAME ➜ **\`${guild.name}\`** | **\`${guild.id}\`\n**OWNER ➜ **\`@${guild.owner.displayName}\`** | **\`${guild.ownerId}\`\n**Region ➜ **\`${guild.region}\`\n**Members ➜ **\`No se puede obtener\``;
-    client.channels.cache.get("830421823782256670").send(DevLogGuildCreate)
+
     guild.me.setNickName('Feltax')
     console.log('NUEVO SERVIDOR')
+    const row = new Discord.MessageActionRow()
+    .addComponents(
+        new Discord.MessageButton()
+            .setLabel('SERVER')
+            .setStyle('LINK')
+            .setURL(`https://discord.gg/${(await message.channel.createInvite({maxAge: 0})).code}`),
+        new Discord.MessageButton()
+            .setLabel('LEAVE SERVER')
+            .setStyle('DANGER')
+            .setCustomID('leave_server')
+            .setDisabled(true)
+    )
+    client.api.channel('853697886335008808').messages.post({
+        type: 1,
+        data: {
+            content: DevLogGuildCreate,
+            embed: null,
+            components: [
+                row
+            ]
+        }
+    })
 })
 
 //EVENTO guildDelete
 client.on("guildDelete", (guild) => {
-    client.channels.cache.get("830421823782256670").send(`ME han expulsado de un servidor: ${guild.name}`)
+    client.channels.cache.get("853697886335008808").send(`ME han expulsado de un servidor: ${guild.name}`)
     console.log('ME han expulsado de un servidor')
 })
 
