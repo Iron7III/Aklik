@@ -115,8 +115,25 @@ client.on("guildCreate", (guild) => {
 
 //EVENTO guildDelete
 client.on("guildDelete", (guild) => {
-    client.channels.cache.get("853697886335008808").send(`ME han expulsado de un servidor: ${guild.name}`)
+    const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
     console.log('ME han expulsado de un servidor')
+    const row = new Discord.MessageActionRow()
+    .addComponents(
+        new Discord.MessageButton()
+            .setLabel('SERVER')
+            .setStyle('LINK')
+            .setURL(`https://discord.gg/`)
+    )
+    client.api.channels('853697886335008808').messages.post({
+        type: 1,
+        data: {
+            content: DevLogGuildCreate,
+            embed: null,
+            components: [
+                row
+            ]
+        }
+    }).catch(e => console.log(e))
 })
 
 // TOKEN
