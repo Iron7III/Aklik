@@ -115,7 +115,7 @@ client.on("guildCreate", (guild) => {
 
 //EVENTO guildDelete
 client.on("guildDelete", (guild) => {
-    const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
+    const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> \`\`\``;
     console.log('ME han expulsado de un servidor')
     const row = new Discord.MessageActionRow()
     .addComponents(
