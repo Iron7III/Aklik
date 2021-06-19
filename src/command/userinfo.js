@@ -14,5 +14,6 @@ const client = new Discord.Client({
 
 exports.run = async (client, message, args) => {
     const UserInfoEmbed = new Discord.MessageEmbed()
-    
+
+    message.channel.send('El comando no funciona, disculpa las molestias :(')
 }
