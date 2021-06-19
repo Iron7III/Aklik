@@ -1,5 +1,5 @@
 //  ⌚STATUS⌚
-//  Comando 100% Completado y Funcional
+//  Comando no funcional debido a la falta de Privileged Intents
 const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
