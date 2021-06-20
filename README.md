@@ -6,7 +6,7 @@
     Shxdow ➜ Helper
 
 ##### **PUSH COMMIT ➜ HEROKU**
-- _`git push -u origin main`_
+- _`git push heroku main`_
 
-##### **PUSH COMMIT ➜ GITHUB** ###
+##### **PUSH COMMIT ➜ GITHUB**
 - _`git push -u origin main`_
