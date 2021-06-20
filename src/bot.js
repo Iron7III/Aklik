@@ -6,7 +6,7 @@ const client = new Discord.Client({
     ws: {
         properties: {
             $browser: "Discord Android"
-        },
+        }
     },
     intents: Discord.Intents.NON_PRIVILEGED
 });
@@ -17,7 +17,6 @@ const config = {
 };
 var Fortnite = new FortniteAPI(config);
 
-//ready
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
@@ -41,7 +40,6 @@ client.on("ready", async () => {
     })()
 })
 
-//EVENTO message
 client.on("message", async message => {
     let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -84,7 +82,6 @@ client.on("message", async message => {
     }
 });
 
-//EVENTO guildCreate
 client.on("guildCreate", (guild) => {
     const DevLogGuildCreate = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
     //guild.me.setNickName('Feltax')
@@ -113,7 +110,6 @@ client.on("guildCreate", (guild) => {
     }).catch(e => console.log(e))
 })
 
-//EVENTO guildDelete
 client.on("guildDelete", (guild) => {
     const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> \`\`\``;
     console.log('ME han expulsado de un servidor')
@@ -136,5 +132,4 @@ client.on("guildDelete", (guild) => {
     }).catch(e => console.log(e))
 })
 
-// TOKEN
 client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
