@@ -10,8 +10,7 @@ const client = new Discord.Client({
     intents: Discord.Intents.NON_PRIVILEGED
 });
 
-exports.run = async (client, message, args, Fortnite) => {
-    console.log(client.uptime)
+exports.run = async (client, message, args) => {
     let days = 0;
     let week = 0;
     let uptime = ``;
@@ -65,12 +64,6 @@ exports.run = async (client, message, args, Fortnite) => {
             ]
         }
     }
-    let Statistics=[
-        [Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`).join('\n')].join('\n'),
-        [Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n')].join('\n'),
-        [Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n')].join('\n'),
-        [Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n')].join('\n')
-    ];
     const embed = new Discord.MessageEmbed()
         .setTitle(`**INFORMACION DE ${client.user.username}**`)
         .setDescription('Soy un BOT en constante desarrollo, tengo algunas funciones sobre Fortnite y mi principal funcion es la Moderacion, aunque tenga pocos comandos soy actualizado constantemente con fixes y mejoras, no te pierdas ninguna y disfruta de todas mis funciones :)')
