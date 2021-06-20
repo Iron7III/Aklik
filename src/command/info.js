@@ -95,8 +95,14 @@ exports.run = async (client, message, args, Fortnite) => {
             new Discord.MessageButton()
                 .setLabel('Invitame')
                 .setStyle('LINK')
-                .setEmoji(client.emojis.cache.get("851173104838377502"))
-                .setURL('https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot')
+                .setEmoji(client.emojis.cache.get('851173104838377502'))
+                .setURL('https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot'),
+            new Discord.MessageButton()
+                .setLabel('GitHub')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get('856179417902350386'))
+                .setURL('https://github.com/Iron7III/Aklik')
+                .setDisabled(true)
         )
     client.api.channels(message.channel.id).messages.post({
         type: 1,
