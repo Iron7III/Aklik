@@ -7,7 +7,8 @@ const client = new Discord.Client({
             $browser: "Discord Android"
         },
     },
-    intents: Discord.Intents.NON_PRIVILEGED
+    intents: Discord.Intents.ALL
+    //intents: Discord.Intents.NON_PRIVILEGED
 });
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
