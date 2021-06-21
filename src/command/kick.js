@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
         message.channel.send({embed: embed})
             .then(m => m.delete({timeout: 5000}))
     } else {
-        let user = message.mentions.members.first() || message.guild.members.resolve(args[0]) || message.guild.members.cache.find(m => m.user.username.toLowerCase() == args[0]) || await client.users.fetch(args[0]);
+        let user = message.mentions.users.first() || client.users.resolve(args[0]) || message.guild.members.cache.find(m => m.user.username.toLowerCase() == args[0]) || await client.users.fetch(args[0]);
         if(!user||user.id==message.author.id){
             message.channel.send({embed: embed})
                 .then(m => m.delete({timeout: 5000}))
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
                 message.channel.send({embed: embed})
                     .then(m => m.delete({ timeout: 5000 }))
             } else {
-                const member = message.guild.member(user);
+                const member = message.guild.members.cache.get(user);
                 if(!member){
                     embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
                     message.channel.send({embed: embed})
@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
                         const reason = args.slice(1).join(/ +/g)?args.slice(1).join(/ +/g):'No se ha especificado una razón.';
                         member.kick(reason)
                             .then(()=>{
-                                embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${args[1]?args.slice(1).join(/ +/g):'No hay motivo.'}\`_`).setColor('#57F287')
+                                embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${reason}\`_`).setColor('#57F287')
                                 message.channel.send({embed: embed})
                             })
                             .catch(err => {
