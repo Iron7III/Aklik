@@ -7,7 +7,8 @@ const client = new Discord.Client({
             $browser: "Discord Android"
         },
     },
-    intents: Discord.Intents.NON_PRIVILEGED
+    intents: Discord.Intents.PRIVILEGED
+    //intents: Discord.Intents.NON_PRIVILEGED
 });
 
 exports.run = async (client, message, args) => {
