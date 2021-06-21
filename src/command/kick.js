@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
                 message.channel.send({embed: embed})
                     .then(m => m.delete({ timeout: 5000 }))
             } else {
-                const member = message.guild.members.cache.get(user);
+                const member = message.guild.members.cache.get(user.id);
                 console.log(user)
                 console.log('________________________________')
                 console.log(member)
