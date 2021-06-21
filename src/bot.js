@@ -132,4 +132,7 @@ client.on("guildDelete", (guild) => {
     }).catch(e => console.log(e))
 })
 
-client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
+// LOGIN WITH "FORTNITE API BOT"
+//  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
+// LOGIN WITH "Feltax"
+client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.poqOXAxf5nQD6N8XrOg973u7790').catch(e => console.log(e));
