@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
                         message.channel.send({embed: embed})
                             .then(m => m.delete({ timeout: 5000 }))
                     } else {
-                        const reason = args.slice(1).join(/ +/g)?args.slice(1).join(/ +/g):'No se ha especificado una razón.';
+                        const reason = args.slice(1).join(' ')?args.slice(1).join(' '):'No se ha especificado una razón.';
                         member.kick(reason)
                             .then(()=>{
                                 embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido kickeado con motivo: \`${reason}\`_`).setColor('#57F287')
