@@ -56,7 +56,7 @@ exports.run = async (client, message, args, Fortnite) => {
                 .setEmoji('851207714465906718')
                 .setDisabled(true),
             new Discord.MessageButton()
-                .setLabel('true')
+                .setLabel('Fortnite')
                 .setStyle('DANGER')
                 .setCustomID('fortnite')
                 .setEmoji('851207714465906718')
