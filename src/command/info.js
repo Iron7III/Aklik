@@ -72,7 +72,7 @@ exports.run = async (client, message, args) => {
         .addField(Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n'),true)
         .addField(Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n'),true)
-        .addField(`**ACTUALIZACIONES**`,`¡He sido añadido a [top.gg](https://top.gg/bot/685919845233197100)!\n¡En busca de los Intents perdidos...!`)
+        .addField(`**ACTUALIZACIONES**`,`¡He sido añadido a [top.gg](https://top.gg/bot/${client.user.id})!\n¡En busca de los Intents perdidos...!`)
         .setColor('#FF6B00')
     const row = new Discord.MessageActionRow()
         .addComponents(
@@ -80,17 +80,17 @@ exports.run = async (client, message, args) => {
                 .setLabel('Top.gg')
                 .setStyle('LINK')
                 .setEmoji(client.emojis.cache.get("851166313372319816"))
-                .setURL('https://top.gg/bot/685919845233197100'),
+                .setURL(`https://top.gg/bot/${client.user.id}`),
             new Discord.MessageButton()
                 .setLabel('Votar')
                 .setStyle('LINK')
                 .setEmoji(client.emojis.cache.get("851169432113512477"))
-                .setURL('https://top.gg/bot/685919845233197100/vote'),
+                .setURL(`https://top.gg/bot/${client.user.id}/vote`),
             new Discord.MessageButton()
                 .setLabel('Invitame')
                 .setStyle('LINK')
                 .setEmoji(client.emojis.cache.get('851173104838377502'))
-                .setURL('https://discord.com/oauth2/authorize?client_id=685919845233197100&permissions=4294967287&scope=bot'),
+                .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=4294967287&scope=bot`),
             new Discord.MessageButton()
                 .setLabel('GitHub')
                 .setStyle('LINK')
