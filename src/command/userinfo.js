@@ -14,15 +14,8 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-    var UserName = user.client.user.username;
-    console.log(UserName)
-    var UserID = user.id;
-    console.log(UserID)
-    var UserBOT = user.bot;
-    console.log(UserBOT)
-    var UserFlags = user.flags;
-    console.log(UserFlags)
+    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.author.member;
+    console.log(user)
     var UserStatus = {
         'online': {
             color: '#3BA55B',
