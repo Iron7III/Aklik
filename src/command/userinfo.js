@@ -15,7 +15,7 @@ const client = new Discord.Client({
 
 exports.run = async (client, message, args) => {
     let User = client.users.chache.get(args[0]);
-    console.log(User)
+    console.log(User.user)
     var UserStatus = {
         'online': {
             color: '#3BA55B',
