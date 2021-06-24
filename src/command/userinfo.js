@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     let member = args[0]?message.channel.guild.members.cache.get(args[0]):message.author;
     console.log(member)
     console.log(message.author.presence.status)
-    var Tag = `${member.username}#${member.discriminator}`;
+    var Tag = `${member.user.username}#${member.user.discriminator}`;
     var ID = member.id;
     var Status = member.presence.status;
     console.log(Status);
@@ -41,8 +41,8 @@ exports.run = async (client, message, args) => {
     }
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`INFORMACIÓN DE ${Tag}`)
-        .addField('STATUS',UserStatus[message.author.presence.status].displayName,false)
-        .setColor(UserStatus[message.author.presence.status].color)
+        .addField('STATUS',UserStatus[Status].displayName,false)
+        .addField(`ID`,ID,false)
+        .setColor(UserStatus[Status].color)
     message.channel.send({embed: UserInfoEmbed})
-    message.channel.send('El comando no funciona, disculpa las molestias :(')
 }
