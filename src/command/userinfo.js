@@ -14,8 +14,8 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.author.member;
-    console.log(user)
+    let User = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+    console.log(User)
     var UserStatus = {
         'online': {
             color: '#3BA55B',
@@ -37,8 +37,8 @@ exports.run = async (client, message, args) => {
     console.log(UserPresence)
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`INFORMACIÓN DE ${UserName}`)
-        .addField('STATUS',User.Status[user.presence.status].displayName,false)
-        .setColor(User.Status[user.presence.status].color)
+        .addField('STATUS',UserStatus[User.user.presence.status].displayName,false)
+        .setColor(UserStatus[User.user.presence.status].color)
     message.channel.send({embed: UserInfoEmbed})
     message.channel.send('El comando no funciona, disculpa las molestias :(')
 }
