@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
     console.log(message.author.presence.status)
     var Tag = `${member.username}#${member.discriminator}`;
     var ID = member.id;
-    var Status = member.status;
+    var Status = member.presence.status;
     console.log(Status);
     var UserStatus = {
         'online': {
@@ -39,7 +39,6 @@ exports.run = async (client, message, args) => {
             displayName: `${client.emojis.cache.get("857688314269401099")} Desconectado`
         }
     }
-    console.log(UserPresence)
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`INFORMACIÓN DE ${Tag}`)
         .addField('STATUS',UserStatus[message.author.presence.status].displayName,false)
