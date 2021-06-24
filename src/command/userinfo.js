@@ -23,10 +23,9 @@ exports.run = async (client, message, args) => {
     console.log(UserBOT)
     var UserFlags = user.flags;
     console.log(UserFlags)
-    var UserPresenceStatus = user.presence.status;
     switch(user.presence.status){
         case 'online':
-            UserStatus = UserStatus = {
+            UserStatus = {
                 color: '#3BA55B',
                 displayName: `${client.emojis.cache.get("857688314429833237")}`
             };
@@ -41,13 +40,13 @@ exports.run = async (client, message, args) => {
                     UserStatus = {
                         color: '#F9A61A',
                         displayName: `${client.emojis.cache.get("857688314369802261")}`
-                    };;
+                    };
                     break;
                     case 'offline':
                         UserStatus = {
                             color: '#737F8D',
                             displayName: `${client.emojis.cache.get("857688314269401099")}`
-                        };;
+                        };
                         break;
     }
     console.log(UserPresence)
