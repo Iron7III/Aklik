@@ -14,7 +14,7 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let User = client.users.chache.get(args[0]);
+    let User = client.users.cache.get(args[0]);
     console.log(User.user)
     var UserStatus = {
         'online': {
