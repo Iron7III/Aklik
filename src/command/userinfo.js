@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     let member = message.author || client.channel.guild.members.get(args[0]);
     console.log(member)
     console.log(message.author.presence.status)
-    var Tag = `${member.user.username}#${member.user.discriminator}`;
+    var Tag = `${member.username}#${member.discriminator}`;
     var ID = member.id;
     var Status = member.status;
     console.log(Status);
