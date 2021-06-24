@@ -23,37 +23,29 @@ exports.run = async (client, message, args) => {
     console.log(UserBOT)
     var UserFlags = user.flags;
     console.log(UserFlags)
-    switch(user.presence.status){
-        case 'online':
-            UserStatus = {
-                color: '#3BA55B',
-                displayName: `${client.emojis.cache.get("857688314429833237")}`
-            };
-            break;
-            case 'dnd':
-                UserStatus = {
-                    color: '#EB4245',
-                    displayName: `${client.emojis.cache.get("857688314874560562")}`
-                };
-                break;
-                case 'idle':
-                    UserStatus = {
-                        color: '#F9A61A',
-                        displayName: `${client.emojis.cache.get("857688314369802261")}`
-                    };
-                    break;
-                    case 'offline':
-                        UserStatus = {
-                            color: '#737F8D',
-                            displayName: `${client.emojis.cache.get("857688314269401099")}`
-                        };
-                        break;
+    var UserStatus = {
+        'online': {
+            color: '#3BA55B',
+            displayName: `${client.emojis.cache.get("857688314429833237")} Conectado`
+        },
+        'dnd': {
+            color: '#EB4245',
+            displayName: `${client.emojis.cache.get("857688314874560562")} No molestar`
+        },
+        'idle': {
+            color: '#F9A61A',
+            displayName: `${client.emojis.cache.get("857688314369802261")} Ausente`
+        },
+        'offline': {
+            color: '#737F8D',
+            displayName: `${client.emojis.cache.get("857688314269401099")} Desconectado`
+        }
     }
     console.log(UserPresence)
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`INFORMACIÓN DE ${UserName}`)
-        .addField('STATUS',User.Status.displayName,false)
-        .setColor(UserStatus.color)
+        .addField('STATUS',User.Status[user.presence.status].displayName,false)
+        .setColor(User.Status[user.presence.status].color)
     message.channel.send({embed: UserInfoEmbed})
     message.channel.send('El comando no funciona, disculpa las molestias :(')
 }
