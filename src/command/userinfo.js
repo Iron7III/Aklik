@@ -14,7 +14,7 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let member = args[0]?client.channel.guild.members.get(args[0]):message.author;
+    let member = args[0]?message.channel.guild.members.get(args[0]):message.author;
     console.log(member)
     console.log(message.author.presence.status)
     var Tag = `${member.username}#${member.discriminator}`;
