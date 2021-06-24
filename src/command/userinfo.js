@@ -14,7 +14,7 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let User = client.guilds.cache.get(message.guild.id).members.cache.get(args[0]);
+    let User = message.channel.guild.members.cache.get(message.mentions[0].id)
     console.log(User)
     console.log(message.guild.presences.cache.get(args[0]))
     var UserStatus = {
