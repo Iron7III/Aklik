@@ -15,7 +15,7 @@ const client = new Discord.Client({
 
 exports.run = async (client, message, args) => {
     let member = message.mentions.length>=1?message.channel.guild.members.get(message.mentions[0].id):message.member
-    console.log(User)
+    console.log(member)
     console.log(message.author.presence.status)
     var Tag = `${member.user.username}#${member.user.discriminator}`;
     var ID = member.id;
