@@ -14,9 +14,13 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let User = message.mentions.length>=1?message.channel.guild.members.get(message.mentions[0].id):message.member
+    let member = message.mentions.length>=1?message.channel.guild.members.get(message.mentions[0].id):message.member
     console.log(User)
     console.log(message.guild.presences.cache.get(args[0]))
+    var Tag = `${member.user.username}#${member.user.discriminator}`;
+    var ID = member.id;
+    var Status = member.status;
+    console.log(Status);
     var UserStatus = {
         'online': {
             color: '#3BA55B',
