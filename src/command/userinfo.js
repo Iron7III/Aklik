@@ -58,7 +58,7 @@ exports.run = async (client, message, args) => {
         if(member.user.flags.has('VERIFIED_BOT')) {
             Field_UserInfo.splice(4,0,`**BOT ➜ **\`Verifed\` ${client.emojis.cache.get('857854548566474782')}`)
         } else {
-            Field_UserInfo.splice(4,0,`**BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
+            Field_UserInfo.splice(4,0,`**BOT ➜ **\`Unverifed\` ${client.emojis.cache.get('857854548566474782')}`)
         }
     }
     const UserInfoEmbed = new Discord.MessageEmbed()
