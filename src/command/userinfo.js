@@ -54,7 +54,7 @@ exports.run = async (client, message, args) => {
         `**Mention ➜ **<@${member.id}>`,
         `**ID ➜ **\`${member.id}\``,
     ]
-    if(member.user.bot){Field_UserInfo.splice(3,0,`**BOT ➜ ${client.emojis.cache.get('857854548566474782')}`)}
+    if(member.user.bot){Field_UserInfo.splice(4,0,`**BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)}
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`${member.user.username} INFORMATION`)
         .addField('USER INFO',Field_UserInfo.join('\n'),false)
