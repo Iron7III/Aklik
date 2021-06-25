@@ -27,32 +27,40 @@ exports.run = async (client, message, args) => {
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.author;
     console.log(member)
     console.log(message.author.presence.status)
-    var Tag = `${member.user.username}#${member.user.discriminator}`;
-    var ID = member.id;
     var Status = member.presence.status;
     console.log(Status);
     var UserStatus = {
         'online': {
             color: '#3BA55B',
-            displayName: `${client.emojis.cache.get("857688314429833237")} Conectado`
+            displayName: `${client.emojis.cache.get("857688314429833237")} Online`
         },
         'dnd': {
             color: '#EB4245',
-            displayName: `${client.emojis.cache.get("857688314874560562")} No molestar`
+            displayName: `${client.emojis.cache.get("857688314874560562")} Do Not Disturb`
         },
         'idle': {
             color: '#F9A61A',
-            displayName: `${client.emojis.cache.get("857688314369802261")} Ausente`
+            displayName: `${client.emojis.cache.get("857688314369802261")} Idle`
         },
         'offline': {
             color: '#737F8D',
-            displayName: `${client.emojis.cache.get("857688314269401099")} Desconectado`
+            displayName: `${client.emojis.cache.get("857688314269401099")} Offline`
         }
     }
+    
+    var Field_UserInfo = [
+        `**Username ➜ **\`${member.user.username}\``,
+        `**Discriminator ➜ **\`${member.user.discriminator}\``,
+        `**Mention ➜ **<@${member.id}>`,
+        `**ID ➜ **\`${member.id}\``,
+    ]
+    if(member.user.bot){Field_UserInfo+=`**BOT ➜ ${client.emojis.cache.get('857854548566474782')}`}
     const UserInfoEmbed = new Discord.MessageEmbed()
-        .setTitle(`INFORMACIÓN DE ${Tag}`)
+        .setTitle(`${Tag} INFORMATION`)
+        .addField('')
+        .addField('USER INFO',Field_UserInfo.join('\n'),false)
+        //.addField('MEMBER INFO')
         .addField('STATUS',`**${UserStatus[Status].displayName}**`,false)
-        .addField(`ID`,`**${ID}**`,false)
         .setColor(UserStatus[Status].color)
     message.channel.send({embed: UserInfoEmbed})
 }
