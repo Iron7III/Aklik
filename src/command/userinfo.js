@@ -14,7 +14,17 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    let member = args[0]?message.channel.guild.members.cache.get(args[0]):message.author;
+    function getUserFromMention(mention) {
+        if (!mention) return;
+        if (mention.startsWith('<@') && mention.endsWith('>')) {
+            mention = mention.slice(2, -1);
+            if (mention.startsWith('!')) {
+                mention = mention.slice(1);
+            }
+            return client.users.cache.get(mention);
+        }
+    }
+    let member = args[0]?message.channel.guild.members.cache.get(args[0])||getUserFromMention(args[0]):message.author;
     console.log(member)
     console.log(message.author.presence.status)
     var Tag = `${member.user.username}#${member.user.discriminator}`;
@@ -41,8 +51,8 @@ exports.run = async (client, message, args) => {
     }
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`INFORMACIÓN DE ${Tag}`)
-        .addField('STATUS',UserStatus[Status].displayName,false)
-        .addField(`ID`,ID,false)
+        .addField('STATUS',`**${UserStatus[Status].displayName}**`,false)
+        .addField(`ID`,`**${ID}**`,false)
         .setColor(UserStatus[Status].color)
     message.channel.send({embed: UserInfoEmbed})
 }
