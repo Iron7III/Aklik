@@ -14,17 +14,17 @@ const client = new Discord.Client({
 });
 
 exports.run = async (client, message, args) => {
-    function getUserFromMention(mention) {
+    function getMemberFromMention(mention) {
         if (!mention) return;
         if (mention.startsWith('<@') && mention.endsWith('>')) {
             mention = mention.slice(2, -1);
             if (mention.startsWith('!')) {
                 mention = mention.slice(1);
             }
-            return client.users.cache.get(mention);
+            return message.channel.guild.members.cache.get(mention);
         }
     }
-    let member = args[0]?message.channel.guild.members.cache.get(args[0])||getUserFromMention(args[0]):message.author;
+    let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.author;
     console.log(member)
     console.log(message.author.presence.status)
     var Tag = `${member.user.username}#${member.user.discriminator}`;
