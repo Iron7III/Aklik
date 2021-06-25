@@ -56,7 +56,7 @@ exports.run = async (client, message, args) => {
     ]
     if(member.user.bot){Field_UserInfo+=`**BOT ➜ ${client.emojis.cache.get('857854548566474782')}`}
     const UserInfoEmbed = new Discord.MessageEmbed()
-        .setTitle(`${Tag} INFORMATION`)
+        .setTitle(`${member.user.username} INFORMATION`)
         .addField('')
         .addField('USER INFO',Field_UserInfo.join('\n'),false)
         //.addField('MEMBER INFO')
