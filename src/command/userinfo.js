@@ -54,6 +54,9 @@ exports.run = async (client, message, args) => {
         `**Mention ➜ **<@${member.id}>`,
         `**ID ➜ **\`${member.id}\``,
     ]
+    var FieldMemberInfo = [
+        `**NICKNAME ➜ **\`${member.nickname}\``
+    ]
     if(member.user.bot){
         if(member.user.flags.has('VERIFIED_BOT')) {
             Field_UserInfo.splice(4,0,`**BOT ➜ **\`Verifed\` ${client.emojis.cache.get('857854548566474782')}`)
@@ -64,9 +67,9 @@ exports.run = async (client, message, args) => {
     const UserInfoEmbed = new Discord.MessageEmbed()
         .setTitle(`${member.user.username} INFORMATION`)
         .addField('USER INFO',Field_UserInfo.join('\n'),false)
-        //.addField('MEMBER INFO')
+        .addField('MEMBER INFO',Field_MemberInfo.join('\n'),false)
         .addField('STATUS',`**${UserStatus[Status].displayName}**`,false)
         .setColor(UserStatus[Status].color)
-        .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:512}))
+        .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
     message.channel.send({embed: UserInfoEmbed})
 }
