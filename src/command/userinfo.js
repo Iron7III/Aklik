@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.author;
     console.log(member)
-    console.log(message.author.presence.status)
+    console.log(member.presence)
     var Status = member.presence.status;
     console.log(Status);
     var UserStatus = {
@@ -67,5 +67,6 @@ exports.run = async (client, message, args) => {
         //.addField('MEMBER INFO')
         .addField('STATUS',`**${UserStatus[Status].displayName}**`,false)
         .setColor(UserStatus[Status].color)
+        .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:512}))
     message.channel.send({embed: UserInfoEmbed})
 }
