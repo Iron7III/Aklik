@@ -42,6 +42,41 @@ exports.run = async (client, message, args) => {
     }
 
     if(member){
+        let _permissions = {
+            'ADMINISTRATOR':  'Administrator',
+            'CREATE_INSTANT_INVITE': 'Create Instant Invite',
+            'KICK_MEMBERS': 'Kick Members',
+            'BAN_MEMBERS': 'Ban Members',
+            'MANAGE_CHANNELS': 'Manage Channels',
+            'MANAGE_GUILD': 'Manage Guild',
+            'ADD_REACTIONS': 'Add Reactions',
+            'VIEW_AUDIT_LOG': 'View Audit Log',
+            'PRIORITY_SPEAKER': 'Priority Speaker',
+            'STREAM': 'Stream',
+            'VIEW_CHANNEL': 'View Channel',
+            'SEND_MESSAGES': 'Send Messages',
+            'SEND_TTS_MESSAGES': 'Send TTS Messages',
+            'MANAGE_MESSAGES': 'Manage Messages',
+            'EMBED_LINKS': 'Embed Links',
+            'ATTACH_FILES': 'Attach Files',
+            'READ_MESSAGE_HISTORY': 'Read Message History',
+            'MENTION_EVERYONE': 'Mention Everyone',
+            'USE_EXTERNAL_EMOJIS': 'Use External Emojis',
+            'VIEW_GUILD_INSIGHTS': 'View Guild Insights',
+            'CONNECT': 'Connect',
+            'SPEAK': 'Speak',
+            'MUTE_MEMBERS': 'Mute Members',
+            'DEAFEN_MEMBERS': 'Deafen Members',
+            'MOVE_MEMBERS': 'Move Members',
+            'USE_VAD': 'Use VAD',
+            'CHANGE_NICKNAME': 'Change Nickname',
+            'MANAGE_NICKNAMES': 'Manage Nicknames',
+            'MANAGE_ROLES': 'Manage Roles',
+            'MANAGE_WEBHOOKS': 'Manage WebHooks',
+            'MANAGE_EMOJIS': 'Manage Emojis',
+            'USE_APPLICATION_COMMANDS': 'Use Applications Commands',
+            'REQUEST_TO_SPEAK': 'Request To Speak'
+        }
         var MemberInfo_Member = [
             `> **Nickname ➜ **\`${member.nickname!==null?member.nickname:'No Nickname'}\``,
             `> **Booster ➜ **\`${member.premiumSince!=null?`Boosting [${member.premiumSince.getDate()>9?member.premiumSince.getDate():`0${member.premiumSince.getDate()}`}-${member.premiumSince.getMonth()>9?member.premiumSince.getMonth():`0${member.premiumSince.getMonth()+1}`}-${member.premiumSince.getFullYear()} | ${member.premiumSince.getHours()>9?member.premiumSince.getHours():`0${member.premiumSince.getHours()}`}:${member.premiumSince.getMinutes()>9?member.premiumSince.getMinutes():`0${member.premiumSince.getMinutes()}`}:${member.premiumSince.getSeconds()>9?member.premiumSince.getSeconds():`0${member.premiumSince.getSeconds()}`}]`:`Not Boosting`}\``,
