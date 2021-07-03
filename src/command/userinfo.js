@@ -112,9 +112,9 @@ exports.run = async (client, message, args) => {
         ]
         if(member.user.bot){
             if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
-                MemberInfo_User.splice(4,0,`> **BOT ➜ **\`Unverifed\` ${client.emojis.cache.get('857854548566474782')}`)
+                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
-                MemberInfo_User.splice(4,0,`> **BOT ➜ **\`Verifed\` ${client.emojis.cache.get('857854548566474782')}`)
+                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
             }
         }
         const MemberInfoEmbed = new Discord.MessageEmbed()
