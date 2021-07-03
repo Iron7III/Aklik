@@ -102,8 +102,8 @@ exports.run = async (client, message, args) => {
         }
         const MemberInfoEmbed = new Discord.MessageEmbed()
             .setAuthor(`${member.user.username}'s Information`,member.user.displayAvatarURL({dynamic:true,size:512}))
-            .addField('User Info',Field_UserInfo.join('\n'),false)
-            .addField('Member Info',Field_MemberInfo.join('\n'),false)
+            .addField('User Info',MemberInfo_User.join('\n'),false)
+            .addField('Member Info',MemberInfo_Member.join('\n'),false)
             .addField('Status',`> **${_status[member.presence.status].displayName}**`,false)
             .setColor(_status[member.presence.status].color)
             .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
