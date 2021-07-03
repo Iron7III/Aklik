@@ -23,19 +23,19 @@ exports.run = async (client, message, args) => {
         `> **Name ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
         `> **Members ➜ **\`${guild.memberCount}\``,
-        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} | \`${guild.ownerID}\``,
+        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerID}\``,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
         `> **Maximum Presences ➜ **\`${guild.maximumPresences}\``,
         `> **Created ➜ **\` \``
     ]
     if(guild.afkChannel){
-        _desc.splice(_desc.length,0,`> **AFK Channel ➜ **<#${guild.afkChannel}> | \`${guild.afkChannelID}\` | \`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``)
+        _desc.splice(_desc.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelID}\` **|** \`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``)
     }
     if(guild.rulesChannel){
-        _desc.splice(_desc.length,0,`> **Rules Channel ➜ **<#${guild.rulesChannel}> | \`${guild.rulesChannelID}\``)
+        _desc.splice(_desc.length,0,`> **Rules Channel ➜ **${guild.rulesChannel} **|** \`${guild.rulesChannelID}\``)
     }
     if(guild.systemChannel){
-        _desc.splice(6,0,`> **System Channel ➜ **<#${guild.systemChannel}> | \`${guild.systemChannelID}\``)
+        _desc.splice(6,0,`> **System Channel ➜ **${guild.systemChannel} **|** \`${guild.systemChannelID}\``)
     }
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
