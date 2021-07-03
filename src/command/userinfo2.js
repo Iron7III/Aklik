@@ -125,7 +125,7 @@ exports.run = async (client, message, args) => {
             .addField('Status',`> **${_status[member.presence.status].displayName}**`,false)
             .setColor(_status[member.presence.status].color)
             .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
-        message.channel.send({embed: UserInfoEmbed})
+        message.channel.send({embed: MemberInfoEmbed})
     } else {
         if(user){
             var UserInfo_User = [
