@@ -26,6 +26,7 @@ exports.run = async (client, message, args) => {
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     let user = args[0]?client.users.cache.get(args[0]):client.users.cache.get(message.author.id);
+    console.log(user)
 // USER DATA
     let _badges = {
         'EARLY_SUPPORTER': '<:Earlysupporter:746029762274656317>',
@@ -40,7 +41,24 @@ exports.run = async (client, message, args) => {
         'EARLY_VERIFIED_BOT_DEVELOPER': '<:VerifiedBotDeveloper:746029762194964590>',
         'VERIFIED_BOT': '<:verified:753442204541911081>'
     }
-
+    let _status = {
+        'online': {
+            color: '#3BA55B',
+            displayName: `${client.emojis.cache.get("857688314429833237")} Online`
+        },
+        'dnd': {
+            color: '#EB4245',
+            displayName: `${client.emojis.cache.get("857688314874560562")} Do Not Disturb`
+        },
+        'idle': {
+            color: '#F9A61A',
+            displayName: `${client.emojis.cache.get("857688314369802261")} Idle`
+        },
+        'offline': {
+            color: '#737F8D',
+            displayName: `${client.emojis.cache.get("857688314269401099")} Offline`
+        }
+    }
     if(member){
         let _permissions = {
             'ADMINISTRATOR':  'Administrator',
@@ -114,7 +132,6 @@ exports.run = async (client, message, args) => {
                 `> **Discriminator ➜ **\`${user.discriminator}\``,
                 `> **Mention ➜ **<@${user.id}>`,
                 `> **ID ➜ **\`${user.id}\``,
-                `> **Platforms ➜ **${user.presence.clientStatus!=null&&user.presence.clientStatus.mobile?`${client.emojis.cache.get('858403427428335636')}`:client.emojis.cache.get('858406136033837126')} ${user.presence.clientStatus!=null&&user.presence.clientStatus.desktop?`${client.emojis.cache.get('858403427473948712')}`:client.emojis.cache.get('858406136046682163')} ${user.presence.clientStatus!=null&&user.presence.clientStatus.web?`${client.emojis.cache.get('858403427407495168')}`:client.emojis.cache.get('858406136121524225')}`,
                 `> **Registered ➜ **\`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} | ${user.createdAt.getHours()>9?user.createdAt.getHours():`0${user.createdAt.getHours()}`}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`}\``,
                 `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
             ]
@@ -128,9 +145,7 @@ exports.run = async (client, message, args) => {
             const MemberInfoEmbed = new Discord.MessageEmbed()
                 .setAuthor(`${user.username}'s Information`,user.displayAvatarURL({dynamic:true,size:512}))
                 .addField('User Info',UserInfo_User.join('\n'),false)
-                .addField('Member Info','Not on this server.',false)
-                .addField('Status',`> **${_status[user.presence.status].displayName}**`,false)
-                .setColor(_status[user.presence.status].color)
+                .setColor(_status["offline"].color)
                 .setThumbnail(user.displayAvatarURL({dynamic:true,size:1024}))
         } else {
             
