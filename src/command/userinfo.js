@@ -25,14 +25,9 @@ exports.run = async (client, message, args) => {
         }
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
-    console.log(member)
-    console.log('---------------------------------------------')
-    console.log(member.user)
-    console.log('---------------------------------------------')
-    console.log(member.user.premium_type)
-    console.log('---------------------------------------------')
-    console.log(member.roles)
-    var Status = member.presence.status;
+    if(member === undefined){
+        member = client.users.cache.get(args[0])
+    }
     let _status = {
         'online': {
             color: '#3BA55B',
@@ -99,6 +94,9 @@ exports.run = async (client, message, args) => {
         'USE_APPLICATION_COMMANDS': 'Use Applications Commands',
         'REQUEST_TO_SPEAK': 'Request To Speak'
     }
+    if(member===undefined){
+        member = client.users.cache.get(args[0])
+    }
     var Field_UserInfo = [
         `> **Username ➜ **\`${member.user.username}\``,
         `> **Discriminator ➜ **\`${member.user.discriminator}\``,
@@ -122,12 +120,12 @@ exports.run = async (client, message, args) => {
             Field_UserInfo.splice(4,0,`> **BOT ➜ **\`Verifed\` ${client.emojis.cache.get('857854548566474782')}`)
         }
     }
-    const UserInfoEmbed = new Discord.MessageEmbed()
+    const MemberInfoEmbed = new Discord.MessageEmbed()
         .setAuthor(`${member.user.username}'s Information`,member.user.displayAvatarURL({dynamic:true,size:512}))
         .addField('User Info',Field_UserInfo.join('\n'),false)
         .addField('Member Info',Field_MemberInfo.join('\n'),false)
-        .addField('Status',`> **${_status[Status].displayName}**`,false)
-        .setColor(_status[Status].color)
+        .addField('Status',`> **${_status[member.presence.status].displayName}**`,false)
+        .setColor(_status[member.presence.status].color)
         .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
     if(member.presence.activities){
         member.presence.activities.map(a => {
@@ -144,11 +142,11 @@ exports.run = async (client, message, args) => {
             if(a.details===null&&a.state===null){
                 _activities.push(`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
             }
-            UserInfoEmbed.addField(`${a.name}`, `${_activities.join('\n')}`)
+            MemberInfoEmbed.addField(`${a.name}`, `${_activities.join('\n')}`)
         })
     }
     if(member.id=='438390132538605589'){
-        UserInfoEmbed.setImage('https://cdn.discordapp.com/banners/438390132538605589/4a345ee014987727183693bf2593aa4b.png?size=512')
+        MemberInfoEmbed.setImage('https://cdn.discordapp.com/banners/438390132538605589/4a345ee014987727183693bf2593aa4b.png?size=512')
     }
-    message.channel.send({embed: UserInfoEmbed})
+    message.channel.send({embed: MemberInfoEmbed})
 }
