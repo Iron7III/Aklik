@@ -125,6 +125,7 @@ exports.run = async (client, message, args) => {
             .addField('Status',`> **${_status[member.presence.status].displayName}**`,false)
             .setColor(_status[member.presence.status].color)
             .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
+        message.channel.send({embed: UserInfoEmbed})
     } else {
         if(user){
             var UserInfo_User = [
@@ -142,11 +143,12 @@ exports.run = async (client, message, args) => {
                     UserInfo_User.splice(4,0,`> **BOT ➜ **\`Verifed\` ${client.emojis.cache.get('857854548566474782')}`)
                 }
             }
-            const MemberInfoEmbed = new Discord.MessageEmbed()
+            const UserInfoEmbed = new Discord.MessageEmbed()
                 .setAuthor(`${user.username}'s Information`,user.displayAvatarURL({dynamic:true,size:512}))
                 .addField('User Info',UserInfo_User.join('\n'),false)
                 .setColor(_status["offline"].color)
                 .setThumbnail(user.displayAvatarURL({dynamic:true,size:1024}))
+            message.channel.send({embed: UserInfoEmbed})
         } else {
             
         }
