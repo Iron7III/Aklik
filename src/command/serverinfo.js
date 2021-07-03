@@ -16,12 +16,13 @@ const client = new Discord.Client({
 exports.run = async (client, message, args) => {
     const guild = message.guild;
     console.log(guild)
+    var date = new Date(guild.afkTimeout*1000)
     //> **Registered ➜ **
     let _desc = [
         `> **Owner ➜ **<@${guild.ownerID}> | ${guild.ownerID}`,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
         `> **Maximum Presences ➜ **\`${guild.maximumPresences}\``,
-        `> **AFK Channel ➜ **\`${guild.afkChannel}\` | \`${guild.afkChannelID}\` | \`${(guild.afkTimeout*1000).getDate()>9?(guild.afkTimeout*1000).getDate():`0${(guild.afkTimeout*1000).getDate()}`}-${(guild.afkTimeout*1000).getMonth()>9?(guild.afkTimeout*1000).getMonth():`0${(guild.afkTimeout*1000).getMonth()+1}`}-${(guild.afkTimeout*1000).getFullYear()} | ${(guild.afkTimeout*1000).getHours()>9?(guild.afkTimeout*1000).getHours():`0${(guild.afkTimeout*1000).getHours()}`}:${(guild.afkTimeout*1000).getMinutes()>9?(guild.afkTimeout*1000).getMinutes():`0${(guild.afkTimeout*1000).getMinutes()}`}:${(guild.afkTimeout*1000).getSeconds()>9?(guild.afkTimeout*1000).getSeconds():`0${(guild.afkTimeout*1000).getSeconds()}`}\``
+        `> **AFK Channel ➜ **\`${guild.afkChannel}\` | \`${guild.afkChannelID}\` | \`${date.getDate()>9?date.getDate():`0${date.getDate()}`}-${date.getMonth()>9?date.getMonth():`0${date.getMonth()+1}`}-${date.getFullYear()} | ${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``
     ]
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
