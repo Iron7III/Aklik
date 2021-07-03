@@ -22,7 +22,8 @@ exports.run = async (client, message, args) => {
     let _desc = [
         `> **NAME ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
-        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} | \`${guild.ownerID}\``,
+        
+        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${client.members.get(ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} | \`${guild.ownerID}\``,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
         `> **Maximum Presences ➜ **\`${guild.maximumPresences}\``,
         `> **AFK Channel ➜ **\`${guild.afkChannel.name}\` | \`${guild.afkChannelID}\` | \`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``,
