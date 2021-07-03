@@ -21,10 +21,11 @@ exports.run = async (client, message, args) => {
         `> **Owner ➜ **<@${guild.ownerID}> | ${guild.ownerID}`,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
         `> **Maximum Presences ➜ **\`${guild.maximumPresences}\``,
-        //`> **AFK Channel ➜ **\`${guild.afkChannel}\` | \`${guild.afkChannelID}\` | \`${guild.afkTimeout.getDate()>9?guild.afkTimeout.getDate():`0${guild.afkTimeout.getDate()}`}-${guild.afkTimeout.getMonth()>9?guild.afkTimeout.getMonth():`0${guild.afkTimeout.getMonth()+1}`}-${guild.afkTimeout.getFullYear()} | ${guild.afkTimeout.getHours()>9?guild.afkTimeout.getHours():`0${guild.afkTimeout.getHours()}`}:${guild.afkTimeout.getMinutes()>9?guild.afkTimeout.getMinutes():`0${guild.afkTimeout.getMinutes()}`}:${guild.afkTimeout.getSeconds()>9?guild.afkTimeout.getSeconds():`0${guild.afkTimeout.getSeconds()}`}\``
+        `> **AFK Channel ➜ **\`${guild.afkChannel}\` | \`${guild.afkChannelID}\` | \`${(guild.afkTimeout*1000).getDate()>9?(guild.afkTimeout*1000).getDate():`0${(guild.afkTimeout*1000).getDate()}`}-${(guild.afkTimeout*1000).getMonth()>9?(guild.afkTimeout*1000).getMonth():`0${(guild.afkTimeout*1000).getMonth()+1}`}-${(guild.afkTimeout*1000).getFullYear()} | ${(guild.afkTimeout*1000).getHours()>9?(guild.afkTimeout*1000).getHours():`0${(guild.afkTimeout*1000).getHours()}`}:${(guild.afkTimeout*1000).getMinutes()>9?(guild.afkTimeout*1000).getMinutes():`0${(guild.afkTimeout*1000).getMinutes()}`}:${(guild.afkTimeout*1000).getSeconds()>9?(guild.afkTimeout*1000).getSeconds():`0${(guild.afkTimeout*1000).getSeconds()}`}\``
     ]
     const embed = new Discord.MessageEmbed()
-        .setAuthor(`${guild.name}'s Information`,guild.icon({dynamic:true,size:512}))
+        .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
         .setDescription(_desc.join('\n'))
+        .setThumbnail(guild.iconURL({dynamic:true,size:512}))
     message.channel.send({embed: embed})
 }
