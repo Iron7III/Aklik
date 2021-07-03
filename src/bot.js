@@ -21,7 +21,7 @@ var Fortnite = new FortniteAPI(config);
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var today = new Date();
-    var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`
+    var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+1}`}-${today.getFullYear()}`
     const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
     client.api.channels('853697844333772820').messages.post({
         type: 1,
@@ -134,6 +134,6 @@ client.on("guildDelete", (guild) => {
 })
 
 // LOGIN WITH "FORTNITE API BOT"
-//  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.aWA9QK8J5GLEe3Bgr4EMAgEfxBg').catch(e => console.log(e));
+//  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.neEtx0dXQymAPX0qL3ek98RRhJ0').catch(e => console.log(e));
 // LOGIN WITH "Feltax"
-client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.poqOXAxf5nQD6N8XrOg973u7790').catch(e => console.log(e));
+client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.qtlccKF4S1PVvOsNAqlMv-rHEOk').catch(e => console.log(e));

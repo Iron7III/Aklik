@@ -96,7 +96,7 @@ exports.run = async (client, message, args) => {
                 .setStyle('LINK')
                 .setEmoji(client.emojis.cache.get('856179417902350386'))
                 .setURL('https://github.com/Iron7III/Aklik')
-                .setDisabled(true)
+                .setDisabled(true),
         )
     client.api.channels(message.channel.id).messages.post({
         type: 1,
