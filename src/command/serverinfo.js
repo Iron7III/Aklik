@@ -16,7 +16,7 @@ const client = new Discord.Client({
 exports.run = async (client, message, args) => {
     const guild = message.guild;
     console.log(guild)
-    console.log(guild.bans)
+    console.log(guild.bans.cache)
     var date = new Date(guild.afkTimeout*1000)
     //> **Registered ➜ **
     let _verificationLevel = {
@@ -60,7 +60,6 @@ exports.run = async (client, message, args) => {
     }
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
-        .setDescription(ServerInfo_General.join('\n'))
         .addField('General Info',ServerInfo_General.join('\n'),false)
         .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FEE75C')

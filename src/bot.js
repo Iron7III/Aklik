@@ -52,7 +52,7 @@ client.on("message", async message => {
         let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, Fortnite);
     } catch (e) {
-        message.channel.send('Este comando no existe').then(msg => msg.delete({timeout: 5000}))
+        message.channel.send('Este comando no existe').then(msg => client.setTimeout(() => msg.delete(), 5000))
         console.log(e.stack),
         s='-';
     } finally {
