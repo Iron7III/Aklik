@@ -153,11 +153,11 @@ exports.run = async (client, message, args) => {
                 `> **Registered ➜ **\`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} | ${user.createdAt.getHours()>9?user.createdAt.getHours():`0${user.createdAt.getHours()}`}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`}\``,
                 `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
             ]
-            if(user.bot){
-                if(user.flags==null||!user.flags.has('VERIFIED_BOT')) {
-                    UserInfo_User.splice(4,0,`> **BOT ➜ **\`Unverifed\` ${client.emojis.cache.get('857854548566474782')}`)
+            if(member.user.bot){
+                if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
+                    MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
                 } else {
-                    UserInfo_User.splice(4,0,`> **BOT ➜ **\`Verifed\` ${client.emojis.cache.get('857854548566474782')}`)
+                    MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
                 }
             }
             const UserInfoEmbed = new Discord.MessageEmbed()
@@ -167,7 +167,11 @@ exports.run = async (client, message, args) => {
                 .setThumbnail(user.displayAvatarURL({dynamic:true,size:1024}))
             message.channel.send({embed: UserInfoEmbed})
         } else {
-            
+            const ErrorEmbed = new Discord.MessageEmbed()
+                .setAuthor(`I don't have any data about this user.`,'https://cdn.discordapp.com/emojis/590432801468448779.png?v=1')
+                .setColor('#ED4245')
+            message.channel.send({embed: ErrorEmbed})
+                .then(msg => client.setTimeout(() => msg.delete(), 5000))
         }
     }
 }

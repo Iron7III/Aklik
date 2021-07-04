@@ -51,7 +51,7 @@ exports.run = async (client, message, args) => {
                                     message.channel.send({embed: UnbanEmbed})
                                 })
                                 .catch(err => {
-                                    UnbanEmbed.setDescription(`_No puedo desbanear a este usuario._`).setColor('#ED4245')
+                                    UnbanEmbed.setAuthor(`I can't unban this user.`,'https://cdn.discordapp.com/emojis/590432801468448779.png?v=1').setColor('#ED4245')
                                     message.channel.send({embed: UnbanEmbed})
                                         .then(msg => client.setTimeout(() => msg.delete(), 5000))
                                     console.error(err);
