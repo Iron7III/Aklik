@@ -19,27 +19,47 @@ exports.run = async (client, message, args) => {
     console.log(guild.bans)
     var date = new Date(guild.afkTimeout*1000)
     //> **Registered ➜ **
-    let _desc = [
+    let _verificationLevel = {
+        "NONE": "",
+        "LOW": "Low",
+        "MEDIUM": "Medium",
+        "HIGH": "(╯°□°）╯︵ ┻━┻",
+        "VERY_HIGH": "┻━┻︵ ヽ(ಠ益ಠ)ノ ︵ ┻━┻"
+    }
+    let ServerInfo_General = [
         `> **Name ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
+        `> **Locale ➜ **\`${guild.locale}\``,
         `> **Members ➜ **\`${guild.memberCount}\``,
         `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerID}\``,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
-        `> **Maximum Presences ➜ **\`${guild.maximumPresences}\``,
+        `> **Maximum Presences ➜ **\`${guild.maximumPresences!=null?guild.maximumPresences:`∞`}\``,
         `> **Created ➜ **\` \``
     ]
+    let ServerInfo_Moderation = [
+        `> **Bans ➜ **\`${guild.bans.cache.lenght}\``,
+        `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``
+    ]
+    if(vanityURLCode){
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Vanity URL ➜ *${guild.vanityURLCode} **|** \`${guild.vanityURLUses}\``)
+    }
     if(guild.afkChannel){
-        _desc.splice(_desc.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelID}\` **|** \`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelID}\` **|** \`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``)
     }
     if(guild.rulesChannel){
-        _desc.splice(_desc.length,0,`> **Rules Channel ➜ **${guild.rulesChannel} **|** \`${guild.rulesChannelID}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Rules Channel ➜ **${guild.rulesChannel} **|** \`${guild.rulesChannelID}\``)
     }
     if(guild.systemChannel){
-        _desc.splice(6,0,`> **System Channel ➜ **${guild.systemChannel} **|** \`${guild.systemChannelID}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.systemChannel} **|** \`${guild.systemChannelID}\``)
+    }
+    if(guild.publicUpdatesChannelID){
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.publicUpdatesChannel} **|** \`${guild.publicUpdatesChannelID}\``)
     }
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
-        .setDescription(_desc.join('\n'))
+        .setDescription(ServerInfo_General.join('\n'))
+        .addField('General Info',ServerInfo_General.join('\n'),false)
+        .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FEE75C')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
     message.channel.send({embed: embed})
