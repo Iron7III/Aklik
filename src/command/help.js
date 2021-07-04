@@ -36,9 +36,10 @@ exports.run = async (client, message, args, Fortnite) => {
         {
             'header':'**MODERACION**',
             'cmds':[
-                `**\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\` (Only works with @)`,
-                `**\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\` (Only works with @)`,
-                `**\`${prefix}unban\`** \`<MEMBER>\` \`[REASON]\``
+                `**\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\``,
+                `**\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\``,
+                `**\`${prefix}unban\`** \`<MEMBER>\` \`[REASON]\``,
+                `**\`${prefix}clear\` \`<NUMBER>\``
             ]
         }
     ]
