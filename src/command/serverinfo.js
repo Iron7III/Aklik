@@ -40,7 +40,7 @@ exports.run = async (client, message, args) => {
         `> **Bans ➜ **\`${guild.bans.cache.lenght}\``,
         `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``
     ]
-    if(vanityURLCode){
+    if(guild.vanityURLCode){
         ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Vanity URL ➜ *${guild.vanityURLCode} **|** \`${guild.vanityURLUses}\``)
     }
     if(guild.afkChannel){
