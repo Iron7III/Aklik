@@ -17,13 +17,13 @@ const client = new Discord.Client({
 exports.run = async (client, message, args) => {
     const UnbanEmbed = new Discord.MessageEmbed();
     if(!args[0]){
-        UnbanEmbed.setDescription(`_Has de mencionar a un usuario o ID._`).setColor('#ED4245')
+        UnbanEmbed.setAuthor(`Mention a user or write a valid ID.`,client.emojis.cache.get('861325428513046559').url).setColor('#ED4245')
         message.channel.send({embed: UnbanEmbed})
             .then(msg => client.setTimeout(() => msg.delete(), 5000))
     } else {
         const UnbanUser = args[0];
         if(!UnbanUser || UnbanUser == message.author.id){
-            UnbanEmbed.setDescription(`_Has de mencionar a un usuario o escribir un ID valido._`).setColor('#ED4245')
+            UnbanEmbed.setAuthor(`Mention a user or write a valid ID.`,client.emojis.cache.get('861325428513046559').url).setColor('#ED4245')
             message.channel.send({embed: UnbanEmbed})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
         } else {
@@ -51,7 +51,7 @@ exports.run = async (client, message, args) => {
                                     message.channel.send({embed: UnbanEmbed})
                                 })
                                 .catch(err => {
-                                    UnbanEmbed.setAuthor(`I can't unban this user.`,'https://cdn.discordapp.com/emojis/590432801468448779.png?v=1').setColor('#ED4245')
+                                    UnbanEmbed.setAuthor(`I can't unban this user.`,client.emojis.cache.get('861325114694696960').url).setColor('#ED4245')
                                     message.channel.send({embed: UnbanEmbed})
                                         .then(msg => client.setTimeout(() => msg.delete(), 5000))
                                     console.error(err);
