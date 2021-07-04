@@ -34,46 +34,54 @@ exports.run = async (client, message, args) => {
     if(minutes > 60){
         minutes = 0;
     }
-    uptime += `${days} D, ${hours>9?hours:`0${hours}`}:${minutes>9?minutes:`0${minutes}`}:${seconds>9?seconds:`0${seconds}`}`;
-    let Stats={
-        "uptime":{
-            "header":`**UPTIME**`,
-            "list":[
+    uptime += `${days} Days, ${hours>9?hours:`0${hours}`}:${minutes>9?minutes:`0${minutes}`}:${seconds>9?seconds:`0${seconds}`}`;
+    let Stats=[
+        {
+            "header": `**Uptime**`,
+            "list": [
                 `\`${uptime}\``
             ]
         },
-        "servers":{
-            "header":`**SERVIDORES | USUARIOS**`,
-            "list":[
+        {
+            "header": `**Servers | Users**`,
+            "list": [
                 `\`${client.guilds.cache.size.toLocaleString()}\` **|** \`${client.users.cache.size.toLocaleString()}\``
             ]
         },
-        "idioms":{
-            "header":`**LENGUAJES**`,
-            "list":[
+        {
+            "header": `**Language**`,
+            "list": [
                 `\`Node.js\` ${client.emojis.cache.get("777182228987772958")}`,
                 `\`Git\` ${client.emojis.cache.get("832355210885464066")}`
             ]
         },
-        "dependices":{
-            "header":`**LIBRERIAS**`,
-            "list":[
-                `\`discord.js v13.0.0-dev\` ${client.emojis.cache.get("777189460655341600")}`,
-                `\`axios v0.21.0\`${client.emojis.cache.get("777189460655341600")}`,
-                `\`express v4.17.1\`${client.emojis.cache.get("777189460655341600")}`,
-                `\`fortnite-api-com v2.2.1\` ${client.emojis.cache.get("777189460655341600")}`
+        {
+            header: `**Dependencies**`,
+            list: [
+                `**discord.js [\`v13.0.0-dev\`]** ${client.emojis.cache.get("777189460655341600")}`,
+                `**axios [\`v0.21.0\`]** ${client.emojis.cache.get("777189460655341600")}`,
+                `**express [\`v4.17.1\`]** ${client.emojis.cache.get("777189460655341600")}`,
+                `**fortnite-api-com [\`v2.2.1\`]** ${client.emojis.cache.get("777189460655341600")}`
+            ]
+        },
+        {
+            header: `Announcements`,
+            list: [
+                `➜ ¡He sido añadido a [top.gg](https://top.gg/bot/${client.user.id})!`,
+                `➜ ¡En busca de los Intents perdidos...!`
             ]
         }
-    }
+    ]
     const embed = new Discord.MessageEmbed()
-        .setTitle(`**INFORMACION DE ${client.user.username}**`)
+        .setAuthor(`**${client.user.username}'s Stats Information**`,client.user.displayAvatarURL({dynamic:true,size:512}))
         .setDescription('Soy un BOT en constante desarrollo, tengo algunas funciones sobre Fortnite y mi principal funcion es la Moderacion, aunque tenga pocos comandos soy actualizado constantemente con fixes y mejoras, no te pierdas ninguna y disfruta de todas mis funciones :)')
-        .addField(Stats.uptime.header,Stats.uptime.list.map(l=>`- ${l}`).join('\n'),true)
-        .addField(Stats.idioms.header,Stats.idioms.list.map(l=>`- ${l}`).join('\n'),true)
-        .addField(Stats.servers.header,Stats.servers.list.map(l=>`- ${l}`).join('\n'),true)
-        .addField(Stats.dependices.header,Stats.dependices.list.map(l=>`- ${l}`).join('\n'),true)
-        .addField(`**ACTUALIZACIONES**`,`¡He sido añadido a [top.gg](https://top.gg/bot/${client.user.id})!\n¡En busca de los Intents perdidos...!`)
+        .addField(Stats.uptime.header,Stats.uptime.list.map(l=>`> ${l}`).join('\n'),true)
+        .addField(Stats.idioms.header,Stats.idioms.list.map(l=>`> ${l}`).join('\n'),true)
+        .addField(Stats.servers.header,Stats.servers.list.map(l=>`> ${l}`).join('\n'),true)
+        .addField(Stats.dependencies.header,Stats.dependencies.list.map(l=>`> ${l}`).join('\n'),true)
+        .addField(`**ACTUALIZACIONES**`,`➜ ¡He sido añadido a [top.gg](https://top.gg/bot/${client.user.id})!\n➜ ¡En busca de los Intents perdidos...!`)
         .setColor('#FF6B00')
+    Stats.map(o => embed.addField(o.header,o.list.join('\n'),true))
     const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
@@ -82,12 +90,12 @@ exports.run = async (client, message, args) => {
                 .setEmoji(client.emojis.cache.get("851166313372319816"))
                 .setURL(`https://top.gg/bot/${client.user.id}`),
             new Discord.MessageButton()
-                .setLabel('Votar')
+                .setLabel('Vote')
                 .setStyle('LINK')
                 .setEmoji(client.emojis.cache.get("851169432113512477"))
                 .setURL(`https://top.gg/bot/${client.user.id}/vote`),
             new Discord.MessageButton()
-                .setLabel('Invitame')
+                .setLabel('Add Me')
                 .setStyle('LINK')
                 .setEmoji(client.emojis.cache.get('851173104838377502'))
                 .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=4294967287&scope=bot`),

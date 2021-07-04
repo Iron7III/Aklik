@@ -20,7 +20,9 @@ exports.run = async (client, message, args, Fortnite) => {
             'cmds':[
                 `**\`${prefix}help\`**`,
                 `**\`${prefix}ping\`**`,
-                `**\`${prefix}info\`**`
+                `**\`${prefix}info\`**`,
+                `**\`${prefix}serverinfo\`**`,
+                `**\`${prefix}userinfo\`** \`[MEMBER|USER]\``
             ]
         },
         {
@@ -38,8 +40,8 @@ exports.run = async (client, message, args, Fortnite) => {
             'cmds':[
                 `**\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\``,
                 `**\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\``,
-                `**\`${prefix}unban\`** \`<MEMBER>\` \`[REASON]\``,
-                `**\`${prefix}clear\` \`<NUMBER>\``
+                `**\`${prefix}unban\`** \`<USER>\` \`[REASON]\``,
+                `**\`${prefix}clear\`** \`<NUMBER>\``
             ]
         }
     ]
