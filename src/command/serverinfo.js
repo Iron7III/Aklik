@@ -34,17 +34,20 @@ exports.run = async (client, message, args) => {
         `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerID}\``,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
         `> **Maximum Presences ➜ **\`${guild.maximumPresences!=null?guild.maximumPresences:`∞`}\``,
-        `> **Created ➜ **\` \``
+        `> **Created ➜ **\` \``,
+        `> **Boost Tier ➜ **\`${guild.premiumTier}\``,
+        `> **Boost Count ➜ **\`${guild.premiumSubscriptionCount}\``
     ]
     let ServerInfo_Moderation = [
         `> **Bans ➜ **\`${guild.bans.cache.lenght}\``,
-        `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``
+        `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``,
+        `> **AFK Timeout ➜ **\`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``
     ]
     if(guild.vanityURLCode){
         ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Vanity URL ➜ *${guild.vanityURLCode} **|** \`${guild.vanityURLUses}\``)
     }
     if(guild.afkChannel){
-        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelID}\` **|** \`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelID}\``)
     }
     if(guild.rulesChannel){
         ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Rules Channel ➜ **${guild.rulesChannel} **|** \`${guild.rulesChannelID}\``)
@@ -62,5 +65,8 @@ exports.run = async (client, message, args) => {
         .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FEE75C')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
+    if(guild.description){
+        embed.setDescription(guild.description)
+    }
     message.channel.send({embed: embed})
 }
