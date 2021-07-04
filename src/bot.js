@@ -134,6 +134,6 @@ client.on("guildDelete", (guild) => {
 })
 
 // LOGIN WITH "FORTNITE API BOT"
-//  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.neEtx0dXQymAPX0qL3ek98RRhJ0').catch(e => console.log(e));
+//  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.-EUlDqnaKAX5TjQJS5AnJWLMG-s').catch(e => console.log(e));
 // LOGIN WITH "Feltax"
-client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.qtlccKF4S1PVvOsNAqlMv-rHEOk').catch(e => console.log(e));
+client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.Q2xMCBvPLFHhja2CzkscVSP7osE').catch(e => console.log(e));
