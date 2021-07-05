@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
             ]
         },
         {
-            "header": `Language`,
+            "header": `Languages`,
             "list": [
                 `> **Node.js** ${client.emojis.cache.get("777182228987772958")}`,
                 `> **Git** ${client.emojis.cache.get("832355210885464066")}`
