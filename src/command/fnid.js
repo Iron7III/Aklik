@@ -14,6 +14,20 @@ const client = new Discord.Client({
 exports.run = async (client, message, args, Fortnite) => {
     Fortnite.CosmeticsSearchByID(args[0], "en").then(res => {
         console.log(res);
+        if(!args){
+            const ErrorEmbed = new Discord.MessageEmbed()
+                .setAuthor(`Write a cosmetic ID.`,client.emojis.cache.get('861325114694696960').url)
+                .setColor('#ED4245')
+            message.channel.send({embed: ErrorEmbed})
+                .then(msg => client.setTimeout(() => msg.delete(), 5000))
+        }
+        if(res==undefined){
+            const ErrorEmbed2 = new Discord.MessageEmbed()
+                .setAuthor(`Write a valid cosmetic ID.`,client.emojis.cache.get('861325114694696960').url)
+                .setColor('#ED4245')
+            message.channel.send({embed: ErrorEmbed2})
+                .then(msg => client.setTimeout(() => msg.delete(), 5000))
+        }
         const embed = new Discord.MessageEmbed()
             .setTitle(`**${res.data.name.toUpperCase()}**`)
             .addField(

@@ -48,11 +48,7 @@ exports.run = async (client, message, args, Fortnite) => {
     }
     const test = new Discord.MessageEmbed()
       .setTitle('awdaw')
-      .setImage('attachment://shop-cataba.jpg')
       .setColor('RANDOM')
-    message.channel.send({embed: test})
-
-    const attach = new Discord.MessageAttachment(`shop-cataba.jpg`)
-    message.channel.send(attach)
+    message.channel.send({files: ['shop-cataba.jpg'],embed: test})
   });
 };
