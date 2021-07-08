@@ -1,18 +1,7 @@
 const Discord = require("discord.js");
-const client = new Discord.Client({
-    disableEveryone: true,
-    fetchAllMembers: true,
-    ws: {
-        properties: {
-            $browser: "Discord Android"
-        },
-    },
-    intents: Discord.Intents.ALL
-    //intents: Discord.Intents.NON_PRIVILEGED
-});
+const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args, assets) => {
-    console.log(message.guild.members)
+exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed();
     if(!args[0]){
         embed.setAuthor(`Mention a user or write a valid ID.`,assets.mention).setColor('#ED4245')

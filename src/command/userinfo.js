@@ -1,17 +1,5 @@
-//  ⌚STATUS⌚
-//  Comando no funcional debido a la falta de Privileged Intents
 const Discord = require("discord.js");
-const client = new Discord.Client({
-    disableEveryone: true,
-    fetchAllMembers: true,
-    ws: {
-        properties: {
-            $browser: "Discord Android"
-        },
-    },
-    intents: Discord.Intents.ALL
-    //intents: Discord.Intents.NON_PRIVILEGED
-});
+const {assets} = require('../assets.json')
 
 exports.run = async (client, message, args) => {
     function getMemberFromMention(mention) {

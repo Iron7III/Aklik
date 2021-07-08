@@ -17,6 +17,7 @@ const config = {
     language: "en"
 };
 var Fortnite = new FortniteAPI(config);
+const {assets} = require('./assets.json')
 
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
@@ -40,9 +41,7 @@ client.on("ready", async () => {
         await generateShop(items, watermark);
     })()
 })
-const assets = {
-    mention: 'https://i.imgur.com/BplBZPL.png'
-}
+
 client.on("message", async message => {
     let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -52,7 +51,7 @@ client.on("message", async message => {
     var s='+';
     try {
         let file = require(`./command/${cmd}.js`);
-        file.run(client, message, args, Fortnite, assets);
+        file.run(client, message, args, Fortnite, {assets});
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => client.setTimeout(() => msg.delete(), 5000))
         console.log(e.stack),

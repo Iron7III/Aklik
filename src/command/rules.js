@@ -1,15 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client({
-    disableEveryone: true,
-    fetchAllMembers: true,
-    ws: {
-        properties: {
-            $browser: "Discord Android"
-        },
-    },
-    intents: Discord.Intents.ALL
-    //intents: Discord.Intents.NON_PRIVILEGED
-});
+const {assets} = require('../assets.json')
 
 exports.run = async (client, message, args) => {
     if(message.author.id!=='438390132538605589') return;
