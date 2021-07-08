@@ -10,22 +10,22 @@ exports.run = async (client, message, args) => {
             .then(msg => client.setTimeout(() => msg.delete(), 5000))
     } else {
         if(isNaN(bulk)||!bulk){
-            embed.setDescription(`_Escribe un número._`).setColor('#ED4245')
+            embed.setAuthor('Write a number.',assets.number).setColor('#ED4245')
             message.channel.send({embed: embed})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
         } else {
             if(100<bulk||bulk<1){
-                embed.setDescription(`_Ha de ser un número mayor a 0 y menor a 100._`)
+                embed.setAuthor('It must be a number bigger than 0 and less than 100.',assets.number).setColor('#ED4245')
                 message.channel.send({embed: embed})
                     .then(msg => client.setTimeout(() => msg.delete(), 5000))
             } else {
                 if(100>bulk&&bulk>0){
-                    message.channel.bulkDelete(bulk, true)
-                    embed.setDescription(`Se han borrado \`${bulk}\` mensajes.`).setColor('#57F287')
+                    message.channel.bulkDelete(bulk+1, true)
+                    embed.setAuthor(`Deleted ${bulk} messages.`,assets.success).setColor('#57F287')
                     message.channel.send({embed: embed})
                         .then(msg => client.setTimeout(() => msg.delete(), 5000))
                 } else {
-                    embed.setDescription(`_No se han podido eliminar los mensajes._`).setColor('#ED4245')
+                    embed.setAuthor(`I couldn't delete the messages.`,assets.error).setColor('#ED4245')
                     message.channel.send({embed: embed})
                         .then(msg => client.setTimeout(() => msg.delete(), 5000))
                 }
