@@ -11,11 +11,11 @@ const client = new Discord.Client({
     //intents: Discord.Intents.NON_PRIVILEGED
 });
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, assets) => {
     console.log(message.guild.members)
     const embed = new Discord.MessageEmbed();
     if(!args[0]){
-        embed.setAuthor(`Mention a user or write a valid ID.`,'botassets\\mention.png').setColor('#ED4245')
+        embed.setAuthor(`Mention a user or write a valid ID.`,assets.mention).setColor('#ED4245')
         message.channel.send({embed: embed})
             .then(msg => client.setTimeout(() => msg.delete(), 5000))
     } else {
