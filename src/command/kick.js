@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
     console.log(message.guild.members)
     const embed = new Discord.MessageEmbed();
     if(!args[0]){
-        embed.setAuthor(`Mention a user or write a valid ID.`,client.emojis.cache.get('861325428513046559').url).setColor('#ED4245')
+        embed.setAuthor(`Mention a user or write a valid ID.`,client.emojis.cache.get('862637092910792726').url).setColor('#ED4245')
         message.channel.send({embed: embed})
             .then(msg => client.setTimeout(() => msg.delete(), 5000))
     } else {
