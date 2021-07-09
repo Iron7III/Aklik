@@ -21,6 +21,7 @@ const {assets} = require('./assets.json')
 
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
+    var a = await client.api.users('438390132538605589').get();
     var today = new Date();
     var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+1}`}-${today.getFullYear()}`
     const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
@@ -32,7 +33,7 @@ client.on("ready", async () => {
             components: null
         }
     })
-    client.user.setActivity("Invitame :D", { type: "WATCHING" });
+    client.user.setActivity("Use f-help :D", { type: "WATCHING" });
 
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");

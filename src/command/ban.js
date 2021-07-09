@@ -19,9 +19,6 @@ exports.run = async (client, message, args) => {
                     .then(msg => client.setTimeout(() => msg.delete(), 5000))
             } else {
                 const member = message.guild.members.cache.get(user.id);
-                console.log(user)
-                console.log('________________________________')
-                console.log(member)
                 if(!member){
                     embed.setDescription(`_El usuario no esta en el servidor._`).setColor('#ED4245')
                     message.channel.send({embed: embed})

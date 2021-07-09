@@ -4,45 +4,45 @@ const {assets} = require('../assets.json')
 exports.run = async (client, message, args, Fortnite) => {
     console.log(client.uptime)
     const prefix = 'f-'
-    let Global = [
+    let commands = [
         {
-            'header':'**INFORMACION / SOPORTE**',
+            'header':'**Information / Support**',
             'cmds':[
-                `**\`${prefix}help\`**`,
-                `**\`${prefix}ping\`**`,
-                `**\`${prefix}info\`**`,
-                `**\`${prefix}serverinfo\`**`,
-                `**\`${prefix}userinfo\`** \`[MEMBER|USER]\``
+                `> **\`${prefix}help\`**`,
+                `> **\`${prefix}ping\`**`,
+                `> **\`${prefix}info\`**`,
+                `> **\`${prefix}serverinfo\`**`,
+                `> **\`${prefix}userinfo\`** \`[MEMBER|USER]\``
             ]
         },
         {
-            'header':'**FORTNITE**',
+            'header':'**Fortnite**',
             'cmds':[
-                `**\`${prefix}aes\`**`,
-                `**\`${prefix}shop\`** (Beta)`,
-                `**\`${prefix}news\`** \`[BR•STW•CREATIVE]\` \`[LANGUAGE]\``,
-                `**\`${prefix}fnid\`** \`<COSMETIC_ID>\``
+                `> **\`${prefix}aes\`**`,
+                `> **\`${prefix}shop\`** (Beta)`,
+                `> **\`${prefix}news\`** \`[br•stw•creative]\` \`[LANGUAGE]\``,
+                `> **\`${prefix}fnid\`** \`<COSMETIC_ID>\``
             ]
         },
         {
-            'header':'**MODERACION**',
+            'header':'**Moderation**',
             'cmds':[
-                `**\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\``,
-                `**\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\``,
-                `**\`${prefix}unban\`** \`<USER>\` \`[REASON]\``,
-                `**\`${prefix}clear\`** \`<NUMBER>\``
+                `> **\`${prefix}kick\`** \`<MEMBER>\` \`[REASON]\``,
+                `> **\`${prefix}ban\`** \`<MEMBER>\` \`[REASON]\``,
+                `> **\`${prefix}unban\`** \`<USER>\` \`[REASON]\``,
+                `> **\`${prefix}clear\`** \`<NUMBER>\``
             ]
         }
     ]
     const embed = new Discord.MessageEmbed()
         .setTitle(`**${client.user.username} HELP**`)
-        .setDescription(`**\`<>\` - Campo Obligatorio\n\`[]\` - Campo Opcional\n\`()\` - Campo Informativo**`)
-        .addField('**LISTA DE COMANDOS**',`${Global.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n\n')}`)
+        .setDescription(`**\`<>\` - Required Parameter\n\`[]\` - Optional Parameter\n\`()\` - Informative Parameter**`)
+        .addField('Command List',`${commands.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n\n')}`)
         .setColor('#ff5e00')
     const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
-                .setLabel('Información')
+                .setLabel('Information')
                 .setStyle('DANGER')
                 .setCustomID('information')
                 .setEmoji('851207714465906718')
@@ -54,7 +54,7 @@ exports.run = async (client, message, args, Fortnite) => {
                 .setEmoji('851207714465906718')
                 .setDisabled(true),
             new Discord.MessageButton()
-                .setLabel('Moderación')
+                .setLabel('Moderation')
                 .setStyle('DANGER')
                 .setCustomID('moderation')
                 .setEmoji('851146036722008084')
