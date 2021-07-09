@@ -3,6 +3,8 @@
         "mention": "https://i.imgur.com/BplBZPL.png",
         "number": "https://i.imgur.com/HDYImWF.png",
         "success": "https://i.imgur.com/mmvSpQx.png",
-        "error": "https://i.imgur.com/TcaXLbj.png"
+        "error": "https://i.imgur.com/TcaXLbj.png",
+        "guildCreate": "https://i.imgur.com/lz76c9p.png",
+        "guildDelete": "https://i.imgur.com/dCOQ994.png"
     }
 }

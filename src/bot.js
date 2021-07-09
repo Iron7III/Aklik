@@ -13,7 +13,7 @@ const client = new Discord.Client({
 });
 const FortniteAPI = require("fortnite-api-com");
 const config = {
-    apikey: "f932b4642b7f68bee1f619a073524a174b03e942498cbaa0626e245b11905e1b",
+    apikey: "",
     language: "en"
 };
 var Fortnite = new FortniteAPI(config);
@@ -33,7 +33,7 @@ client.on("ready", async () => {
             components: null
         }
     })
-    client.user.setActivity("Use f-help :D", { type: "WATCHING" });
+    client.user.setActivity("Use f-help :D", { type: "COMPETING" });
 
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
@@ -86,9 +86,18 @@ client.on("message", async message => {
 });
 
 client.on("guildCreate", (guild) => {
-    const DevLogGuildCreate = `${client.emojis.cache.get("853735097315622913")} **SERVER JOINED**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> OWNER ➜ $$$ | ${guild.ownerId}\n> \`\`\``;
-    //guild.me.setNickName('Feltax')
-    console.log('NUEVO SERVIDOR')
+    let _info = [
+        `> **Name ➜ **\`${guild.name}\``,
+        `> **ID ➜ **\`${guild.id}\``,
+        `> **Locale ➜ **\`${guild.locale}\``,
+        `> **Members ➜ **\`${guild.memberCount}\``,
+        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerID}\``
+    ]
+    const guildCreateEmbed = new Discord.MessageEmbed()
+        .setAuthor(`Joined Server`,assets.guildCreate)
+        .setDescription(_info.join('\n'))
+        .setThumbnail(guild.iconURL)
+        .setImage(guild.bannerURL)
     const row = new Discord.MessageActionRow()
     .addComponents(
         new Discord.MessageButton()
@@ -104,8 +113,8 @@ client.on("guildCreate", (guild) => {
     client.api.channels('853697886335008808').messages.post({
         type: 1,
         data: {
-            content: DevLogGuildCreate,
-            embed: null,
+            content: ' ',
+            embed: guildCreateEmbed,
             components: [
                 row
             ]
