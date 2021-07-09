@@ -26,16 +26,14 @@ exports.run = async (client, message, args, Fortnite) => {
         false
       )
       .addField(
-        `${client.emojis.cache.get("769615338538139679")} **DYNAMIC KEYS [\`${res.data.dynamicKeys.length}\`]**`,
-        res.data.dynamicKeys.map(t => `\`\`\`md\n< FortniteGame/Content/Paks/${t.pakFilename} >\n${t.key}\n\`\`\``).join("\n"),
-        false
-      )
-      .addField(
         `${client.emojis.cache.get("769568936077033482")} **ACTUALIZADO**`,
         `\`\`\`fix\n${res.data.updated}\n\`\`\``,
         false
       )
       .setColor("#ffef7d");
+    res.data.dynamicKeys.map(d => {
+      embedAES.addField(`${d.pakFilename}`,`\`\`\`\n${t.key}\n\`\`\``)
+    })
     message.channel.send({ embed: embedAES });
   });
 };
