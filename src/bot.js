@@ -96,8 +96,9 @@ client.on("guildCreate", (guild) => {
     const guildCreateEmbed = new Discord.MessageEmbed()
         .setAuthor(`Joined Server`,assets.guildCreate)
         .setDescription(_info.join('\n'))
-        .setThumbnail(guild.iconURL)
-        .setImage(guild.bannerURL)
+        .setColor('#57F287')
+        .setThumbnail(guild.iconURL({dynamic:true,size:512}))
+        .setImage(guild.bannerURL())
     const row = new Discord.MessageActionRow()
     .addComponents(
         new Discord.MessageButton()
