@@ -32,7 +32,7 @@ exports.run = async (client, message, args, Fortnite) => {
       )
       .setColor("#ffef7d");
     res.data.dynamicKeys.map(d => {
-      embedAES.addField(`${d.pakFilename}`,`\`\`\`\n${t.key}\n\`\`\``)
+      embedAES.addField(`${d.pakFilename}`,`\`\`\`\n${d.key}\n\`\`\``)
     })
     message.channel.send({ embed: embedAES });
   });
