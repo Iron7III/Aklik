@@ -91,7 +91,7 @@ client.on("guildCreate", (guild) => {
         `> **ID ➜ **\`${guild.id}\``,
         `> **Locale ➜ **\`${guild.locale}\``,
         `> **Members ➜ **\`${guild.memberCount}\``,
-        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerID}\``
+        `> **Owner ➜ **<@${guild.ownerID}> ${client.emojis.cache.get('860997112434786315')} ${guild.members.cache.get(guild.ownerID).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerID}\``
     ]
     const guildCreateEmbed = new Discord.MessageEmbed()
         .setAuthor(`Joined Server`,assets.guildCreate)
