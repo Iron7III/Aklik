@@ -14,19 +14,19 @@ const client = new Discord.Client({
 exports.run = async (client, message, args, Fortnite) => {
   Fortnite.AES().then(res => {
     const embedAES = new Discord.MessageEmbed()
-      .setTitle(`**Información AES**`)
+      .setTitle(`**AES Information**`)
       .addField(
-        `${client.emojis.cache.get("768962558144544818")} **BUILD [\`${res.data.build.substring(19,24)}\`]**`,
+        `Build [\`${res.data.build.substring(19,24)}\`]`,
         `\`\`\`fix\n${res.data.build}\n\`\`\``,
         false
       )
       .addField(
-        `${client.emojis.cache.get("769615338538139679")} **KEY**`,
+        `Key`,
         `\`\`\`fix\n${res.data.mainKey}\n\`\`\``,
         false
       )
       .addField(
-        `${client.emojis.cache.get("769568936077033482")} **ACTUALIZADO**`,
+        `Updated`,
         `\`\`\`fix\n${res.data.updated}\n\`\`\``,
         false
       )

@@ -19,7 +19,7 @@ exports.run = async (client, message, args, Fortnite) => {
             'header':'**Fortnite**',
             'cmds':[
                 `> **\`${prefix}aes\`**`,
-                `> **\`${prefix}shop\`** (Beta)`,
+                `> **\`${prefix}shop\`** (Maintenance)`,
                 `> **\`${prefix}news\`** \`[br•stw•creative]\` \`[LANGUAGE]\``,
                 `> **\`${prefix}fnid\`** \`<COSMETIC_ID>\``
             ]
