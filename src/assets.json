@@ -5,6 +5,7 @@
         "success": "https://i.imgur.com/mmvSpQx.png",
         "error": "https://i.imgur.com/TcaXLbj.png",
         "guildCreate": "https://i.imgur.com/lz76c9p.png",
-        "guildDelete": "https://i.imgur.com/dCOQ994.png"
+        "guildDelete": "https://i.imgur.com/dCOQ994.png",
+        "ready": "https://i.imgur.com/jShp0S9.png"
     }
 }

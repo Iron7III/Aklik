@@ -24,17 +24,19 @@ client.on("ready", async () => {
     var a = await client.api.users('438390132538605589').get();
     var today = new Date();
     var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+1}`}-${today.getFullYear()}`
-    const DevLogReady = `${client.emojis.cache.get("852614405161353217")} **READY UP**\n> \`\`\`\n> PING ➜ ${Math.round(client.ws.ping)}\n> DATE ➜ ${date}\n> \`\`\``;
+    const readyEmbed = new Discord.MessageEmbed()
+        .setAuthor(`Connected`,assets.ready)
+        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **\`${date}\``)
+        .setColor('#FEE75C')
     client.api.channels('853697844333772820').messages.post({
         type: 1,
         data: {
-            content: DevLogReady,
-            embed: null,
+            content: ' ',
+            embed: readyEmbed,
             components: null
         }
     })
     client.user.setActivity("Use f-help :D", { type: "COMPETING" });
-
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
     (async () => {
