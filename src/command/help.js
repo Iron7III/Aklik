@@ -38,7 +38,7 @@ exports.run = async (client, message, args, Fortnite) => {
         .setTitle(`**${client.user.username} HELP**`)
         .setDescription(`**\`<>\` - Required Parameter\n\`[]\` - Optional Parameter\n\`()\` - Informative Parameter**`)
         .addField('Command List',`${commands.map(g => `${g.header}\n${g.cmds.join('\n')}`).join('\n\n')}`)
-        .setColor('#ff5e00')
+        .setColor('#FD3D26')
     const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
