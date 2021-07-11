@@ -34,12 +34,11 @@ exports.run = async (client, message, args) => {
                             const UnbanReason = args.slice(1).join(/ +/g)?args.slice(1).join(/ +/g):'Any reason'
                             message.guild.members.unban(UnbanUser)
                                 .then(()=>{
-                                    UnbanEmbed.setDescription(`_${UnbanUser} ha sido desbaneado con motivo: \`${UnbanReason}\`_`).setColor('#57F287')
-                                    UnbanEmbed.setAuthor(`${UnbanUser} Unbanned`,client.emojis.cache.get('861325114694696960').url).setDescription(`\`${UnbanReason}\``).setColor('#57F287')
+                                    UnbanEmbed.setAuthor(`${UnbanUser} Unbanned`,assets.success).setDescription(`\`${UnbanReason}\``).setColor('#57F287')
                                     message.channel.send({embed: UnbanEmbed})
                                 })
                                 .catch(err => {
-                                    UnbanEmbed.setAuthor(`I can't unban this user.`,client.emojis.cache.get('861325114694696960').url).setColor('#ED4245')
+                                    UnbanEmbed.setAuthor(`I can't unban this user.`,assets.error).setColor('#ED4245')
                                     message.channel.send({embed: UnbanEmbed})
                                         .then(msg => client.setTimeout(() => msg.delete(), 5000))
                                     console.error(err);
