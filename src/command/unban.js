@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
                     message.channel.send({embed: UnbanEmbed})
                         .then(msg => client.setTimeout(() => msg.delete(), 5000))
             } else {
-                message.guild.fetchBans().then(bans=> {
+                message.guild.bans.fetch().then(bans=> {
                     if(bans.size == 0){
                         UnbanEmbed.setDescription(`_No hay ningun usuario baneado en el servidor._`).setColor('#ED4245')
                         message.channel.send({embed: UnbanEmbed})
