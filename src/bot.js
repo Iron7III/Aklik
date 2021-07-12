@@ -31,10 +31,9 @@ client.on("ready", async () => {
             components: null
         }
     })
-    client.user.setActivity({
+    client.user.setActivity('Use f-help :D',{
         status: 'dnd',
         activity: {
-            name: "Use f-help :D",
             type: 'COMPETING'
         }
     });
