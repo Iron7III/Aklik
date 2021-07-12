@@ -14,7 +14,6 @@ exports.run = async (client, message, args) => {
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     let user = args[0]?client.users.cache.get(args[0]):client.users.cache.get(message.author.id);
-    console.log(user)
     let _badges = {
         'EARLY_SUPPORTER': '<:Earlysupporter:746029762274656317>',
         'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
@@ -131,8 +130,7 @@ exports.run = async (client, message, args) => {
             })
         }
         message.channel.send({embed: MemberInfoEmbed})
-    } else {
-        if(user){
+    } else if(user){
             var UserInfo_User = [
                 `> **Username ➜ **\`${user.username}\``,
                 `> **Discriminator ➜ **\`${user.discriminator}\``,
@@ -160,6 +158,5 @@ exports.run = async (client, message, args) => {
                 .setColor('#ED4245')
             message.channel.send({embed: ErrorEmbed})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
-        }
     }
 }
