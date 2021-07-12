@@ -36,7 +36,13 @@ client.on("ready", async () => {
             components: null
         }
     })
-    client.user.setActivity("Use f-help :D", { type: "COMPETING" });
+    client.user.setActivity({
+        status: 'dnd',
+        activity: {
+            name: 'Use f-help :D',
+            type: 'COMPETING'
+        }
+    });
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
     (async () => {
