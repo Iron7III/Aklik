@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     let user = args[0]?client.users.cache.get(args[0]):client.users.cache.get(message.author.id);
     let _badges = {
-        'EARLY_SUPPORTER': '<:Earlysupporter:746029762274656317>',
+        'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
         'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
         'PARTNERED_SERVER_OWNER': client.emojis.cache.get('864133588165722152'),
         'HYPESQUAD_EVENTS': client.emojis.cache.get('864133588328644618'),
@@ -25,7 +25,8 @@ exports.run = async (client, message, args) => {
         'BUGHUNTER_LEVEL_1': client.emojis.cache.get('864133587875266602'),
         'BUGHUNTER_LEVEL_2': client.emojis.cache.get('864133588126531604'),
         'EARLY_VERIFIED_BOT_DEVELOPER': client.emojis.cache.get('864133588152746000'),
-        'VERIFIED_BOT': '<:verified:753442204541911081>'
+        'VERIFIED_BOT': '<:verified:753442204541911081>',
+        'DISCORD_CERTIFIED_MODERATOR': client.emojis.cache.get('864133588119060481')
     }
     let _status = {
         'online': {
@@ -131,32 +132,32 @@ exports.run = async (client, message, args) => {
         }
         message.channel.send({embed: MemberInfoEmbed})
     } else if(user){
-            var UserInfo_User = [
-                `> **Username ➜ **\`${user.username}\``,
-                `> **Discriminator ➜ **\`${user.discriminator}\``,
-                `> **Mention ➜ **<@${user.id}>`,
-                `> **ID ➜ **\`${user.id}\``,
-                `> **Registered ➜ **\`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} | ${user.createdAt.getHours()>9?user.createdAt.getHours():`0${user.createdAt.getHours()}`}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`}\``,
-                `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
-            ]
-            if(user.bot){
-                if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
-                    MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
-                } else {
-                    MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
-                }
+        var UserInfo_User = [
+            `> **Username ➜ **\`${user.username}\``,
+            `> **Discriminator ➜ **\`${user.discriminator}\``,
+            `> **Mention ➜ **<@${user.id}>`,
+            `> **ID ➜ **\`${user.id}\``,
+            `> **Registered ➜ **<t:${user.createdTimestamp}:d> <t:${user.createdTimestamp}:T>`,
+            `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
+        ]
+        //\`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} | ${user.createdAt.getHours()>9?user.createdAt.getHours():`0${user.createdAt.getHours()}`}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`}\`
+        if(user.bot){
+            if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
+                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
+            } else {
+                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
             }
-            const UserInfoEmbed = new Discord.MessageEmbed()
-                .setAuthor(`${user.username}'s Information`,user.displayAvatarURL({dynamic:true,size:512}))
-                .addField('User Info',UserInfo_User.join('\n'),false)
-                .setColor(_status["offline"].color)
-                .setThumbnail(user.displayAvatarURL({dynamic:true,size:1024}))
-            message.channel.send({embed: UserInfoEmbed})
-        } else if(!member&&!user){
-            const ErrorEmbed = new Discord.MessageEmbed()
-                .setAuthor(`I don't have any data about this user.`,assets.error)
-                .setColor('#ED4245')
-            message.channel.send({embed: ErrorEmbed})
-                .then(msg => client.setTimeout(() => msg.delete(), 5000))
+        }
+        const UserInfoEmbed = new Discord.MessageEmbed()
+            .setAuthor(`${user.username}'s Information`,user.displayAvatarURL({dynamic:true,size:512}))
+            .addField('User Info',UserInfo_User.join('\n'),false)
+            .setColor(_status["offline"].color)
+            .setThumbnail(user.displayAvatarURL({dynamic:true,size:1024}))
+        message.channel.send({embed: UserInfoEmbed})
+    } else if(!member&&!user){
+        const ErrorEmbed = new Discord.MessageEmbed()
+            .setAuthor(`I don't have any data about this user.`,assets.error)
+            .setColor('#ED4245')
+        message.channel.send({embed: ErrorEmbed})
     }
 }
