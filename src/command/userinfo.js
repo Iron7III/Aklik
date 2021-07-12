@@ -154,7 +154,7 @@ exports.run = async (client, message, args) => {
             message.channel.send({embed: UserInfoEmbed})
         } else if(!member&&!user){
             const ErrorEmbed = new Discord.MessageEmbed()
-                .setAuthor(`I don't have any data about this user.`,client.emojis.cache.get('861325114694696960').url)
+                .setAuthor(`I don't have any data about this user.`,assets.error)
                 .setColor('#ED4245')
             message.channel.send({embed: ErrorEmbed})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
