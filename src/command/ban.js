@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
                             .then(msg => client.setTimeout(() => msg.delete(), 5000))
                     } else {
                         const reason = args.slice(1).join(' ')?args.slice(1).join(' '):'No se ha especificado una razón.';
-                        member.ban(reason)
+                        member.ban({days:7,reason:reason})
                             .then(()=>{
                                 embed.setDescription(`_${member.user.username}#${member.user.discriminator} ha sido baneado con motivo: \`${reason}\`_`).setColor('#57F287')
                                 message.channel.send({embed: embed})
