@@ -31,19 +31,19 @@ exports.run = async (client, message, args) => {
     let _status = {
         'online': {
             color: '#3BA55B',
-            displayName: `${client.emojis.cache.get("857688314429833237")} Online`
+            displayName: `${client.emojis.cache.get("864132043944362024")} Online`
         },
         'dnd': {
             color: '#EB4245',
-            displayName: `${client.emojis.cache.get("857688314874560562")} Do Not Disturb`
+            displayName: `${client.emojis.cache.get("864132043877384212")} Do Not Disturb`
         },
         'idle': {
             color: '#F9A61A',
-            displayName: `${client.emojis.cache.get("857688314369802261")} Idle`
+            displayName: `${client.emojis.cache.get("864132043881316413")} Idle`
         },
         'offline': {
             color: '#737F8D',
-            displayName: `${client.emojis.cache.get("857688314269401099")} Offline`
+            displayName: `${client.emojis.cache.get("864132044081594369")} Offline`
         }
     }
     if(member){
