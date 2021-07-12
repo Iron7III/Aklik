@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
                             message.channel.send({embed: UnbanEmbed})
                                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
                         } else {
-                            const UnbanReason = args.slice(1).join(/ +/g)?args.slice(1).join(/ +/g):'Any reason'
+                            const UnbanReason = args.slice(1).join(' ')?args.slice(1).join(' '):'Any reason'
                             message.guild.members.unban(UnbanUser)
                                 .then(()=>{
                                     UnbanEmbed.setAuthor(`${UnbanUser} Unbanned`,assets.success).setDescription(`\`${UnbanReason}\``).setColor('#57F287')
