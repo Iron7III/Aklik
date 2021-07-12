@@ -37,7 +37,7 @@ client.on("ready", async () => {
                 type: 'COMPETING'
             }
         ],
-        status: 'idle'
+        status: 'dnd'
     });
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
