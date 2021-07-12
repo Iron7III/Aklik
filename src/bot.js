@@ -40,7 +40,7 @@ client.on("ready", async () => {
         status: 'dnd',
         activity: {
             name: 'Use f-help :D',
-            type: 'COMPETING'
+            type: COMPETING
         }
     });
     const { generateShop, getShopItems } = require("./shop");
