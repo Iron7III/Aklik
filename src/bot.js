@@ -31,7 +31,7 @@ client.on("ready", async () => {
         }
     })
     client.user.setActivity('Use f-help :D',{type: 'COMPETING'});
-    client.user.setStatus('dnd')
+    client.user.setStatus('idle')
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
     (async () => {
