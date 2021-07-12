@@ -137,7 +137,7 @@ exports.run = async (client, message, args) => {
             `> **Discriminator ➜ **\`${user.discriminator}\``,
             `> **Mention ➜ **<@${user.id}>`,
             `> **ID ➜ **\`${user.id}\``,
-            `> **Registered ➜ **<t:${user.createdTimestamp}:d> <t:${user.createdTimestamp}:T> (<t:${user.createdTimestamp}:R>)`,
+            `> **Registered ➜ **<t:${user.createdTimestamp}:d> <t:${user.createdTimestamp}:T> <t:${user.createdTimestamp}:R>`,
             `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
         console.log(user.createdTimestamp)
