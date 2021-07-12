@@ -95,7 +95,7 @@ exports.run = async (client, message, args) => {
             `> **Mention ➜ **<@${member.id}>`,
             `> **ID ➜ **\`${member.id}\``,
             `> **Platforms ➜ **${member.presence.clientStatus!=null&&member.presence.clientStatus.mobile?`${client.emojis.cache.get('858403427428335636')}`:client.emojis.cache.get('858406136033837126')} ${member.presence.clientStatus!=null&&member.presence.clientStatus.desktop?`${client.emojis.cache.get('858403427473948712')}`:client.emojis.cache.get('858406136046682163')} ${member.presence.clientStatus!=null&&member.presence.clientStatus.web?`${client.emojis.cache.get('858403427407495168')}`:client.emojis.cache.get('858406136121524225')}`,
-            `> **Registered ➜ **<t:${member.user.createdTimestamp}:d> <t:${member.user.createdTimestamp}:T> (<t:${member.user.createdTimestamp}:R>)`,
+            `> **Registered ➜ **<t:${member.user.createdTimestamp}:d> <t:${member.user.createdTimestamp}:T> (<t:${member.user.createdAt}:R>)`,
             `> **Badges ➜ **${member.user.flags!==null?member.user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
         if(member.user.bot){
@@ -137,7 +137,7 @@ exports.run = async (client, message, args) => {
             `> **Discriminator ➜ **\`${user.discriminator}\``,
             `> **Mention ➜ **<@${user.id}>`,
             `> **ID ➜ **\`${user.id}\``,
-            `> **Registered ➜ **<t:${user.createdTimestamp}:d> <t:${user.createdTimestamp}:T> (<t:${user.createdTimestamp}:R>)`,
+            `> **Registered ➜ **<t:${user.createdTimestamp}:d> <t:${user.createdTimestamp}:T> (<t:${user.createdAt}:R>)`,
             `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
         //\`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} | ${user.createdAt.getHours()>9?user.createdAt.getHours():`0${user.createdAt.getHours()}`}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`}\`
