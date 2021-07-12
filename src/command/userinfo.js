@@ -132,12 +132,13 @@ exports.run = async (client, message, args) => {
         }
         message.channel.send({embed: MemberInfoEmbed})
     } else if(user){
+        const createdAt_Date = `${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} ${user.createdAt.getHours()>12?`0${user.createdAt.getHours()-12}`:user.createdAt.getHours()}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`} ${user.createdAt.getHours()>12?'PM':'PM'}`;
         var UserInfo_User = [
             `> **Username ➜ **\`${user.username}\``,
             `> **Discriminator ➜ **\`${user.discriminator}\``,
             `> **Mention ➜ **<@${user.id}>`,
             `> **ID ➜ **\`${user.id}\``,
-            `> **Registered ➜ **<t:${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} ${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()} ${user.createdAt.getHours()>12?`0${user.createdAt.getHours()-12}`:user.createdAt.getHours()} ${user.createdAt.getHours()>12?'PM':'PM'}`}:d> <t:${user.createdTimestamp}:T> <t:${user.createdTimestamp}:R>`,
+            `> **Registered ➜ **<t:${createdAt_Date}:T> <t:${createdAt_Date}:R>`,
             `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
         console.log(`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} ${user.createdAt.getHours()>12?`0${user.createdAt.getHours()-12}`:user.createdAt.getHours()}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`} ${user.createdAt.getHours()>12?'PM':'PM'}`)
