@@ -39,8 +39,8 @@ client.on("ready", async () => {
     client.user.setActivity({
         status: 'dnd',
         activity: {
-            name: 'Use f-help :D',
-            type: COMPETING
+            name: "Use f-help :D",
+            type: 'COMPETING'
         }
     });
     const { generateShop, getShopItems } = require("./shop");
