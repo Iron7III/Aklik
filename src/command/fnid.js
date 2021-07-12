@@ -1,15 +1,4 @@
 const Discord = require("discord.js");
-const client = new Discord.Client({
-    disableEveryone: true,
-    fetchAllMembers: true,
-    ws: {
-        properties: {
-            $browser: "Discord Android"
-        },
-    },
-    intents: Discord.Intents.ALL
-    //intents: Discord.Intents.NON_PRIVILEGED
-});
 
 exports.run = async (client, message, args, Fortnite) => {
     Fortnite.CosmeticsSearchByID(args[0], "en").then(res => {

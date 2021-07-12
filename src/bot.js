@@ -3,11 +3,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
     fetchAllMembers: true,
-    ws: {
-        properties: {
-            $browser: "Discord Android"
-        }
-    },
     intents: Discord.Intents.ALL
     //intents: Discord.Intents.NON_PRIVILEGED
 });
