@@ -17,15 +17,15 @@ exports.run = async (client, message, args) => {
     console.log(user)
     let _badges = {
         'EARLY_SUPPORTER': '<:Earlysupporter:746029762274656317>',
-        'DISCORD_EMPLOYEE': '<:Discordstaff:746029762513862666>',
-        'PARTNERED_SERVER_OWNER': client.emojis.cache.get('847137447687356466'),
-        'HYPESQUAD_EVENTS': '<:HypesquadEvents:746029762497085550>',
-        'HOUSE_BRAVERY': client.emojis.cache.get('858487935183749140'),
-        'HOUSE_BRILLIANCE': client.emojis.cache.get('858487935190958110'),
-        'HOUSE_BALANCE': client.emojis.cache.get('858487935271436308'),
-        'BUGHUNTER_LEVEL_1': '<:Bughunter:746029762522120203>',
-        'BUGHUNTER_LEVEL_2': '<:Goldbughunter:746029762526576691>',
-        'EARLY_VERIFIED_BOT_DEVELOPER': '<:VerifiedBotDeveloper:746029762194964590>',
+        'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
+        'PARTNERED_SERVER_OWNER': client.emojis.cache.get('864133588165722152'),
+        'HYPESQUAD_EVENTS': client.emojis.cache.get('864133588328644618'),
+        'HOUSE_BRAVERY': client.emojis.cache.get('864133587908689931'),
+        'HOUSE_BRILLIANCE': client.emojis.cache.get('864133588173062184'),
+        'HOUSE_BALANCE': client.emojis.cache.get('864133588164280340'),
+        'BUGHUNTER_LEVEL_1': client.emojis.cache.get('864133587875266602'),
+        'BUGHUNTER_LEVEL_2': client.emojis.cache.get('864133588126531604'),
+        'EARLY_VERIFIED_BOT_DEVELOPER': client.emojis.cache.get('864133588152746000'),
         'VERIFIED_BOT': '<:verified:753442204541911081>'
     }
     let _status = {
