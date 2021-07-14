@@ -16,12 +16,11 @@ const {assets} = require('./assets.json')
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var a = await client.api.users('438390132538605589').get();
-    var today = new Date.now();
-    console.log(today)
-    var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+1}`}-${today.getFullYear()}`
+    const D = new Date();
+    var _date = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
-        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **\`${date}\``)
+        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **<t:${_date.toFixed(0)}:d> **|** <t:${_date.toFixed(0)}:T>`)
         .setColor('#FD3D26')
     client.api.channels('853697844333772820').messages.post({
         type: 1,
