@@ -21,7 +21,7 @@ client.on("ready", async () => {
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
         .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **\`${date}\``)
-        .setColor('#FEE75C')
+        .setColor('#FD3D26')
     client.api.channels('853697844333772820').messages.post({
         type: 1,
         data: {
