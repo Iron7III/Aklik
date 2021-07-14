@@ -16,6 +16,7 @@ const {assets} = require('./assets.json')
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var a = await client.api.users('438390132538605589').get();
+    console.log(a)
     const D = new Date();
     var _date = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()

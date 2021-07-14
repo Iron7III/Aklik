@@ -57,7 +57,7 @@ exports.run = async (client, message, args, Fortnite) => {
                 .setLabel('Moderation')
                 .setStyle('DANGER')
                 .setCustomID('moderation')
-                .setEmoji('851146036722008084')
+                .setEmoji('864133588119060481')
                 .setDisabled(true)
         )
         client.api.channels(message.channel.id).messages.post({
