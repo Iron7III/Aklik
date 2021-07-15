@@ -53,5 +53,12 @@ exports.run = async (client, message, args) => {
         .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FEE75C')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
-    message.channel.send({embed: embed}).catch(err => console.log(err.stack))
+    client.api.channels(message.channel.id).messages.post({
+        type: 1,
+        data: {
+            content: ' ',
+            embed: embed,
+            components: null
+        }
+    })
 }
