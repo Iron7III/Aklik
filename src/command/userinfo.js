@@ -153,13 +153,22 @@ exports.run = async (client, message, args) => {
             `> **Registered ➜ **<t:${(APIUser.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(APIUser.createdAt.getTime()/1000).toFixed(0)}:T> <t:${(APIUser.createdAt.getTime()/1000).toFixed(0)}:R>`,
             `> **Badges ➜ **${APIUser.flags!==null?APIUser.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
-        if(APIUser.bot){
-            if(APIUser.flags==null||!APIUser.flags.has('VERIFIED_BOT')) {
+        if(APIUser.system){
+            UserInfo_User.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
+        } else {
+            if(mAPIUser.flags==null||!APIUser.flags.has('VERIFIED_BOT')) {
                 UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
                 UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
             }
         }
+        /*if(APIUser.bot){
+            if(APIUser.flags==null||!APIUser.flags.has('VERIFIED_BOT')) {
+                UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
+            } else {
+                UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
+            }
+        }*/
         const UserInfoEmbed = new Discord.MessageEmbed()
             .setAuthor(`${APIUser.username}'s Information`,APIUser.displayAvatarURL({dynamic:true,size:512}))
             .addField('User Info',UserInfo_User.join('\n'),false)
