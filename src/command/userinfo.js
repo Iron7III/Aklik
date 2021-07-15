@@ -102,7 +102,7 @@ exports.run = async (client, message, args) => {
         ]
         if(member.user.system){
             MemberInfo_User.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
-        } else if(member.user.bot){
+        } else if(member.user.bot&&!member.user.system){
             if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
                 MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
