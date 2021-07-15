@@ -101,10 +101,10 @@ exports.run = async (client, message, args) => {
             `> **Badges ➜ **${member.user.flags!==null?member.user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
         if(member.user.bot){
-            if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
-                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
-            } else if(member.user.flags==null||!member.user.flags.has('TEAM_USER')){
+            if(member.user.flags==null||!member.user.flags.has('TEAM_USER')){
                 MemberInfo_User.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
+            } else if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
+                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
                 MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
             }
