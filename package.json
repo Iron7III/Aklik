@@ -12,7 +12,7 @@
     "dependencies": {
         "axios": "^0.21.0",
         "canvas": "^2.6.1",
-        "discord.js": "^13.0.0-dev.f7e420bf290f5404e8b99b8896c63e178f77bbfc",
+        "discord.js": "^13.0.0-dev.4206e35.1626350625",
         "express": "^4.17.1",
         "fortnite-api-com": "^2.2.1",
         "fortnite-api-io": "^1.8.0",
