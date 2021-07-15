@@ -156,7 +156,7 @@ exports.run = async (client, message, args) => {
         if(APIUser.system){
             UserInfo_User.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
         } else {
-            if(mAPIUser.flags==null||!APIUser.flags.has('VERIFIED_BOT')) {
+            if(APIUser.flags==null||!APIUser.flags.has('VERIFIED_BOT')) {
                 UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
                 UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
