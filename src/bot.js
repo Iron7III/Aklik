@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
     fetchAllMembers: true,
-    intents: Discord.Intents.ALL
+    intents: ['GUILDS','GUILD_MEMBERS','GUILD_BANS','GUILD_EMOJIS','GUILD_INTEGRATIONS','GUILD_WEBHOOKS','GUILD_INVITES','GUILD_VOICE_STATES','GUILD_PRESENCES','GUILD_MESSAGES','GUILD_MESSAGE_REACTIONS','GUILD_MESSAGE_TYPING','DIRECT_MESSAGES','DIRECT_MESSAGE_REACTIONS','DIRECT_MESSAGE_TYPING']
     //intents: Discord.Intents.NON_PRIVILEGED
 });
 const FortniteAPI = require("fortnite-api-com");
@@ -48,7 +48,7 @@ client.on("ready", async () => {
     })()
 })
 
-client.on("message", async message => {
+client.on("messageCreate", async message => {
     let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
