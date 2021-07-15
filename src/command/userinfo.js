@@ -14,6 +14,8 @@ exports.run = async (client, message, args) => {
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     let user = args[0]?client.users.cache.get(args[0]):client.users.cache.get(message.author.id);
+    var APIUser = await client.users.fetch(args[0],{cache: false})
+    console.log(APIUser)
     let _badges = {
         'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
         'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
@@ -25,7 +27,6 @@ exports.run = async (client, message, args) => {
         'BUGHUNTER_LEVEL_1': client.emojis.cache.get('864133587875266602'),
         'BUGHUNTER_LEVEL_2': client.emojis.cache.get('864133588126531604'),
         'EARLY_VERIFIED_BOT_DEVELOPER': client.emojis.cache.get('864133588152746000'),
-        'VERIFIED_BOT': '<:verified:753442204541911081>',
         'DISCORD_CERTIFIED_MODERATOR': client.emojis.cache.get('864133588119060481')
     }
     let _status = {
@@ -87,14 +88,15 @@ exports.run = async (client, message, args) => {
             `> **Booster ➜ **\`${member.premiumSince!=null?`Boosting [${member.premiumSince.getDate()>9?member.premiumSince.getDate():`0${member.premiumSince.getDate()}`}-${member.premiumSince.getMonth()>9?member.premiumSince.getMonth():`0${member.premiumSince.getMonth()+1}`}-${member.premiumSince.getFullYear()}\` **|** \`${member.premiumSince.getHours()>9?member.premiumSince.getHours():`0${member.premiumSince.getHours()}`}:${member.premiumSince.getMinutes()>9?member.premiumSince.getMinutes():`0${member.premiumSince.getMinutes()}`}:${member.premiumSince.getSeconds()>9?member.premiumSince.getSeconds():`0${member.premiumSince.getSeconds()}`}]`:`Not Boosting`}\``,
             `> **Joined ➜ **\`${member.joinedAt.getDate()>9?member.joinedAt.getDate():`0${member.joinedAt.getDate()}`}-${member.joinedAt.getMonth()>9?member.joinedAt.getMonth():`0${member.joinedAt.getMonth()+1}`}-${member.joinedAt.getFullYear()}\` **|** \`${member.joinedAt.getHours()>9?member.joinedAt.getHours():`0${member.joinedAt.getHours()}`}:${member.joinedAt.getMinutes()>9?member.joinedAt.getMinutes():`0${member.joinedAt.getMinutes()}`}:${member.joinedAt.getSeconds()>9?member.joinedAt.getSeconds():`0${member.joinedAt.getSeconds()}`}\``,
             `> **Permissions ➜ **${member.permissions!==null?member.permissions.toArray().map(p => `\`${_permissions[p]}\``).join(' '):`\`No permissions\``}`,
-            `> **Roles ➜ [\`${member._roles.length+1}\`]**${member.roles.cache.map(r => r).join(' ')}`
+            `> **Roles ➜ [\`${member._roles.length+1}\`]** ${member.roles.cache.map(r => r).join(' ')}`
         ]
+        console.log(member.presence)
         var MemberInfo_User = [
             `> **Username ➜ **\`${member.user.username}\``,
             `> **Discriminator ➜ **\`${member.user.discriminator}\``,
             `> **Mention ➜ **<@${member.id}>`,
             `> **ID ➜ **\`${member.id}\``,
-            `> **Platforms ➜ **${member.presence.clientStatus!=null&&member.presence.clientStatus.mobile?`${client.emojis.cache.get('858403427428335636')}`:client.emojis.cache.get('858406136033837126')} ${member.presence.clientStatus!=null&&member.presence.clientStatus.desktop?`${client.emojis.cache.get('858403427473948712')}`:client.emojis.cache.get('858406136046682163')} ${member.presence.clientStatus!=null&&member.presence.clientStatus.web?`${client.emojis.cache.get('858403427407495168')}`:client.emojis.cache.get('858406136121524225')}`,
+            `> **Platforms ➜ **${member.presence!==null&&member.presence.clientStatus.mobile?client.emojis.cache.get('858403427428335636'):client.emojis.cache.get('858406136033837126')} ${member.presence!==null&&member.presence.clientStatus.desktop?client.emojis.cache.get('858403427473948712'):client.emojis.cache.get('858406136046682163')} ${member.presence!==null&&member.presence.clientStatus.web?client.emojis.cache.get('858403427407495168'):client.emojis.cache.get('858406136121524225')}`,
             `> **Registered ➜ **<t:${(member.user.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(member.user.createdAt.getTime()/1000).toFixed(0)}:T> <t:${(member.user.createdAt.getTime()/1000).toFixed(0)}:R>`,
             `> **Badges ➜ **${member.user.flags!==null?member.user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
@@ -109,55 +111,77 @@ exports.run = async (client, message, args) => {
             .setAuthor(`${member.user.username}'s Information`,member.user.displayAvatarURL({dynamic:true,size:512}))
             .addField('User Info',MemberInfo_User.join('\n'),false)
             .addField('Member Info',MemberInfo_Member.join('\n'),false)
-            .addField('Status',`> **${_status[member.presence.status].displayName}**`,false)
-            .setColor(_status[member.presence.status].color)
+            .addField('Status',`> **${member.presence!==null?_status[member.presence.status].displayName:_status['offline'].displayName}**`,false)
+            .setColor(member.presence!==null?_status[member.presence.status].color:_status['offline'].color)
             .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
-        if(member.presence.activities){
-            member.presence.activities.map(a => {
-                let _activities = []
-                if(a.details!==null&&a.state!==null){
-                    _activities.push(`> **${a.details}**`,`> **${a.state}**`,`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
-                }
-                if(a.details!==null&&a.state===null){
-                    _activities.push(`> **${a.details}**`,`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
-                }
-                if(a.details===null&&a.state!==null){
-                    _activities.push(`> **${a.state}**`,`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
-                }
-                if(a.details===null&&a.state===null){
-                    _activities.push(`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
-                }
-                MemberInfoEmbed.addField(`${a.name}`, `${_activities.join('\n')}`)
-            })
+        if(member.presence!==null){
+            if(member.presence.activities){
+                member.presence.activities.map(a => {
+                    let _activities = []
+                    if(a.details!==null&&a.state!==null){
+                        _activities.push(`> **${a.details}**`,`> **${a.state}**`,`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
+                    }
+                    if(a.details!==null&&a.state===null){
+                        _activities.push(`> **${a.details}**`,`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
+                    }
+                    if(a.details===null&&a.state!==null){
+                        _activities.push(`> **${a.state}**`,`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
+                    }
+                    if(a.details===null&&a.state===null){
+                        _activities.push(`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
+                    }
+                    MemberInfoEmbed.addField(`${a.name}`, `${_activities.join('\n')}`)
+                })
+            }
         }
-        message.channel.send({embed: MemberInfoEmbed})
-    } else if(user){
+        client.api.channels(message.channel.id).messages.post({
+            type: 1,
+            data: {
+                content: ' ',
+                embed: MemberInfoEmbed,
+                components: null
+            }
+        })
+    } else if(APIUser){
         var UserInfo_User = [
-            `> **Username ➜ **\`${user.username}\``,
-            `> **Discriminator ➜ **\`${user.discriminator}\``,
-            `> **Mention ➜ **<@${user.id}>`,
-            `> **ID ➜ **\`${user.id}\``,
-            `> **Registered ➜ **<t:${(user.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(user.createdAt.getTime()/1000).toFixed(0)}:T> <t:${(user.createdAt.getTime()/1000).toFixed(0)}:R>`,
-            `> **Badges ➜ **${user.flags!==null?user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
+            `> **Username ➜ **\`${APIUser.username}\``,
+            `> **Discriminator ➜ **\`${APIUser.discriminator}\``,
+            `> **Mention ➜ **<@${APIUser.id}>`,
+            `> **ID ➜ **\`${APIUser.id}\``,
+            `> **Registered ➜ **<t:${(APIUser.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(APIUser.createdAt.getTime()/1000).toFixed(0)}:T> <t:${(APIUser.createdAt.getTime()/1000).toFixed(0)}:R>`,
+            `> **Badges ➜ **${APIUser.flags!==null?APIUser.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
-        console.log(`${user.createdAt.getDate()>9?user.createdAt.getDate():`0${user.createdAt.getDate()}`}-${user.createdAt.getMonth()>9?user.createdAt.getMonth():`0${user.createdAt.getMonth()+1}`}-${user.createdAt.getFullYear()} ${user.createdAt.getHours()>12?`0${user.createdAt.getHours()-12}`:user.createdAt.getHours()}:${user.createdAt.getMinutes()>9?user.createdAt.getMinutes():`0${user.createdAt.getMinutes()}`}:${user.createdAt.getSeconds()>9?user.createdAt.getSeconds():`0${user.createdAt.getSeconds()}`} ${user.createdAt.getHours()>12?'PM':'PM'}`)
-        if(user.bot){
-            if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
-                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
+        if(APIUser.bot){
+            if(APIUser.flags==null||!APIUser.flags.has('VERIFIED_BOT')) {
+                UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
-                MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
+                UserInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
             }
         }
         const UserInfoEmbed = new Discord.MessageEmbed()
-            .setAuthor(`${user.username}'s Information`,user.displayAvatarURL({dynamic:true,size:512}))
+            .setAuthor(`${APIUser.username}'s Information`,APIUser.displayAvatarURL({dynamic:true,size:512}))
             .addField('User Info',UserInfo_User.join('\n'),false)
             .setColor(_status["offline"].color)
-            .setThumbnail(user.displayAvatarURL({dynamic:true,size:1024}))
-        message.channel.send({embed: UserInfoEmbed})
+            .setThumbnail(APIUser.displayAvatarURL({dynamic:true,size:512}))
+        client.api.channels(message.channel.id).messages.post({
+            type: 1,
+            data: {
+                content: ' ',
+                embed: UserInfoEmbed,
+                components: null
+            }
+        })
     } else if(!member&&!user){
         const ErrorEmbed = new Discord.MessageEmbed()
             .setAuthor(`I don't have any data about this user.`,assets.error)
             .setColor('#ED4245')
-        message.channel.send({embed: ErrorEmbed})
+        client.api.channels(message.channel.id).messages.post({
+            type: 1,
+            data: {
+                content: ' ',
+                embed: ErrorEmbed,
+                components: null
+            }
+        })
     }
 }
