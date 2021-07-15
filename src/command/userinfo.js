@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     let user = args[0]?client.users.cache.get(args[0]):client.users.cache.get(message.author.id);
-    var APIUser = await client.users.fetch(args[0],{cache: false})
+    var APIUser = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false})
     console.log(APIUser)
     let _badges = {
         'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
