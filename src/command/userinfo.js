@@ -100,14 +100,14 @@ exports.run = async (client, message, args) => {
             `> **Registered ➜ **<t:${(member.user.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(member.user.createdAt.getTime()/1000).toFixed(0)}:T> <t:${(member.user.createdAt.getTime()/1000).toFixed(0)}:R>`,
             `> **Badges ➜ **${member.user.flags!==null?member.user.flags.toArray().map(b => _badges[b]).join(' '):`\`No badges\``}`
         ]
-        if(member.user.bot){
+        if(member.user.system){
+            MemberInfo_User.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
+        } else if(member.user.bot){
             if(member.user.flags==null||!member.user.flags.has('VERIFIED_BOT')) {
                 MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
             } else {
                 MemberInfo_User.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
             }
-        } else if(member.user.system){
-            MemberInfo_User.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
         }
         const MemberInfoEmbed = new Discord.MessageEmbed()
             .setAuthor(`${member.user.username}'s Information`,member.user.displayAvatarURL({dynamic:true,size:512}))
