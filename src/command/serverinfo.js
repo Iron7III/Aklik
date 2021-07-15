@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     var date = new Date(guild.afkTimeout*1000)
     //> **Registered ➜ **
     let _verificationLevel = {
-        "NONE": "",
+        "NONE": "A",
         "LOW": "Low",
         "MEDIUM": "Medium",
         "HIGH": "(╯°□°）╯︵ ┻━┻",
@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
     let ServerInfo_General = [
         `> **Name ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
-        `> **Locale ➜ **\`${guild.locale}\``,
+        `> **Locale ➜ **\`${guild.preferredLocale}\``,
         `> **Members ➜ **\`${guild.memberCount}\``,
         `> **Owner ➜ **<@${guild.ownerId}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerId).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerId}\``,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
@@ -36,16 +36,16 @@ exports.run = async (client, message, args) => {
         ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Vanity URL ➜ *${guild.vanityURLCode} **|** \`${guild.vanityURLUses}\``)
     }
     if(guild.afkChannel){
-        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelID}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **AFK Channel ➜ **${guild.afkChannel} **|** \`${guild.afkChannelId}\``)
     }
     if(guild.rulesChannel){
-        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Rules Channel ➜ **${guild.rulesChannel} **|** \`${guild.rulesChannelID}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Rules Channel ➜ **${guild.rulesChannel} **|** \`${guild.rulesChannelId}\``)
     }
     if(guild.systemChannel){
-        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.systemChannel} **|** \`${guild.systemChannelID}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.systemChannel} **|** \`${guild.systemChannelId}\``)
     }
-    if(guild.publicUpdatesChannelID){
-        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.publicUpdatesChannel} **|** \`${guild.publicUpdatesChannelID}\``)
+    if(guild.publicUpdatesChannelId){
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.publicUpdatesChannel} **|** \`${guild.publicUpdatesChannelId}\``)
     }
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
@@ -53,8 +53,5 @@ exports.run = async (client, message, args) => {
         .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FEE75C')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
-    if(guild.description){
-        embed.setDescription(guild.description)
-    }
-    message.channel.send({embed: embed})
+    message.channel.send({embed: embed}).catch(err => console.log(err.stack))
 }
