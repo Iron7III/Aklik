@@ -15,6 +15,12 @@ exports.run = async (client, message, args) => {
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     var APIUser = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false})
     console.log(APIUser)
+    if(Discord.DiscordAPIError){
+        const ErrorEmbedT = new Discord.MessageEmbed()
+            .setAuthor(`I don't have any data about this user.`,assets.error)
+            .setColor('#ED4245')
+        message.channel.send({embeds:[ErrorEmbed]})
+    }
     let _badges = {
         'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
         'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
