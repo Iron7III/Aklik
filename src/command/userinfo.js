@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
         }
     }
     console.log(Discord.SnowflakeUtil.deconstruct(args[0]))
-    if(Discord.SnowflakeUtil.deconstruct(args[0]).timestamp>1420070400000){
+    if(Discord.SnowflakeUtil().deconstruct(args[0]).timestamp>1420070400000){
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
     var APIUser = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false})
     console.log(APIUser)
