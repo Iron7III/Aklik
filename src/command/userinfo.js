@@ -187,7 +187,6 @@ exports.run = async (client, message, args) => {
         const ErrorEmbed = new Discord.MessageEmbed()
             .setAuthor(`I don't have any data about this user.`,assets.error)
             .setColor('#ED4245')
-        console.log(e)
         client.api.channels(message.channel.id).messages.post({
             type: 1,
             data: {
