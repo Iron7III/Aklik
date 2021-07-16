@@ -47,6 +47,7 @@ exports.run = async (client, message, args) => {
             displayName: `${client.emojis.cache.get("864132044081594369")} Offline`
         }
     }
+    try {
     if(member){
         let _permissions = {
             'ADMINISTRATOR':  'Administrator',
@@ -111,6 +112,7 @@ exports.run = async (client, message, args) => {
                 }
             }
         }
+        const bannerData = await client.api.users(member.id).get()
         const MemberInfoEmbed = new Discord.MessageEmbed()
             .setAuthor(`${member.user.username}'s Information`,member.user.displayAvatarURL({dynamic:true,size:512}))
             .addField('User Info',MemberInfo_User.join('\n'),false)
@@ -118,6 +120,7 @@ exports.run = async (client, message, args) => {
             .addField('Status',`> **${member.presence!==null?_status[member.presence.status].displayName:_status['offline'].displayName}**`,false)
             .setColor(member.presence!==null?_status[member.presence.status].color:_status['offline'].color)
             .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
+            .setImage(`https://cdn.discordapp.com/banners/${member.id}/${bannerData.banner}.${bannerData.banner.startsWith('a_')?'gif':'png'}?size=512`)
         if(member.presence!==null){
             if(member.presence.activities){
                 member.presence.activities.map(a => {
@@ -179,10 +182,12 @@ exports.run = async (client, message, args) => {
                 components: null
             }
         })
-    } else if(!member&&!user){
+    }
+    } catch (e){
         const ErrorEmbed = new Discord.MessageEmbed()
             .setAuthor(`I don't have any data about this user.`,assets.error)
             .setColor('#ED4245')
+        console.log(e)
         client.api.channels(message.channel.id).messages.post({
             type: 1,
             data: {
@@ -191,5 +196,6 @@ exports.run = async (client, message, args) => {
                 components: null
             }
         })
+        message.channel.send({embeds:[ErrorEmbed]})
     }
 }
