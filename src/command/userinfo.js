@@ -13,7 +13,6 @@ exports.run = async (client, message, args) => {
         }
     }
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
-    let user = args[0]?client.users.cache.get(args[0]):client.users.cache.get(message.author.id);
     var APIUser = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false})
     console.log(APIUser)
     let _badges = {
@@ -112,7 +111,8 @@ exports.run = async (client, message, args) => {
                 }
             }
         }
-        const bannerData = await client.api.users(member.id).get()
+        const APIData = await client.api.users(member.id).get()
+        console.log(APIData)
         const MemberInfoEmbed = new Discord.MessageEmbed()
             .setAuthor(`${member.user.username}'s Information`,member.user.displayAvatarURL({dynamic:true,size:512}))
             .addField('User Info',MemberInfo_User.join('\n'),false)
@@ -120,7 +120,7 @@ exports.run = async (client, message, args) => {
             .addField('Status',`> **${member.presence!==null?_status[member.presence.status].displayName:_status['offline'].displayName}**`,false)
             .setColor(member.presence!==null?_status[member.presence.status].color:_status['offline'].color)
             .setThumbnail(member.user.displayAvatarURL({dynamic:true,size:1024}))
-            .setImage(`https://cdn.discordapp.com/banners/${member.id}/${bannerData.banner}.${bannerData.banner.startsWith('a_')?'gif':'png'}?size=512`)
+            .setImage(`https://cdn.discordapp.com/banners/${member.id}/${APIData.banner}.${APIData.banner.startsWith('a_')?'gif':'png'}?size=512`)
         if(member.presence!==null){
             if(member.presence.activities){
                 member.presence.activities.map(a => {
