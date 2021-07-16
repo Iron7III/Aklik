@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
         const ErrorEmbedT = new Discord.MessageEmbed()
             .setAuthor(`I don't have any data about this user.`,assets.error)
             .setColor('#ED4245')
-        message.channel.send({embeds:[ErrorEmbed]})
+        message.channel.send({embeds:[ErrorEmbedT]})
     }
     let _badges = {
         'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
