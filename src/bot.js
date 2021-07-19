@@ -53,7 +53,6 @@ client.on("messageCreate", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
-    var DevLogCommand;
     var s='+';
     try {
         let file = require(`./command/${cmd}.js`);
@@ -69,13 +68,14 @@ client.on("messageCreate", async message => {
             `> **Guild ➜** \`${message.guild.name}\` **|** \`${message.guild.id}\``,
             `> **Channel ➜** \`#${message.channel.name}\` **|** \`${message.channel.id}\``,
             `> **User ➜** <@${message.author.id}> **|** \`${message.author.id}\``,
-            `> **Date ➜** <t:${message.createdTimestamp}:d> **|** <t:${message.createdTimestamp}:T>`,
+            `> **Date ➜** <t:${(message.createdTimestamp/1000).toFixed(0)}:d> **|** <t:${(message.createdTimestamp/1000).toFixed(0)}:T>`,
             `> **Command ➜** **\`${prefix}\`**\`${cmd}\``,
-            `> **Arguments ➜** ${args?args.map(a=>`\`${a}\``).join(' '):'No arguments provided'}`
+            `> **Arguments ➜** ${args[0]?args.map(a=>`\`${a}\``).join(' '):'No arguments provided'}`
         ]
         const commandEmbed = new Discord.MessageEmbed()
-            .setAuthor('Command Executed','https://i.imgur.com/uEOCyZw.png')
+            .setAuthor('Command Executed',assets.command)
             .setDescription(_commandInfo.join('\n'))
+            .setColor('#FD3D26')
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
