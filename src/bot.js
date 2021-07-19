@@ -65,7 +65,17 @@ client.on("messageCreate", async message => {
     } finally {
         var today = new Date();
         var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`    
-        DevLogCommand = `${client.emojis.cache.get("852613781589852210")} **COMMAND USED**\n> \`\`\`\n> GUILD ➜ ${message.guild.name} | ${message.guild.id}\n> CHANNEL ➜ #${message.channel.name} | ${message.channel.id}\n> USER ➜ @${message.author.tag} | ${message.author.id}\n> DATE ➜ ${date}\n> CMD ➜ ${prefix}${cmd}\n> ARGS ➜ ${args[0]?args.map(a=>`${a}`).join(' '):'No arguments provided'}\n> \`\`\``;
+        var _commandInfo = [
+            `> **Guild ➜** \`${message.guild.name}\` **|** \`${message.guild.id}\``,
+            `> **Channel ➜** \`#${message.channel.name}\` **|** \`${message.channel.id}\``,
+            `> **User ➜** <@${message.author.id}> **|** \`${message.author.id}\``,
+            `> **Date ➜** <t:${message.createdTimestamp}:d> **|** <t:${message.createdTimestamp}:T>`,
+            `> **Command ➜** **\`${prefix}\`**\`${cmd}\``,
+            `> **Arguments ➜** ${args?args.map(a=>`\`${a}\``).join(' '):'No arguments provided'}`
+        ]
+        const commandEmbed = new Discord.MessageEmbed()
+            .setAuthor('Command Executed','https://i.imgur.com/uEOCyZw.png')
+            .setDescription(_commandInfo.join('\n'))
         const row = new Discord.MessageActionRow()
             .addComponents(
                 new Discord.MessageButton()
@@ -80,8 +90,8 @@ client.on("messageCreate", async message => {
         client.api.channels('853697754706739250').messages.post({
             type: 1,
             data: {
-                content: DevLogCommand,
-                embed: null,
+                content: ' ',
+                embeds: commandEmbed,
                 components: [
                     row
                 ]
