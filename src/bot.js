@@ -91,7 +91,7 @@ client.on("messageCreate", async message => {
             type: 1,
             data: {
                 content: ' ',
-                embeds: commandEmbed,
+                embeds: [commandEmbed],
                 components: [
                     row
                 ]
