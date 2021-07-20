@@ -160,6 +160,57 @@ client.on("guildDelete", (guild) => {
     }).catch(e => console.log(e))
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // LOGIN WITH "FORTNITE API BOT"
 //  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.-EUlDqnaKAX5TjQJS5AnJWLMG-s').catch(e => console.log(e));
 // LOGIN WITH "Feltax"

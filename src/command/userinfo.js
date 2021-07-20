@@ -21,6 +21,7 @@ exports.run = async (client, message, args) => {
             .setColor('#ED4245')
         message.channel.send({embeds:[ErrorEmbed0]})
         console.log(error)
+        return
     })
     console.log(APIUser)
     let _badges = {
@@ -205,5 +206,6 @@ exports.run = async (client, message, args) => {
         //    }
         //})
         message.channel.send({embeds:[ErrorEmbed1]})
+        return
     }
 }
