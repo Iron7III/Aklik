@@ -15,7 +15,13 @@ exports.run = async (client, message, args) => {
     console.log(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id))
     if(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id).timestamp>1420070400000){
     let member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
-    var APIUser = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false})
+    var APIUser = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false}).catch(error=>{
+        const ErrorEmbed0 = new Discord.MessageEmbed()
+            .setAuthor(`This user doesn't exist.`,assets.error)
+            .setColor('#ED4245')
+        message.channel.send({embeds:[ErrorEmbed0]})
+        console.log(error)
+    })
     console.log(APIUser)
     let _badges = {
         'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
@@ -187,18 +193,17 @@ exports.run = async (client, message, args) => {
         })
     }
     } else {
-        const ErrorEmbed = new Discord.MessageEmbed()
+        const ErrorEmbed1 = new Discord.MessageEmbed()
             .setAuthor(`I don't have any data about this user.`,assets.error)
             .setColor('#ED4245')
-        client.api.channels(message.channel.id).messages.post({
-            type: 1,
-            data: {
-                content: ' ',
-                embed: ErrorEmbed,
-                components: null
-            }
-        })
-        message.channel.send({embeds:[ErrorEmbed]})
+        //client.api.channels(message.channel.id).messages.post({
+        //    type: 1,
+        //    data: {
+        //        content: ' ',
+        //        embed: ErrorEmbed,
+        //        components: null
+        //    }
+        //})
+        message.channel.send({embeds:[ErrorEmbed1]})
     }
-    //Change
 }
