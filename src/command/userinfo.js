@@ -25,9 +25,9 @@ exports.run = async (client, message, args) => {
     })
     console.log(APIUser)
     let _badges = {
-        'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802'),
         'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
         'PARTNERED_SERVER_OWNER': client.emojis.cache.get('864133588165722152'),
+        'DISCORD_CERTIFIED_MODERATOR': client.emojis.cache.get('864133588119060481'),
         'HYPESQUAD_EVENTS': client.emojis.cache.get('864133588328644618'),
         'HOUSE_BRAVERY': client.emojis.cache.get('864133587908689931'),
         'HOUSE_BRILLIANCE': client.emojis.cache.get('864133588173062184'),
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
         'BUGHUNTER_LEVEL_1': client.emojis.cache.get('864133587875266602'),
         'BUGHUNTER_LEVEL_2': client.emojis.cache.get('864133588126531604'),
         'EARLY_VERIFIED_BOT_DEVELOPER': client.emojis.cache.get('864133588152746000'),
-        'DISCORD_CERTIFIED_MODERATOR': client.emojis.cache.get('864133588119060481')
+        'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802')
     }
     let _status = {
         'online': {
