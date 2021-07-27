@@ -5,7 +5,6 @@ const Discord = require("discord.js");
 exports.run = async (client, message, args) => {
     const guild = message.guild;
     console.log(guild)
-    console.log(guild.bans.cache)
     var date = new Date(guild.afkTimeout*1000)
     //> **Registered ➜ **
     let _verificationLevel = {
@@ -32,6 +31,7 @@ exports.run = async (client, message, args) => {
         `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``,
         `> **AFK Timeout ➜ **\`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``
     ]
+    console.log(guild.bans.cache.map(a=>a))
     if(guild.vanityURLCode){
         ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Vanity URL ➜ *${guild.vanityURLCode} **|** \`${guild.vanityURLUses}\``)
     }
