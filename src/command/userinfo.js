@@ -122,10 +122,10 @@ exports.run = async (client, message, args) => {
             }
         }
         let UserInfoBase = new Discord.MessageEmbed()
-        .setAuthor(`${User.username}'s Information`,`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`)
+        .setAuthor(`${User.username}'s Information`,APIUser.avatar!==null?`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`:User.defaultAvatarURL)
         .addField('User Info',UserInfo.join('\n'),false)
         .setColor(Status["offline"].color)
-        .setThumbnail(`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`)
+        .setThumbnail(APIUser.avatar!==null?`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`:User.defaultAvatarURL)
         const Banner = new Discord.MessageEmbed()
         .setColor(Status["offline"].color)
         if(Member){
