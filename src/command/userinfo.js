@@ -97,7 +97,7 @@ exports.run = async (client, message, args) => {
             }
         }
         var UserBadges = User.flags.toArray().map(b => Badges[b]);
-        if(APIUser.avatar.startsWith('a_'||APIUser.banner.startsWith('a_'))){
+        if(APIUser.avatar.startsWith('a_')||APIUser.banner.startsWith('a_')){
             UserBadges.push(client.emojis.cache.get('867772736651001926'))
         }
         var UserInfo = [
