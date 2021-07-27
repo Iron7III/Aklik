@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
         `> **Boost Count ➜ **\`${guild.premiumSubscriptionCount}\``
     ]
     let ServerInfo_Moderation = [
-        `> **Bans ➜ **\`${guild.bans.cache.lenght}\``,
+        `> **Bans ➜ **\`${guild.bans.cache.size}\``,
         `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``,
         `> **AFK Timeout ➜ **\`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``
     ]
@@ -45,7 +45,7 @@ exports.run = async (client, message, args) => {
         ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.systemChannel} **|** \`${guild.systemChannelId}\``)
     }
     if(guild.publicUpdatesChannelId){
-        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **System Channel ➜ **${guild.publicUpdatesChannel} **|** \`${guild.publicUpdatesChannelId}\``)
+        ServerInfo_Moderation.splice(ServerInfo_General.length,0,`> **Community Updates Channel ➜ **${guild.publicUpdatesChannel} **|** \`${guild.publicUpdatesChannelId}\``)
     }
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
