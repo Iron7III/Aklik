@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
         `> **Boost Count ➜ **\`${guild.premiumSubscriptionCount}\``
     ]
     let ServerInfo_Moderation = [
-        `> **Bans ➜ **\`${guild.bans.cache.size}\``,
+        `> **Bans ➜ **\`${guild.bans.cache.size+1}\``,
         `> **Verification Level ➜ **\`${_verificationLevel[guild.verificationLevel]}\``,
         `> **AFK Timeout ➜ **\`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``
     ]
