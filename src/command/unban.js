@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     const UnbanEmbed = new Discord.MessageEmbed();
     if(!args[0]){
         UnbanEmbed.setAuthor(`Mention a user or write a valid ID.`,assets.mention).setColor('#ED4245')

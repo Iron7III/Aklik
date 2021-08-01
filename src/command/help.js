@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args, Fortnite) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     console.log(client.uptime)
     const prefix = 'f-'
     let commands = [

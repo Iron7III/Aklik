@@ -1,17 +1,15 @@
 const Discord = require("discord.js");
-const FortniteAPI = require("fortnite-api-io");
-const fortniteAPI = new FortniteAPI("1c43003c-41511d50-7062e583-6ea047a7")
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
-exports.run = async (client, message, args, Fortnite) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     var x;
     if(args[0]==='-n') x = {name: args.slice(1).join(/ +/g), language: "en"};
     if(args[0]==='-i') x = {id: args[1], language: "en"};
     if(args[0]!=='-n'&&args[0]!=='-i') return;
-    Fortnite.CosmeticsSearch(x).then(async res => {
+    FortniteAPIComClient.CosmeticsSearch(x).then(async res => {
         console.log(res.data)
         console.log('---------------------')
-        const item = await fortniteAPI.getItemDetails(res.data.id,"en");
+        const item = await FortniteAPIIoClient.v2.getItemDetails(res.data.id,"en");
         var i = item.item;
         console.log(i)
         console.log(i.price)
@@ -104,7 +102,7 @@ exports.run = async (client, message, args, Fortnite) => {
                     var t = ctx.measureText(n);
                     ctx.fillText(n, 430-t.width, 502)
                     const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${res.data.id}.jpg`)
-                message.channel.send(attach)
+                message.channel.send({files:[attach]})
 /*
 const embed = new Discord.RichEmbed()
 .setAuthor(message.author.tag, message.author.displayAvatarURL)

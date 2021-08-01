@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     let days = 0;
     let week = 0;
     let uptime = ``;
@@ -64,7 +63,7 @@ exports.run = async (client, message, args) => {
     ]
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${client.user.username}'s Stats Information`,client.user.displayAvatarURL({dynamic:true,size:512}))
-        .setDescription('Soy un BOT en constante desarrollo, tengo algunas funciones sobre Fortnite y mi principal funcion es la Moderacion, aunque tenga pocos comandos soy actualizado constantemente con fixes y mejoras, no te pierdas ninguna y disfruta de todas mis funciones :)')
+        .setDescription('Im a Discord BOT for moderation and other some uses.')
         .setColor('#FD3D26')
     Stats.map(o => embed.addField(o.header,o.list.join('\n'),true))
     const row = new Discord.MessageActionRow()

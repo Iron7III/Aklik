@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
-exports.run = async (client, message, args, Fortnite) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
   var GameModeType = args[0];
   var lang = args[1];
   

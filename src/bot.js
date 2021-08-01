@@ -5,24 +5,26 @@ const client = new Discord.Client({
     intents: ['GUILDS','GUILD_MEMBERS','GUILD_BANS','GUILD_EMOJIS','GUILD_INTEGRATIONS','GUILD_WEBHOOKS','GUILD_INVITES','GUILD_VOICE_STATES','GUILD_PRESENCES','GUILD_MESSAGES','GUILD_MESSAGE_REACTIONS','GUILD_MESSAGE_TYPING','DIRECT_MESSAGES','DIRECT_MESSAGE_REACTIONS','DIRECT_MESSAGE_TYPING']
     //intents: Discord.Intents.NON_PRIVILEGED
 });
-const FortniteAPI = require("fortnite-api-com");
+const FortniteAPICom = require("fortnite-api-com");
 const config = {
     apikey: "",
     language: "en"
 };
-var Fortnite = new FortniteAPI(config);
+var FortniteAPIComClient = new FortniteAPICom(config);
+const FortniteAPIIo = require("fortnite-api-io");
+const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7")
 const {assets} = require('./assets.json')
 
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
     var a = await client.api.users('438390132538605589').get();
     console.log(a)
-    const D = new Date();
-    var _date = Date.now()/1000;
+    var UserDate = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
-        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **<t:${_date.toFixed(0)}:d> **|** <t:${_date.toFixed(0)}:T>`)
+        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **<t:${UserDate.toFixed(0)}:d> **|** <t:${UserDate.toFixed(0)}:T>`)
         .setColor('#FD3D26')
+    client.channels.cache.get()
     client.api.channels('853697844333772820').messages.post({
         type: 1,
         data: {
@@ -56,7 +58,7 @@ client.on("messageCreate", async message => {
     var s='+';
     try {
         let file = require(`./command/${cmd}.js`);
-        file.run(client, message, args, Fortnite, {assets});
+        file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets});
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => client.setTimeout(() => msg.delete(), 5000))
         console.log(e.stack),
@@ -148,68 +150,8 @@ client.on("guildDelete", (guild) => {
             .setStyle('LINK')
             .setURL(`https://discord.gg/`)
     )
-    client.api.channels('853697886335008808').messages.post({
-        type: 1,
-        data: {
-            content: DevLogGuildDelete,
-            embed: null,
-            components: [
-                row
-            ]
-        }
-    }).catch(e => console.log(e))
+    client.channels.cache.get('853697886335008808').send({embeds:[DevLogGuildDelete],components:[row]}).catch(e=>console.log(e))
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // LOGIN WITH "FORTNITE API BOT"
 //  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.-EUlDqnaKAX5TjQJS5AnJWLMG-s').catch(e => console.log(e));

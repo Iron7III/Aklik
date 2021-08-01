@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     function getMemberFromMention(mention) {
         if (!mention) return;
         if (mention.startsWith('<@') && mention.endsWith('>')) {
@@ -13,8 +12,8 @@ exports.run = async (client, message, args) => {
         }
     }
     console.log(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id))
-
-    if(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id).timestamp<1420070400000){
+    console.log(1420070400000-1)
+    if(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id).timestamp<=1420070400000){
         const InvalidSnowflakeUserId = new Discord.MessageEmbed()
             .setAuthor(`Write a valid ID.`,assets.error)
             .setColor('#ED4245')
@@ -97,9 +96,15 @@ exports.run = async (client, message, args) => {
             }
         }
         var UserBadges = User.flags.toArray().map(b => Badges[b]);
-        if(APIUser.avatar!==null||APIUser.banner!==null){
-            if(APIUser.avatar.startsWith('a_')||APIUser.banner.startsWith('a_')){
+        if(APIUser.avatar!==null){
+            if(APIUser.avatar.startsWith('a_')){
                 UserBadges.push(client.emojis.cache.get('867772736651001926'))
+            } else {
+                if(APIUser.banner!==null){
+                    if(APIUser.banner.startsWith('a_')){
+                        UserBadges.push(client.emojis.cache.get('867772736651001926'))
+                    }
+                }
             }
         }
         var UserInfo = [

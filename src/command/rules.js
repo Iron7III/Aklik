@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     if(message.author.id!=='438390132538605589') return;
     message.delete()
 //==Rules Doesn't Exist==//

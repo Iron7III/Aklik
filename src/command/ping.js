@@ -1,13 +1,12 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args, Fortnite) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     const PingEmbed = new Discord.MessageEmbed()
         .setDescription(`Ping...`)
-        .setColor("#57F287");
-    const m = await message.channel.send({embed: PingEmbed});
+        .setColor("#FD3D26");
+    const m = await message.channel.send({embeds: [PingEmbed]});
     const FinalPingEmbed = new Discord.MessageEmbed()
         .setDescription(`**Ping: \`${Date.now()-m.createdTimestamp}\`ms | \`${Math.round(client.ws.ping)}\`ms**`)
-        .setColor("#57F287");
-    m.edit({embed: FinalPingEmbed});
+        .setColor("#FD3D26");
+    m.edit({embeds: [FinalPingEmbed]});
 };

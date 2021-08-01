@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const {assets} = require('../assets.json')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     let bulk = parseInt(args[0]);
     const embed = new Discord.MessageEmbed()
     if(!message.member.permissions.has('MANAGE_MESSAGES')){

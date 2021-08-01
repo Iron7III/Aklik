@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-exports.run = async (client, message, args, Fortnite) => {
+exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
     const embed = new Discord.MessageEmbed()
         .setTitle('**ESTO ES UNA VERSION BETA Y NO FUNCIONA CORRECTAMENTE**')
         .setColor('RANDOM')
