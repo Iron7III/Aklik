@@ -39,6 +39,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         "TICKETED_EVENTS_ENABLED":"Ticketed Events",
         "VANITY_URL":"Vanity URL",
         "VERIFIED":"Verified",
+        "THREADS_ENABLED":"Threads",
         "VIP_REGIONS":"VIP Regions",
         "WELCOME_SCREEN_ENABLED":"Welcome Screen",
     }
@@ -50,7 +51,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         `> **Owner ➜ **<@${guild.ownerId}> ${client.emojis.cache.get('860997112434786315')} ${message.channel.guild.members.cache.get(guild.ownerId).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerId}\``,
         `> **Maximum Members ➜ **\`${guild.maximumMembers}\``,
         `> **Maximum Presences ➜ **\`${guild.maximumPresences!=null?guild.maximumPresences:`∞`}\``,
-        `> **Created ➜ **\` \``,
+        `> **Created ➜ **<t:${(guild.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(guild.createdAt.getTime()/1000).toFixed(0)}:T> (<t:${(guild.createdAt.getTime()/1000).toFixed(0)}:R>)`,
     ]
     let ServerInfo_BoostStatus = [
         `> **Boost Tier ➜ **\`${PremiumTier[guild.premiumTier]}\``,
@@ -58,7 +59,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
     ]
     let ServerInfo_Moderation = [
         `> **Verification Level ➜ **\`${VerificationLevel[guild.verificationLevel]}\``,
-        `> **AFK Timeout ➜ **\`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``,
+        `> **AFK Timeout ➜ **\`${date.getHours()-1>9?date.getHours()-1:`0${date.getHours()-1}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``,
         `> **AFK Channel ➜ **${guild.afkChannel?`${guild.afkChannel} **|** \`${guild.afkChannelId}\``:'\`None\`'}`,
         `> **Rules Channel ➜ **${guild.rulesChannel?`${guild.rulesChannel} **|** \`${guild.rulesChannelId}\``:'\`None\`'}`,
         `> **System Channel ➜ **${guild.systemChannel?`${guild.systemChannel} **|** \`${guild.systemChannelId}\``:'\`None\`'}`,
@@ -70,7 +71,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
         .addField('General Info',ServerInfo_General.join('\n'),false)
         .addField('Boost Status Info',ServerInfo_BoostStatus.join('\n'),false)
-        .addField('Features',guild.features.toArray().map(f => Features[f]),false)
+        .addField('Features',`> \`\`\`\n${guild.features.map(f => `> ${Features[f]}`).join('\n')}\n> \`\`\``,false)
         .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FD3D26')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
