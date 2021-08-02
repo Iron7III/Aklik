@@ -43,7 +43,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             new Discord.MessageButton()
                 .setLabel('Top.gg')
                 .setStyle('LINK')
-                .setEmoji(client.emojis.cache.get("851166313372319816"))
+                .setEmoji(client.emojis.cache.get("871896526820085760"))
                 .setURL(`https://top.gg/bot/${client.user.id}`),
             new Discord.MessageButton()
                 .setLabel('Vote')
