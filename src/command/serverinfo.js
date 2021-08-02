@@ -18,6 +18,30 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         "TIER_2":"Level 2",
         "TIER_3":"Level 3"
     }
+    let Features = {
+        "ANIMATED_ICON":"Animated Icon",
+        "BANNER":"Banner",
+        "COMMERCE":"Commerce",
+        "COMMUNITY":"Community",
+        "DISCOVERABLE":"Discoverable",
+        "FEATURABLE":"Featurable",
+        "INVITE_SPLASH":"Invite Splash",
+        "MEMBER_VERIFICATION_GATE_ENABLED":"Member Verification Gate",
+        "MONETIZATION_ENABLED":"Monetization",
+        "MORE_STICKERS":"More Stickers",
+        "NEWS":"News",
+        "PARTNERED":"Partnered",
+        "PREVIEW_ENABLED":"Preview",
+        "PRIVATE_THREADS":"Private Threads",
+        "RELAY_ENABLED":"Relay",
+        "SEVEN_DAY_THREAD_ARCHIVE":"Seven Day Thread Archive",
+        "THREE_DAY_THREAD_ARCHIVE":"Three Day Thread Archive",
+        "TICKETED_EVENTS_ENABLED":"Ticketed Events",
+        "VANITY_URL":"Vanity URL",
+        "VERIFIED":"Verified",
+        "VIP_REGIONS":"VIP Regions",
+        "WELCOME_SCREEN_ENABLED":"Welcome Screen",
+    }
     let ServerInfo_General = [
         `> **Name ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
@@ -33,7 +57,6 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         `> **Boost Count ➜ **\`${guild.premiumSubscriptionCount}\``
     ]
     let ServerInfo_Moderation = [
-        `> **Bans ➜ **`,
         `> **Verification Level ➜ **\`${VerificationLevel[guild.verificationLevel]}\``,
         `> **AFK Timeout ➜ **\`${date.getHours()>9?date.getHours():`0${date.getHours()}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``,
         `> **AFK Channel ➜ **${guild.afkChannel?`${guild.afkChannel} **|** \`${guild.afkChannelId}\``:'\`None\`'}`,
@@ -42,10 +65,12 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         `> **Community Updates Channel ➜ **${guild.publicUpdatesChannel?`${guild.publicUpdatesChannel} **|** \`${guild.publicUpdatesChannelId}\``:'\`None\`'}`,
         `> **Vanity URL ➜ **${guild.vanityURLCode?`${guild.vanityURLCode} **|** \`${guild.vanityURLUses}\``:'\`None\`'}`
     ]
+    console.log(guild.features)
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${guild.name}'s Information`,guild.iconURL({dynamic:true,size:512}))
         .addField('General Info',ServerInfo_General.join('\n'),false)
         .addField('Boost Status Info',ServerInfo_BoostStatus.join('\n'),false)
+        .addField('Features',guild.features.toArray().map(f => Features[f]),false)
         .addField('Moderation Info',ServerInfo_Moderation.join('\n'),false)
         .setColor('#FD3D26')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
