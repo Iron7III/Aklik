@@ -59,7 +59,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
     ]
     let ServerInfo_Moderation = [
         `> **Verification Level ➜ **\`${VerificationLevel[guild.verificationLevel]}\``,
-        `> **AFK Timeout ➜ **\`${date.getHours()-1>9?date.getHours()-1:`0${date.getHours()-1}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``,
+        `> **AFK Timeout ➜ **\`${(date.getHours()-1)>9?date.getHours()-1:`0${date.getHours()-1}`}:${date.getMinutes()>9?date.getMinutes():`0${date.getMinutes()}`}:${date.getSeconds()>9?date.getSeconds():`0${date.getSeconds()}`}\``,
         `> **AFK Channel ➜ **${guild.afkChannel?`${guild.afkChannel} **|** \`${guild.afkChannelId}\``:'\`None\`'}`,
         `> **Rules Channel ➜ **${guild.rulesChannel?`${guild.rulesChannel} **|** \`${guild.rulesChannelId}\``:'\`None\`'}`,
         `> **System Channel ➜ **${guild.systemChannel?`${guild.systemChannel} **|** \`${guild.systemChannelId}\``:'\`None\`'}`,
