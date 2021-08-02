@@ -41,23 +41,26 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
     const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
-                .setLabel('Information')
-                .setStyle('DANGER')
-                .setCustomId('information')
-                .setEmoji('851207714465906718')
-                .setDisabled(true),
+                .setLabel('Top.gg')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("851166313372319816"))
+                .setURL(`https://top.gg/bot/${client.user.id}`),
             new Discord.MessageButton()
-                .setLabel('Fortnite')
-                .setStyle('DANGER')
-                .setCustomId('fortnite')
-                .setEmoji('851207714465906718')
-                .setDisabled(true),
+                .setLabel('Vote')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("851169432113512477"))
+                .setURL(`https://top.gg/bot/${client.user.id}/vote`),
             new Discord.MessageButton()
-                .setLabel('Moderation')
-                .setStyle('DANGER')
-                .setCustomId('moderation')
-                .setEmoji('864133588119060481')
-                .setDisabled(true)
+                .setLabel('Add Me')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get('851173104838377502'))
+                .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=4294967287&scope=bot`),
+            new Discord.MessageButton()
+                .setLabel('GitHub')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get('856179417902350386'))
+                .setURL('https://github.com/Iron7III/Aklik')
+                .setDisabled(true),
         )
         client.api.channels(message.channel.id).messages.post({
             type: 1,
