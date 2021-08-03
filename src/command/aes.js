@@ -23,6 +23,6 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
     res.data.dynamicKeys.map(d => {
       embedAES.addField(`${d.pakFilename}`,`\`\`\`\n${d.key}\n\`\`\``)
     })
-    message.channel.send({content: ' ',embed: embedAES});
+    message.channel.send({embeds: [embedAES]});
   });
 };
