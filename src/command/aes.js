@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
-  Fortnite.AES().then(res => {
+  FortniteAPIComClient.AES().then(res => {
     const embedAES = new Discord.MessageEmbed()
       .setTitle(`**AES Information**`)
       .addField(

@@ -12,7 +12,6 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
     }
     console.log(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id))
-    console.log(1420070400000-1)
     if(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id).timestamp<=1420070400000){
         const InvalidSnowflakeUserId = new Discord.MessageEmbed()
             .setAuthor(`Write a valid ID.`,assets.error)

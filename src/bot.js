@@ -17,8 +17,6 @@ const {assets} = require('./assets.json')
 
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
-    var a = await client.api.users('438390132538605589').get();
-    console.log(a)
     var UserDate = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
@@ -55,17 +53,13 @@ client.on("messageCreate", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
-    var s='+';
     try {
         let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets});
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => client.setTimeout(() => msg.delete(), 5000))
-        console.log(e.stack),
-        s='-';
+        console.log(e.stack)
     } finally {
-        var today = new Date();
-        var date = `${today.getHours()+2>9?today.getHours()+2:`0${today.getHours()+2}`}:${today.getMinutes()>9?today.getMinutes():`0${today.getMinutes()}`}:${today.getSeconds()>9?today.getSeconds():`0${today.getSeconds()}`} | ${today.getDate()>9?today.getDate():`0${today.getDate()}`}-${today.getMonth()>9?today.getMonth():`0${today.getMonth()+4}`}-${today.getFullYear()}`    
         var _commandInfo = [
             `> **Guild ➜** \`${message.guild.name}\` **|** \`${message.guild.id}\``,
             `> **Channel ➜** \`#${message.channel.name}\` **|** \`${message.channel.id}\``,
