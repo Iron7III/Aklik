@@ -1,16 +1,6 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId) => {
-    function getMemberFromMention(mention) {
-        if (!mention) return;
-        if (mention.startsWith('<@') && mention.endsWith('>')) {
-            mention = mention.slice(2, -1);
-            if (mention.startsWith('!')) {
-                mention = mention.slice(1);
-            }
-            return message.channel.guild.members.cache.get(mention);
-        }
-    }
     function getIdFromMention(mention) {
         if (!mention) return;
         if (mention.startsWith('<@') && mention.endsWith('>')) {
@@ -32,7 +22,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         console.log(User)
         const APIUser = await client.api.users(args[0]?getIdFromMention(args[0])||args[0]:message.author.id).get();
         console.log(APIUser)
-        const Member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
+        const Member = args[0]?message.channel.guild.members.cache.get(getIdFromMention(args[0])||args[0]):message.channel.guild.members.cache.get(message.author.id);
         let Badges = {
             'DISCORD_EMPLOYEE': client.emojis.cache.get('864133588433371217'),
             'PARTNERED_SERVER_OWNER': client.emojis.cache.get('864133588165722152'),
