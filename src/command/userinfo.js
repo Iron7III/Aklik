@@ -11,16 +11,26 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             return message.channel.guild.members.cache.get(mention);
         }
     }
-    if(checkSnowflakeId(args[0]?args[0]:message.author.id)===false){
+    function getIdFromMention(mention) {
+        if (!mention) return;
+        if (mention.startsWith('<@') && mention.endsWith('>')) {
+            mention = mention.slice(2, -1);
+            if (mention.startsWith('!')) {
+                mention = mention.slice(1);
+            }
+            return mention;
+        }
+    }
+    if(checkSnowflakeId(args[0]?getIdFromMention(args[0])||args[0]:message.author.id)===false){
         const InvalidSnowflakeUserId = new Discord.MessageEmbed()
             .setAuthor(`Write a valid ID.`,assets.error)
             .setColor('#ED4245')
         message.channel.send({embeds:[InvalidSnowflakeUserId]})
         return
     } else {
-        const User = await client.users.fetch(args[0]?args[0]:message.author.id,{cache: false});
+        const User = await client.users.fetch(args[0]?getIdFromMention(args[0])||args[0]:message.author.id,{cache: false});
         console.log(User)
-        const APIUser = await client.api.users(args[0]?args[0]:message.author.id).get();
+        const APIUser = await client.api.users(args[0]?getIdFromMention(args[0])||args[0]:message.author.id).get();
         console.log(APIUser)
         const Member = args[0]?message.channel.guild.members.cache.get(args[0])||getMemberFromMention(args[0]):message.channel.guild.members.cache.get(message.author.id);
         let Badges = {
@@ -37,7 +47,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             'EARLY_SUPPORTER': client.emojis.cache.get('864140289492385802')
         }
         let Permissions = {
-            'ADMINISTRATOR':  'Administrator',
+            'ADMINISTRATOR': 'Administrator',
             'CREATE_INSTANT_INVITE': 'Create Instant Invite',
             'KICK_MEMBERS': 'Kick Members',
             'BAN_MEMBERS': 'Ban Members',
