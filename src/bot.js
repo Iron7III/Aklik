@@ -14,6 +14,15 @@ var FortniteAPIComClient = new FortniteAPICom(config);
 const FortniteAPIIo = require("fortnite-api-io");
 const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7")
 const {assets} = require('./assets.json')
+function checkSnowflakeId(ID) {
+    if(!ID) return;
+    if(Discord.SnowflakeUtil.deconstruct(ID).timestamp<=1420070400000){
+        return false;
+    } else {
+        console.log(Discord.SnowflakeUtil.deconstruct(ID));
+        return true;
+    }
+}
 
 client.on("ready", async () => {
     console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
@@ -55,7 +64,7 @@ client.on("messageCreate", async message => {
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
     try {
         let file = require(`./command/${cmd}.js`);
-        file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets});
+        file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId);
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => client.setTimeout(() => msg.delete(), 5000))
         console.log(e.stack)

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
+exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId) => {
     function getMemberFromMention(mention) {
         if (!mention) return;
         if (mention.startsWith('<@') && mention.endsWith('>')) {
@@ -11,8 +11,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             return message.channel.guild.members.cache.get(mention);
         }
     }
-    console.log(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id))
-    if(Discord.SnowflakeUtil.deconstruct(args[0]?args[0]:message.author.id).timestamp<=1420070400000){
+    if(checkSnowflakeId(args[0]?args[0]:message.author.id)===false){
         const InvalidSnowflakeUserId = new Discord.MessageEmbed()
             .setAuthor(`Write a valid ID.`,assets.error)
             .setColor('#ED4245')
