@@ -24,48 +24,50 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         minutes = 0;
     }
     uptime += `${days} Days, ${hours>9?hours:`0${hours}`}:${minutes>9?minutes:`0${minutes}`}:${seconds>9?seconds:`0${seconds}`}`;
-    let Stats=[
+    let Data = [
         {
-            "header": `Uptime`,
-            "list": [
-                `> \`${uptime}\``
+            header: `Stats`,
+            inline: true,
+            list: [
+                `> **Uptime ➜ **\`${uptime}\``,
+                `> **Guilds ➜ **\`${client.guilds.cache.size.toLocaleString()}\``,
+                `> **Users ➜ **\`${client.users.cache.size.toLocaleString()}\``,
+                `> **Channels ➜ **\`${client.channels.cache.size.toLocaleString()}\``,
+                `> **Emojis ➜ **\`${client.emojis.cache.size.toLocaleString()}\``
             ]
         },
         {
-            "header": `Servers | Users`,
-            "list": [
-                `> \`${client.guilds.cache.size.toLocaleString()}\` **|** \`${client.users.cache.size.toLocaleString()}\``
-            ]
-        },
-        {
-            "header": `Languages`,
-            "list": [
+            header: `Languages`,
+            inline: true,
+            list: [
                 `> **Node.js** ${client.emojis.cache.get("777182228987772958")}`,
                 `> **Git** ${client.emojis.cache.get("832355210885464066")}`
             ]
         },
         {
             header: `Dependencies`,
+            inline: false,
             list: [
-                `> **discord.js [\`v13.0.0-dev\`]** ${client.emojis.cache.get("777189460655341600")}`,
-                `> **axios [\`v0.21.0\`]** ${client.emojis.cache.get("777189460655341600")}`,
-                `> **express [\`v4.17.1\`]** ${client.emojis.cache.get("777189460655341600")}`,
-                `> **fortnite-api-com [\`v2.2.1\`]** ${client.emojis.cache.get("777189460655341600")}`
+                `> **discord.js ➜ **\`v13.0.0-dev\` ${client.emojis.cache.get("777189460655341600")}`,
+                `> **axios ➜ **\`v0.21.0\` ${client.emojis.cache.get("777189460655341600")}`,
+                `> **canvas ➜ **\`v2.6.1\` ${client.emojis.cache.get("777189460655341600")}`,
+                `> **fortnite-api-com ➜ **\`v2.2.1\` ${client.emojis.cache.get("777189460655341600")}`,
+                `> **fortnite-api-io ➜ **\`v1.9.0\` ${client.emojis.cache.get("777189460655341600")}`
             ]
         },
         {
             header: `Announcements`,
+            inline: false,
             list: [
-                `➜ ¡He sido añadido a [top.gg](https://top.gg/bot/${client.user.id})!`,
-                `➜ ¡En busca de los Intents perdidos...!`
+                `➜ ¡I have been added to [top.gg](https://top.gg/bot/${client.user.id})!`
             ]
         }
     ]
     const embed = new Discord.MessageEmbed()
-        .setAuthor(`${client.user.username}'s Stats Information`,client.user.displayAvatarURL({dynamic:true,size:512}))
+        .setAuthor(`${client.user.username}'s Information`,client.user.displayAvatarURL({dynamic:true,size:512}))
         .setDescription('Im a Discord BOT for moderation and other some uses.')
         .setColor('#FD3D26')
-    Stats.map(o => embed.addField(o.header,o.list.join('\n'),true))
+    Data.map(o => embed.addField(o.header,o.list.join('\n'),o.inline))
     const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
