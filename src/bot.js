@@ -75,7 +75,7 @@ client.on("messageCreate", async message => {
             `> **User ➜** <@${message.author.id}> **|** \`${message.author.id}\``,
             `> **Date ➜** <t:${(message.createdTimestamp/1000).toFixed(0)}:d> **|** <t:${(message.createdTimestamp/1000).toFixed(0)}:T>`,
             `> **Command ➜** **\`${prefix}\`**\`${cmd}\``,
-            `> **Arguments ➜** ${args[0]?args.map(a=>`\`${a}\``).join(' '):'No arguments provided'}`
+            `> **Arguments ➜** ${args[0]?args.map(a=>`\`${a}\``).join(' '):'\`No arguments provided\`'}`
         ]
         const commandEmbed = new Discord.MessageEmbed()
             .setAuthor('Command Executed',assets.command)
@@ -135,7 +135,7 @@ client.on("guildCreate", (guild) => {
         type: 1,
         data: {
             content: ' ',
-            embed: guildCreateEmbed,
+            embeds: [guildCreateEmbed],
             components: [
                 row
             ]
