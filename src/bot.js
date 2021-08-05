@@ -145,6 +145,12 @@ client.on("guildCreate", (guild) => {
 
 client.on("guildDelete", (guild) => {
     const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> \`\`\``;
+    const guildDeleteEmbed = new Discord.MessageEmbed()
+        .setAuthor(`Joined Server`,assets.guildCreate)
+        .setDescription(DevLogGuildDelete)
+        .setColor('#57F287')
+        .setThumbnail(guild.iconURL({dynamic:true,size:512}))
+        .setImage(guild.bannerURL())
     console.log('ME han expulsado de un servidor')
     const row = new Discord.MessageActionRow()
     .addComponents(
@@ -153,7 +159,7 @@ client.on("guildDelete", (guild) => {
             .setStyle('LINK')
             .setURL(`https://discord.gg/`)
     )
-    client.channels.cache.get('853697886335008808').send({embeds:[DevLogGuildDelete],components:[row]}).catch(e=>console.log(e))
+    client.channels.cache.get('853697886335008808').send({embeds:[guildDeleteEmbed],components:[row]}).catch(e=>console.log(e))
 })
 
 // LOGIN WITH "FORTNITE API BOT"
