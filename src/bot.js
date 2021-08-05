@@ -128,7 +128,7 @@ client.on("guildCreate", (guild) => {
         new Discord.MessageButton()
             .setLabel('LEAVE SERVER')
             .setStyle('DANGER')
-            .setCustomID('leave_server')
+            .setCustomId('leave_server')
             .setDisabled(true)
     )
     client.api.channels('853697886335008808').messages.post({
@@ -146,7 +146,7 @@ client.on("guildCreate", (guild) => {
 client.on("guildDelete", (guild) => {
     const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> \`\`\``;
     const guildDeleteEmbed = new Discord.MessageEmbed()
-        .setAuthor(`Joined Server`,assets.guildCreate)
+        .setAuthor(`Left Server`,assets.guildDelete)
         .setDescription(DevLogGuildDelete)
         .setColor('#57F287')
         .setThumbnail(guild.iconURL({dynamic:true,size:512}))
