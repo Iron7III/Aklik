@@ -162,7 +162,5 @@ client.on("guildDelete", (guild) => {
     client.channels.cache.get('853697886335008808').send({embeds:[guildDeleteEmbed],components:[row]}).catch(e=>console.log(e))
 })
 
-// LOGIN WITH "FORTNITE API BOT"
-//  client.login('Njg1OTE5ODQ1MjMzMTk3MTAw.XmPqog.-EUlDqnaKAX5TjQJS5AnJWLMG-s').catch(e => console.log(e));
 // LOGIN WITH "Feltax"
 client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.ReMH4ndYBbjqZVZrSqxhQ81VDdE').catch(e => console.log(e));
