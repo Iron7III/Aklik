@@ -48,7 +48,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             header: `Dependencies`,
             inline: false,
             list: [
-                `> **discord.js ➜ **\`v13.0.0-dev\` ${client.emojis.cache.get("777189460655341600")}`,
+                `> **discord.js ➜ **\`v13.0.1\` ${client.emojis.cache.get("777189460655341600")}`,
                 `> **axios ➜ **\`v0.21.0\` ${client.emojis.cache.get("777189460655341600")}`,
                 `> **canvas ➜ **\`v2.6.1\` ${client.emojis.cache.get("777189460655341600")}`,
                 `> **fortnite-api-com ➜ **\`v2.2.1\` ${client.emojis.cache.get("777189460655341600")}`,

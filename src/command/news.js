@@ -22,7 +22,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
           `No hay noticias del idioma o modo seleccionado.`
         );
       }
-      message.channel.send({ embed: embedNewsBR });
+      message.channel.send({ embeds: [embedNewsBR] });
     });
   } else if (GameModeType === "stw") {
     Fortnite.NewsSTW(lang).then(res => {
@@ -36,7 +36,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
           `No hay noticias del idioma o modo seleccionado.`
         );
       }
-      message.channel.send({ embed: embedNewsSTW });
+      message.channel.send({ embeds: [embedNewsSTW] });
     });
   } else if (GameModeType === "creative") {
     Fortnite.NewsCreative(lang).then(res => {
@@ -64,7 +64,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         .setColor(0x262326)
       message.channel.send({ embed: news });
 */
-      message.channel.send({ embed: embedNewsCreative });
+      message.channel.send({ embeds: [embedNewsCreative] });
     });
   }
 

@@ -20,7 +20,8 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                 `> **\`${prefix}aes\`**`,
                 `> **\`${prefix}shop\`** (Maintenance)`,
                 `> **\`${prefix}news\`** \`[br•stw•creative]\` \`[LANGUAGE]\``,
-                `> **\`${prefix}fnid\`** \`<COSMETIC_ID>\``
+                `> **\`${prefix}fnid\`** \`<COSMETIC_ID>\``,
+                `> **\`${prefix}fncard\`** \`<-i|-n>\` \`<COSMETIC_ID|NAME>\``
             ]
         },
         {
@@ -62,14 +63,5 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                 .setURL('https://github.com/Iron7III/Aklik')
                 .setDisabled(true),
         )
-        client.api.channels(message.channel.id).messages.post({
-            type: 1,
-            data: {
-                content: ' ',
-                embed: embed,
-                components: [
-                    row
-                ]
-            }
-        })
+        message.channel.send({embeds:[embed],components:[row]})
 }

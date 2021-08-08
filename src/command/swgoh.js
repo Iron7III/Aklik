@@ -2,7 +2,13 @@ const { default: axios } = require("axios");
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId) => {
-    if(args[0]==='player'){
+    if(!args[0]){
+        const NoSubCommand = new Discord.MessageEmbed()
+            .setAuthor(`Write a valid subcommand.`,assets.error)
+            .setDescription('')
+            .setColor('#ED4245')
+        message.channel.send({embeds: [NoSubCommand]})
+    } else if(args[0]==='player'){
         var player = args[1].replace('-', '').replace('-', '')
         axios.get(`https://swgoh.gg/api/player/${player}/`)
             .then(function (res) {

@@ -5,5 +5,5 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             .setTitle(args[0])
             .setImage(`http://fortnite-island-screenshots-live-cdn.ol.epicgames.com/screenshots/${args[0]}_${args[1]}.png`)
             .setColor("#bdecb6");
-        message.channel.send({embed: Island})
+        message.channel.send({embeds: [Island]})
 };

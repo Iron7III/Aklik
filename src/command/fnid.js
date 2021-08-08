@@ -7,14 +7,14 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             const ErrorEmbed = new Discord.MessageEmbed()
                 .setAuthor(`Write a cosmetic ID.`,client.emojis.cache.get('861325114694696960').url)
                 .setColor('#ED4245')
-            message.channel.send({embed: ErrorEmbed})
+            message.channel.send({embeds: [ErrorEmbed]})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
         }
         if(res==undefined){
             const ErrorEmbed2 = new Discord.MessageEmbed()
                 .setAuthor(`Write a valid cosmetic ID.`,client.emojis.cache.get('861325114694696960').url)
                 .setColor('#ED4245')
-            message.channel.send({embed: ErrorEmbed2})
+            message.channel.send({embeds: [ErrorEmbed2]})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
         }
         const embed = new Discord.MessageEmbed()
@@ -74,6 +74,6 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                 false
             )
         }
-        message.channel.send({ embed: embed });
+        message.channel.send({ embeds: [embed] });
     });
 };
