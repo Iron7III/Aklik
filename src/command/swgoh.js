@@ -80,5 +80,75 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             .catch(function (error) {
                 console.log(error);
             })
+    } else if(args[0]==='check'){
+        async function checkData(allyCode,character) {
+            var playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
+        }
+    } else if(args[0]==='character'){
+        var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
+        var characterData = characterListData.data.find(c => c.name.toLowerCase()===args.slice(1).join(' ').toLowerCase());
+        console.log(characterData)
+        var x = characterData;
+        function sortCategories(alignment,categories){
+            var perks = []
+            if(categories.includes('Galactic Legend')){
+                perks.splice(0,0,`> \`\`\`fix\n> ≜ Galactic Legend\n> \`\`\``)
+                categories.splice(1,1)
+                if(alignment==='Light Side'){
+                    perks.splice(1,0,`\`\`\`md\n> # Light Side\n> \`\`\``)
+                } else if(alignment==='Dark Side'){
+                    perks.splice(1,0,`\`\`\`diff\n> - Dark Side\n> \`\`\``)
+                }
+                if(categories.includes('Tank')===true){
+                    var l = categories.indexOf('Tank')
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
+                    categories.splice(l,1)
+                } else if(categories.includes('Support')===true){
+                    var l = categories.indexOf('Support')
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
+                    categories.splice(l,1)
+                } else if(categories.includes('Attacker')===true){
+                    var l = categories.indexOf('Attacker')
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
+                    categories.splice(l,1)
+                } else if(categories.includes('Healer')===true){
+                    var l = categories.indexOf('Healer')
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
+                    categories.splice(l,1)
+                }
+                categories.map(c => perks.splice(3,0,`\`\`\`diff\n> ⊹ ${c}\n> \`\`\``))
+            } else {
+                if(alignment==='Light Side'){
+                    perks.splice(0,0,`\`\`\`md\n# Light Side\n\`\`\``)
+                } else if(alignment==='Dark Side'){
+                    perks.splice(0,0,`\`\`\`diff\n- Dark Side\n\`\`\``)
+                }
+                if(categories.includes('Tank')===true){
+                    var l = categories.indexOf('Tank')
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
+                    categories.splice(l,1)
+                } else if(categories.includes('Support')===true){
+                    var l = categories.indexOf('Support')
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
+                    categories.splice(l,1)
+                } else if(categories.includes('Attacker')===true){
+                    var l = categories.indexOf('Attacker')
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
+                    categories.splice(l,1)
+                } else if(categories.includes('Healer')===true){
+                    var l = categories.indexOf('Healer')
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
+                    categories.splice(l,1)
+                }
+                categories.map(c => perks.splice(2,0,`\`\`\`diff\n⊹ ${c}\n\`\`\``))
+            }
+            return perks;
+        }
+        const embedData = new Discord.MessageEmbed()
+            .setAuthor(`${x.name}'s Information`,x.image)
+            .setDescription(`**${x.description}**`)
+            .addField('Perks',`${sortCategories(x.alignment,x.categories).join('')}`)
+            .setColor('#FD3D26')
+        message.channel.send({embeds: [embedData]})
     }
 }

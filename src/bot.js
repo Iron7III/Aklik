@@ -25,7 +25,7 @@ function checkSnowflakeId(ID) {
 }
 
 client.on("ready", async () => {
-    console.log("[" + client.user.username + "]>[INFO]>[STARTED]>[TESTING]");
+    console.log(`[${client.user.username}] Connected and ready up.`);
     var UserDate = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
@@ -65,8 +65,9 @@ client.on("messageCreate", async message => {
     try {
         let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId);
+        console.log(`[${client.user.username}] Used \'${cmd}\'.`);
     } catch (e) {
-        message.channel.send('Este comando no existe').then(msg => client.setTimeout(() => msg.delete(), 5000))
+        message.channel.send('Este comando no existe').then(msg => setTimeout(() => msg.delete(), 5000))
         console.log(e.stack)
     } finally {
         var _commandInfo = [

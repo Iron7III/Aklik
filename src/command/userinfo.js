@@ -15,7 +15,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         const InvalidSnowflakeUserId = new Discord.MessageEmbed()
             .setAuthor(`Write a valid ID.`,assets.error)
             .setColor('#ED4245')
-        message.channel.send({embeds:[InvalidSnowflakeUserId]})
+        message.channel.send({                              s:[InvalidSnowflakeUserId]})
         return
     } else {
         const User = await client.users.fetch(args[0]?getIdFromMention(args[0])||args[0]:message.author.id,{cache: false});
