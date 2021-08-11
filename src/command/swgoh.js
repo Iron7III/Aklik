@@ -144,11 +144,27 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             }
             return perks;
         }
+        var gearListData = await axios.get(`https://swgoh.gg/api/gear/`);
         const embedData = new Discord.MessageEmbed()
             .setAuthor(`${x.name}'s Information`,x.image)
             .setDescription(`**${x.description}**`)
-            .addField('Perks',`${sortCategories(x.alignment,x.categories).join('')}`)
+            .addField('Categories',`${sortCategories(x.alignment,x.categories).join('')}`,false)
+            .addField('Information',`> **Role ➜ **\`${x.role}\`\n> **Activate Shards ➜ **\`${x.activate_shard_count}\`${client.emojis.cache.get('874805488791994458')}\n> **Max. Power ➜ **\`${Intl.NumberFormat("es-ES").format(x.power)}\``,false)
             .setColor('#FD3D26')
+        /*x.gear_levels.map(async g => {
+            if(g.tier<13){
+                var gearLevels = {tier: g.tier,gear:[]}
+                g.gear.map(gd => {
+                    var gearData = gearListData.data.find(c => c.base_id===gd);
+                    gearLevels.gear.push(gearData.name)    
+                })
+                embedData.addField(`Tier ${gearLevels.tier}`,gearLevels.gear.map(g => `> **\`${g}\`**`).join('\n'),false)
+                console.log(gearLevels)
+                console.log('-----------------------')
+            } else {
+                return
+            }
+        })*/
         message.channel.send({embeds: [embedData]})
     }
 }
