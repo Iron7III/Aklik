@@ -74,7 +74,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         var glName = Name.data.find(n => n.base_id===ru.baseId);
                         GLData.addField(`${glName.name}`, `> **Gear Level ➜ **\`${ru.gearLevel}\`\n> **Relic Tier ➜ **\`${ru.relicTier}\``, true).setDescription('')
                     })
-                    message.channel.send({embeds:[GLData]}).then(msg => client.setTimeout(() => msg.edit({embeds:[GLData]}), 2000))
+                    message.channel.send({embeds:[GLData]}).then(msg => setTimeout(() => msg.edit({embeds:[GLData]}), 2000))
                 }
             })
             .catch(function (error) {
@@ -149,7 +149,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             .setAuthor(`${x.name}'s Information`,x.image)
             .setDescription(`**${x.description}**`)
             .addField('Categories',`${sortCategories(x.alignment,x.categories).join('')}`,false)
-            .addField('Information',`> **Role ➜ **\`${x.role}\`\n> **Activate Shards ➜ **\`${x.activate_shard_count}\`${client.emojis.cache.get('874805488791994458')}\n> **Max. Power ➜ **\`${Intl.NumberFormat("es-ES").format(x.power)}\``,false)
+            .addField('Information',`> **Role ➜ **\`${x.role}\`\n> **Activate Shards ➜ **\`${x.activate_shard_count}\`${client.emojis.cache.get('874939449946021920')}\n> **Max. Power ➜ **\`${Intl.NumberFormat("es-ES").format(x.power)}\``,false)
             .setColor('#FD3D26')
         /*x.gear_levels.map(async g => {
             if(g.tier<13){
