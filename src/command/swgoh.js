@@ -83,6 +83,11 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
     } else if(args[0]==='check'){
         async function checkData(allyCode,character) {
             var playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
+            var galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
+            var galacticLegend = galacticLegendsList.data.find(n => n.unitName===character)
+            galacticLegend.requiredUnits.map(async unit => {
+                playerData.units.find(u => u.data.base_id===unit.baseId)
+            })
         }
     } else if(args[0]==='character'){
         var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
