@@ -20,9 +20,9 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         false
       )
       .setColor("#FD3D26");
-    res.data.dynamicKeys.map(d => {
-      embedAES.addField(`${d.pakFilename}`,`\`\`\`\n${d.key}\n\`\`\``)
-    })
+    //res.data.dynamicKeys.map(d => {
+    //  embedAES.addField(`${d.pakFilename}`,`\`\`\`\n${d.key}\n\`\`\``)
+    //})
     message.channel.send({embeds: [embedAES]});
   });
 };
