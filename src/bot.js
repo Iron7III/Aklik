@@ -70,6 +70,10 @@ client.on("messageCreate", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     if(cmd===undefined||!message.content.startsWith(`${prefix}${cmd}`||message.channel.dm)) return;
+    if(!message.guild.me.permissionsIn(message.channel).has('EMBED_LINKS')){
+        message.channel.send({content:'I need \`Embed Links\` permission.'})
+        return;
+    }
     try {
         let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId);
