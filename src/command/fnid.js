@@ -1,21 +1,23 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
+    if(!args[0]){
+        const ErrorEmbed = new Discord.MessageEmbed()
+            .setAuthor(`Write a cosmetic ID.`,assets.error)
+            .setColor('#ED4245')
+        message.channel.send({embeds: [ErrorEmbed]})
+            .then(msg => setTimeout(() => msg.delete(), 5000))
+            return
+    }
     FortniteAPIComClient.CosmeticsSearchByID(args[0], "en").then(res => {
         console.log(res);
-        if(!args){
-            const ErrorEmbed = new Discord.MessageEmbed()
-                .setAuthor(`Write a cosmetic ID.`,assets.error)
-                .setColor('#ED4245')
-            message.channel.send({embeds: [ErrorEmbed]})
-                .then(msg => client.setTimeout(() => msg.delete(), 5000))
-        }
-        if(res.error){
+        if(res.error||res===false){
             const ErrorEmbed2 = new Discord.MessageEmbed()
                 .setAuthor(`Write a valid cosmetic ID.`,assets.error)
                 .setColor('#ED4245')
             message.channel.send({embeds: [ErrorEmbed2]})
-                .then(msg => client.setTimeout(() => msg.delete(), 5000))
+                .then(msg => setTimeout(() => msg.delete(), 5000))
+            return
         }
         let data = [
             `> **Id ➜ **\`${res.data.id}\``,
