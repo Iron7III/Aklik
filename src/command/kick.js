@@ -44,6 +44,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                                     .then(msg => setTimeout(() => msg.delete(), 5000))
                                 console.error(err);
                             })
+                            //awdaw
                     }
                 }
             }
