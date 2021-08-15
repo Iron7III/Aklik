@@ -30,10 +30,10 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             inline: true,
             list: [
                 `> **Uptime ➜ **\`${uptime}\``,
-                `> **Guilds ➜ **\`${client.guilds.cache.size.toLocaleString()}\``,
-                `> **Users ➜ **\`${client.users.cache.size.toLocaleString()}\``,
-                `> **Channels ➜ **\`${client.channels.cache.size.toLocaleString()}\``,
-                `> **Emojis ➜ **\`${client.emojis.cache.size.toLocaleString()}\``
+                `> **Guilds ➜ **\`${new Intl.NumberFormat("es-ES").format(client.guilds.cache.size)}\``,
+                `> **Users ➜ **\`${new Intl.NumberFormat("es-ES").format(client.users.cache.size)}\``,
+                `> **Channels ➜ **\`${new Intl.NumberFormat("es-ES").format(client.channels.cache.size)}\``,
+                `> **Emojis ➜ **\`${new Intl.NumberFormat("es-ES").format(client.emojis.cache.size)}\``
             ]
         },
         {
@@ -59,7 +59,8 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             header: `Announcements`,
             inline: false,
             list: [
-                `➜ ¡I have been added to [top.gg](https://top.gg/bot/${client.user.id})!`
+                `➜ ¡I have been added to [top.gg](https://top.gg/bot/${client.user.id})!`,
+                `➜ ¡I have been added to [discordthings.com](https://discordthings.com/bot/${client.user.id})!`
             ]
         }
     ]
@@ -68,7 +69,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         .setDescription('Im a Discord BOT for moderation and other some uses.')
         .setColor('#FD3D26')
     Data.map(o => embed.addField(o.header,o.list.join('\n'),o.inline))
-    const row = new Discord.MessageActionRow()
+    const row0 = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
                 .setLabel('Top.gg')
@@ -76,10 +77,26 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                 .setEmoji(client.emojis.cache.get("871896526820085760"))
                 .setURL(`https://top.gg/bot/${client.user.id}`),
             new Discord.MessageButton()
+                .setLabel('DiscordThings.com')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("876525424388223028"))
+                .setURL(`https://discordthings.com/bot/${client.user.id}`)
+        )
+    const row1 = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
                 .setLabel('Vote')
                 .setStyle('LINK')
-                .setEmoji(client.emojis.cache.get("851169432113512477"))
+                .setEmoji(client.emojis.cache.get("871896526820085760"))
                 .setURL(`https://top.gg/bot/${client.user.id}/vote`),
+            new Discord.MessageButton()
+                .setLabel('Vote')
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("876525424388223028"))
+                .setURL(`https://discordthings.com/bot/${client.user.id}/vote`)
+        )
+    const row2 = new Discord.MessageActionRow()
+        .addComponents(
             new Discord.MessageButton()
                 .setLabel('Add Me')
                 .setStyle('LINK')
@@ -98,7 +115,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             content: ' ',
             embed: embed,
             components: [
-                row
+                row0, row1, row2
             ]
         }
     })
