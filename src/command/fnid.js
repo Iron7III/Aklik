@@ -17,62 +17,26 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             message.channel.send({embeds: [ErrorEmbed2]})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
         }
+        let data = [
+            `> **Id ➜ **\`${res.data.id}\``,
+            `> **Type ➜ **\`${res.data.type.displayValue}\``,
+            `> **Rarity ➜ **\`${res.data.rarity.displayValue}\``,
+            `> **Introduced ➜ **\`c${res.data.introduction.chapter} | s${res.data.introduction.season}\``,
+            `> **Bundle ➜ **\`${res.data.set?res.data.set.value:'Any'}\``,
+            `> **Path ➜ **\`${res.data.path}\``
+        ]
         const embed = new Discord.MessageEmbed()
-            .setTitle(`**${res.data.name.toUpperCase()}**`)
-            .addField(
-                `**ID**`,
-                `\`\`\`${res.data.id}\`\`\``,
-                false
-            )
-            .addField(
-                `**DESCRIPCIÓN**`,
-                `\`\`\`${res.data.description}\`\`\``,
-                false
-            )
-            .addField(
-                `**TIPO**`,
-                `\`\`\`${res.data.type.displayValue}\`\`\``,
-                true
-            )
-            .addField(
-                `**RAREZA**`,
-                `\`\`\`${res.data.rarity.displayValue.toUpperCase()}\`\`\``,
-                false
-            )
-            .addField(
-                `**INTRODUCIDO**`,
-                `\`\`\`CAPITULO ${res.data.introduction.chapter} | TEMPORADA ${res.data.introduction.season}\`\`\``,
-                false
-            )
-            .addField(
-                `**PATH**`,
-                `\`\`\`${res.data.path}\`\`\``,
-                false
-            );
-        if (res.data.set != null) {
-            embed.addField(
-                `**CONJUNTO**`,
-                `\`\`\`${res.data.set.text}\`\`\``,
-                false
-            )
-        } else if (res.data.set == null) {
-            embed.addField(
-                `**CONJUNTO**`,
-                `\`\`\`No tiene\`\`\``,
-                false
-            )
-        }
+            .setAuthor(`${res.data.name}`,res.data.images.smallIcon)
+            .setDescription(res.data.description)
+            .addField('Information',data.join('\n'))
+            .setColor('#FD3D26')
         if (res.data.images.featured != null) {
             embed.setImage(res.data.images.featured);
         } else if (res.data.images.featured == null) {
             embed.setImage(res.data.images.icon);
         } 
         if(res.data.shopHistory != null) {
-            embed.addField(
-                `**HISTORIAL DE TIENDA**`,
-                `${res.data.shopHistory.join(`\n`)}`,
-                false
-            )
+            data.push(`> **Shop History ➜ **\n\`${res.data.shopHistory.join(`\`\n\``)}\``)
         }
         message.channel.send({ embeds: [embed] });
     });
