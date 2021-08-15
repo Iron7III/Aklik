@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
-    let bulk = parseInt(args[0]);
+    let bulk = Math.round(parseInt(args[0]));
     const embed = new Discord.MessageEmbed()
     if(!message.member.permissions.has('MANAGE_MESSAGES')){
         embed.setDescription(`_No tienes permisos suficientes._`).setColor('#ED4245')

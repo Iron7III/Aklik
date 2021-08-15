@@ -81,14 +81,35 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 console.log(error);
             })
     } else if(args[0]==='check'){
-        async function checkData(allyCode,character) {
+        async function checkRequirements(allyCode,character) {
             var playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
             var galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
-            var galacticLegend = galacticLegendsList.data.find(n => n.unitName===character)
-            galacticLegend.requiredUnits.map(async unit => {
-                playerData.units.find(u => u.data.base_id===unit.baseId)
+            var galacticLegend = galacticLegendsList.data.units.find(n => n.unitName===character)
+            var requirements = []
+            galacticLegend.requiredUnits.map(async galacticLegendUnit => {
+                var playerUnit = playerData.data.units.find(u => u.data.base_id===galacticLegendUnit.baseId)
+                var matchGearLevel;
+                var matchTierLevel;
+                if(playerUnit.gear_level>=galacticLegendUnit.gearLevel){
+                    matchGearLevel = true
+                } else if(playerUnit.gear_level<galacticLegendUnit.gearLevel){
+                    matchGearLevel = false
+                }
+                if(playerUnit.relic_tier>=galacticLegendUnit.relicTier){
+                    matchTierLevel = true
+                } else if(playerUnit.relic_tier<galacticLegendUnit.relicTier){
+                    matchTierLevel = false
+                }
+                var data = {
+                    baseId: galacticLegendUnit.baseId,
+                    matchGearLevelRequirement: matchGearLevel,
+                    matchTierLevelRequirement: matchTierLevel
+                }
+                requirements.push(data)
             })
+            console.log(requirements)
         }
+        checkRequirements(args[1],args.slice(2).join(' '))
     } else if(args[0]==='character'){
         var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
         var characterData = characterListData.data.find(c => c.name.toLowerCase()===args.slice(1).join(' ').toLowerCase());
