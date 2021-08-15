@@ -7,6 +7,16 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         message.channel.send({embeds: [embed]})
             .then(msg => setTimeout(() => msg.delete(), 5000))
     } else {
+        function getIdFromMention(mention) {
+            if (!mention) return;
+            if (mention.startsWith('<@') && mention.endsWith('>')) {
+                mention = mention.slice(2, -1);
+                if (mention.startsWith('!')) {
+                    mention = mention.slice(1);
+                }
+                return mention;
+            }
+        }
         if(checkSnowflakeId(args[0]?getIdFromMention(args[0])||args[0]:message.author.id)===false){
             const InvalidSnowflakeUserId = new Discord.MessageEmbed()
                 .setAuthor(`Write a valid ID.`,assets.error)
