@@ -14,16 +14,24 @@ var FortniteAPIComClient = new FortniteAPICom(config);
 const FortniteAPIIo = require("fortnite-api-io");
 const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7")
 const {assets} = require('./assets.json')
-function checkSnowflakeId(ID) {
-    if(!ID) return;
-    if(Discord.SnowflakeUtil.deconstruct(ID).timestamp<=1420070400000){
+function checkSnowflakeId(Id) {
+    if(!Id) {
+        console.log('undefined')
+        return undefined
+    } else if(Discord.SnowflakeUtil.deconstruct(Id).timestamp<=1420070400000){
+        console.log('false')
         return false;
-    } else {
-        console.log(Discord.SnowflakeUtil.deconstruct(ID));
-        return true;
+    } else if(Discord.SnowflakeUtil.deconstruct(Id).timestamp>1420070400000) {
+        console.log(Discord.SnowflakeUtil.deconstruct(Id));
+        try {
+            console.log('true')
+            return true
+        } catch (error) {
+            console.log('false')
+            return false
+        }
     }
 }
-
 client.on("ready", async () => {
     console.log(`[${client.user.username}] Connected and ready up.`);
     var UserDate = Date.now()/1000;
@@ -52,8 +60,8 @@ client.on("ready", async () => {
     const { generateShop, getShopItems } = require("./shop");
     const { apiKey, language, watermark } = require("./config.json");
     (async () => {
-        const items = await getShopItems(apiKey, language);
-        await generateShop(items, watermark);
+        //const items = await getShopItems(apiKey, language);
+        //await generateShop(items, watermark);
     })()
 })
 

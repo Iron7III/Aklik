@@ -11,16 +11,22 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             return mention;
         }
     }
-    if(checkSnowflakeId(args[0]?getIdFromMention(args[0])||args[0]:message.author.id)===false){
-        const InvalidSnowflakeUserId = new Discord.MessageEmbed()
+    console.log(checkSnowflakeId(args[0]?getIdFromMention(args[0])||args[0]:message.author.id))
+    const InvalidSnowflakeUserId = new Discord.MessageEmbed()
             .setAuthor(`Write a valid ID.`,assets.error)
             .setColor('#ED4245')
+    if(checkSnowflakeId(args[0]?getIdFromMention(args[0])||args[0]:message.author.id)===false){
         message.channel.send({embeds:[InvalidSnowflakeUserId]})
-        return
-    } else {
-        const User = await client.users.fetch(args[0]?getIdFromMention(args[0])||args[0]:message.author.id,{cache: false});
+        return ;
+    } else if(checkSnowflakeId(args[0]?getIdFromMention(args[0])||args[0]:message.author.id)===true){
+        const User = await client.users.fetch(args[0]?getIdFromMention(args[0])||args[0]:message.author.id,{cache: false}).catch(e=>{
+            message.channel.send({embeds:[InvalidSnowflakeUserId]})
+            return;
+        });
         console.log(User)
-        const APIUser = await client.api.users(args[0]?getIdFromMention(args[0])||args[0]:message.author.id).get();
+        const APIUser = await client.api.users(args[0]?getIdFromMention(args[0])||args[0]:message.author.id).get().catch(e=>{
+            return;
+        });
         console.log(APIUser)
         const Member = args[0]?message.channel.guild.members.cache.get(getIdFromMention(args[0])||args[0]):message.channel.guild.members.cache.get(message.author.id);
         let Badges = {
@@ -93,80 +99,83 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 displayName: `${client.emojis.cache.get("864132044081594369")} Offline`
             }
         }
-        var UserBadges = User.flags.toArray().map(b => Badges[b]);
-        if(APIUser.avatar!==null){
-            if(APIUser.avatar.startsWith('a_')){
-                UserBadges.push(client.emojis.cache.get('867772736651001926'))
-            } else {
-                if(APIUser.banner!==null){
-                    if(APIUser.banner.startsWith('a_')){
-                        UserBadges.push(client.emojis.cache.get('867772736651001926'))
-                    }
-                }
-            }
-        }
-        var UserInfo = [
-            `> **Username ➜ **\`${User.username}\``,
-            `> **Discriminator ➜ **\`${User.discriminator}\``,
-            `> **Mention ➜ **<@${User.id}>`,
-            `> **ID ➜ **\`${User.id}\``,
-            `> **Registered ➜ **<t:${(User.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(User.createdAt.getTime()/1000).toFixed(0)}:T> (<t:${(User.createdAt.getTime()/1000).toFixed(0)}:R>)`,
-            `> **Badges ➜ **${User.flags!==null?UserBadges.join(' '):`\`No badges\``}`
-        ]
-        if(User.bot===true){
-            if(User.system===true){
-                UserInfo.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
-            } else {
-                if(User.flags==null||!User.flags.has('VERIFIED_BOT')) {
-                    UserInfo.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
+        if(User){
+            var UserBadges = User.flags.toArray().map(b => Badges[b]);
+            var UserBadges = User.flags.toArray().map(b => Badges[b]);
+            if(APIUser.avatar!==null){
+                if(APIUser.avatar.startsWith('a_')){
+                    UserBadges.push(client.emojis.cache.get('867772736651001926'))
                 } else {
-                    UserInfo.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
+                    if(APIUser.banner!==null){
+                        if(APIUser.banner.startsWith('a_')){
+                            UserBadges.push(client.emojis.cache.get('867772736651001926'))
+                        }
+                    }
                 }
             }
-        }
-        let UserInfoBase = new Discord.MessageEmbed()
-        .setAuthor(`${User.username}'s Information`,APIUser.avatar!==null?`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`:User.defaultAvatarURL)
-        .addField('User Info',UserInfo.join('\n'),false)
-        .setColor(Status["offline"].color)
-        .setThumbnail(APIUser.avatar!==null?`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`:User.defaultAvatarURL)
-        const Banner = new Discord.MessageEmbed()
-        .setColor(Status["offline"].color)
-        if(Member){
-            var MemberInfo = [
-                `> **Nickname ➜ **\`${Member.nickname!==null?Member.nickname:'No Nickname'}\``,
-                `> **Booster ➜ **\`${Member.premiumSince!=null?`Boosting [${Member.premiumSince.getDate()>9?Member.premiumSince.getDate():`0${Member.premiumSince.getDate()}`}-${Member.premiumSince.getMonth()>9?Member.premiumSince.getMonth():`0${Member.premiumSince.getMonth()+1}`}-${Member.premiumSince.getFullYear()}\` **|** \`${Member.premiumSince.getHours()>9?Member.premiumSince.getHours():`0${Member.premiumSince.getHours()}`}:${Member.premiumSince.getMinutes()>9?Member.premiumSince.getMinutes():`0${Member.premiumSince.getMinutes()}`}:${Member.premiumSince.getSeconds()>9?Member.premiumSince.getSeconds():`0${Member.premiumSince.getSeconds()}`}]`:`Not Boosting`}\``,
-                `> **Joined ➜ **<t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:d> <t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:T> (<t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:R>)`,
-                `> **Platforms ➜ **${Member.presence!==null&&Member.presence.clientStatus.mobile?client.emojis.cache.get('858403427428335636'):client.emojis.cache.get('858406136033837126')} ${Member.presence!==null&&Member.presence.clientStatus.desktop?client.emojis.cache.get('858403427473948712'):client.emojis.cache.get('858406136046682163')} ${Member.presence!==null&&Member.presence.clientStatus.web?client.emojis.cache.get('858403427407495168'):client.emojis.cache.get('858406136121524225')}`,
+            var UserInfo = [
+                `> **Username ➜ **\`${User.username}\``,
+                `> **Discriminator ➜ **\`${User.discriminator}\``,
+                `> **Mention ➜ **<@${User.id}>`,
+                `> **ID ➜ **\`${User.id}\``,
+                `> **Registered ➜ **<t:${(User.createdAt.getTime()/1000).toFixed(0)}:d> <t:${(User.createdAt.getTime()/1000).toFixed(0)}:T> (<t:${(User.createdAt.getTime()/1000).toFixed(0)}:R>)`,
+                `> **Badges ➜ **${User.flags!==null?UserBadges.join(' '):`\`No badges\``}`
             ]
-            var MemberInfo2 = [
-                `> **Permissions ➜ **${Member.permissions!==null?Member.permissions.toArray().map(p => `\`${Permissions[p]}\``).join(' '):`\`No permissions\``}`,
-                `> **Roles ➜ [\`${Member._roles.length+1}\`]** ${Member.roles.cache.map(r => r).join(' ')}`
-            ]
-            UserInfoBase
-            .addField('Member Info',MemberInfo.join('\n'),false)
-            .addField('Member Info 2',MemberInfo2.join('\n'),false)
-            .addField('Status',`> **${Member.presence!==null?Status[Member.presence.status].displayName:Status['offline'].displayName}**`,false)
-            .setColor(Member.presence!==null?Status[Member.presence.status].color:Status['offline'].color)
-            Banner.setColor(Member.presence!==null?Status[Member.presence.status].color:Status['offline'].color)
-            if(Member.presence!==null&&Member.presence.activities){
-                Member.presence.activities.map(a => {
-                    let Activities = []
-                    if(a.details){
-                        Activities.push(`> **${a.details}**`)
+            if(User.bot===true){
+                if(User.system===true){
+                    UserInfo.splice(4,0,`> **SYSTEM ➜ **${client.emojis.cache.get('865301427756335125')}`)
+                } else {
+                    if(User.flags==null||!User.flags.has('VERIFIED_BOT')) {
+                        UserInfo.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('857854548566474782')}`)
+                    } else {
+                        UserInfo.splice(4,0,`> **BOT ➜ **${client.emojis.cache.get('860997112652627978')}${client.emojis.cache.get('860997112397168662')}`)
                     }
-                    if(a.state){
-                        Activities.push(`> **${a.state}**`)
-                    }
-                    console.log(a.timestamps)
-                    Activities.push(`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
-                    UserInfoBase.addField(`${a.name}`, `${Activities.join('\n')}`)
-                })
+                }
             }
-        }
-        message.channel.send({embeds:[UserInfoBase]})
-        if(APIUser.banner!==null){
-            Banner.setImage(`https://cdn.discordapp.com/banners/${User.id}/${APIUser.banner}.${APIUser.banner.startsWith('a_')?'gif':'png'}?size=512`)
-            message.channel.send({embeds:[Banner]})
+            let UserInfoBase = new Discord.MessageEmbed()
+            .setAuthor(`${User.username}'s Information`,APIUser.avatar!==null?`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`:User.defaultAvatarURL)
+            .addField('User Info',UserInfo.join('\n'),false)
+            .setColor(Status["offline"].color)
+            .setThumbnail(APIUser.avatar!==null?`https://cdn.discordapp.com/avatars/${User.id}/${User.avatar}.${User.avatar.startsWith('a_')?'gif':'png'}?size=1024`:User.defaultAvatarURL)
+            const Banner = new Discord.MessageEmbed()
+            .setColor(Status["offline"].color)
+            if(Member){
+                var MemberInfo = [
+                    `> **Nickname ➜ **\`${Member.nickname!==null?Member.nickname:'No Nickname'}\``,
+                    `> **Booster ➜ **\`${Member.premiumSince!=null?`Boosting [${Member.premiumSince.getDate()>9?Member.premiumSince.getDate():`0${Member.premiumSince.getDate()}`}-${Member.premiumSince.getMonth()>9?Member.premiumSince.getMonth():`0${Member.premiumSince.getMonth()+1}`}-${Member.premiumSince.getFullYear()}\` **|** \`${Member.premiumSince.getHours()>9?Member.premiumSince.getHours():`0${Member.premiumSince.getHours()}`}:${Member.premiumSince.getMinutes()>9?Member.premiumSince.getMinutes():`0${Member.premiumSince.getMinutes()}`}:${Member.premiumSince.getSeconds()>9?Member.premiumSince.getSeconds():`0${Member.premiumSince.getSeconds()}`}]`:`Not Boosting`}\``,
+                    `> **Joined ➜ **<t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:d> <t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:T> (<t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:R>)`,
+                    `> **Platforms ➜ **${Member.presence!==null&&Member.presence.clientStatus.mobile?client.emojis.cache.get('858403427428335636'):client.emojis.cache.get('858406136033837126')} ${Member.presence!==null&&Member.presence.clientStatus.desktop?client.emojis.cache.get('858403427473948712'):client.emojis.cache.get('858406136046682163')} ${Member.presence!==null&&Member.presence.clientStatus.web?client.emojis.cache.get('858403427407495168'):client.emojis.cache.get('858406136121524225')}`,
+                ]
+                var MemberInfo2 = [
+                    `> **Permissions ➜ **${Member.permissions!==null?Member.permissions.toArray().map(p => `\`${Permissions[p]}\``).join(' '):`\`No permissions\``}`,
+                    `> **Roles ➜ [\`${Member._roles.length+1}\`]** ${Member.roles.cache.map(r => r).join(' ')}`
+                ]
+                UserInfoBase
+                .addField('Member Info',MemberInfo.join('\n'),false)
+                .addField('Member Info 2',MemberInfo2.join('\n'),false)
+                .addField('Status',`> **${Member.presence!==null?Status[Member.presence.status].displayName:Status['offline'].displayName}**`,false)
+                .setColor(Member.presence!==null?Status[Member.presence.status].color:Status['offline'].color)
+                Banner.setColor(Member.presence!==null?Status[Member.presence.status].color:Status['offline'].color)
+                if(Member.presence!==null&&Member.presence.activities){
+                    Member.presence.activities.map(a => {
+                        let Activities = []
+                        if(a.details){
+                            Activities.push(`> **${a.details}**`)
+                        }
+                        if(a.state){
+                            Activities.push(`> **${a.state}**`)
+                        }
+                        console.log(a.timestamps)
+                        Activities.push(`> **${a.timestamps!==null?`Since ${a.timestamps.start.toString().substring(16,24)}`:`Infinite`}**`)
+                        UserInfoBase.addField(`${a.name}`, `${Activities.join('\n')}`)
+                    })
+                }
+            }
+            message.channel.send({embeds:[UserInfoBase]})
+            if(APIUser.banner!==null){
+                Banner.setImage(`https://cdn.discordapp.com/banners/${User.id}/${APIUser.banner}.${APIUser.banner.startsWith('a_')?'gif':'png'}?size=512`)
+                message.channel.send({embeds:[Banner]})
+            }
         }
     }
 }

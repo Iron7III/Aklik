@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
-    try {
+    /*try {
         message.channel.send({files: ['shop-cataba.webp']})
     } catch (e) {
         const embed = new Discord.MessageEmbed()
@@ -9,6 +9,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         message.channel.send({embeds: [embed]})
             .then(msg => setTimeout(() => msg.delete(), 5000))
         console.error(e.stack);
-    }
-    message.channel.send()
+        return
+    }*/
+    message.channel.send({content:'Currently unavalible'})
 };

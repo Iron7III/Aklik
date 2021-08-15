@@ -65,7 +65,7 @@ module.exports = {
 		console.log("[WATERMARK] Drawing Date and Watermarks");
 
 		// Item Shop
-		ctx.fillStyle = "#ffffff";
+		ctx.fillStyle = "#FD3D26";
 		ctx.font = "italic 300px Burbank Big Rg Bk";
 		ctx.textAlign = "left";
 		ctx.fillText("Item Shop", 170, 500);
@@ -84,9 +84,9 @@ module.exports = {
 
 			// Draw shop section name
 			if (shop[i].name !== null) {
-				console.log(`[SECTIONS] Drawing ${shop[i].name} Section`.magenta);
+				console.log(`[SECTIONS] Drawing ${shop[i].name} Section`);
 
-				ctx.fillStyle = "#ffffff";
+				ctx.fillStyle = "#FD3D26";
 				ctx.font = "italic 100px Burbank Big Rg Bk";
 				ctx.textAlign = "left";
 				ctx.fillText(shop[i].name, 185, featuredY - 60);
