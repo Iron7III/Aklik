@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
-    Fortnite.CosmeticsSearchByID(args[0], "en").then(res => {
+    FortniteAPIComClient.CosmeticsSearchByID(args[0], "en").then(res => {
         console.log(res);
         if(!args){
             const ErrorEmbed = new Discord.MessageEmbed()
