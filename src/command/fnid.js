@@ -28,7 +28,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         const embed = new Discord.MessageEmbed()
             .setAuthor(`${res.data.name}`,res.data.images.smallIcon)
             .setDescription(res.data.description)
-            .addField('Information',data.join('\n'))
+            .addField('Information',data.join('\n'),false)
             .setColor('#FD3D26')
         if (res.data.images.featured != null) {
             embed.setImage(res.data.images.featured);
