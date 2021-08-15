@@ -5,14 +5,14 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         console.log(res);
         if(!args){
             const ErrorEmbed = new Discord.MessageEmbed()
-                .setAuthor(`Write a cosmetic ID.`,client.emojis.cache.get('861325114694696960').url)
+                .setAuthor(`Write a cosmetic ID.`,assets.error)
                 .setColor('#ED4245')
             message.channel.send({embeds: [ErrorEmbed]})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
         }
-        if(res==undefined){
+        if(res.error){
             const ErrorEmbed2 = new Discord.MessageEmbed()
-                .setAuthor(`Write a valid cosmetic ID.`,client.emojis.cache.get('861325114694696960').url)
+                .setAuthor(`Write a valid cosmetic ID.`,assets.error)
                 .setColor('#ED4245')
             message.channel.send({embeds: [ErrorEmbed2]})
                 .then(msg => client.setTimeout(() => msg.delete(), 5000))
