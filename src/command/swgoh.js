@@ -84,32 +84,45 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         async function checkRequirements(allyCode,character) {
             var playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
             var galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
-            var galacticLegend = galacticLegendsList.data.units.find(n => n.unitName===character)
-            var requirements = []
+            var charactersList = await axios.get(`https://swgoh.gg/api/characters/`);
+            var galacticLegend = galacticLegendsList.data.units.find(n => n.unitName.toLowerCase()===character.toLowerCase())
+            var requirements = {
+                unitName: galacticLegend.unitName,
+                baseId: galacticLegend.baseId,
+                image: `https://swgoh.gg/${galacticLegend.image}`,
+                requiredUnits:[]
+            }
             galacticLegend.requiredUnits.map(async galacticLegendUnit => {
-                var playerUnit = playerData.data.units.find(u => u.data.base_id===galacticLegendUnit.baseId)
-                var matchGearLevel;
-                var matchTierLevel;
-                if(playerUnit.gear_level>=galacticLegendUnit.gearLevel){
-                    matchGearLevel = true
-                } else if(playerUnit.gear_level<galacticLegendUnit.gearLevel){
-                    matchGearLevel = false
-                }
-                if(playerUnit.relic_tier>=galacticLegendUnit.relicTier){
-                    matchTierLevel = true
-                } else if(playerUnit.relic_tier<galacticLegendUnit.relicTier){
-                    matchTierLevel = false
-                }
+                var playerUnit = playerData.data.units.find(unit => unit.data.base_id===galacticLegendUnit.baseId)
+                var gameUnit = charactersList.data.find(character => character.base_id===galacticLegendUnit.baseId);
                 var data = {
+                    unitName: gameUnit.name,
                     baseId: galacticLegendUnit.baseId,
-                    matchGearLevelRequirement: matchGearLevel,
-                    matchTierLevelRequirement: matchTierLevel
+                    gear: {
+                        required: galacticLegendUnit.gearLevel,
+                        unit: playerUnit.data.gear_level,
+                        match: playerUnit.data.gear_level>=galacticLegendUnit.gearLevel?true:false,
+                    },
+                    relic: {
+                        required: galacticLegendUnit.relicTier,
+                        unit: playerUnit.data.relic_tier,
+                        match: playerUnit.data.relic_tier>=galacticLegendUnit.relicTier?true:false,
+                    }
                 }
-                requirements.push(data)
+                requirements.requiredUnits.push(data)
             })
             console.log(requirements)
+            return requirements;
         }
-        checkRequirements(args[1],args.slice(2).join(' '))
+        const data = await checkRequirements(args[1],args.slice(2).join(' '))
+        const embed = new Discord.MessageEmbed()
+            .setAuthor(`${data.unitName}'s Requirements Progress`)
+            //.setDescription(`> **Base Id ➜ **\`${data.baseId}\``)
+            .setColor('#FD3D26')
+        data.requiredUnits.map(unit => {
+            embed.addField(unit.unitName,`> **Gear ➜ **\`${unit.gear.unit}/${unit.gear.required}\` ${unit.gear.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}\n> **Relic ➜ **\`${unit.relic.unit}/${unit.relic.required}\` ${unit.relic.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}`)
+        })
+        message.channel.send({embeds: [embed]})
     } else if(args[0]==='character'){
         var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
         var characterData = characterListData.data.find(c => c.name.toLowerCase()===args.slice(1).join(' ').toLowerCase());
