@@ -82,45 +82,65 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             })
     } else if(args[0]==='check'){
         async function checkRequirements(allyCode,character) {
-            var playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
-            var galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
-            var charactersList = await axios.get(`https://swgoh.gg/api/characters/`);
-            var galacticLegend = galacticLegendsList.data.units.find(n => n.unitName.toLowerCase()===character.toLowerCase())
+            const playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
+            const galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
+            const charactersList = await axios.get(`https://swgoh.gg/api/characters/`);
+            const galacticLegend = galacticLegendsList.data.units.find(n => n.unitName.toLowerCase()===character.toLowerCase())
             var requirements = {
-                unitName: galacticLegend.unitName,
-                baseId: galacticLegend.baseId,
-                image: `https://swgoh.gg/${galacticLegend.image}`,
-                requiredUnits:[]
+                playerName: playerData.data.data.name,
+                allyCode: playerData.data.data.ally_code,
+                galacticLegend: {
+                    unitName: galacticLegend.unitName,
+                    baseId: galacticLegend.baseId,
+                    image: `https://swgoh.gg/${galacticLegend.image}`,
+                    requiredUnits:[]
+                }
             }
             galacticLegend.requiredUnits.map(async galacticLegendUnit => {
-                var playerUnit = playerData.data.units.find(unit => unit.data.base_id===galacticLegendUnit.baseId)
-                var gameUnit = charactersList.data.find(character => character.base_id===galacticLegendUnit.baseId);
-                var data = {
-                    unitName: gameUnit.name,
-                    baseId: galacticLegendUnit.baseId,
-                    gear: {
-                        required: galacticLegendUnit.gearLevel,
-                        unit: playerUnit.data.gear_level,
-                        match: playerUnit.data.gear_level>=galacticLegendUnit.gearLevel?true:false,
-                    },
-                    relic: {
-                        required: galacticLegendUnit.relicTier,
-                        unit: playerUnit.data.relic_tier,
-                        match: playerUnit.data.relic_tier>=galacticLegendUnit.relicTier?true:false,
+                const playerUnit = await playerData.data.units.find(unit => unit.data.base_id===galacticLegendUnit.baseId);
+                const gameUnit = charactersList.data.find(character => character.base_id===galacticLegendUnit.baseId);
+                if(playerUnit===undefined){
+                    var noData = {
+                        unitName: gameUnit.name,
+                        baseId: galacticLegendUnit.baseId,
+                        playerHas: false
                     }
+                    requirements.galacticLegend.requiredUnits.push(noData)
+                } else {
+                    
+                    var data = {
+                        unitName: gameUnit.name,
+                        baseId: galacticLegendUnit.baseId,
+                        gear: {
+                            required: galacticLegendUnit.gearLevel,
+                            unit: playerUnit.data.gear_level<0?0:playerUnit.data.gear_level,
+                            match: playerUnit.data.gear_level>=galacticLegendUnit.gearLevel?true:false,
+                        },
+                        relic: {
+                            required: galacticLegendUnit.relicTier,
+                            unit: playerUnit.data.relic_tier-2<0?0:playerUnit.data.relic_tier-2,
+                            match: playerUnit.data.relic_tier-2>=galacticLegendUnit.relicTier?true:false,
+                        }
+                    }
+                    requirements.galacticLegend.requiredUnits.push(data)
                 }
-                requirements.requiredUnits.push(data)
+                
             })
-            console.log(requirements)
             return requirements;
         }
-        const data = await checkRequirements(args[1],args.slice(2).join(' '))
+        const check = await checkRequirements(args[1],args.slice(2).join(' '))
+        console.log(check.galacticLegend.requiredUnits)
         const embed = new Discord.MessageEmbed()
-            .setAuthor(`${data.unitName}'s Requirements Progress`)
-            //.setDescription(`> **Base Id ➜ **\`${data.baseId}\``)
+            .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress`)
+            .setDescription(`> **Player Name ➜ **\`${check.playerName}\`\n> **Ally Code ➜ **\`${check.allyCode}\`\n> **Base Id ➜ **\`${check.galacticLegend.baseId}\``)
             .setColor('#FD3D26')
-        data.requiredUnits.map(unit => {
-            embed.addField(unit.unitName,`> **Gear ➜ **\`${unit.gear.unit}/${unit.gear.required}\` ${unit.gear.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}\n> **Relic ➜ **\`${unit.relic.unit}/${unit.relic.required}\` ${unit.relic.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}`)
+        
+        check.galacticLegend.requiredUnits.map(unit => {
+            if(unit.playerHas===false){
+                embed.addField(unit.unitName,`> **Doesn\'t have the character**`,false)
+            } else {
+                embed.addField(unit.unitName,`> **Gear ➜ **\`${unit.gear.unit}/${unit.gear.required}\` ${unit.gear.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}\n> **Relic ➜ **\`${unit.relic.unit}/${unit.relic.required}\` ${unit.relic.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}`,false)
+            }
         })
         message.channel.send({embeds: [embed]})
     } else if(args[0]==='character'){
