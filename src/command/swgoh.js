@@ -146,58 +146,55 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
     } else if(args[0]==='character'){
         var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
         var characterData = characterListData.data.find(c => c.name.toLowerCase()===args.slice(1).join(' ').toLowerCase());
-        console.log(characterData)
         var x = characterData;
         function sortCategories(alignment,categories){
             var perks = []
             if(categories.includes('Galactic Legend')){
                 perks.splice(0,0,`> \`\`\`fix\n> ≜ Galactic Legend\n> \`\`\``)
                 categories.splice(1,1)
-                if(alignment==='Light Side'){
-                    perks.splice(1,0,`\`\`\`md\n> # Light Side\n> \`\`\``)
-                } else if(alignment==='Dark Side'){
-                    perks.splice(1,0,`\`\`\`diff\n> - Dark Side\n> \`\`\``)
+                switch (alignment) {
+                    case 'Light Side':
+                        perks.splice(1,0,`\`\`\`md\n> # Light Side\n> \`\`\``)
+                        break;
+                    case 'Dark Side':
+                        perks.splice(1,0,`\`\`\`diff\n> - Dark Side\n> \`\`\``)
+                        break;
                 }
                 if(categories.includes('Tank')===true){
-                    var l = categories.indexOf('Tank')
-                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[categories.indexOf('Tank')]}\n> \`\`\``)
+                    categories.splice(categories.indexOf('Tank'),1)
                 } else if(categories.includes('Support')===true){
-                    var l = categories.indexOf('Support')
-                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[categories.indexOf('Support')]}\n> \`\`\``)
+                    categories.splice(categories.indexOf('Support'),1)
                 } else if(categories.includes('Attacker')===true){
-                    var l = categories.indexOf('Attacker')
-                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[categories.indexOf('Attacker')]}\n> \`\`\``)
+                    categories.splice(categories.indexOf('Attacker'),1)
                 } else if(categories.includes('Healer')===true){
-                    var l = categories.indexOf('Healer')
-                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[l]}\n> \`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(2,0,`\`\`\`diff\n> + ${categories[categories.indexOf('Healer')]}\n> \`\`\``)
+                    categories.splice(categories.indexOf('Healer'),1)
                 }
                 categories.map(c => perks.splice(3,0,`\`\`\`diff\n> ⊹ ${c}\n> \`\`\``))
             } else {
-                if(alignment==='Light Side'){
-                    perks.splice(0,0,`\`\`\`md\n# Light Side\n\`\`\``)
-                } else if(alignment==='Dark Side'){
-                    perks.splice(0,0,`\`\`\`diff\n- Dark Side\n\`\`\``)
+                switch (alignment) {
+                    case 'Light Side':
+                        perks.splice(0,0,`\`\`\`md\n# Light Side\n\`\`\``)
+                        break;
+                    case 'Dark Side':
+                        perks.splice(0,0,`\`\`\`diff\n- Dark Side\n\`\`\``)
+                        break;
                 }
                 if(categories.includes('Tank')===true){
-                    var l = categories.indexOf('Tank')
-                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[categories.indexOf('Tank')]}\n\`\`\``)
+                    categories.splice(categories.indexOf('Tank'),1)
                 } else if(categories.includes('Support')===true){
-                    var l = categories.indexOf('Support')
-                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[categories.indexOf('Support')]}\n\`\`\``)
+                    categories.splice(categories.indexOf('Support'),1)
                 } else if(categories.includes('Attacker')===true){
-                    var l = categories.indexOf('Attacker')
-                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[categories.indexOf('Attacker')]}\n\`\`\``)
+                    categories.splice(categories.indexOf('Attacker'),1)
                 } else if(categories.includes('Healer')===true){
-                    var l = categories.indexOf('Healer')
-                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[l]}\n\`\`\``)
-                    categories.splice(l,1)
+                    perks.splice(1,0,`\`\`\`diff\n+ ${categories[categories.indexOf('Healer')]}\n\`\`\``)
+                    categories.splice(categories.indexOf('Healer'),1)
                 }
                 categories.map(c => perks.splice(2,0,`\`\`\`diff\n⊹ ${c}\n\`\`\``))
             }
@@ -205,12 +202,12 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         }
         var gearListData = await axios.get(`https://swgoh.gg/api/gear/`);
         const embedData = new Discord.MessageEmbed()
-            .setAuthor(`${x.name}'s Information`,x.image)
-            .setDescription(`**${x.description}**`)
-            .addField('Categories',`${sortCategories(x.alignment,x.categories).join('')}`,false)
-            .addField('Information',`> **Role ➜ **\`${x.role}\`\n> **Activate Shards ➜ **\`${x.activate_shard_count}\`${client.emojis.cache.get('874939449946021920')}\n> **Max. Power ➜ **\`${Intl.NumberFormat("es-ES").format(x.power)}\``,false)
+            .setAuthor(`${characterData.name}'s Information`,characterData.image)
+            .setDescription(`**${characterData.description}**`)
+            .addField('Categories',`${sortCategories(characterData.alignment,characterData.categories).join('')}`,false)
+            .addField('Information',`> **Role ➜ **\`${characterData.role}\`\n> **Activate Shards ➜ **\`${characterData.activate_shard_count}\`${client.emojis.cache.get('874939449946021920')}\n> **Max. Power ➜ **\`${Intl.NumberFormat("es-ES").format(characterData.power)}\``,false)
             .setColor('#FD3D26')
-        /*x.gear_levels.map(async g => {
+        /*characterData.gear_levels.map(async g => {
             if(g.tier<13){
                 var gearLevels = {tier: g.tier,gear:[]}
                 g.gear.map(gd => {
