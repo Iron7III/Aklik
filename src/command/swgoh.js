@@ -1,7 +1,20 @@
 const { default: axios } = require("axios");
+const { registerFont } = require("canvas");
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId) => {
+    async function trimAllyCode(str){
+        var rgx0 = /\d{9}/;
+        var rgx1 = /\d{3}/;
+        if(rgx0.test(str)===true){
+            return str;
+        } else if(rgx1.test(str)===true){
+            var newStr = str.split(/[$-/:-?{-~!"^_`\[\]]/).join('');
+            return newStr;
+        } else {
+            return null;
+        }
+    }
     if(!args[0]){
         const NoSubCommand = new Discord.MessageEmbed()
             .setAuthor(`Write a valid subcommand.`,assets.error)
@@ -9,7 +22,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             .setColor('#ED4245')
         message.channel.send({embeds: [NoSubCommand]})
     } else if(args[0]==='player'){
-        var player = args[1].replace('-', '').replace('-', '')
+        var player = await trimAllyCode(args[1])
         axios.get(`https://swgoh.gg/api/player/${player}/`)
             .then(function (res) {
                 console.log(res.data);
@@ -222,5 +235,43 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             }
         })*/
         message.channel.send({embeds: [embedData]})
+    } else if(args[0]==='rules'){
+        if(message.guild.id==='724221331943456788'||message.guild.id==='514150100575191040'){
+            if(args[1]==='geonosis'){
+                const strategy = [
+                    [
+                        '> **Above ➜ **\`3★\`',
+                        '> **Bottom ➜ **\`Add 31M & complete ALL the platoons\`'
+                    ],
+                    [
+                        '> **Ships ➜ **\`3★\`',
+                        '> **Middle ➜ **\`2★ & complete the platoons\`',
+                        '> **Bottom ➜ **\`3★\`'
+                    ],
+                    [
+                        '> **Ships ➜ **\`2★\`',
+                        '> **Middle ➜ **\`NO get the Wat Tambor star\`',
+                        '> **Bottom ➜ **\`2★ adding 88M & platoons\`'
+                    ],
+                    [
+                        '> **Ships ➜ **\`Minimum 1★ & add\`',
+                        '> **Middle ➜ **\`2★ & Wat Tambor\`',
+                        '> **Bottom ➜ **\`1★\`'
+                    ],
+                ]
+                const rulesGeonosis = new Discord.MessageEmbed()
+                    .setTitle('Geonosis: Separatist Might (18*)')
+                    .addField('Phase 1/4',strategy[0].join('\n'))
+                    .addField('Phase 2/4',strategy[1].join('\n'))
+                    .addField('Phase 3/4',strategy[2].join('\n'))
+                    .addField('Phase 4/4',strategy[3].join('\n'))
+                    .setColor('#FD3D26')
+                message.channel.send({embeds: [rulesGeonosis]})
+            } else if(args[1]==='sith'){
+                const rulesSith = new Discord.MessageEmbed()
+            }
+        } else {
+            return;
+        }
     }
 }
