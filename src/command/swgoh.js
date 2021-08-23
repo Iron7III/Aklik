@@ -240,33 +240,62 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             if(args[1]==='geonosis'){
                 const strategy = [
                     [
-                        '> **Above ➜ **\`3★\`',
-                        '> **Bottom ➜ **\`Add 31M & complete ALL the platoons\`'
+                        `> **Above ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,
+                        `> **Bottom ➜ **\`Add 31M & complete ALL the platoons\``
                     ],
                     [
-                        '> **Ships ➜ **\`3★\`',
-                        '> **Middle ➜ **\`2★ & complete the platoons\`',
-                        '> **Bottom ➜ **\`3★\`'
+                        `> **Ships ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,
+                        `> **Middle ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')} \`& complete the platoons\``,
+                        `> **Bottom ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`
                     ],
                     [
-                        '> **Ships ➜ **\`2★\`',
-                        '> **Middle ➜ **\`NO get the Wat Tambor star\`',
-                        '> **Bottom ➜ **\`2★ adding 88M & platoons\`'
+                        `> **Ships ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,
+                        `> **Middle ➜ **\`NO get the Wat Tambor\` ${client.emojis.cache.get('879466444822282291')}`,
+                        `> **Bottom ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')} \`adding 88M & platoons\``
                     ],
                     [
-                        '> **Ships ➜ **\`Minimum 1★ & add\`',
-                        '> **Middle ➜ **\`2★ & Wat Tambor\`',
-                        '> **Bottom ➜ **\`1★\`'
+                        `> **Ships ➜ **\`Minimum\` ${client.emojis.cache.get('879466444822282291')} \`& add\``,
+                        `> **Middle ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')} \`& Wat Tambor\``,
+                        `> **Bottom ➜ **${client.emojis.cache.get('879466444822282291')}`
                     ],
                 ]
                 const rulesGeonosis = new Discord.MessageEmbed()
-                    .setTitle('Geonosis: Separatist Might (18*)')
-                    .addField('Phase 1/4',strategy[0].join('\n'))
-                    .addField('Phase 2/4',strategy[1].join('\n'))
-                    .addField('Phase 3/4',strategy[2].join('\n'))
-                    .addField('Phase 4/4',strategy[3].join('\n'))
+                    .setTitle('Geonosis: Separatist Might')
+                    .setDescription(`\`\`\`fix\nNext objective: try to get 18★\n\`\`\``)
+                    .setImage('https://i.imgur.com/j7ryVYc.jpg')
                     .setColor('#FD3D26')
-                message.channel.send({embeds: [rulesGeonosis]})
+                const rulesGeonosisv2_0 = new Discord.MessageEmbed()
+                    .setTitle('Geonosis: Separatist Might')
+                    .setDescription(`> \`\`\`fix\n> Next objective: try to get 18★\n> \`\`\``)
+                    .setColor('#FD3D26')
+                const rulesGeonosisv2_1 = new Discord.MessageEmbed()
+                    .setTitle('Phase 1/4')
+                    .addField(`Above ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                    .addField(`Bottom`,`> \`Add 31M & complete ALL the platoons\``)
+                    .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
+                    .setColor('#FD3D26')
+                const rulesGeonosisv2_2 = new Discord.MessageEmbed()
+                    .setTitle('Phase 2/4')
+                    .addField(`Ships ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                    .addField(`Middle ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & complete the platoons\``)
+                    .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                    .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
+                    .setColor('#FD3D26')
+                const rulesGeonosisv2_3 = new Discord.MessageEmbed()
+                    .setTitle('Phase 3/4')
+                    .addField(`Ships ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                    .addField(`Middle`,`> \`NO get the Wat Tambor star\``)
+                    .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars adding 88M & platoons\``)
+                    .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
+                    .setColor('#FD3D26')
+                const rulesGeonosisv2_4 = new Discord.MessageEmbed()
+                    .setTitle('Phase 4/4')
+                    .addField(`Ships ${client.emojis.cache.get('879466444822282291')}`,`> \`Get minimum the star & add\``)
+                    .addField(`Middle ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & Wat Tambor\``)
+                    .setFooter('Deploy all the units avalaible & do all the missions until reach the mark', 'https://game-assets.swgoh.gg/tex.charui_geonosian_poggle.png')
+                    .setColor('#FD3D26')
+                message.channel.send({embeds: [rulesGeonosis]});
+                message.channel.send({embeds: [rulesGeonosisv2_0,rulesGeonosisv2_1,rulesGeonosisv2_2,rulesGeonosisv2_3,rulesGeonosisv2_4]});
             } else if(args[1]==='sith'){
                 const rulesSith = new Discord.MessageEmbed()
             }
