@@ -325,11 +325,11 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             let GUILD = await fetchGuild(trimAllyCode(args[1]));
             if(guildData===undefined){return message.channel.send({embeds: [INVALID_GUILD_ID]})};
             async function getGuildUnits(GUILD_DATA){
-                var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13;
-                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = 0;
-                var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12;
-                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12 = 0;
-                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR = []
+                var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13, JKLg13;
+                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13, JKLg13 = 0;
+                var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12, JKLg12;
+                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12, JKLg12 = 0;
+                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR , JKL= []
                 for(var i=0;i<GUILD_DATA.members-1;i++){
                     var ROSTER = await fetchRoster(trimAllyCode(GUILD_DATA.roster[i].allyCode))
                     if(ROSTER['GLREY']!==undefined){
@@ -349,6 +349,9 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     }
                     if(ROSTER['DARTHREVAN']!==undefined){
                         DR.push(ROSTER['DARTHREVAN'][0])
+                    }
+                    if(ROSTER['JEDIKNIGHTLUKE']!==undefined){
+                        JKL.push(ROSTER['JEDIKNIGHTLUKE'][0])
                     }
                 }
                 REY.map(UNIT => {
@@ -393,13 +396,21 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         DRg12++
                     }
                 })
+                JKL.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        JKLg13++
+                    } else if(UNIT.gearLevel===12){
+                        JKLg12++
+                    }
+                })
                 var data = {
                     rey: { count: REY.length, g13: REYg13, g12: REYg12},
                     slkr: { count: SLKR.length, g13: SLKRg13, g12: SLKRg12},
                     jml: { count: JML.length, g13: JMLg13, g12: JMLg12},
                     see: { count: SEE.length, g13: SEEg13, g12: SEEg12},
                     jmk: { count: JMK.length, g13: JMKg13, g12: JMKg12},
-                    dr: { count: DR.length, g13: DRg13, g12: DRg12}
+                    dr: { count: DR.length, g13: DRg13, g12: DRg12},
+                    jkl: { count: JKL.length, g13: JKLg13, g12: JKLg12}
                 }
                 return data;
             }
@@ -498,7 +509,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **JML ➜ **\`${data.jml.count}/${GUILD.members}\`${data.jml.count===0?'':` **•** \`${data.jml.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jml.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                 `> **SEE ➜ **\`${data.see.count}/${GUILD.members}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                 `> **JMK ➜ **\`${data.jmk.count}/${GUILD.members}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **DR ➜ **\`${data.dr.count}/${GUILD.members}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
+                `> **DR ➜ **\`${data.dr.count}/${GUILD.members}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **JKL ➜ **\`${data.jkl.count}/${GUILD.members}\`${data.jkl.count===0?'':` **•** \`${data.jkl.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jkl.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
             ]
             var data = new Discord.MessageEmbed()
                 .setTitle(`${GUILD.name}`)
