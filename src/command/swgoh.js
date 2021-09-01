@@ -319,17 +319,12 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             }
             break;
         case 'guild':
-            var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(args[1])}/`).catch(() => {return});
-            var guildData = await axios.get(`https://swgoh.gg/api/guild/${playerData.data.data.guild_id}/`).catch(() => {return});
-            if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
-            let GUILD = await fetchGuild(trimAllyCode(args[1]));
-            if(guildData===undefined){return message.channel.send({embeds: [INVALID_GUILD_ID]})};
             async function getGuildUnits(GUILD_DATA){
                 var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13, JKLg13;
-                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13, JKLg13 = 0;
+                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = JKLg13 = 0;
                 var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12, JKLg12;
-                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12, JKLg12 = 0;
-                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR , JKL= []
+                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12 = JKLg12 = 0;
+                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR = [], JKL= []
                 for(var i=0;i<GUILD_DATA.members-1;i++){
                     var ROSTER = await fetchRoster(trimAllyCode(GUILD_DATA.roster[i].allyCode))
                     if(ROSTER['GLREY']!==undefined){
@@ -414,111 +409,52 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 }
                 return data;
             }
-            async function getGuildCharactersStats(guild){
-                var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13;
-                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = 0;
-                var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12;
-                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12 = 0;
-                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR = []
-                guild.data.players.map(player => {
-                    player.units.map(unit => {
-                        if(unit.data.base_id==='GLREY'){
-                            REY.push(unit.data)
-                        }
-                        if(unit.data.base_id==='SUPREMELEADERKYLOREN'){
-                            SLKR.push(unit.data)
-                        }
-                        if(unit.data.base_id==='GRANDMASTERLUKE'){
-                            JML.push(unit.data)
-                        }
-                        if(unit.data.base_id==='SITHPALPATINE'){
-                            SEE.push(unit.data)
-                        }
-                        if(unit.data.base_id==='JEDIMASTERKENOBI'){
-                            JMK.push(unit.data)
-                        }
-                        if(unit.data.base_id==='DARTHREVAN'){
-                            DR.push(unit.data)
-                        }
-                    })
-                })
-                REY.map(rey => {
-                    if(rey.gear_level===13){
-                        REYg13++
-                    } else if(rey.gear_level===12){
-                        REYg12++
-                    }
-                })
-                SLKR.map(slkr => {
-                    if(slkr.gear_level===13){
-                        SLKRg13++
-                    } else if(slkr.gear_level===12){
-                        SLKRg12++
-                    }
-                })
-                JML.map(jml => {
-                    if(jml.gear_level===13){
-                        JMLg13++
-                    } else if(jml.gear_level===12){
-                        JMLg12++
-                    }
-                })
-                SEE.map(see => {
-                    if(see.gear_level===13){
-                        SEEg13++
-                    } else if(see.gear_level===12){
-                        SEEg12++
-                    }
-                })
-                JMK.map(jmk => {
-                    if(jmk.gear_level===13){
-                        JMKg13++
-                    } else if(jmk.gear_level===12){
-                        JMKg12++
-                    }
-                })
-                DR.map(dr => {
-                    if(dr.gear_level===13){
-                        DRg13++
-                    } else if(dr.gear_level===12){
-                        DRg12++
-                    }
-                })
-                var data = {
-                    rey: { count: REY.length, g13: REYg13, g12: REYg12},
-                    slkr: { count: SLKR.length, g13: SLKRg13, g12: SLKRg12},
-                    jml: { count: JML.length, g13: JMLg13, g12: JMLg12},
-                    see: { count: SEE.length, g13: SEEg13, g12: SEEg12},
-                    jmk: { count: JMK.length, g13: JMKg13, g12: JMKg12},
-                    dr: { count: DR.length, g13: DRg13, g12: DRg12}
-                }
-                return data;
-            }
-            var guildStats = [
-                `> **Id ➜ **\`${GUILD.id}\``,
-                `> **Member Count ➜ **\`${GUILD.members}/50\``,
-                `> **Profile Count ➜ **\`${guildData.data.data.profile_count}/50\``,
-                `> **Rank ➜ **\`${guildData.data.data.rank==0?'Not Ranked':guildData.data.data.rank}\``,
-                `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(GUILD.gp)}\``,
-                `> **Avg Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(Math.trunc(GUILD.gp/GUILD.members))}\``
-            ]
-            var data = await getGuildUnits(GUILD);
-            var galacticLegendsCountStats = [
-                `> **Rey ➜ **\`${data.rey.count}/${GUILD.members}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **SLKR ➜ **\`${data.slkr.count}/${GUILD.members}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **JML ➜ **\`${data.jml.count}/${GUILD.members}\`${data.jml.count===0?'':` **•** \`${data.jml.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jml.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **SEE ➜ **\`${data.see.count}/${GUILD.members}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **JMK ➜ **\`${data.jmk.count}/${GUILD.members}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **DR ➜ **\`${data.dr.count}/${GUILD.members}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **JKL ➜ **\`${data.jkl.count}/${GUILD.members}\`${data.jkl.count===0?'':` **•** \`${data.jkl.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jkl.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
-            ]
-            var data = new Discord.MessageEmbed()
-                .setTitle(`${GUILD.name}`)
-                .setDescription(`> **${GUILD.desc}**`)
-                .addField('Stats',guildStats.join('\n'))
-                .addField('Galactic Legends Count',galacticLegendsCountStats.join('\n'))
+            var embed = new Discord.MessageEmbed()
+                .setTitle(`Getting guild data...`)
                 .setColor('#FD3D26')
-            message.channel.send({embeds: [data]})
+            message.channel.send({embeds: [embed]}).then(async msg => {
+                let GUILD = await fetchGuild(trimAllyCode(args[1]));
+                var guildStats = [
+                    `> **Id ➜ **\`${GUILD.id}\``,
+                    `> **Member Count ➜ **\`${GUILD.members}/50\``,
+                    `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(GUILD.gp)}\``,
+                    `> **Avg Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(Math.trunc(GUILD.gp/GUILD.members))}\``
+                ]
+                embed
+                .setTitle(`${GUILD.name}`)
+                .setFields([
+                    {
+                        name: 'Statistics',
+                        value: guildStats.join('\n')
+                    },
+                    {
+                        name: 'Galactic Legends Count',
+                        value: '> **Getting data, please wait...**',
+                    }
+                ])
+                .setDescription(`> **${GUILD.desc}**`)
+                msg.edit({embeds: [embed]}).then(async msg2 => {
+                    var data = await getGuildUnits(GUILD);
+                    var galacticLegendsCountStats = [
+                        `> **Rey ➜ **\`${data.rey.count}/${GUILD.members}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **SLKR ➜ **\`${data.slkr.count}/${GUILD.members}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **JML ➜ **\`${data.jml.count}/${GUILD.members}\`${data.jml.count===0?'':` **•** \`${data.jml.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jml.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **SEE ➜ **\`${data.see.count}/${GUILD.members}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **JMK ➜ **\`${data.jmk.count}/${GUILD.members}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **DR ➜ **\`${data.dr.count}/${GUILD.members}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **JKL ➜ **\`${data.jkl.count}/${GUILD.members}\`${data.jkl.count===0?'':` **•** \`${data.jkl.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jkl.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
+                    ]
+                    embed.setFields([
+                        msg2.embeds[0].fields[0],
+                        {
+                            name: 'Galactic Legends Count',
+                            value: galacticLegendsCountStats.join('\n'),
+                        }
+                    ])
+                    msg2.edit({embeds: [embed]})
+                })
+            })
+            
             break;
         case 'number':
             async function CollatzConjecture(x){
