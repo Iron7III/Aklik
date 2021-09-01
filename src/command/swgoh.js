@@ -31,6 +31,14 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         GUILD = Array.isArray(result)?result[0]:result;
         return GUILD;
     }
+    async function fetchRoster(PLAYER_ALLY_CODE){
+        let ROSTER_PAYLOAD = {
+            allycode: trimAllyCode(PLAYER_ALLY_CODE)
+        };
+        let {result,error,warning} = await swgoh.fetchUnits(ROSTER_PAYLOAD);
+        ROSTER = Array.isArray(result)?result[0]:result;
+        return ROSTER;
+    }
     async function fetchData(COLLECTION){
         VALID_COLLECTIONS = ["abilityList","battleEnvironmentsList","battleTargetingRuleList","categoryList","challengeList","challengeStyleList","effectList","environmentCollectionList","equipmentList","eventSamplingList","guildExchangeItemList","guildRaidList","helpEntryList","materialList","playerTitleList","powerUpBundleList","raidConfigList","recipeList","requirementList","skillList","starterGuildList","statModList","statModSetList","statProgressionList","tableList","targetingSetList","territoryBattleDefinitionList","territoryWarDefinitionList","unitsList","unlockAnnouncementDefinitionList","warDefinitionList","xpTableList"]
         if(VALID_COLLECTIONS.some(c => c==COLLECTION)){
@@ -316,6 +324,85 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
             let GUILD = await fetchGuild(trimAllyCode(args[1]));
             if(guildData===undefined){return message.channel.send({embeds: [INVALID_GUILD_ID]})};
+            async function getGuildUnits(GUILD_DATA){
+                var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13;
+                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = 0;
+                var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12;
+                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12 = 0;
+                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR = []
+                for(var i=0;i<GUILD_DATA.members-1;i++){
+                    var ROSTER = await fetchRoster(trimAllyCode(GUILD_DATA.roster[i].allyCode))
+                    if(ROSTER['GLREY']!==undefined){
+                        REY.push(ROSTER['GLREY'][0])
+                    }
+                    if(ROSTER['SUPREMELEADERKYLOREN']!==undefined){
+                        SLKR.push(ROSTER['SUPREMELEADERKYLOREN'][0])
+                    }
+                    if(ROSTER['GRANDMASTERLUKE']!==undefined){
+                        JML.push(ROSTER['GRANDMASTERLUKE'][0])
+                    }
+                    if(ROSTER['SITHPALPATINE']!==undefined){
+                        SEE.push(ROSTER['SITHPALPATINE'][0])
+                    }
+                    if(ROSTER['JEDIMASTERKENOBI']!==undefined){
+                        JMK.push(ROSTER['JEDIMASTERKENOBI'][0])
+                    }
+                    if(ROSTER['DARTHREVAN']!==undefined){
+                        DR.push(ROSTER['DARTHREVAN'][0])
+                    }
+                }
+                REY.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        REYg13++
+                    } else if(UNIT.gearLevel===12){
+                        REYg12++
+                    }
+                })
+                SLKR.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        SLKRg13++
+                    } else if(UNIT.gearLevel===12){
+                        SLKRg12++
+                    }
+                })
+                JML.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        JMLg13++
+                    } else if(UNIT.gearLevel===12){
+                        JMLg12++
+                    }
+                })
+                SEE.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        SEEg13++
+                    } else if(UNIT.gearLevel===12){
+                        SEEg12++
+                    }
+                })
+                JMK.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        JMKg13++
+                    } else if(UNIT.gearLevel===12){
+                        JMKg12++
+                    }
+                })
+                DR.map(UNIT => {
+                    if(UNIT.gearLevel===13){
+                        DRg13++
+                    } else if(UNIT.gearLevel===12){
+                        DRg12++
+                    }
+                })
+                var data = {
+                    rey: { count: REY.length, g13: REYg13, g12: REYg12},
+                    slkr: { count: SLKR.length, g13: SLKRg13, g12: SLKRg12},
+                    jml: { count: JML.length, g13: JMLg13, g12: JMLg12},
+                    see: { count: SEE.length, g13: SEEg13, g12: SEEg12},
+                    jmk: { count: JMK.length, g13: JMKg13, g12: JMKg12},
+                    dr: { count: DR.length, g13: DRg13, g12: DRg12}
+                }
+                return data;
+            }
             async function getGuildCharactersStats(guild){
                 var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13;
                 REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = 0;
@@ -404,7 +491,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(GUILD.gp)}\``,
                 `> **Avg Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(Math.trunc(GUILD.gp/GUILD.members))}\``
             ]
-            var data = await getGuildCharactersStats(guildData);
+            var data = await getGuildUnits(GUILD);
             var galacticLegendsCountStats = [
                 `> **Rey ➜ **\`${data.rey.count}/${guildData.data.data.profile_count}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                 `> **SLKR ➜ **\`${data.slkr.count}/${guildData.data.data.profile_count}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
