@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const { registerFont } = require("canvas");
 const Discord = require("discord.js");
 
-exports.run = async (client, message, args, {assets}, swgoh) => {
+exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId, swgoh) => {
     function trimAllyCode(str){
         var rgx0 = /\d{9}/;
         var rgx1 = /\d{3}/;
@@ -45,10 +45,10 @@ exports.run = async (client, message, args, {assets}, swgoh) => {
         }
     }
     const INVALID_ALLY_CODE = new Discord.MessageEmbed()
-        .setAuthor('Invalid ally code.', assets.error)
+        .setAuthor('Invalid ally code.')
         .setColor('#FF2222')
     const INVALID_GUILD_ID = new Discord.MessageEmbed()
-        .setAuthor('Invalid guild Id.', assets.error)
+        .setAuthor('Invalid guild Id.')
         .setColor('#FF2222')
     switch (args[0]){
         case 'player':
