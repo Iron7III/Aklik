@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const { registerFont } = require("canvas");
 const Discord = require("discord.js");
 
-exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId) => {
+exports.run = async (client, message, args, {assets}, swgoh) => {
     function trimAllyCode(str){
         var rgx0 = /\d{9}/;
         var rgx1 = /\d{3}/;
@@ -15,10 +15,49 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             return null;
         }
     }
+    async function fetchPlayer(PLAYER_ALLY_CODE){
+        let PLAYER_PAYLOAD = {
+            allycode: trimAllyCode(PLAYER_ALLY_CODE)
+        };
+        let {result,error,warning} = await swgoh.fetchPlayer(PLAYER_PAYLOAD);
+        PLAYER = Array.isArray(result)?result[0]:result;
+        return PLAYER;
+    }
+    async function fetchGuild(GUILD_MEMBER_ALLY_CODE){
+        let GUILD_PAYLOAD = {
+            allycode: trimAllyCode(GUILD_MEMBER_ALLY_CODE)
+        };
+        let {result,error,warning} = await swgoh.fetchGuild(GUILD_PAYLOAD);
+        GUILD = Array.isArray(result)?result[0]:result;
+        return GUILD;
+    }
+    async function fetchData(COLLECTION){
+        VALID_COLLECTIONS = ["abilityList","battleEnvironmentsList","battleTargetingRuleList","categoryList","challengeList","challengeStyleList","effectList","environmentCollectionList","equipmentList","eventSamplingList","guildExchangeItemList","guildRaidList","helpEntryList","materialList","playerTitleList","powerUpBundleList","raidConfigList","recipeList","requirementList","skillList","starterGuildList","statModList","statModSetList","statProgressionList","tableList","targetingSetList","territoryBattleDefinitionList","territoryWarDefinitionList","unitsList","unlockAnnouncementDefinitionList","warDefinitionList","xpTableList"]
+        if(VALID_COLLECTIONS.some(c => c==COLLECTION)){
+            let DATA_PAYLOAD = {
+                collection: COLLECTION
+            };
+            let {result,error,warning} = await swgoh.fetchData(DATA_PAYLOAD);
+            DATA = Array.isArray(result)?result[0]:result;
+            return DATA;
+        } else {
+            return undefined;
+        }
+    }
+    const INVALID_ALLY_CODE = new Discord.MessageEmbed()
+        .setAuthor('Invalid ally code.', assets.error)
+        .setColor('#FF2222')
+    const INVALID_GUILD_ID = new Discord.MessageEmbed()
+        .setAuthor('Invalid guild Id.', assets.error)
+        .setColor('#FF2222')
     switch (args[0]){
         case 'player':
-            var player = trimAllyCode(args[1])
-            const playerData = await axios.get(`https://swgoh.gg/api/player/${player}/`);
+            var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(args[1])}/`).catch(() => {return});
+            PLAYER = fetchPlayer(trimAllyCode(args[1]));
+            console.log(PLAYER)
+            if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
+            var characterListData = await axios.get(`https://swgoh.gg/api/characters/`)
+            var arenaLeader = await characterListData.data.find(unit => unit.base_id===playerData.data.data.arena_leader_base_id);
             function FormatAllyCode(nStr){
                 nStr += '';
                 x = nStr.split('.');
@@ -31,10 +70,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 return x1 + x2;
             }
             var PlayerData = [
-                `> **Name ➜ **\`${playerData.data.data.name}\``,
-                `> **Ally Code ➜ **\`${FormatAllyCode(playerData.data.data.ally_code)}\``,
-                `> **Level ➜ **\`${playerData.data.data.level}\``,
-                `> **Guild Name ➜ **\`${playerData.data.data.guild_name}\``,
+                `> **Name ➜ **\`${PLAYER.name}\``,
+                `> **Ally Code ➜ **\`${FormatAllyCode(PLAYER.allyCode)}\``,
+                `> **Level ➜ **\`${PLAYER.level}\``,
+                `> **Guild Name ➜ **\`${PLAYER.guildName}\``,
             ]
             var StatsData = [
                 `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.galactic_power)}\``,
@@ -43,22 +82,29 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **Galactic Power (Ships) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_galactic_power)}\``
             ]
             var ArenaData = [
-                `> **Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.arena_rank)}\``,
+                `> **Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(PLAYER.arena.char.rank)}\``,
+                `> **Fleet Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(PLAYER.arena.ship.rank)}\``,
                 `> **Fleet Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_battles_won)}\``,
                 `> **Squad Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.pvp_battles_won)}\``
             ]
-            const PlayerEmbed = new Discord.MessageEmbed()
-                .setAuthor(`${playerData.data.data.name}`, `https://swgoh.gg/game-asset/u/${playerData.data.data.arena_leader_base_id}.png`)
+            var GuildData = [
+                `> **Guild Name ➜ **\`${playerData.data.data.guild_name}\``,
+                ``
+            ]
+            var PlayerEmbed = new Discord.MessageEmbed()
+                .setAuthor(`${playerData.data.data.name}`,arenaLeader.image)
+                .setDescription(`> **${PLAYER.titles.selected}**`)
                 .addField('Player', PlayerData.join('\n'))
                 .addField('Stats', StatsData.join('\n'))
                 .addField('Arena', ArenaData.join('\n'))
+                //.addField('Guild Stats')
                 .setColor('#FD3D26')
             message.channel.send({embeds:[PlayerEmbed]})
             break;
         case 'gl':
-            const glData = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
+            var glData = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
             if(!args[1]){
-                const GLList = new Discord.MessageEmbed()
+                let GLList = new Discord.MessageEmbed()
                     .setAuthor('Galactic Legends List')
                     .setDescription(glData.data.units.map(n => `> **${n.unitName}**`).join('\n'))
                     .setColor('#FD3D26')
@@ -66,7 +112,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             } else {
                 var gl = glData.data.units.find(n => n.unitName.toLowerCase()===args.slice(1).join(' ').toLowerCase())
                 console.log(gl)
-                const GLData = new Discord.MessageEmbed()
+                var GLData = new Discord.MessageEmbed()
                     .setAuthor(`${gl.unitName}`, `https://swgoh.gg/game-asset/u/${gl.baseId}.png`)
                     .setThumbnail(`https://swgoh.gg${gl.image}`)
                     .setDescription(`> **Getting ${gl.unitName}'s Data**`)
@@ -81,10 +127,11 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             break;
         case 'check':
             async function checkRequirements(allyCode,character) {
-                const playerData = await axios.get(`https://swgoh.gg/api/player/${allyCode}/`);
-                const galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
-                const charactersList = await axios.get(`https://swgoh.gg/api/characters/`);
-                const galacticLegend = galacticLegendsList.data.units.find(n => n.unitName.toLowerCase()===character.toLowerCase())
+                var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(allyCode)}/`).catch(() => {return});
+                if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
+                var galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
+                var charactersList = await axios.get(`https://swgoh.gg/api/characters/`);
+                var galacticLegend = galacticLegendsList.data.units.find(n => n.unitName.toLowerCase()===character.toLowerCase())
                 var requirements = {
                     playerName: playerData.data.data.name,
                     allyCode: playerData.data.data.ally_code,
@@ -96,8 +143,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     }
                 }
                 galacticLegend.requiredUnits.map(async galacticLegendUnit => {
-                    const playerUnit = await playerData.data.units.find(unit => unit.data.base_id===galacticLegendUnit.baseId);
-                    const gameUnit = charactersList.data.find(character => character.base_id===galacticLegendUnit.baseId);
+                    var playerUnit = await playerData.data.units.find(unit => unit.data.base_id===galacticLegendUnit.baseId);
+                    var gameUnit = charactersList.data.find(character => character.base_id===galacticLegendUnit.baseId);
                     if(playerUnit===undefined){
                         var noData = {
                             unitName: gameUnit.name,
@@ -106,7 +153,6 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         }
                         requirements.galacticLegend.requiredUnits.push(noData)
                     } else {
-                        
                         var data = {
                             unitName: gameUnit.name,
                             baseId: galacticLegendUnit.baseId,
@@ -123,13 +169,12 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         }
                         requirements.galacticLegend.requiredUnits.push(data)
                     }
-                    
                 })
                 return requirements;
             }
-            const check = await checkRequirements(args[1],args.slice(2).join(' '))
+            var check = await checkRequirements(args[1],args.slice(2).join(' '))
             console.log(check.galacticLegend.requiredUnits)
-            const embed = new Discord.MessageEmbed()
+            var embed = new Discord.MessageEmbed()
                 .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress`)
                 .setDescription(`> **Player Name ➜ **\`${check.playerName}\`\n> **Ally Code ➜ **\`${check.allyCode}\`\n> **Base Id ➜ **\`${check.galacticLegend.baseId}\``)
                 .setColor('#FD3D26')
@@ -144,7 +189,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             message.channel.send({embeds: [embed]})
             break;
         case 'character':
-            const characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
+            var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
             var characterData = characterListData.data.find(c => c.name.toLowerCase()===args.slice(1).join(' ').toLowerCase());
             var x = characterData;
             function sortCategories(alignment,categories){
@@ -200,8 +245,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 }
                 return perks;
             }
-            const gearListData = await axios.get(`https://swgoh.gg/api/gear/`);
-            const embedData = new Discord.MessageEmbed()
+            var gearListData = await axios.get(`https://swgoh.gg/api/gear/`);
+            var embedData = new Discord.MessageEmbed()
                 .setAuthor(`${characterData.name}'s Information`,characterData.image)
                 .setDescription(`**${characterData.description}**`)
                 .addField('Categories',`${sortCategories(characterData.alignment,characterData.categories).join('')}`,false)
@@ -225,71 +270,166 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             break;
         case 'rules':
             if(message.guild.id==='724221331943456788'||message.guild.id==='514150100575191040'){
-                if(args[1]==='geonosis'){
-                    const strategy = [
-                        [
-                            `> **Above ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,
-                            `> **Bottom ➜ **\`Add 31M & complete ALL the platoons\``
-                        ],
-                        [
-                            `> **Ships ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,
-                            `> **Middle ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')} \`& complete the platoons\``,
-                            `> **Bottom ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`
-                        ],
-                        [
-                            `> **Ships ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,
-                            `> **Middle ➜ **\`NO get the Wat Tambor\` ${client.emojis.cache.get('879466444822282291')}`,
-                            `> **Bottom ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')} \`adding 88M & platoons\``
-                        ],
-                        [
-                            `> **Ships ➜ **\`Minimum\` ${client.emojis.cache.get('879466444822282291')} \`& add\``,
-                            `> **Middle ➜ **${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')} \`& Wat Tambor\``,
-                            `> **Bottom ➜ **${client.emojis.cache.get('879466444822282291')}`
-                        ],
-                    ]
-                    const rulesGeonosis_0 = new Discord.MessageEmbed()
-                        .setTitle('Geonosis: Separatist Might')
-                        .setDescription(`> \`\`\`fix\n> Next objective: try to get 18★\n> \`\`\``)
-                        .setColor('#FD3D26')
-                    const rulesGeonosis_1 = new Discord.MessageEmbed()
-                        .setTitle('Phase 1/4')
-                        .addField(`Above ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & complete the platoons\` ${client.emojis.cache.get('879484314738389023')}`)
-                        .addField(`Bottom`,`> \`Add 31M & try to complete the platoons\` ${client.emojis.cache.get('879485350161047582')}`)
-                        .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
-                        .setColor('#FD3D26')
-                    const rulesGeonosis_2 = new Discord.MessageEmbed()
-                        .setTitle('Phase 2/4')
-                        .addField(`Ships ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
-                        .addField(`Middle ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & complete the platoons\` ${client.emojis.cache.get('879486249444974602')}`)
-                        .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
-                        .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
-                        .setColor('#FD3D26')
-                    const rulesGeonosis_3 = new Discord.MessageEmbed()
-                        .setTitle('Phase 3/4')
-                        .addField(`Ships ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
-                        .addField(`Middle`,`> \`NO get the Wat Tambor star\``)
-                        .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars adding 88M & platoons\` ${client.emojis.cache.get('879487214071996436')}`)
-                        .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
-                        .setColor('#FD3D26')
-                    const rulesGeonosis_4 = new Discord.MessageEmbed()
-                        .setTitle('Phase 4/4')
-                        .addField(`Ships ${client.emojis.cache.get('879466444822282291')}`,`> \`Get minimum the star & add\``)
-                        .addField(`Middle ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & Wat Tambor\``)
-                        .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}`,`> \`Get the star\``)
-                        .setFooter('Deploy all the units avalaible & do all the missions until reach the mark', 'https://game-assets.swgoh.gg/tex.charui_geonosian_poggle.png')
-                        .setColor('#FD3D26')
-                    message.channel.send({embeds: [rulesGeonosis_0,rulesGeonosis_1,rulesGeonosis_2,rulesGeonosis_3,rulesGeonosis_4]});
-                } else if(args[1]==='sith'){
-                    const rulesSith = new Discord.MessageEmbed()
+                switch (args[1]){
+                    case 'geonosis':
+                        const rulesGeonosis_0 = new Discord.MessageEmbed()
+                            .setTitle('Geonosis: Separatist Might')
+                            .setDescription(`> \`\`\`fix\n> Next objective: try to get 18★\n> \`\`\``)
+                            .setColor('#FD3D26')
+                        const rulesGeonosis_1 = new Discord.MessageEmbed()
+                            .setTitle('Phase 1/4')
+                            .addField(`Above ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & complete the platoons\` ${client.emojis.cache.get('879484314738389023')}`)
+                            .addField(`Bottom`,`> \`Add 31M & try to complete the platoons\` ${client.emojis.cache.get('879485350161047582')}`)
+                            .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
+                            .setColor('#FD3D26')
+                        const rulesGeonosis_2 = new Discord.MessageEmbed()
+                            .setTitle('Phase 2/4')
+                            .addField(`Ships ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                            .addField(`Middle ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & complete the platoons\` ${client.emojis.cache.get('879486249444974602')}`)
+                            .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                            .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
+                            .setColor('#FD3D26')
+                        const rulesGeonosis_3 = new Discord.MessageEmbed()
+                            .setTitle('Phase 3/4')
+                            .addField(`Ships ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars\``)
+                            .addField(`Middle`,`> \`NO get the Wat Tambor star\``)
+                            .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars adding 88M & platoons\` ${client.emojis.cache.get('879487214071996436')}`)
+                            .setFooter('Complete the platoons that gives bonificators for Wat Tambor & do the missions', 'https://game-assets.swgoh.gg/tex.charui_wattambor.png')
+                            .setColor('#FD3D26')
+                        const rulesGeonosis_4 = new Discord.MessageEmbed()
+                            .setTitle('Phase 4/4')
+                            .addField(`Ships ${client.emojis.cache.get('879466444822282291')}`,`> \`Get minimum the star & add\``)
+                            .addField(`Middle ${client.emojis.cache.get('879466444822282291')}${client.emojis.cache.get('879466444822282291')}`,`> \`Get the stars & Wat Tambor\``)
+                            .addField(`Bottom ${client.emojis.cache.get('879466444822282291')}`,`> \`Get the star\``)
+                            .setFooter('Deploy all the units avalaible & do all the missions until reach the mark', 'https://game-assets.swgoh.gg/tex.charui_geonosian_poggle.png')
+                            .setColor('#FD3D26')
+                        message.channel.send({embeds: [rulesGeonosis_0,rulesGeonosis_1,rulesGeonosis_2,rulesGeonosis_3,rulesGeonosis_4]});
+                        break;
+                    default:
+                        return
                 }
-            } else {
-                return;
             }
+            break;
+        case 'guild':
+            var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(args[1])}/`).catch(() => {return});
+            var guildData = await axios.get(`https://swgoh.gg/api/guild/${playerData.data.data.guild_id}/`).catch(() => {return});
+            if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
+            let GUILD = await fetchGuild(trimAllyCode(args[1]));
+            if(guildData===undefined){return message.channel.send({embeds: [INVALID_GUILD_ID]})};
+            async function getGuildCharactersStats(guild){
+                var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13;
+                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = 0;
+                var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12;
+                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12 = 0;
+                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR = []
+                guild.data.players.map(player => {
+                    player.units.map(unit => {
+                        if(unit.data.base_id==='GLREY'){
+                            REY.push(unit.data)
+                        }
+                        if(unit.data.base_id==='SUPREMELEADERKYLOREN'){
+                            SLKR.push(unit.data)
+                        }
+                        if(unit.data.base_id==='GRANDMASTERLUKE'){
+                            JML.push(unit.data)
+                        }
+                        if(unit.data.base_id==='SITHPALPATINE'){
+                            SEE.push(unit.data)
+                        }
+                        if(unit.data.base_id==='JEDIMASTERKENOBI'){
+                            JMK.push(unit.data)
+                        }
+                        if(unit.data.base_id==='DARTHREVAN'){
+                            DR.push(unit.data)
+                        }
+                    })
+                })
+                REY.map(rey => {
+                    if(rey.gear_level===13){
+                        REYg13++
+                    } else if(rey.gear_level===12){
+                        REYg12++
+                    }
+                })
+                SLKR.map(slkr => {
+                    if(slkr.gear_level===13){
+                        SLKRg13++
+                    } else if(slkr.gear_level===12){
+                        SLKRg12++
+                    }
+                })
+                JML.map(jml => {
+                    if(jml.gear_level===13){
+                        JMLg13++
+                    } else if(jml.gear_level===12){
+                        JMLg12++
+                    }
+                })
+                SEE.map(see => {
+                    if(see.gear_level===13){
+                        SEEg13++
+                    } else if(see.gear_level===12){
+                        SEEg12++
+                    }
+                })
+                JMK.map(jmk => {
+                    if(jmk.gear_level===13){
+                        JMKg13++
+                    } else if(jmk.gear_level===12){
+                        JMKg12++
+                    }
+                })
+                DR.map(dr => {
+                    if(dr.gear_level===13){
+                        DRg13++
+                    } else if(dr.gear_level===12){
+                        DRg12++
+                    }
+                })
+                var data = {
+                    rey: { count: REY.length, g13: REYg13, g12: REYg12},
+                    slkr: { count: SLKR.length, g13: SLKRg13, g12: SLKRg12},
+                    jml: { count: JML.length, g13: JMLg13, g12: JMLg12},
+                    see: { count: SEE.length, g13: SEEg13, g12: SEEg12},
+                    jmk: { count: JMK.length, g13: JMKg13, g12: JMKg12},
+                    dr: { count: DR.length, g13: DRg13, g12: DRg12}
+                }
+                return data;
+            }
+            var guildStats = [
+                `> **Id ➜ **\`${GUILD.id}\``,
+                `> **Member Count ➜ **\`${GUILD.members}/50\``,
+                `> **Profile Count ➜ **\`${guildData.data.data.profile_count}/50\``,
+                `> **Rank ➜ **\`${guildData.data.data.rank==0?'Not Ranked':guildData.data.data.rank}\``,
+                `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(GUILD.gp)}\``,
+                `> **Avg Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(Math.trunc(GUILD.gp/GUILD.members))}\``
+            ]
+            var data = await getGuildCharactersStats(guildData);
+            var galacticLegendsCountStats = [
+                `> **Rey ➜ **\`${data.rey.count}/${guildData.data.data.profile_count}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **SLKR ➜ **\`${data.slkr.count}/${guildData.data.data.profile_count}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **JML ➜ **\`${data.jml.count}/${guildData.data.data.profile_count}\`${data.jml.count===0?'':` **•** \`${data.jml.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jml.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **SEE ➜ **\`${data.see.count}/${guildData.data.data.profile_count}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **JMK ➜ **\`${data.jmk.count}/${guildData.data.data.profile_count}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **DR ➜ **\`${data.dr.count}/${guildData.data.data.profile_count}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
+            ]
+            var data = new Discord.MessageEmbed()
+                .setTitle(`${GUILD.name}`)
+                .setDescription(`> **${GUILD.desc}**`)
+                .addField('Stats',guildStats.join('\n'))
+                .addField('Galactic Legends Count',galacticLegendsCountStats.join('\n'))
+                .setColor('#FD3D26')
+            message.channel.send({embeds: [data]})
             break;
         default:
             const NoSubCommand = new Discord.MessageEmbed()
-                .setAuthor(`Write a valid subcommand.`,assets.error)
-                .setColor('#ED4245')
+                .setTitle(`These is the valid subcommand list and use.`)
+                .addField('Player',`> **\`f-player\`** \`ALLY_CODE\``)
+                .addField('Character',`> **\`f-character\`** \`CHARACTER_NAME\``)
+                .addField('Galactic Legend',`> **\`f-gl\`** \`GL_NAME\``)
+                .addField('Guild',`> **\`f-guild\`** \`GUILD_ID\``)
+                .addField('Check',`> **\`f-check\`** \`ALLY_CODE\` \`GL_NAME\``)
+                .setColor('#FD3D26')
             message.channel.send({embeds: [NoSubCommand]})
             break;
     }

@@ -3,7 +3,6 @@ const client = new Discord.Client({
     disableEveryone: true,
     fetchAllMembers: true,
     intents: ['GUILDS','GUILD_MEMBERS','GUILD_BANS','GUILD_EMOJIS_AND_STICKERS','GUILD_INTEGRATIONS','GUILD_WEBHOOKS','GUILD_INVITES','GUILD_VOICE_STATES','GUILD_PRESENCES','GUILD_MESSAGES','GUILD_MESSAGE_REACTIONS','GUILD_MESSAGE_TYPING','DIRECT_MESSAGES','DIRECT_MESSAGE_REACTIONS','DIRECT_MESSAGE_TYPING']
-    //intents: Discord.Intents.NON_PRIVILEGED
 });
 const FortniteAPICom = require("fortnite-api-com");
 const config = {
@@ -14,6 +13,12 @@ var FortniteAPIComClient = new FortniteAPICom(config);
 const FortniteAPIIo = require("fortnite-api-io");
 const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7")
 const {assets} = require('./assets.json')
+const express = require('express')
+const ApiSwgohHelp = require('api-swgoh-help');
+const swgoh = new ApiSwgohHelp({
+    "username":"Iron",
+    "password":"02122005asj"
+});
 function checkSnowflakeId(Id) {
     if(!Id) {
         console.log('undefined')
@@ -32,8 +37,10 @@ function checkSnowflakeId(Id) {
         }
     }
 }
+
 client.on("ready", async () => {
     console.log(`[${client.user.username}] Connected and ready up.`);
+    let acquiredToken = await swgoh.connect();
     var UserDate = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
@@ -76,7 +83,7 @@ client.on("messageCreate", async message => {
     }
     try {
         let file = require(`./command/${cmd}.js`);
-        file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId);
+        file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId, swgoh);
         console.log(`[${client.user.username}] Used \'${cmd}\'.`);
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => setTimeout(() => msg.delete(), 5000))
