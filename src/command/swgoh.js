@@ -493,12 +493,12 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             ]
             var data = await getGuildUnits(GUILD);
             var galacticLegendsCountStats = [
-                `> **Rey ➜ **\`${data.rey.count}/${guildData.data.data.profile_count}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **SLKR ➜ **\`${data.slkr.count}/${guildData.data.data.profile_count}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **JML ➜ **\`${data.jml.count}/${guildData.data.data.profile_count}\`${data.jml.count===0?'':` **•** \`${data.jml.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jml.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **SEE ➜ **\`${data.see.count}/${guildData.data.data.profile_count}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **JMK ➜ **\`${data.jmk.count}/${guildData.data.data.profile_count}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                `> **DR ➜ **\`${data.dr.count}/${guildData.data.data.profile_count}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
+                `> **Rey ➜ **\`${data.rey.count}/${GUILD.members}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **SLKR ➜ **\`${data.slkr.count}/${GUILD.members}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **JML ➜ **\`${data.jml.count}/${GUILD.members}\`${data.jml.count===0?'':` **•** \`${data.jml.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jml.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **SEE ➜ **\`${data.see.count}/${GUILD.members}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **JMK ➜ **\`${data.jmk.count}/${GUILD.members}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                `> **DR ➜ **\`${data.dr.count}/${GUILD.members}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
             ]
             var data = new Discord.MessageEmbed()
                 .setTitle(`${GUILD.name}`)
