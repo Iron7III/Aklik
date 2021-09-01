@@ -508,6 +508,17 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 .setColor('#FD3D26')
             message.channel.send({embeds: [data]})
             break;
+        case 'number':
+            async function CollatzConjecture(x){
+                var y=Number(x),a=[y];
+                while(y!==1){
+                    if(y%2===0){y=y/2}else{y=3*y+1}
+                    a.push(y)
+                }
+                return a;
+            }
+            console.log(await CollatzConjecture(args[1]))
+            break;
         default:
             const NoSubCommand = new Discord.MessageEmbed()
                 .setTitle(`These is the valid subcommand list and use.`)
