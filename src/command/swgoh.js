@@ -460,7 +460,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             async function CollatzConjecture(x){
                 var y=Number(x),a=[y];
                 while(y!==1){
-                    if(y%2===0){y=y/2}else{y=3*y+1}
+                    y=y%2===0?y/2:3*y+1
                     a.push(y)
                 }
                 return a;
