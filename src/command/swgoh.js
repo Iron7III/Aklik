@@ -60,11 +60,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         .setColor('#FF2222')
     switch (args[0]){
         case 'player':
-            var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(args[1])}/`).catch(() => {return});
             PLAYER = await fetchPlayer(trimAllyCode(args[1]));
-            if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
             var characterListData = await axios.get(`https://swgoh.gg/api/characters/`)
-            var arenaLeader = await characterListData.data.find(unit => unit.base_id===playerData.data.data.arena_leader_base_id);
             function FormatAllyCode(nStr){
                 nStr += '';
                 x = nStr.split('.');
@@ -84,11 +81,11 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **Last Activity ➜ **<t:${PLAYER.lastActivity/1000}:R>`,
                 `> **Rewards ➜ **\`GMT+${PLAYER.poUTCOffsetMinutes/60}\``
             ]
-            var StatsData = [
-                `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.galactic_power)}\``,
-                `> **Galactic Power (Characters) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.character_galactic_power)}\``,
-                `> **Galactic Power (Ships) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_galactic_power)}\``
-            ]
+            //var StatsData = [
+            //    `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.galactic_power)}\``,
+            //    `> **Galactic Power (Characters) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.character_galactic_power)}\``,
+            //    `> **Galactic Power (Ships) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_galactic_power)}\``
+            //]
             CHARACTERS_SQUAD = {
                 leader: PLAYER.arena.char.squad.find(UNIT => UNIT.squadUnitType===2).defId,
                 team: PLAYER.arena.char.squad.filter(UNIT => UNIT.squadUnitType===1).map(UNIT => UNIT.defId)
@@ -98,23 +95,24 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 team: PLAYER.arena.ship.squad.filter(UNIT => UNIT.squadUnitType===1).map(UNIT => UNIT.defId),
                 supports: PLAYER.arena.ship.squad.filter(UNIT => UNIT.squadUnitType===5).map(UNIT => UNIT.defId)
             }
+            var arenaLeader = await characterListData.data.find(unit => unit.base_id===CHARACTERS_SQUAD.leader);
             var ArenaData = [
                 `> **Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(PLAYER.arena.char.rank)}\``,
                 `> \`\`\`fix\n> ${CHARACTERS_SQUAD.leader}\n> \`\`\`\`\`\`\n> ${CHARACTERS_SQUAD.team.join('\n> ')}\n> \`\`\``,
                 `> **Fleet Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(PLAYER.arena.ship.rank)}\``,
                 `> \`\`\`fix\n> ${SHIPS_SQUAD.leader}\n> \`\`\`\`\`\`\n> ${SHIPS_SQUAD.team.join('\n> ')}\n> \`\`\`\`\`\`diff\n> + ${SHIPS_SQUAD.supports.join('\n> + ')}\n> \`\`\``,
-                `> **Fleet Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_battles_won)}\``,
-                `> **Squad Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.pvp_battles_won)}\``
+                //`> **Fleet Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_battles_won)}\``,
+                //`> **Squad Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.pvp_battles_won)}\``
             ]
             var GuildData = [
                 `> **Guild Name ➜ **\`${PLAYER.guildName}\``,
                 `> **Guild Id ➜ **\`${PLAYER.guildRefId}\``
             ]
             var PlayerEmbed = new Discord.MessageEmbed()
-                .setAuthor(`${playerData.data.data.name}`,arenaLeader.image)
+                .setAuthor(`${PLAYER.name}`,arenaLeader.image)
                 .setDescription(`> **${PLAYER.titles.selected?PLAYER.titles.selected:'No title selected.'}**`)
                 .addField('Player', PlayerData.join('\n'))
-                .addField('Stats', StatsData.join('\n'))
+                //.addField('Stats', StatsData.join('\n'))
                 .addField('Arena', ArenaData.join('\n'))
                 .addField('Guild Stats', GuildData.join('\n'))
                 .setColor('#FD3D26')
