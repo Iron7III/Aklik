@@ -120,7 +120,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             break;
         case 'gl':
             var glData = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
-            if(!args[1]){
+            if(!args[1]||args[2]){
                 let GLList = new Discord.MessageEmbed()
                     .setAuthor('Galactic Legends List')
                     .setDescription(glData.data.units.map(n => `> **${n.unitName}**`).join('\n'))
@@ -156,19 +156,15 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         unitName: galacticLegend.unitName,
                         baseId: galacticLegend.baseId,
                         image: `https://swgoh.gg/${galacticLegend.image}`,
-                        requiredUnits:[]
+                        requiredUnits: [],
+                        missingUnits: []
                     }
                 }
                 galacticLegend.requiredUnits.map(async galacticLegendUnit => {
                     var playerUnit = await playerData.data.units.find(unit => unit.data.base_id===galacticLegendUnit.baseId);
                     var gameUnit = charactersList.data.find(character => character.base_id===galacticLegendUnit.baseId);
                     if(playerUnit===undefined){
-                        var noData = {
-                            unitName: gameUnit.name,
-                            baseId: galacticLegendUnit.baseId,
-                            playerHas: false
-                        }
-                        requirements.galacticLegend.requiredUnits.push(noData)
+                        requirements.galacticLegend.missingUnits.push(gameUnit.name)
                     } else {
                         var data = {
                             unitName: gameUnit.name,
@@ -195,7 +191,6 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress`)
                 .setDescription(`> **Player Name ➜ **\`${check.playerName}\`\n> **Ally Code ➜ **\`${check.allyCode}\`\n> **Base Id ➜ **\`${check.galacticLegend.baseId}\``)
                 .setColor('#FD3D26')
-            
             check.galacticLegend.requiredUnits.map(unit => {
                 if(unit.playerHas===false){
                     embed.addField(unit.unitName,`> **Doesn\'t have the character**`,false)
@@ -203,6 +198,9 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     embed.addField(unit.unitName,`> **Gear ➜ **\`${unit.gear.unit}/${unit.gear.required}\` ${unit.gear.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}\n> **Relic ➜ **\`${unit.relic.unit}/${unit.relic.required}\` ${unit.relic.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}`,false)
                 }
             })
+            if(check.galacticLegend.missingUnits>0){
+                embed.addField('Missing Units', `> ${check.galacticLegend.missingUnits.map(unit => `**${unit}**`).join('\n> ')}`)
+            }
             message.channel.send({embeds: [embed]})
             break;
         case 'character':
