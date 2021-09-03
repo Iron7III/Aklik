@@ -102,7 +102,6 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(PLAYER.arena.char.rank)}\``,
                 `> \`\`\`fix\n> ${CHARACTERS_SQUAD.leader}\n> \`\`\`\`\`\`\n> ${CHARACTERS_SQUAD.team.join('\n> ')}\n> \`\`\``,
                 `> **Fleet Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(PLAYER.arena.ship.rank)}\``,
-                `> \`\`\`fix\n> ${CHARACTERS_SQUAD.leader}\n> \`\`\`\`\`\`\n> ${CHARACTERS_SQUAD.team.join('\n> ')}\n> \`\`\``,
                 `> \`\`\`fix\n> ${SHIPS_SQUAD.leader}\n> \`\`\`\`\`\`\n> ${SHIPS_SQUAD.team.join('\n> ')}\n> \`\`\`\`\`\`diff\n> + ${SHIPS_SQUAD.supports.join('\n> + ')}\n> \`\`\``,
                 `> **Fleet Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_battles_won)}\``,
                 `> **Squad Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.pvp_battles_won)}\``
