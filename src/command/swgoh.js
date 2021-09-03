@@ -101,7 +101,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             ]
             var PlayerEmbed = new Discord.MessageEmbed()
                 .setAuthor(`${playerData.data.data.name}`,arenaLeader.image)
-                .setDescription(`> **${PLAYER.titles.selected}**`)
+                .setDescription(`> **${PLAYER.titles.selected?PLAYER.titles.selected:'No title selected.'}**`)
                 .addField('Player', PlayerData.join('\n'))
                 .addField('Stats', StatsData.join('\n'))
                 .addField('Arena', ArenaData.join('\n'))
