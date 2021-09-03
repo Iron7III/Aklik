@@ -61,7 +61,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
     switch (args[0]){
         case 'player':
             var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(args[1])}/`).catch(() => {return});
-            PLAYER = fetchPlayer(trimAllyCode(args[1]));
+            PLAYER = await fetchPlayer(trimAllyCode(args[1]));
             console.log(PLAYER)
             if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
             var characterListData = await axios.get(`https://swgoh.gg/api/characters/`)
@@ -81,12 +81,12 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **Name ➜ **\`${PLAYER.name}\``,
                 `> **Ally Code ➜ **\`${FormatAllyCode(PLAYER.allyCode)}\``,
                 `> **Level ➜ **\`${PLAYER.level}\``,
-                `> **Guild Name ➜ **\`${PLAYER.guildName}\``,
+                `> **Id ➜ **\`${PLAYER.id}\``,
+                `> **Last Activity ➜ **<t:${PLAYER.lastActivity/1000}:R>`
             ]
             var StatsData = [
                 `> **Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.galactic_power)}\``,
                 `> **Galactic Power (Characters) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.character_galactic_power)}\``,
-                `> **Galactic Power (Ships) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_galactic_power)}\``,
                 `> **Galactic Power (Ships) ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.ship_galactic_power)}\``
             ]
             var ArenaData = [
@@ -96,8 +96,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 `> **Squad Arena Battles Won ➜ **\`${new Intl.NumberFormat("es-ES").format(playerData.data.data.pvp_battles_won)}\``
             ]
             var GuildData = [
-                `> **Guild Name ➜ **\`${playerData.data.data.guild_name}\``,
-                ``
+                `> **Guild Name ➜ **\`${PLAYER.guildName}\``,
+                `> **Guild Id ➜ **\`${PLAYER.guildRefId}\``
             ]
             var PlayerEmbed = new Discord.MessageEmbed()
                 .setAuthor(`${playerData.data.data.name}`,arenaLeader.image)
@@ -105,7 +105,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 .addField('Player', PlayerData.join('\n'))
                 .addField('Stats', StatsData.join('\n'))
                 .addField('Arena', ArenaData.join('\n'))
-                //.addField('Guild Stats')
+                .addField('Guild Stats', GuildData.join('\n'))
                 .setColor('#FD3D26')
             message.channel.send({embeds:[PlayerEmbed]})
             break;
