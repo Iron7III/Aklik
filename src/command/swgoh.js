@@ -145,7 +145,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         case 'check':
             async function checkRequirements(allyCode,character) {
                 var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(allyCode)}/`).catch(() => {return});
-                if(playerData===undefined){return message.channel.send({embeds: [INVALID_ALLY_CODE]})};
+                if(playerData===undefined){return};
                 var galacticLegendsList = await axios.get(`https://swgoh.gg/api/gl-checklist/`);
                 var charactersList = await axios.get(`https://swgoh.gg/api/characters/`);
                 var galacticLegend = galacticLegendsList.data.units.find(n => n.unitName.toLowerCase()===character.toLowerCase())
@@ -185,8 +185,28 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 })
                 return requirements;
             }
-            var check = await checkRequirements(args[1],args.slice(2).join(' '))
-            console.log(check.galacticLegend.requiredUnits)
+            if(!args[1]){
+                var NO_ALLY_CODE_PROVIDED = new Discord.MessageEmbed()
+                    .setAuthor(`Provide a valid ally code.`)
+                    .setColor('#FD3D26')
+                return message.channel.send({embeds: [NO_ALLY_CODE_PROVIDED]})
+            }
+            if(!args[2]||!['rey','kylo','executor','jedi knight luke','jkl','jedi master luke','jml','sith eternal emperor','see','jedi master kenobi','jmk','lord vader','lv'].includes(args.slice(2).join(' ').toLowerCase())){
+                var NO_GALACTIC_LEGEND_PROVIDED = new Discord.MessageEmbed()
+                    .setAuthor(`Provide a valid galactic legend.`)
+                    .setDescription(`> **Kylo**\n> **Rey**\n> **Jedi Knight Luke (\`JKL\`)**\n> **Jedi Master Luke Skywalker (\`JML\`)**\n> **Sith Eternal Emperor (\`SEE\`)**\n> **Jedi Master Kenobi (\`JMK\`)**\n> **Lord Vader (\`LV\`)**\n> **Executor**\n`)
+                    .setColor('#FD3D26')
+                return message.channel.send({embeds: [NO_GALACTIC_LEGEND_PROVIDED]})
+            }
+            var GALACTIC_LEGENDS_ACRONYM = {
+                'jkl': 'Jedi Knight Luke',
+                'jml': 'Jedi Master Luke Skywalker',
+                'see': 'Sith Eternal Emperor',
+                'jmk': 'Jedi Master Kenobi',
+                'lv': 'lord vader',
+            }
+            var GALACTIC_LEGEND = ['jkl','jml','see','jmk','lv'].includes(args.slice(2).join(' '))?GALACTIC_LEGENDS_ACRONYM[args.slice(2).join(' ')]:args.slice(2).join(' ')
+            var check = await checkRequirements(args[1],GALACTIC_LEGEND)
             var embed = new Discord.MessageEmbed()
                 .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress`)
                 .setDescription(`> **Player Name ➜ **\`${check.playerName}\`\n> **Ally Code ➜ **\`${check.allyCode}\`\n> **Base Id ➜ **\`${check.galacticLegend.baseId}\``)
@@ -194,7 +214,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             check.galacticLegend.requiredUnits.map(unit => {
                 embed.addField(unit.unitName,`> **Gear ➜ **\`${unit.gear.unit}/${unit.gear.required}\` ${unit.gear.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}\n> **Relic ➜ **\`${unit.relic.unit}/${unit.relic.required}\` ${unit.relic.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}`,false)
             })
-            if(check.galacticLegend.missingUnits>0){
+            if(check.galacticLegend.missingUnits.length>0){
                 embed.addField('Missing Units', `> ${check.galacticLegend.missingUnits.map(unit => `**${unit}**`).join('\n> ')}`)
             }
             message.channel.send({embeds: [embed]})
@@ -471,7 +491,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             console.log(await CollatzConjecture(args[1]))
             break;
         default:
-            const NoSubCommand = new Discord.MessageEmbed()
+            const NO_SUBCOMMAND_PROVIDED = new Discord.MessageEmbed()
                 .setTitle(`These is the valid subcommand list and use.`)
                 .addField('Player',`> **\`f-player\`** \`ALLY_CODE\``)
                 .addField('Character',`> **\`f-character\`** \`CHARACTER_NAME\``)
@@ -479,7 +499,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 .addField('Guild',`> **\`f-guild\`** \`GUILD_ID\``)
                 .addField('Check',`> **\`f-check\`** \`ALLY_CODE\` \`GL_NAME\``)
                 .setColor('#FD3D26')
-            message.channel.send({embeds: [NoSubCommand]})
+            message.channel.send({embeds: [NO_SUBCOMMAND_PROVIDED]})
             break;
     }
 }
