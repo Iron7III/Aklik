@@ -74,7 +74,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                         },
                         {
                             type: 2,
-                            custom_id: ' ',
+                            custom_id: 'awdfafafgw',
                             label: ' ',
                             style: 2,
                             disabled: true
@@ -110,7 +110,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                         },
                         {
                             type: 2,
-                            custom_id: ' ',
+                            custom_id: 'wdawdawd',
                             label: ' ',
                             style: 2,
                             disabled: true
@@ -146,7 +146,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                         },
                         {
                             type: 2,
-                            custom_id: ' ',
+                            custom_id: 'adawd',
                             label: ' ',
                             style: 2,
                             disabled: true
@@ -182,7 +182,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                         },
                         {
                             type: 2,
-                            custom_id: ' ',
+                            custom_id: 'wadawdaw',
                             label: ' ',
                             style: 2,
                             disabled: true
