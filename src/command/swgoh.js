@@ -343,92 +343,56 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             break;
         case 'guild':
             async function getGuildUnits(GUILD_DATA){
-                var REYg13, SLKRg13, JMLg13, SEEg13, JMKg13, DRg13, JKLg13;
-                REYg13 = SLKRg13 = JMLg13 = SEEg13 = JMKg13 = DRg13 = JKLg13 = 0;
-                var REYg12, SLKRg12, JMLg12, SEEg12, JMKg12, DRg12, JKLg12;
-                REYg12 = SLKRg12 = JMLg12 = SEEg12 = JMKg12 = DRg12 = JKLg12 = 0;
-                var REY = [], SLKR = [], JML = [], SEE = [], JMK = [], DR = [], JKL= []
+                var REY, SLKR, JML, SEE, JMK, DR, JKL
+                REY = {guildUnits: [],g13: 0,g12: 0}
+                SLKR = {guildUnits: [],g13: 0,g12: 0}
+                JML = {guildUnits: [],g13: 0,g12: 0}
+                SEE = {guildUnits: [],g13: 0,g12: 0}
+                JMK = {guildUnits: [],g13: 0,g12: 0}
+                DR = {guildUnits: [],g13: 0,g12: 0}
+                JKL = {guildUnits: [],g13: 0,g12: 0}
                 for(var i=0;i<GUILD_DATA.members-1;i++){
                     var ROSTER = await fetchRoster(trimAllyCode(GUILD_DATA.roster[i].allyCode))
                     if(ROSTER['GLREY']!==undefined){
-                        REY.push(ROSTER['GLREY'][0])
+                        REY.guildUnits.push(ROSTER['GLREY'][0])
                     }
                     if(ROSTER['SUPREMELEADERKYLOREN']!==undefined){
-                        SLKR.push(ROSTER['SUPREMELEADERKYLOREN'][0])
+                        SLKR.guildUnits.push(ROSTER['SUPREMELEADERKYLOREN'][0])
                     }
                     if(ROSTER['GRANDMASTERLUKE']!==undefined){
-                        JML.push(ROSTER['GRANDMASTERLUKE'][0])
+                        JML.guildUnits.push(ROSTER['GRANDMASTERLUKE'][0])
                     }
                     if(ROSTER['SITHPALPATINE']!==undefined){
-                        SEE.push(ROSTER['SITHPALPATINE'][0])
+                        SEE.guildUnits.push(ROSTER['SITHPALPATINE'][0])
                     }
                     if(ROSTER['JEDIMASTERKENOBI']!==undefined){
-                        JMK.push(ROSTER['JEDIMASTERKENOBI'][0])
+                        JMK.guildUnits.push(ROSTER['JEDIMASTERKENOBI'][0])
                     }
                     if(ROSTER['DARTHREVAN']!==undefined){
-                        DR.push(ROSTER['DARTHREVAN'][0])
+                        DR.guildUnits.push(ROSTER['DARTHREVAN'][0])
                     }
                     if(ROSTER['JEDIKNIGHTLUKE']!==undefined){
-                        JKL.push(ROSTER['JEDIKNIGHTLUKE'][0])
+                        JKL.guildUnits.push(ROSTER['JEDIKNIGHTLUKE'][0])
                     }
                 }
-                REY.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        REYg13++
-                    } else if(UNIT.gearLevel===12){
-                        REYg12++
-                    }
-                })
-                SLKR.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        SLKRg13++
-                    } else if(UNIT.gearLevel===12){
-                        SLKRg12++
-                    }
-                })
-                JML.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        JMLg13++
-                    } else if(UNIT.gearLevel===12){
-                        JMLg12++
-                    }
-                })
-                SEE.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        SEEg13++
-                    } else if(UNIT.gearLevel===12){
-                        SEEg12++
-                    }
-                })
-                JMK.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        JMKg13++
-                    } else if(UNIT.gearLevel===12){
-                        JMKg12++
-                    }
-                })
-                DR.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        DRg13++
-                    } else if(UNIT.gearLevel===12){
-                        DRg12++
-                    }
-                })
-                JKL.map(UNIT => {
-                    if(UNIT.gearLevel===13){
-                        JKLg13++
-                    } else if(UNIT.gearLevel===12){
-                        JKLg12++
-                    }
+                var GALACTIC_LEGENDS = [REY,SLKR,JML,SEE,JMK,DR,JKL]
+                GALACTIC_LEGENDS.forEach(GL => {
+                    GL.guildUnits.map(UNIT => {
+                        if(UNIT.gearLevel===13){
+                            GL.g13++
+                        } else if(UNIT.gearLevel===12){
+                            GL.g12++
+                        }
+                    })
                 })
                 var data = {
-                    rey: { count: REY.length, g13: REYg13, g12: REYg12},
-                    slkr: { count: SLKR.length, g13: SLKRg13, g12: SLKRg12},
-                    jml: { count: JML.length, g13: JMLg13, g12: JMLg12},
-                    see: { count: SEE.length, g13: SEEg13, g12: SEEg12},
-                    jmk: { count: JMK.length, g13: JMKg13, g12: JMKg12},
-                    dr: { count: DR.length, g13: DRg13, g12: DRg12},
-                    jkl: { count: JKL.length, g13: JKLg13, g12: JKLg12}
+                    rey: {count: REY.guildUnits.length, g13: REY.g13, g12: REY.g12},
+                    slkr: {count: SLKR.guildUnits.length, g13: SLKR.g13, g12: SLKR.g12},
+                    jml: {count: JML.guildUnits.length, g13: JML.g13, g12: JML.g12},
+                    see: {count: SEE.guildUnits.length, g13: SEE.g13, g12: SEE.g12},
+                    jmk: {count: JMK.guildUnits.length, g13: JMK.g13, g12: JMK.g12},
+                    dr: {count: DR.guildUnits.length, g13: DR.g13, g12: DR.g12},
+                    jkl: {count: JKL.guildUnits.length, g13: JKL.g13, g12: JKL.g12}
                 }
                 return data;
             }
@@ -478,17 +442,6 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 })
             })
             
-            break;
-        case 'number':
-            async function CollatzConjecture(x){
-                var y=Number(x),a=[y];
-                while(y!==1){
-                    y=y%2===0?y/2:3*y+1
-                    a.push(y)
-                }
-                return a;
-            }
-            console.log(await CollatzConjecture(args[1]))
             break;
         default:
             const NO_SUBCOMMAND_PROVIDED = new Discord.MessageEmbed()
