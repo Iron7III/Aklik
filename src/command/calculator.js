@@ -9,39 +9,16 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
         return a;
     }
-    async function KaprekarRoutine(number){
-        let total = number;
-        let count = 0;
-        let array = [Number(total)]
-        function uniqueDigitCount(number) {
-            let count = number.toString().split('').sort().filter(function(el, i, a) {
-              if (i == a.indexOf(el)) {
-                return 1;
-              } else {
-                return 0;
-              }
-            });
-            return count.length;
+    async function KaprekarRoutine(n){
+        let t = n,a = [Number(t)];
+        while(t!==6174){
+            let min = parseInt(("0000"+t).substr(-4,4).toString().split('').sort(function(a,b){return a-b}).join(''));
+            let max = parseInt(("0000"+t).substr(-4,4).toString().split('').sort(function(a,b){return b-a}).join(''));
+            t = max - min;
+            a.push(t)
         }
-        if (uniqueDigitCount(total) > 1) {
-          while (total !== 6174) {
-            let ascending = parseInt(("0000" + total).substr(-4, 4).toString().split('').sort(acendingSort).join(''));
-            let descending = parseInt(("0000" + total).substr(-4, 4).toString().split('').sort(decendingSort).join(''));
-            total = descending - ascending;
-            count++;
-            array.push(total)
-          }
-        }
-        return array;
+        return a;
     }
-      function acendingSort(a, b) {
-        return a - b;
-      }
-      function decendingSort(a, b) {
-        return b - a;
-      }
-
-
 
     switch(args[0]){
         case 'collatz':
