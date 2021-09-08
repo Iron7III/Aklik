@@ -1,195 +1,66 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
-    const embed = new Discord.MessageEmbed()
-        .setTitle('**ESTO ES UNA VERSION BETA Y NO FUNCIONA CORRECTAMENTE**')
-        .setColor('RANDOM')
-    client.api.channels(message.channel.id).messages.post({
-        type: 1,
-        data: {
-            content: ' ',
-            embed: embed,
-            components: [
-                {
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            custom_id: 'ac',
-                            label: 'AC',
-                            style: 4
-                        },
-                        {
-                            type: 2,
-                            custom_id: '(',
-                            label: '(',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: ')',
-                            label: ')',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: '^',
-                            label: '^',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: 'delete',
-                            label: 'Del',
-                            style: 4
-                        }
-                    ]
-                },
-                {
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            custom_id: '7',
-                            label: '7',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '8',
-                            label: '8',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '9',
-                            label: '9',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '/',
-                            label: '/',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: 'awdfafafgw',
-                            label: ' ',
-                            style: 2,
-                            disabled: true
-                        }
-                    ]
-                },
-                {
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            custom_id: '4',
-                            label: '4',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '5',
-                            label: '5',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '6',
-                            label: '6',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: 'x',
-                            label: 'X',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: 'wdawdawd',
-                            label: ' ',
-                            style: 2,
-                            disabled: true
-                        }
-                    ]
-                },
-                {
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            custom_id: '1',
-                            label: '1',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '2',
-                            label: '2',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '3',
-                            label: '3',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '-',
-                            label: '-',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: 'adawd',
-                            label: ' ',
-                            style: 2,
-                            disabled: true
-                        }
-                    ]
-                },
-                {
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            custom_id: '.',
-                            label: '.',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: '0',
-                            label: '0',
-                            style: 2
-                        },
-                        {
-                            type: 2,
-                            custom_id: '=',
-                            label: '=',
-                            style: 3
-                        },
-                        {
-                            type: 2,
-                            custom_id: '+',
-                            label: '+',
-                            style: 1
-                        },
-                        {
-                            type: 2,
-                            custom_id: 'wadawdaw',
-                            label: ' ',
-                            style: 2,
-                            disabled: true
-                        }
-                    ]
-                }
-            ]
+    async function CollatzConjecture(x){
+        var y=Number(x),a=[y];
+        while(y!==1){
+            y=y%2===0?y/2:3*y+1
+            a.push(y)
         }
-    })
+        return a;
+    }
+    async function KaprekarRoutine(number){
+        let total = number;
+        let count = 0;
+        let array = [Number(total)]
+        function uniqueDigitCount(number) {
+            let count = number.toString().split('').sort().filter(function(el, i, a) {
+              if (i == a.indexOf(el)) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+            return count.length;
+        }
+        if (uniqueDigitCount(total) > 1) {
+          while (total !== 6174) {
+            let ascending = parseInt(("0000" + total).substr(-4, 4).toString().split('').sort(acendingSort).join(''));
+            let descending = parseInt(("0000" + total).substr(-4, 4).toString().split('').sort(decendingSort).join(''));
+            total = descending - ascending;
+            count++;
+            array.push(total)
+          }
+        }
+        return array;
+    }
+      function acendingSort(a, b) {
+        return a - b;
+      }
+      function decendingSort(a, b) {
+        return b - a;
+      }
+
+
+
+    switch(args[0]){
+        case 'collatz':
+            var COLLATZ_CONJECTURE = await CollatzConjecture(args[1])
+            console.log(COLLATZ_CONJECTURE)
+            var embed = new Discord.MessageEmbed()
+                .setTitle(`Collatz Conjecture of ${args[1]}`)
+                .setDescription(`\`${COLLATZ_CONJECTURE.join('\`** - **\`')}\``)
+                .setColor('#FD3D26')
+            message.channel.send({embeds: [embed]})
+            break;
+        case 'kaprekar':
+            var KAPREKAR_REOUTINE = await KaprekarRoutine(args[1])
+            console.log(KAPREKAR_REOUTINE)
+            var embed = new Discord.MessageEmbed()
+                .setTitle(`Kaprekar's Routine of ${args[1]}`)
+                .setDescription(`\`${KAPREKAR_REOUTINE.join('\`** - **\`')}\``)
+                .setColor('#FD3D26')
+            message.channel.send({embeds: [embed]})
+            break;
+    }
 }
