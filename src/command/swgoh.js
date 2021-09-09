@@ -211,9 +211,6 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress for ${check.playerName}`)
                 .setDescription(`${check.galacticLegend.requiredUnits.map(unit => `${unit.relic.match===true?`${client.emojis.cache.get('876872571243593738')} ~~**${unit.unitName}** - \`Upgrade to relic ${unit.relic.required}\`~~`:`${client.emojis.cache.get('876872571394621460')} **${unit.unitName}** - \`Upgrade to relic ${unit.relic.required}\``}`).join('\n')}`)
                 .setColor('#FD3D26')
-            //if(check.galacticLegend.completedUnits.length>0){
-            //    embed.addField('Completed Units', `> ${check.galacticLegend.completedUnits.map(unit => `**${unit}**`).join('\n> ')}`)
-            //}
             if(check.galacticLegend.missingUnits.length>0){
                 embed.addField('Missing Units', `> ${check.galacticLegend.missingUnits.map(unit => `**${unit}**`).join('\n> ')}`)
             }
