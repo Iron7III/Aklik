@@ -208,12 +208,12 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             var GALACTIC_LEGEND = ['jkl','jml','see','jmk','lv'].includes(args.slice(2).join(' '))?GALACTIC_LEGENDS_ACRONYM[args.slice(2).join(' ')]:args.slice(2).join(' ')
             var check = await checkRequirements(args[1],GALACTIC_LEGEND)
             var embed = new Discord.MessageEmbed()
-                .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress`)
-                .setDescription(`> **Player Name ➜ **\`${check.playerName}\`\n> **Ally Code ➜ **\`${check.allyCode}\`\n> **Base Id ➜ **\`${check.galacticLegend.baseId}\``)
+                .setAuthor(`${check.galacticLegend.unitName}'s Requirements Progress for ${check.playerName}`)
+                .setDescription(`${check.galacticLegend.requiredUnits.map(unit => `${unit.relic.match===true?`${client.emojis.cache.get('876872571243593738')} ~~**${unit.unitName}** - \`Upgrade to relic ${unit.relic.required}\`~~`:`${client.emojis.cache.get('876872571394621460')} **${unit.unitName}** - \`Upgrade to relic ${unit.relic.required}\``}`).join('\n')}`)
                 .setColor('#FD3D26')
-            check.galacticLegend.requiredUnits.map(unit => {
-                embed.addField(unit.unitName,`> **Gear ➜ **\`${unit.gear.unit}/${unit.gear.required}\` ${unit.gear.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}\n> **Relic ➜ **\`${unit.relic.unit}/${unit.relic.required}\` ${unit.relic.match===true?client.emojis.cache.get('876872571243593738'):client.emojis.cache.get('876872571394621460')}`,false)
-            })
+            //if(check.galacticLegend.completedUnits.length>0){
+            //    embed.addField('Completed Units', `> ${check.galacticLegend.completedUnits.map(unit => `**${unit}**`).join('\n> ')}`)
+            //}
             if(check.galacticLegend.missingUnits.length>0){
                 embed.addField('Missing Units', `> ${check.galacticLegend.missingUnits.map(unit => `**${unit}**`).join('\n> ')}`)
             }
@@ -443,6 +443,19 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             })
             
             break;
+        case 'compare':
+            switch(args[1]){
+                case 'guilds':
+                    async function compareGuilds(ALLY_CODE_1, ALLY_CODE_2){
+                        
+                    }
+                    break;
+                case 'players':
+                    async function comparePlayers(ALLY_CODE_1, ALLY_CODE_2){
+
+                    }
+                    break;
+            }
         default:
             const NO_SUBCOMMAND_PROVIDED = new Discord.MessageEmbed()
                 .setTitle(`These is the valid subcommand list and use.`)
