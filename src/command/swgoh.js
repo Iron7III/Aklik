@@ -340,7 +340,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             break;
         case 'guild':
             async function getGuildUnits(GUILD_DATA){
-                var REY, SLKR, JML, SEE, JMK, DR, JKL
+                var REY, SLKR, JML, SEE, JMK, DR, JKL, LV;
                 REY = {guildUnits: [],g13: 0,g12: 0}
                 SLKR = {guildUnits: [],g13: 0,g12: 0}
                 JML = {guildUnits: [],g13: 0,g12: 0}
@@ -348,7 +348,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 JMK = {guildUnits: [],g13: 0,g12: 0}
                 DR = {guildUnits: [],g13: 0,g12: 0}
                 JKL = {guildUnits: [],g13: 0,g12: 0}
-                for(var i=0;i<GUILD_DATA.members-1;i++){
+                LV = {guildUnits: [],g13: 0,g12: 0}
+                for(var i=0;i<GUILD_DATA.members;i++){
                     var ROSTER = await fetchRoster(trimAllyCode(GUILD_DATA.roster[i].allyCode))
                     if(ROSTER['GLREY']!==undefined){
                         REY.guildUnits.push(ROSTER['GLREY'][0])
@@ -371,8 +372,11 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     if(ROSTER['JEDIKNIGHTLUKE']!==undefined){
                         JKL.guildUnits.push(ROSTER['JEDIKNIGHTLUKE'][0])
                     }
+                    if(ROSTER['LORDVADER']!==undefined){
+                        LV.guildUnits.push(ROSTER['LORDVADER'][0])
+                    }
                 }
-                var GALACTIC_LEGENDS = [REY,SLKR,JML,SEE,JMK,DR,JKL]
+                var GALACTIC_LEGENDS = [REY,SLKR,JML,SEE,JMK,DR,JKL,LV]
                 GALACTIC_LEGENDS.forEach(GL => {
                     GL.guildUnits.map(UNIT => {
                         if(UNIT.gearLevel===13){
@@ -382,6 +386,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         }
                     })
                 })
+                console.log(REY.guildUnits)
+                console.log(REY.guildUnits.length)
                 var data = {
                     rey: {count: REY.guildUnits.length, g13: REY.g13, g12: REY.g12},
                     slkr: {count: SLKR.guildUnits.length, g13: SLKR.g13, g12: SLKR.g12},
@@ -389,7 +395,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     see: {count: SEE.guildUnits.length, g13: SEE.g13, g12: SEE.g12},
                     jmk: {count: JMK.guildUnits.length, g13: JMK.g13, g12: JMK.g12},
                     dr: {count: DR.guildUnits.length, g13: DR.g13, g12: DR.g12},
-                    jkl: {count: JKL.guildUnits.length, g13: JKL.g13, g12: JKL.g12}
+                    jkl: {count: JKL.guildUnits.length, g13: JKL.g13, g12: JKL.g12},
+                    lv: {count: LV.guildUnits.length, g13: LV.g13, g12: LV.g12}
                 }
                 return data;
             }
@@ -426,7 +433,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         `> **SEE ➜ **\`${data.see.count}/${GUILD.members}\`${data.see.count===0?'':` **•** \`${data.see.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.see.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                         `> **JMK ➜ **\`${data.jmk.count}/${GUILD.members}\`${data.jmk.count===0?'':` **•** \`${data.jmk.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jmk.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                         `> **DR ➜ **\`${data.dr.count}/${GUILD.members}\`${data.dr.count===0?'':` **•** \`${data.dr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.dr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
-                        `> **JKL ➜ **\`${data.jkl.count}/${GUILD.members}\`${data.jkl.count===0?'':` **•** \`${data.jkl.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jkl.g12}\`${client.emojis.cache.get('881494918273597490')}`}`
+                        `> **JKL ➜ **\`${data.jkl.count}/${GUILD.members}\`${data.jkl.count===0?'':` **•** \`${data.jkl.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jkl.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
+                        `> **LV ➜ **\`${data.lv.count}/${GUILD.members}\`${data.lv.count===0?'':` **•** \`${data.lv.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.lv.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                     ]
                     embed.setFields([
                         msg2.embeds[0].fields[0],
