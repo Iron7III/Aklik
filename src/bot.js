@@ -29,10 +29,8 @@ function checkSnowflakeId(Id) {
     } else if(Discord.SnowflakeUtil.deconstruct(Id).timestamp>1420070400000) {
         console.log(Discord.SnowflakeUtil.deconstruct(Id));
         try {
-            console.log('true')
             return true
         } catch (error) {
-            console.log('false')
             return false
         }
     }
@@ -129,7 +127,6 @@ client.on("guildCreate", (guild) => {
     let _info = [
         `> **Name ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
-        `> **Locale ➜ **\`${guild.locale}\``,
         `> **Members ➜ **\`${guild.memberCount}\``,
         `> **Owner ➜ **<@${guild.ownerId}> ${client.emojis.cache.get('860997112434786315')} ${guild.members.cache.get(guild.ownerId).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerId}\``
     ]
@@ -164,23 +161,17 @@ client.on("guildCreate", (guild) => {
 })
 
 client.on("guildDelete", (guild) => {
-    const DevLogGuildDelete = `${client.emojis.cache.get("853742823371178015")} **SERVER LEFT**\n> \`\`\`\n> GUILD ➜ ${guild.name} | ${guild.id}\n> \`\`\``;
+    let _info = [
+        `> **Name ➜ **\`${guild.name}\``,
+        `> **ID ➜ **\`${guild.id}\``,
+        `> **Members ➜ **\`${guild.memberCount}\``,
+        `> **Owner ➜ **<@${guild.ownerId}> ${client.emojis.cache.get('860997112434786315')} ${guild.members.cache.get(guild.ownerId).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerId}\``
+    ]
     const guildDeleteEmbed = new Discord.MessageEmbed()
-        .setAuthor(`Left Server`,assets.guildDelete)
-        .setDescription(DevLogGuildDelete)
-        .setColor('#57F287')
-        .setThumbnail(guild.iconURL({dynamic:true,size:512}))
-        .setImage(guild.bannerURL())
-    console.log('ME han expulsado de un servidor')
-    const row = new Discord.MessageActionRow()
-    .addComponents(
-        new Discord.MessageButton()
-            .setLabel('SERVER')
-            .setStyle('LINK')
-            .setURL(`https://discord.gg/`)
-    )
-    client.channels.cache.get('853697886335008808').send({embeds:[guildDeleteEmbed],components:[row]}).catch(e=>console.log(e))
+        .setAuthor(`Left Server`,guild.iconURL({dynamic:true,size:512}))
+        .setDescription(_info.join('\n'))
+        .setColor('#FD3D26')
+    client.channels.cache.get('853697886335008808').send({embeds:[guildDeleteEmbed]}).catch(e=>console.log(e))
 })
 
-// LOGIN WITH "Feltax"
 client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.ReMH4ndYBbjqZVZrSqxhQ81VDdE').catch(e => console.log(e));
