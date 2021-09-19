@@ -400,6 +400,20 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 }
                 return data;
             }
+            //async function getGuildAvgArenaRank(GUILD_DATA){
+            //    var CHARACTERS_TOTAL_RANK = 0;
+            //    var SHIPS_TOTAL_RANK = 0;
+            //    for(var i=0;i<GUILD_DATA.members;i++){
+            //        var PLAYER = await fetchPlayer(trimAllyCode(GUILD_DATA.roster[i].allyCode))
+            //        CHARACTERS_TOTAL_RANK = CHARACTERS_TOTAL_RANK+PLAYER.arena.char.rank;
+            //        SHIPS_TOTAL_RANK = SHIPS_TOTAL_RANK+PLAYER.arena.ship.rank;
+            //    }
+            //    var data = {
+            //        char: CHARACTERS_TOTAL_RANK/GUILD_DATA.members,
+            //        ship: SHIPS_TOTAL_RANK/GUILD_DATA.members
+            //    }
+            //    return data;
+            //}
             var embed = new Discord.MessageEmbed()
                 .setTitle(`Getting guild data...`)
                 .setColor('#FD3D26')
@@ -412,20 +426,22 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     `> **Avg Galactic Power ➜ **\`${new Intl.NumberFormat("es-ES").format(Math.trunc(GUILD.gp/GUILD.members))}\``
                 ]
                 embed
-                .setTitle(`${GUILD.name}`)
-                .setFields([
-                    {
-                        name: 'Statistics',
-                        value: guildStats.join('\n')
-                    },
-                    {
-                        name: 'Galactic Legends Count',
-                        value: '> **Getting data, please wait...**',
-                    }
-                ])
+                    .setTitle(`${GUILD.name}`)
+                    .setFields([
+                        {
+                            name: 'Statistics',
+                            value: guildStats.join('\n')
+                        },
+                        {
+                            name: 'Galactic Legends Count',
+                            value: '> **Getting data, please wait...**',
+                        }
+                    ])
                 .setDescription(`> **${GUILD.desc}**`)
                 msg.edit({embeds: [embed]}).then(async msg2 => {
                     var data = await getGuildUnits(GUILD);
+                    //var data2 = await getGuildAvgArenaRank(GUILD);
+                    //guildStats.push(`> **Avg Arena Rank ➜ **\`${new Intl.NumberFormat("es-ES").format(data2.char.toFixed(2))}\``)
                     var galacticLegendsCountStats = [
                         `> **Rey ➜ **\`${data.rey.count}/${GUILD.members}\`${data.rey.count===0?'':` **•** \`${data.rey.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.rey.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                         `> **SLKR ➜ **\`${data.slkr.count}/${GUILD.members}\`${data.slkr.count===0?'':` **•** \`${data.slkr.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.slkr.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
@@ -437,7 +453,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         `> **LV ➜ **\`${data.lv.count}/${GUILD.members}\`${data.lv.count===0?'':` **•** \`${data.lv.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.lv.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                     ]
                     embed.setFields([
-                        msg2.embeds[0].fields[0],
+                        {
+                            name: 'Statistics',
+                            value: guildStats.join('\n')
+                        },
                         {
                             name: 'Galactic Legends Count',
                             value: galacticLegendsCountStats.join('\n'),
@@ -454,13 +473,130 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     async function compareGuilds(ALLY_CODE_1, ALLY_CODE_2){
                         
                     }
+                    var GUILD_1 = args[2];
+                    var GUILD_2 = args[3];
+                    var GUILD_EMBED_1 = new Discord.MessageEmbed()
+                        .setTitle('Guild 1')
+                        .setColor('#FD3D26')
+                    var GUILD_EMBED_2 = new Discord.MessageEmbed()
+                        .setTitle('Guild 2')
+                        .setColor('#FD3D26')
+                    var GUILDS_COMPARATION_EMBED = new Discord.MessageEmbed()
+                        .setTitle('Guilds Comparation')
+                        .setColor('#FD3D26')
+                    message.channel.send({embeds: [GUILD_EMBED_1,GUILD_EMBED_2]}).then(msg => {
+                        setTimeout(() => msg.edit({embeds: [GUILDS_COMPARATION_EMBED]}), 5000)
+                    })
                     break;
                 case 'players':
-                    async function comparePlayers(ALLY_CODE_1, ALLY_CODE_2){
-
+                    async function playersData(ALLY_CODE_1, ALLY_CODE_2){
+                        var PLAYER_1 = await fetchPlayer(trimAllyCode(ALLY_CODE_1));
+                        var PLAYER_1_GG = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(ALLY_CODE_1)}`)
+                        var PLAYER_2 = await fetchPlayer(trimAllyCode(ALLY_CODE_2));
+                        var PLAYER_2_GG = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(ALLY_CODE_2)}`)
+                        var DATA = [
+                            {
+                                name: PLAYER_1.name,
+                                level: PLAYER_1.level,
+                                gp: {
+                                    total: PLAYER_1_GG.data.data.galactic_power,
+                                    char: PLAYER_1_GG.data.data.character_galactic_power,
+                                    ship: PLAYER_1_GG.data.data.ship_galactic_power
+                                },
+                                unitAmount: PLAYER_1.roster.length,
+                                arena: {
+                                    char: {
+                                        rank: PLAYER_1.arena.char.rank,
+                                        squad: {
+                                            leader: PLAYER.arena.char.squad.find(UNIT => UNIT.squadUnitType===2).defId,
+                                            team: PLAYER.arena.char.squad.filter(UNIT => UNIT.squadUnitType===1).map(UNIT => UNIT.defId)
+                                        }
+                                    },
+                                    ship: {
+                                        rank: PLAYER_1.arena.ship.rank,
+                                        squad: {
+                                            leader: PLAYER.arena.ship.squad.find(UNIT => UNIT.squadUnitType===3).defId,
+                                            team: PLAYER.arena.ship.squad.filter(UNIT => UNIT.squadUnitType===1).map(UNIT => UNIT.defId),
+                                            supports: PLAYER.arena.ship.squad.filter(UNIT => UNIT.squadUnitType===5).map(UNIT => UNIT.defId)
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                name: PLAYER_2.name,
+                                level: PLAYER_2.level,
+                                gp: {
+                                    total: PLAYER_2_GG.data.data.galactic_power,
+                                    char: PLAYER_2_GG.data.data.character_galactic_power,
+                                    ship: PLAYER_2_GG.data.data.ship_galactic_power
+                                },
+                                unitAmount: PLAYER_2.roster.length,
+                                arena: {
+                                    char: {
+                                        rank: PLAYER_2.arena.char.rank,
+                                        squad: {
+                                            leader: PLAYER_1.arena.char.squad.find(UNIT => UNIT.squadUnitType===2).defId,
+                                            team: PLAYER_1.arena.char.squad.filter(UNIT => UNIT.squadUnitType===1).map(UNIT => UNIT.defId)
+                                        }
+                                    },
+                                    ship: {
+                                        rank: PLAYER_2.arena.ship.rank,
+                                        squad: {
+                                            leader: PLAYER_2.arena.ship.squad.find(UNIT => UNIT.squadUnitType===3).defId,
+                                            team: PLAYER_2.arena.ship.squad.filter(UNIT => UNIT.squadUnitType===1).map(UNIT => UNIT.defId),
+                                            supports: PLAYER_2.arena.ship.squad.filter(UNIT => UNIT.squadUnitType===5).map(UNIT => UNIT.defId)
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                        return DATA;
                     }
+                    var PLAYER_1 = args[2];
+                    var PLAYER_2 = args[3];
+                    var DATA = await playersData(PLAYER_1, PLAYER_2)
+                    console.log(DATA)
+                    var PLAYER_EMBED_1 = new Discord.MessageEmbed()
+                        .setTitle('Player 1')
+                        .setColor('#FD3D26')
+                    var PLAYER_EMBED_2 = new Discord.MessageEmbed()
+                        .setTitle('Player 2')
+                        .setColor('#FD3D26')
+                    var a = {
+                        level: {
+                            player1: DATA[0].level==DATA[1].level?`\`\`\`${DATA[0].level}\`\`\``:DATA[0].level>DATA[1].level?`\`\`\`ini\n> [${DATA[0].level}]\`\`\``:`\`\`\`css\n> [${DATA[0].level}]\`\`\``,
+                            comparation: DATA[0].level==DATA[1].level?'=':DATA[0].level>DATA[1].level?'>':'<',
+                            player2: DATA[0].level==DATA[1].level?`\`\`\`${DATA[1].level}\`\`\``:DATA[0].level>DATA[1].level?`\`\`\`css\n> [${DATA[1].level}]\`\`\``:`\`\`\`ini\n> [${DATA[1].level}]\`\`\``
+                        },
+                        unitAmount: {
+                            player1: DATA[0].unitAmount==DATA[1].unitAmount?`\`\`\`${DATA[0].unitAmount}\`\`\``:DATA[0].unitAmount>DATA[1].unitAmount?`\`\`\`ini\n> [${DATA[0].unitAmount}]\`\`\``:`\`\`\`css\n> [${DATA[0].unitAmount}]\`\`\``,
+                            comparation: DATA[0].unitAmount==DATA[1].unitAmount?'=':DATA[0].unitAmount>DATA[1].unitAmount?'>':'<',
+                            player2: DATA[0].unitAmount==DATA[1].unitAmount?`\`\`\`${DATA[1].unitAmount}\`\`\``:DATA[0].unitAmount>DATA[1].unitAmount?`\`\`\`css\n> [${DATA[1].unitAmount}]\`\`\``:`\`\`\`ini\n> [${DATA[1].unitAmount}]\`\`\``
+                        },
+                        charArena: {
+                            player1: DATA[0].arena.char.rank==DATA[1].arena.char.rank?`\`\`\`${DATA[0].arena.char.rank}\`\`\``:DATA[0].arena.char.rank>DATA[1].arena.char.rank?`\`\`\`ini\n> [${DATA[0].arena.char.rank}]\`\`\``:`\`\`\`css\n> [${DATA[0].arena.char.rank}]\`\`\``,
+                            comparation: DATA[0].arena.char.rank==DATA[1].arena.char.rank?'=':DATA[0].arena.char.rank>DATA[1].arena.char.rank?'>':'<',
+                            player2: DATA[0].arena.char.rank==DATA[1].arena.char.rank?`\`\`\`${DATA[1].arena.char.rank}\`\`\``:DATA[0].arena.char.rank>DATA[1].arena.char.rank?`\`\`\`css\n> [${DATA[1].arena.char.rank}]\`\`\``:`\`\`\`ini\n> [${DATA[1].arena.char.rank}]\`\`\``
+                        },
+                        shipArena: {
+                            player1: DATA[0].arena.ship.rank==DATA[1].arena.ship.rank?`\`\`\`${DATA[0].arena.ship.rank}\`\`\``:DATA[0].arena.ship.rank>DATA[1].arena.ship.rank?`\`\`\`ini\n> [${DATA[0].arena.ship.rank}]\`\`\``:`\`\`\`css\n> [${DATA[0].arena.ship.rank}]\`\`\``,
+                            comparation: DATA[0].arena.ship.rank==DATA[1].arena.ship.rank?'=':DATA[0].arena.ship.rank>DATA[1].arena.ship.rank?'>':'<',
+                            player2: DATA[0].arena.ship.rank==DATA[1].arena.ship.rank?`\`\`\`${DATA[1].arena.ship.rank}\`\`\``:DATA[0].arena.ship.rank>DATA[1].arena.ship.rank?`\`\`\`css\n> [${DATA[1].arena.ship.rank}]\`\`\``:`\`\`\`ini\n> [${DATA[1].arena.ship.rank}]\`\`\``
+                        }
+                    }
+                    console.log(a)
+                    var PLAYERS_COMPARATION_EMBED = new Discord.MessageEmbed()
+                        .setTitle('Players Comparation')
+                        .addField(DATA[0].name,`> ${a.level.player1}${a.unitAmount.player1}${a.charArena.player1}${a.shipArena.player1}`,true)
+                        .addField('\u2800',`> \`\`\`${a.level.comparation}\`\`\`\`\`\`${a.unitAmount.comparation}\`\`\`\`\`\`${a.charArena.comparation}\`\`\`\`\`\`${a.shipArena.comparation}\`\`\``,true)
+                        .addField(DATA[1].name,`> ${a.level.player2}${a.unitAmount.player2}${a.charArena.player2}${a.shipArena.player2}`,true)
+                        .setColor('#FD3D26')
+                    message.channel.send({embeds: [PLAYER_EMBED_1,PLAYER_EMBED_2]}).then(msg => {
+                        setTimeout(() => msg.edit({embeds: [PLAYERS_COMPARATION_EMBED]}), 5000)
+                    })
                     break;
             }
+            break;
         default:
             const NO_SUBCOMMAND_PROVIDED = new Discord.MessageEmbed()
                 .setTitle(`These is the valid subcommand list and use.`)

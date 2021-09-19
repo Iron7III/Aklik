@@ -89,15 +89,15 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                     ctx.drawImage(image, 0, 81, 512, 431)
                     // COSMETIC NAME
                     ctx.fillStyle = 'white'
-                    registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-                    ctx.font = '36px Burbank Big Condensed'
+                    registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
+                    ctx.font = '36px "Burbank Big Rg Bk"';
                     var n = res.data.name;
                     var t = ctx.measureText(n);
                     ctx.fillText(n, (512-t.width)/2, 446)
                     // COSMETIC PRICE
                     ctx.fillStyle = 'white'
-                    registerFont('Burbank Big Condensed Black 700.ttf', { family: 'Burbank Big Condensed Black' })
-                    ctx.font = '36px Burbank Big Condensed'
+                    registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
+                    ctx.font = '36px "Burbank Big Rg Bk"';
                     var n = i.price;
                     var t = ctx.measureText(n);
                     ctx.fillText(n, 430-t.width, 502)
