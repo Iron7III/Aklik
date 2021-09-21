@@ -44,19 +44,39 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         for(var i=0;i<newsData.data.data.motds.length;i++){
             const canvas = createCanvas(baseWidth, baseHeight);
             const ctx = canvas.getContext('2d');
+        //Global constants.
             var beforeFinish = Date.now();
+        //Function code.
+            //Image
             var img = await loadImage(newsData.data.data.motds[i].image);
             ctx.drawImage(img, 0, 0, baseWidth, baseHeight);
+            //Tab Rectangle
+            var tabHeight = (8.4/100)*baseHeight;
             ctx.fillStyle = 'rgba(43,43,43,0.6)';
-            var tabHeight = baseHeight/12;
             ctx.fillRect(0, 0, baseWidth, tabHeight);
+            //Title
             var title = newsData.data.data.motds[i].title.toUpperCase();
+            var titleFontSize = (tabHeight/2.8).toFixed();
             ctx.fillStyle = '#FFFFFF';
             ctx.strokeStyle = '#000000';
             ctx.lineWidth = 4;
-            ctx.font = `${(tabHeight/2.5).toFixed()}px "Burbank Big Rg Bk"`;
+            ctx.font = `${titleFontSize}px "Burbank Big Rg Bk"`;
             ctx.strokeText(title, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2);
             ctx.fillText(title, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2)
+            //Bottom Gradient
+            var gradient = ctx.createLinearGradient(baseWidth/2, 0, baseWidth/2, baseHeight);
+            gradient.addColorStop(0.4, 'rgba(0,0,0,0)');
+            gradient.addColorStop(1, 'rgba(0,60,255,0.6)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, baseWidth, baseHeight)
+            // Body
+            var body = newsData.data.data.motds[i].body;
+            var bodyFontSize = (tabHeight/2.6).toFixed();
+            var body = newsData.data.data.motds[i].body;
+            ctx.fillStyle = '#55D6F8';
+            ctx.font = `${bodyFontSize}px "Burbank Big Rg Bk"`;
+            ctx.fillText(body, tabHeight/2, (90/100)*baseHeight)
+        //Other
             console.log(`Rendered "${title}" | ${newsData.data.data.motds[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${newsData.data.data.motds[i].id}.webp`)
             fs.writeFileSync(`${newsData.data.data.motds[i].id}.webp`, canvas.toBuffer());
@@ -64,14 +84,6 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
         return splitNews;
     }
-    //var brimgs = await generateSplitNews(args[0],args[1])
-    //var embeds = []
-    //brimgs.map(img => {
-    //    var embed = new Discord.MessageEmbed()
-    //        .setImage(img.name)
-    //    embeds.push(embed)
-    //})
-    //message.channel.send({embeds: embeds})
-    var brimg = await generateFullNews(args[0],args[1])
-    message.channel.send({files:[brimg]})
+    await generateSplitNews(args[0],args[1])
+    await generateFullNews(args[0],args[1])
 };
