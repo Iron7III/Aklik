@@ -42,9 +42,9 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         const baseWidth = 1920;
         const baseHeight = 1080;
         for(var i=0;i<newsData.data.data.motds.length;i++){
+        //Global constants.
             const canvas = createCanvas(baseWidth, baseHeight);
             const ctx = canvas.getContext('2d');
-        //Global constants.
             var beforeFinish = Date.now();
         //Function code.
             //Image
@@ -52,7 +52,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             ctx.drawImage(img, 0, 0, baseWidth, baseHeight);
             //Tab Rectangle
             var tabHeight = (8.4/100)*baseHeight;
-            ctx.fillStyle = 'rgba(43,43,43,0.6)';
+            ctx.fillStyle = 'rgba(100,100,100,0.6)';
             ctx.fillRect(0, 0, baseWidth, tabHeight);
             //Title
             var title = newsData.data.data.motds[i].title.toUpperCase();
@@ -66,16 +66,35 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             //Bottom Gradient
             var gradient = ctx.createLinearGradient(baseWidth/2, 0, baseWidth/2, baseHeight);
             gradient.addColorStop(0.4, 'rgba(0,0,0,0)');
-            gradient.addColorStop(1, 'rgba(0,60,255,0.6)');
+            gradient.addColorStop(1, 'rgba(0,60,255,0.3)');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, baseWidth, baseHeight)
             // Body
             var body = newsData.data.data.motds[i].body;
             var bodyFontSize = (tabHeight/2.6).toFixed();
-            var body = newsData.data.data.motds[i].body;
+            async function splitStringIntoLines(str){
+                var x = str;
+                var lines = [];
+                while(x.length!==0){
+                    var y = x.replace(/^(.{50}[^\s]*).*/, "$1");
+                    var x = x.replace(y,'').slice(1,x.length)
+                    lines.push(y)
+                }
+                return lines.reverse()
+            }
+            var lines = await splitStringIntoLines(body);
             ctx.fillStyle = '#55D6F8';
             ctx.font = `${bodyFontSize}px "Burbank Big Rg Bk"`;
-            ctx.fillText(body, tabHeight/2, (90/100)*baseHeight)
+            async function drawBody(lines){
+                for(var i=0;i<lines.length;i++){
+                    ctx.fillText(lines[i], tabHeight/2, (90/100)*baseHeight-(tabHeight/2)*i)
+                }
+            }
+            await drawBody(lines)
+        //Watermark
+            ctx.globalAlpha = 0.5;
+            var watermark = await loadImage('watermark.png');
+            ctx.drawImage(watermark, baseWidth-(15/100)*baseWidth, baseHeight-(13/100)*baseWidth, (10/100)*baseWidth, (10/100)*baseWidth);
         //Other
             console.log(`Rendered "${title}" | ${newsData.data.data.motds[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${newsData.data.data.motds[i].id}.webp`)
@@ -84,6 +103,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
         return splitNews;
     }
-    await generateSplitNews(args[0],args[1])
     await generateFullNews(args[0],args[1])
+    var splitImgs = await generateSplitNews(args[0],args[1])
+    splitImgs.map(img => message.channel.send({files: [img]}))
 };
