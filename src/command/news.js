@@ -36,7 +36,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
     async function generateSplitNews(gameMode,lang){
         var deafultLang = 'en';
         var deafultGameMode = 'br';
-        const splitNews = []
+        const splitNews =  []
         var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','en','ru'].includes(lang)?lang:deafultLang}`);
         registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
         const baseWidth = 1920;
@@ -54,15 +54,15 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             var tabHeight = (8.4/100)*baseHeight;
             ctx.fillStyle = 'rgba(100,100,100,0.6)';
             ctx.fillRect(0, 0, baseWidth, tabHeight);
-            //Title
-            var title = newsData.data.data.motds[i].title.toUpperCase();
-            var titleFontSize = (tabHeight/2.8).toFixed();
+            //Tab Title
+            var tabTitle = newsData.data.data.motds[i].tabTitle!==null?newsData.data.data.motds[i].tabTitle.toUpperCase():newsData.data.data.motds[i].title;
+            var tabTitleFontSize = (tabHeight/2.8).toFixed();
             ctx.fillStyle = '#FFFFFF';
             ctx.strokeStyle = '#000000';
             ctx.lineWidth = 4;
-            ctx.font = `${titleFontSize}px "Burbank Big Rg Bk"`;
-            ctx.strokeText(title, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2);
-            ctx.fillText(title, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2)
+            ctx.font = `${tabTitleFontSize}px "Burbank Big Rg Bk"`;
+            ctx.strokeText(tabTitle, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2);
+            ctx.fillText(tabTitle, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2)
             //Bottom Gradient
             var gradient = ctx.createLinearGradient(baseWidth/2, 0, baseWidth/2, baseHeight);
             gradient.addColorStop(0.4, 'rgba(0,0,0,0)');
@@ -91,19 +91,40 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
                 }
             }
             await drawBody(lines)
-        //Watermark
+            //Title
+            var title = newsData.data.data.motds[i].title;
+            var titleFontSize = (tabHeight/1.1).toFixed();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `italic ${titleFontSize}px "Burbank Big Rg Bk"`;
+            ctx.fillText(title, tabHeight/2, (90/100)*baseHeight-(tabHeight/2)*lines.length)
+            //Watermark
             ctx.globalAlpha = 0.5;
             var watermark = await loadImage('watermark.png');
-            ctx.drawImage(watermark, baseWidth-(15/100)*baseWidth, baseHeight-(13/100)*baseWidth, (10/100)*baseWidth, (10/100)*baseWidth);
-        //Other
+            ctx.drawImage(watermark, baseWidth-(14/100)*baseWidth, baseHeight-(13/100)*baseWidth, (10/100)*baseWidth, (10/100)*baseWidth);
+            //Other
             console.log(`Rendered "${title}" | ${newsData.data.data.motds[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${newsData.data.data.motds[i].id}.webp`)
             fs.writeFileSync(`${newsData.data.data.motds[i].id}.webp`, canvas.toBuffer());
-            splitNews.push(attach)
+            //Video Link
+            if(newsData.data.data.motds[i].videoId){
+                videoId=`https://cdn.fortnite-api.com/streams/${newsData.data.data.motds[i].videoId}/${deafultLang}.mp4`
+            }
+            splitNews.push({image: attach, title: newsData.data.data.motds[i].title, videoId: newsData.data.data.motds[i].videoId?`https://cdn.fortnite-api.com/streams/${newsData.data.data.motds[i].videoId}/${deafultLang}.mp4`:null})
         }
-        return splitNews;
+        return splitNews
     }
     await generateFullNews(args[0],args[1])
-    var splitImgs = await generateSplitNews(args[0],args[1])
-    splitImgs.map(img => message.channel.send({files: [img]}))
+    var splitNews = await generateSplitNews(args[0],args[1])
+    console.log(splitNews)
+    splitNews.map(n => {
+        const row = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
+                .setLabel(n.title)
+                .setStyle('LINK')
+                .setEmoji(client.emojis.cache.get("890738286111371295"))
+                .setURL(n.videoId?n.videoId:'')
+        )
+        message.channel.send({files: [n.image],components: n.videoId?[row]:null})
+    })
 };
