@@ -37,7 +37,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         var deafultLang = 'en';
         var deafultGameMode = 'br';
         const splitNews =  []
-        var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','en','ru'].includes(lang)?lang:deafultLang}`);
+        var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','es','it','ru'].includes(lang)?lang:deafultLang}`);
         registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
         const baseWidth = 1920;
         const baseHeight = 1080;
@@ -92,7 +92,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             }
             await drawBody(lines)
             //Title
-            var title = newsData.data.data.motds[i].title;
+            var title = newsData.data.data.motds[i].title.toUpperCase();
             var titleFontSize = (tabHeight/1.1).toFixed();
             ctx.fillStyle = '#FFFFFF';
             ctx.font = `italic ${titleFontSize}px "Burbank Big Rg Bk"`;
