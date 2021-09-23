@@ -37,7 +37,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         var deafultLang = 'en';
         var deafultGameMode = 'br';
         const splitNews =  []
-        var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','es','it'].includes(lang)?lang:deafultLang}`);
+        var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','es','it','fr','es-419','pt-BR'].includes(lang)?lang:deafultLang}`);
         registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
         const baseWidth = 1920;
         const baseHeight = 1080;
