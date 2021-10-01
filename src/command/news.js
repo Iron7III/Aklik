@@ -10,7 +10,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','en','ru'].includes(lang)?lang:deafultLang}`);
         registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
         const baseWidth = 1920;
-        const baseHeight = 1080;
+        const baseHeight = baseWidth/(16/9);
         const canvas = createCanvas(baseWidth, baseHeight*newsData.data.data.motds.length);
         const ctx = canvas.getContext('2d');
         for(var i=0;i<newsData.data.data.motds.length;i++){
@@ -33,89 +33,132 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         fs.writeFileSync(`${newsData.data.data.hash}.webp`, canvas.toBuffer());
         return attach;
     }
-    async function generateSplitNews(gameMode,lang){
-        var deafultLang = 'en';
-        var deafultGameMode = 'br';
-        const splitNews =  []
-        var newsData = await axios.get(`https://fortnite-api.com/v2/news/${['br','creative'].includes(gameMode)?gameMode:deafultGameMode}?language=${['en','es','it','fr','es-419','pt-BR'].includes(lang)?lang:deafultLang}`);
+    async function newsBR(language,resolution){
+        const data = await axios.get(`https://fortnite-api.com/v2/news/br?language=${language}`);
+        const news=[];
+        const baseX = 1920; // Width
+        const baseY = baseX/(16/9); // Height
+    // Font
         registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
-        const baseWidth = 1920;
-        const baseHeight = 1080;
-        for(var i=0;i<newsData.data.data.motds.length;i++){
-        //Global constants.
-            const canvas = createCanvas(baseWidth, baseHeight);
-            const ctx = canvas.getContext('2d');
-            var beforeFinish = Date.now();
-        //Function code.
-            //Image
-            var img = await loadImage(newsData.data.data.motds[i].image);
-            ctx.drawImage(img, 0, 0, baseWidth, baseHeight);
-            //Tab Rectangle
-            var tabHeight = (8.4/100)*baseHeight;
-            ctx.fillStyle = 'rgba(100,100,100,0.6)';
-            ctx.fillRect(0, 0, baseWidth, tabHeight);
-            //Tab Title
-            var tabTitle = newsData.data.data.motds[i].tabTitle!==null?newsData.data.data.motds[i].tabTitle.toUpperCase():newsData.data.data.motds[i].title;
-            var tabTitleFontSize = (tabHeight/2.8).toFixed();
+    // Tab Height
+        const tabY = (8.4/100)*baseY;
+    // Body x & y
+        const bodyX = (tabY/2).toFixed(1);
+        const bodyY = (90/100)*baseY-(tabY/2);
+    // Font Sizes
+        const tabTitleFontSize = (tabY/2.8).toFixed();
+        const bodyFontSize = (tabY/2.6).toFixed();
+        const titleFontSize = (tabY/1.2).toFixed();
+    // Template
+        const template = await loadImage('template.png');
+    // Images Generation
+        for(var i=0;i<data.data.data.motds.length;i++){
+            const beforeFinish = Date.now(); // Beggining
+            const canvas = createCanvas(baseX, baseY);
+            const ctx = canvas.getContext('2d', {alpha: false});
+            async function divideString(str,maxLenght,fontSize,style){
+                var splitedString = str.split(/ +/g);
+                var lines = 0;
+                var finalText = '';
+                ctx.font = `${style?`${style} `:''}${fontSize}px "Burbank Big Rg Bk"`;
+                for(var i=0;i<splitedString.length;i++){
+                    var tryText = `${finalText.length>0?`${finalText} ${splitedString[i]}`:`${splitedString[i]}`}`;
+                    if(ctx.measureText(tryText).width<maxLenght){
+                        finalText = tryText;
+                    }else{
+                        lines++;
+                        finalText = `${finalText}\n${splitedString[i]}`;
+                    }
+                }
+                return {text: finalText, linesCount: lines};
+            }
+        //Image
+            var img = await loadImage(data.data.data.motds[i].image);
+            ctx.drawImage(img, 0, 0, baseX, baseY);
+        // Template
+            ctx.drawImage(template, 0, 0, baseX, baseY);
+        //Tab Title
+            var tabTitle = data.data.data.motds[i].tabTitle!==null?data.data.data.motds[i].tabTitle.toUpperCase():data.data.data.motds[i].title.toUpperCase();
             ctx.fillStyle = '#FFFFFF';
             ctx.strokeStyle = '#000000';
             ctx.lineWidth = 4;
             ctx.font = `${tabTitleFontSize}px "Burbank Big Rg Bk"`;
-            ctx.strokeText(tabTitle, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2);
-            ctx.fillText(tabTitle, (baseWidth-ctx.measureText(title).width)/2, (tabHeight+ctx.measureText(title).emHeightAscent)/2)
-            //Bottom Gradient
-            var gradient = ctx.createLinearGradient(baseWidth/2, 0, baseWidth/2, baseHeight);
-            gradient.addColorStop(0.4, 'rgba(0,0,0,0)');
-            gradient.addColorStop(1, 'rgba(0,60,255,0.3)');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, baseWidth, baseHeight)
-            // Body
-            var body = newsData.data.data.motds[i].body;
-            var bodyFontSize = (tabHeight/2.6).toFixed();
-            async function splitStringIntoLines(str){
-                var x = str;
-                var lines = [];
-                while(x.length!==0){
-                    var y = x.replace(/^(.{50}[^\s]*).*/, "$1");
-                    var x = x.replace(y,'').slice(1,x.length)
-                    lines.push(y)
-                }
-                return lines.reverse()
-            }
-            var lines = await splitStringIntoLines(body);
+            ctx.strokeText(tabTitle, (baseX-ctx.measureText(tabTitle).width)/2, (tabY+ctx.measureText(tabTitle).emHeightAscent)/2);
+            ctx.fillText(tabTitle, (baseX-ctx.measureText(tabTitle).width)/2, (tabY+ctx.measureText(tabTitle).emHeightAscent)/2);
+        //Body
+            var bodyLines = await divideString(data.data.data.motds[i].body,baseX/2-tabY/2,bodyFontSize);
             ctx.fillStyle = '#55D6F8';
             ctx.font = `${bodyFontSize}px "Burbank Big Rg Bk"`;
-            async function drawBody(lines){
-                for(var i=0;i<lines.length;i++){
-                    ctx.fillText(lines[i], tabHeight/2, (90/100)*baseHeight-(tabHeight/2)*i)
-                }
-            }
-            await drawBody(lines)
-            //Title
-            var title = newsData.data.data.motds[i].title.toUpperCase();
-            var titleFontSize = (tabHeight/1.1).toFixed();
+            ctx.fillText(bodyLines.text, tabY/2, ((90/100)*baseY-((tabY/2)*bodyLines.linesCount)).toFixed(1))
+        //Title
+            var titleLines = await divideString(data.data.data.motds[i].title,baseX/2-tabY/2,titleFontSize,'italic');
             ctx.fillStyle = '#FFFFFF';
             ctx.font = `italic ${titleFontSize}px "Burbank Big Rg Bk"`;
-            ctx.fillText(title, tabHeight/2, (90/100)*baseHeight-(tabHeight/2)*lines.length)
-            //Watermark
-            ctx.globalAlpha = 0.5;
-            var watermark = await loadImage('watermark.png');
-            ctx.drawImage(watermark, baseWidth-(14/100)*baseWidth, baseHeight-(13/100)*baseWidth, (10/100)*baseWidth, (10/100)*baseWidth);
-            //Other
-            console.log(`Rendered "${title}" | ${newsData.data.data.motds[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
-            const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${newsData.data.data.motds[i].id}.webp`)
-            fs.writeFileSync(`${newsData.data.data.motds[i].id}.webp`, canvas.toBuffer());
-            //Video Link
-            if(newsData.data.data.motds[i].videoId){
-                videoId=`https://cdn.fortnite-api.com/streams/${newsData.data.data.motds[i].videoId}/${deafultLang}.mp4`
-            }
-            splitNews.push({image: attach, title: newsData.data.data.motds[i].title, videoId: newsData.data.data.motds[i].videoId?`https://cdn.fortnite-api.com/streams/${newsData.data.data.motds[i].videoId}/${deafultLang}.mp4`:null})
+            ctx.fillText(titleLines.text.toUpperCase(), tabY/2, (90/100)*baseY-((tabY/2)*(bodyLines.linesCount+1))-((tabY)*titleLines.linesCount));
+        //Other
+            console.log(`Rendered "${data.data.data.motds[i].title.toUpperCase()}" | ${data.data.data.motds[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
+            const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${data.data.data.motds[i].id}.webp`)
+            fs.writeFileSync(`${data.data.data.motds[i].id}.webp`, canvas.toBuffer());
+            news.push({image: attach, title: data.data.data.motds[i].title, videoId: data.data.data.motds[i].videoId?`https://cdn.fortnite-api.com/streams/${data.data.data.motds[i].videoId}/${language}.mp4`:null})
         }
-        return splitNews
+        return news;
     }
-    await generateFullNews(args[0],args[1])
-    var splitNews = await generateSplitNews(args[0],args[1])
-    console.log(splitNews)
+        async function generateSTW(data){
+            const newsArray =  []
+            const baseWidth = 1920;
+            const baseHeight = baseWidth/2;
+            registerFont("BurbankBigRegularBlack.otf", {family: "Burbank Big Regular",style: "Black"});
+            for(var i=0;i<data.data.data.messages.length;i++){
+            //Global constants.
+                const canvas = createCanvas(baseWidth, baseHeight);
+                const ctx = canvas.getContext('2d');
+                var beforeFinish = Date.now();
+            //Function code.
+                //Image
+                var img = await loadImage(data.data.data.messages[i].image);
+                ctx.drawImage(img, 0, 0, baseWidth, baseHeight);
+                // Body
+                var body = data.data.data.messages[i].body;
+                var bodyFontSize = ((8.4/100)*baseHeight/2.6).toFixed();
+                async function splitStringIntoLines(str,maxLenght){
+                    var splitedString = str.split(/ +/g);
+                    var lines = [];
+                    var finalText = `${splitedString[0]}`;
+                    for(var i=1;i<splitedString.length;i++){
+                        var tryText = `${finalText} ${splitedString[i]}`;
+                        ctx.measureText(tryText).width<maxLenght?finalText=tryText:lines.unshift(`${finalText}`),finalText=`${splitedString[i]}`;
+                    }
+                    lines.unshift(`${finalText}`);
+                    return lines;
+                }
+                var lines = await splitStringIntoLines(body,baseWidth/2-tabHeight/2);
+                console.log(lines)
+                ctx.fillStyle = '#368CC5';
+                ctx.font = `${bodyFontSize}px "Burbank Big Rg Bk"`;
+                async function drawBody(lines){
+                    for(var i=0;i<lines.length;i++){
+                        ctx.fillText(lines[i], (8.4/100)*baseHeight/2, (90/100)*baseHeight-((8.4/100)*baseHeight/2)*i)
+                    }
+                }
+                await drawBody(lines)
+                //Title
+                var titleFontSize = ((8.4/100)*baseHeight/1.1).toFixed();
+                ctx.fillStyle = '#101427';
+                ctx.font = `italic ${titleFontSize}px "Burbank Big Rg Bk"`;
+                ctx.fillText(data.data.data.messages[i].title.toUpperCase(), (8.4/100)*baseHeight/2, (90/100)*baseHeight-((8.4/100)*baseHeight/2)*lines.length)
+                //Watermark
+                ctx.globalAlpha = 0.5;
+                var watermark = await loadImage('watermark.png');
+                ctx.drawImage(watermark, baseWidth-(14/100)*baseWidth, baseHeight-(13/100)*baseWidth, (10/100)*baseWidth, (10/100)*baseWidth);
+                //Other
+                console.log(`Rendered "${data.data.data.messages[i].title.toUpperCase()}" | ${data.data.data.messages[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
+                const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${data.data.data.messages[i].id}.webp`)
+                fs.writeFileSync(`${data.data.data.messages[i].image.slice('https://cdn2.unrealengine.com/'.length,-4)}.webp`, canvas.toBuffer());
+                newsArray.push({image: attach, title: data.data.data.messages[i].title})
+            }
+            return newsArray;
+        }
+    var splitNews = await newsBR(args[0]?args[0]:'en');
     splitNews.map(n => {
         const row = new Discord.MessageActionRow()
         .addComponents(

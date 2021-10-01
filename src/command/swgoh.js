@@ -340,15 +340,17 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             break;
         case 'guild':
             async function getGuildUnits(GUILD_DATA){
-                var REY, SLKR, JML, SEE, JMK, DR, JKL, LV;
-                REY = {guildUnits: [],g13: 0,g12: 0}
-                SLKR = {guildUnits: [],g13: 0,g12: 0}
-                JML = {guildUnits: [],g13: 0,g12: 0}
-                SEE = {guildUnits: [],g13: 0,g12: 0}
-                JMK = {guildUnits: [],g13: 0,g12: 0}
-                DR = {guildUnits: [],g13: 0,g12: 0}
-                JKL = {guildUnits: [],g13: 0,g12: 0}
-                LV = {guildUnits: [],g13: 0,g12: 0}
+                var REY, SLKR, JML, SEE, JMK, DR, JKL, LV, HAN, GK;
+                REY = {guildUnits: [],g13: 0,g12: 0};
+                SLKR = {guildUnits: [],g13: 0,g12: 0};
+                JML = {guildUnits: [],g13: 0,g12: 0};
+                SEE = {guildUnits: [],g13: 0,g12: 0};
+                JMK = {guildUnits: [],g13: 0,g12: 0};
+                DR = {guildUnits: [],g13: 0,g12: 0};
+                JKL = {guildUnits: [],g13: 0,g12: 0};
+                LV = {guildUnits: [],g13: 0,g12: 0};
+                HAN = {guildUnits: [],maxStars: 0,notMaxStars: 0};
+                GK = {guildUnits: [],maxStars: 0,notMaxStars: 0};
                 for(var i=0;i<GUILD_DATA.members;i++){
                     var ROSTER = await fetchRoster(trimAllyCode(GUILD_DATA.roster[i].allyCode))
                     if(ROSTER['GLREY']!==undefined){
@@ -375,9 +377,15 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     if(ROSTER['LORDVADER']!==undefined){
                         LV.guildUnits.push(ROSTER['LORDVADER'][0])
                     }
+                    if(ROSTER['HANSOLO']!==undefined){
+                        HAN.guildUnits.push(ROSTER['HANSOLO'][0])
+                    }
+                    if(ROSTER['GENERALKENOBI']!==undefined){
+                        GK.guildUnits.push(ROSTER['GENERALKENOBI'][0])
+                    }
                 }
-                var GALACTIC_LEGENDS = [REY,SLKR,JML,SEE,JMK,DR,JKL,LV]
-                GALACTIC_LEGENDS.forEach(GL => {
+                var CHARACTERS = [REY,SLKR,JML,SEE,JMK,DR,JKL,LV]
+                CHARACTERS.forEach(GL => {
                     GL.guildUnits.map(UNIT => {
                         if(UNIT.gearLevel===13){
                             GL.g13++
@@ -386,8 +394,16 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         }
                     })
                 })
-                console.log(REY.guildUnits)
-                console.log(REY.guildUnits.length)
+                var RAID = [HAN,GK]
+                RAID.forEach(RAID_UNIT => {
+                    RAID_UNIT.guildUnits.map(UNIT => {
+                        if(UNIT.starLevel===7){
+                            RAID_UNIT.maxStars++
+                        } else if(UNIT.starLevel<7){
+                            RAID_UNIT.notMaxStars++
+                        }
+                    })
+                })
                 var data = {
                     rey: {count: REY.guildUnits.length, g13: REY.g13, g12: REY.g12},
                     slkr: {count: SLKR.guildUnits.length, g13: SLKR.g13, g12: SLKR.g12},
@@ -396,8 +412,11 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     jmk: {count: JMK.guildUnits.length, g13: JMK.g13, g12: JMK.g12},
                     dr: {count: DR.guildUnits.length, g13: DR.g13, g12: DR.g12},
                     jkl: {count: JKL.guildUnits.length, g13: JKL.g13, g12: JKL.g12},
-                    lv: {count: LV.guildUnits.length, g13: LV.g13, g12: LV.g12}
+                    lv: {count: LV.guildUnits.length, g13: LV.g13, g12: LV.g12},
+                    han: {count: HAN.guildUnits.length, maxStars: HAN.maxStars, notMaxStars: HAN.notMaxStars},
+                    gk: {count: GK.guildUnits.length, maxStars: GK.maxStars, notMaxStars: GK.notMaxStars}
                 }
+                console.log(data)
                 return data;
             }
             //async function getGuildAvgArenaRank(GUILD_DATA){
@@ -452,6 +471,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         `> **JKL ➜ **\`${data.jkl.count}/${GUILD.members}\`${data.jkl.count===0?'':` **•** \`${data.jkl.g13}\`${client.emojis.cache.get('881494918256791663')} **•** \`${data.jkl.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                         `> **LV ➜ **\`${data.lv.count}/${GUILD.members}\`${data.lv.count===0?'':` **•** \`${data.lv.g13}\`${client.emojis.cache.get('881494918252605530')} **•** \`${data.lv.g12}\`${client.emojis.cache.get('881494918273597490')}`}`,
                     ]
+                    var raidCharactersCountStats = [
+                        `> **HAN ➜ **\`${data.han.maxStars}/35\``,
+                        `> **GK ➜ **\`${data.gk.maxStars}/35\``
+                    ]
                     embed.setFields([
                         {
                             name: 'Statistics',
@@ -460,6 +483,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                         {
                             name: 'Galactic Legends Count',
                             value: galacticLegendsCountStats.join('\n'),
+                        },
+                        {
+                            name: 'Raid Characters Count',
+                            value: raidCharactersCountStats.join('\n'),
                         }
                     ])
                     msg2.edit({embeds: [embed]})

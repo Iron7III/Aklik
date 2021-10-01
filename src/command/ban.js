@@ -32,7 +32,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 if(!message.member.permissions.has('BAN_MEMBERS')){
                     embed.setDescription(`_No tienes permisos para banear usuarios._`).setColor('#ED4245')
                     message.channel.send({embeds: [embed]})
-                        .then(msg => client.setTimeout(() => msg.delete(), 5000))
+                        .then(msg => setTimeout(() => msg.delete(), 5000))
                 } else {
                     const member = message.guild.members.cache.get(user.id);
                     if(!member){
