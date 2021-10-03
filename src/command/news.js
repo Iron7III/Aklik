@@ -44,7 +44,7 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         const tabY = (8.4/100)*baseY;
     // Body x & y
         const bodyX = (tabY/2).toFixed(1);
-        const bodyY = (90/100)*baseY-(tabY/2);
+        const bodyY = (90/100)*baseY;
     // Font Sizes
         const tabTitleFontSize = (tabY/2.8).toFixed();
         const bodyFontSize = (tabY/2.6).toFixed();
@@ -89,12 +89,12 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             var bodyLines = await divideString(data.data.data.motds[i].body,baseX/2-tabY/2,bodyFontSize);
             ctx.fillStyle = '#55D6F8';
             ctx.font = `${bodyFontSize}px "Burbank Big Rg Bk"`;
-            ctx.fillText(bodyLines.text, tabY/2, ((90/100)*baseY-((tabY/2)*bodyLines.linesCount)).toFixed(1))
+            ctx.fillText(bodyLines.text, bodyX, (bodyY-((tabY/2)*bodyLines.linesCount)).toFixed(1))
         //Title
             var titleLines = await divideString(data.data.data.motds[i].title,baseX/2-tabY/2,titleFontSize,'italic');
             ctx.fillStyle = '#FFFFFF';
             ctx.font = `italic ${titleFontSize}px "Burbank Big Rg Bk"`;
-            ctx.fillText(titleLines.text.toUpperCase(), tabY/2, (90/100)*baseY-((tabY/2)*(bodyLines.linesCount+1))-((tabY)*titleLines.linesCount));
+            ctx.fillText(titleLines.text.toUpperCase(), bodyX, bodyY-((tabY/2)*(bodyLines.linesCount+1))-((tabY)*titleLines.linesCount));
         //Other
             console.log(`Rendered "${data.data.data.motds[i].title.toUpperCase()}" | ${data.data.data.motds[i].id} in ${(Date.now()-beforeFinish)/1000}s`)
             const attach = new Discord.MessageAttachment(canvas.toBuffer(), `${data.data.data.motds[i].id}.webp`)
