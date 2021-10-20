@@ -1,24 +1,25 @@
-### **- Repository LINKS -**
-**[GitHub](https://github.com/Iron7III/Aklik) | [Support Discord Server](https://discord.gg/cVpZPqQ)**
+### **- USEFUL LINKS -**
+- **[GitHub](https://github.com/Iron7III/Aklik)**
+- **[Support Discord Server](https://dsc.gg/feltax)**
 
-<a href="https://github.com/Iron7III/Aklik">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Iron7III&repo=Aklik&theme=radical" />
-</a>
-<br/>
 <br/>
 
-### **- OWNER INFORMATION -**
+### **- OWNER'S INFORMATION -**
 - _`Discord Verifed BOT Developer`_
-- _`Feltax & FORTNITE API BOT Owner`_
+- _`"☑ FORTNITE API BOT" Owner`_
+- _`"FΞLTΛX" Owner`_
 
 <a href="https://github.com/Iron7III">
   <img align="center" src="https://github-readme-stats.vercel.app/api?username=Iron7III&theme=radical&show_icons=true">
 </a>
 <br/>
 <br/>
+<br/>
 
-#### **DEVELOPERS & HELPERS**
+#### **- TEAM -**
     Iron   ➜ CEO & DEV
+    Aidar  ➜ Contributor
+    Victor ➜ Contributor, Helper & Tester
     Shxdow ➜ Helper
 
 ##### **PUSH COMMIT ➜ HEROKU**

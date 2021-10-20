@@ -1,24 +1,40 @@
+require('dotenv').config()
+const fs = require("fs");
+const express = require('express')
+const {assets} = require('./assets.json');
+// Fortnite
+const FortniteAPICom = require("fortnite-api-com");
+const config = {apikey: "",language: "en"};
+const FortniteAPIIo = require("fortnite-api-io");
+var FortniteAPIComClient = new FortniteAPICom(config);
+const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7");
+// SWGoH
+const ApiSwgohHelp = require('api-swgoh-help');
+const swgoh = new ApiSwgohHelp({
+    "username":process.env.SWGOH_USERNAME,
+    "password":process.env.SWGOH_PASSWORD
+});
+// Discord
+const {REST} = require('@discordjs/rest');
+const {Routes} = require('discord-api-types/v9');
+const {SlashCommandBuilder} = require('@discordjs/builders');
 const Discord = require("discord.js");
 const client = new Discord.Client({
     disableEveryone: true,
     fetchAllMembers: true,
     intents: ['GUILDS','GUILD_MEMBERS','GUILD_BANS','GUILD_EMOJIS_AND_STICKERS','GUILD_INTEGRATIONS','GUILD_WEBHOOKS','GUILD_INVITES','GUILD_VOICE_STATES','GUILD_PRESENCES','GUILD_MESSAGES','GUILD_MESSAGE_REACTIONS','GUILD_MESSAGE_TYPING','DIRECT_MESSAGES','DIRECT_MESSAGE_REACTIONS','DIRECT_MESSAGE_TYPING']
 });
-const FortniteAPICom = require("fortnite-api-com");
-const config = {
-    apikey: "",
-    language: "en"
-};
-var FortniteAPIComClient = new FortniteAPICom(config);
-const FortniteAPIIo = require("fortnite-api-io");
-const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7")
-const {assets} = require('./assets.json')
-const express = require('express')
-const ApiSwgohHelp = require('api-swgoh-help');
-const swgoh = new ApiSwgohHelp({
-    "username":"Iron",
-    "password":"02122005asj"
-});
+
+// Discord Slash Commands Loader
+client.slashCommands = new Discord.Collection();
+const slashCommandsFiles = fs.readdirSync('src/slashCommands').filter(file => file.endsWith('js'));
+for(const file of slashCommandsFiles){
+    const slashCommand = require(`./slashCommands/${file}`);
+    console.log(`Slash Command \"${file}\" loaded.`)
+    client.slashCommands.set(slashCommand.data.name, slashCommand)
+}
+
+// Snowflake Checker
 function checkSnowflakeId(Id) {
     if(!Id) {
         console.log('undefined')
@@ -34,15 +50,29 @@ function checkSnowflakeId(Id) {
             return false
         }
     }
-}
+};
 
+// Discord Event :: interactionCreate
+client.on('interactionCreate', async(interaction) => {
+    if(!interaction.isCommand()) return;
+    const slashCommands = client.slashCommands.get(interaction.commandName);
+    console.log(`[${client.user.username}] Command :: ${interaction.commandName} (${interaction.commandId})`);
+    if(!slashCommands) return;
+    try{
+        await slashCommands.run(client, interaction);
+    } catch (e) {
+        console.error(e)
+    }
+})
+
+// Discord Event :: ready
 client.on("ready", async () => {
     console.log(`[${client.user.username}] Connected and ready up.`);
     let acquiredToken = await swgoh.connect();
-    var UserDate = Date.now()/1000;
+    var connectionTimestamp = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
         .setAuthor(`Connected`,assets.ready)
-        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **<t:${UserDate.toFixed(0)}:d> **|** <t:${UserDate.toFixed(0)}:T>`)
+        .setDescription(`> **PING ➜ **\`${Math.round(client.ws.ping)}\`\n> **DATE ➜ **<t:${connectionTimestamp.toFixed(0)}:d> **|** <t:${connectionTimestamp.toFixed(0)}:T>`)
         .setColor('#FD3D26')
     client.channels.cache.get()
     client.api.channels('853697844333772820').messages.post({
@@ -63,13 +93,14 @@ client.on("ready", async () => {
         status: 'dnd'
     });
     const { generateShop, getShopItems } = require("./shop");
-    const { apiKey, language, watermark } = require("./config.json");
+    //const { apiKey, language, watermark } = require("./config.json");
     (async () => {
         //const items = await getShopItems(apiKey, language);
         //await generateShop(items, watermark);
     })()
 })
 
+// Discord Event :: messageCreate
 client.on("messageCreate", async message => {
     let prefix = "f-";
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -123,6 +154,7 @@ client.on("messageCreate", async message => {
     }
 });
 
+// Discord Event :: guildCreate
 client.on("guildCreate", (guild) => {
     let _info = [
         `> **Name ➜ **\`${guild.name}\``,
@@ -160,6 +192,7 @@ client.on("guildCreate", (guild) => {
     }).catch(e => console.log(e))
 })
 
+// Discord Event :: guildDelete
 client.on("guildDelete", (guild) => {
     let _info = [
         `> **Name ➜ **\`${guild.name}\``,
@@ -174,4 +207,4 @@ client.on("guildDelete", (guild) => {
     client.channels.cache.get('853697886335008808').send({embeds:[guildDeleteEmbed]}).catch(e=>console.log(e))
 })
 
-client.login('NTY4NDM1NjE2MTUzMzM3OTE2.XLiC6w.ReMH4ndYBbjqZVZrSqxhQ81VDdE').catch(e => console.log(e));
+client.login(process.env.TOKEN).catch(e => console.log(e));

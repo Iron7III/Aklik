@@ -3,6 +3,9 @@ const { registerFont } = require("canvas");
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId, swgoh) => {
+    /**
+    * @param {string} PLAYER_ALLY_CODE
+    */
     function trimAllyCode(str){
         var rgx0 = /\d{9}/;
         var rgx1 = /\d{3}/;
@@ -15,6 +18,9 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             return null;
         }
     }
+    /**
+    * @param {string} PLAYER_ALLY_CODE
+    */
     async function fetchPlayer(PLAYER_ALLY_CODE){
         let PLAYER_PAYLOAD = {
             allycode: trimAllyCode(PLAYER_ALLY_CODE)
@@ -23,6 +29,9 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         PLAYER = Array.isArray(result)?result[0]:result;
         return PLAYER;
     }
+    /**
+    * @param {string} PLAYER_ALLY_CODE
+    */
     async function fetchGuild(GUILD_MEMBER_ALLY_CODE){
         let GUILD_PAYLOAD = {
             allycode: trimAllyCode(GUILD_MEMBER_ALLY_CODE)
@@ -31,6 +40,9 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         GUILD = Array.isArray(result)?result[0]:result;
         return GUILD;
     }
+    /**
+    * @param {string} PLAYER_ALLY_CODE
+    */
     async function fetchRoster(PLAYER_ALLY_CODE){
         let ROSTER_PAYLOAD = {
             allycode: trimAllyCode(PLAYER_ALLY_CODE)
@@ -39,6 +51,9 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         ROSTER = Array.isArray(result)?result[0]:result;
         return ROSTER;
     }
+    /**
+    * @param {string} COLLECTION
+    */
     async function fetchData(COLLECTION){
         VALID_COLLECTIONS = ["abilityList","battleEnvironmentsList","battleTargetingRuleList","categoryList","challengeList","challengeStyleList","effectList","environmentCollectionList","equipmentList","eventSamplingList","guildExchangeItemList","guildRaidList","helpEntryList","materialList","playerTitleList","powerUpBundleList","raidConfigList","recipeList","requirementList","skillList","starterGuildList","statModList","statModSetList","statProgressionList","tableList","targetingSetList","territoryBattleDefinitionList","territoryWarDefinitionList","unitsList","unlockAnnouncementDefinitionList","warDefinitionList","xpTableList"]
         if(VALID_COLLECTIONS.some(c => c==COLLECTION)){
@@ -61,7 +76,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
     switch (args[0]){
         case 'player':
             PLAYER = await fetchPlayer(trimAllyCode(args[1]));
-            var characterListData = await axios.get(`https://swgoh.gg/api/characters/`)
+            var characterListData = await axios.get(`https://swgoh.gg/api/characters/`);
+            /**
+            * @param {string} nStr
+            */
             function FormatAllyCode(nStr){
                 nStr += '';
                 x = nStr.split('.');
@@ -143,6 +161,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             }
             break;
         case 'check':
+            /**
+            * @param {string} allyCode
+            * @param {string} character
+            */
             async function checkRequirements(allyCode,character) {
                 var playerData = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(allyCode)}/`).catch(() => {return});
                 if(playerData===undefined){return};
@@ -516,6 +538,10 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                     })
                     break;
                 case 'players':
+                    /**
+                    * @param {string} ALLY_CODE_1
+                    * @param {string} ALLY_CODE_2
+                    */
                     async function playersData(ALLY_CODE_1, ALLY_CODE_2){
                         var PLAYER_1 = await fetchPlayer(trimAllyCode(ALLY_CODE_1));
                         var PLAYER_1_GG = await axios.get(`https://swgoh.gg/api/player/${trimAllyCode(ALLY_CODE_1)}`)

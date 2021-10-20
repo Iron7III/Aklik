@@ -4,6 +4,10 @@ const fs = require("fs");
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
+    /**
+    * @param {string} gameMode
+    * @param {string} lang
+    */
     async function generateFullNews(gameMode,lang){
         var deafultLang = 'en';
         var deafultGameMode = 'br';
@@ -33,6 +37,10 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         fs.writeFileSync(`${newsData.data.data.hash}.webp`, canvas.toBuffer());
         return attach;
     }
+    /**
+    * @param {string} language
+    * @param {number} resolution
+    */
     async function newsBR(language,resolution){
         const data = await axios.get(`https://fortnite-api.com/v2/news/br?language=${language}`);
         const news=[];
@@ -158,7 +166,9 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             }
             return newsArray;
         }
-    var splitNews = await newsBR(args[0]?args[0]:'en');
+    var newsBR = await newsBR(args[0]?args[0]:'en');
+    const embed = new Discord.MessageEmbed()
+        
     splitNews.map(n => {
         const row = new Discord.MessageActionRow()
         .addComponents(

@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoClient, {assets}) => {
+    /**
+    * @param {number} x
+    */
     async function CollatzConjecture(x){
         var y=Number(x),a=[y];
         while(y!==1){
@@ -9,6 +12,9 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
         return a;
     }
+    /**
+    * @param {number} n
+    */
     async function KaprekarRoutine(n){
         let t = n,a = [Number(t)];
         while(t!==6174){
@@ -19,6 +25,17 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
         return a;
     }
+    /**
+    * @param {number} n
+    */
+    async function Fibonacci(n){
+        for(var a = [0,1], i=0,j=1,k=0; k<n;i=j,j=x,k++ ){
+            x=i+j;
+            a.push(x);
+        }
+        return a;
+    }
+    console.log(await Fibonacci(82))
 
     switch(args[0]){
         case 'collatz':
