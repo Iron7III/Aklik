@@ -101,7 +101,6 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
         }
         if(User){
             var UserBadges = User.flags.toArray().map(b => Badges[b]);
-            var UserBadges = User.flags.toArray().map(b => Badges[b]);
             if(APIUser.avatar!==null){
                 if(APIUser.avatar.startsWith('a_')){
                     UserBadges.push(client.emojis.cache.get('867772736651001926'))
@@ -142,7 +141,7 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
             if(Member){
                 var MemberInfo = [
                     `> **Nickname ➜ **\`${Member.nickname!==null?Member.nickname:'No Nickname'}\``,
-                    `> **Booster ➜ **\`${Member.premiumSince!=null?`Boosting [${Member.premiumSince.getDate()>9?Member.premiumSince.getDate():`0${Member.premiumSince.getDate()}`}-${Member.premiumSince.getMonth()>9?Member.premiumSince.getMonth():`0${Member.premiumSince.getMonth()+1}`}-${Member.premiumSince.getFullYear()}\` **|** \`${Member.premiumSince.getHours()>9?Member.premiumSince.getHours():`0${Member.premiumSince.getHours()}`}:${Member.premiumSince.getMinutes()>9?Member.premiumSince.getMinutes():`0${Member.premiumSince.getMinutes()}`}:${Member.premiumSince.getSeconds()>9?Member.premiumSince.getSeconds():`0${Member.premiumSince.getSeconds()}`}]`:`Not Boosting`}\``,
+                    `> **Booster ➜ **\`${Member.premiumSince!=null?`Boosting since [${Member.premiumSince.getDate()>9?Member.premiumSince.getDate():`0${Member.premiumSince.getDate()}`}-${Member.premiumSince.getMonth()>9?Member.premiumSince.getMonth():`0${Member.premiumSince.getMonth()+1}`}-${Member.premiumSince.getFullYear()}\` **|** \`${Member.premiumSince.getHours()>9?Member.premiumSince.getHours():`0${Member.premiumSince.getHours()}`}:${Member.premiumSince.getMinutes()>9?Member.premiumSince.getMinutes():`0${Member.premiumSince.getMinutes()}`}:${Member.premiumSince.getSeconds()>9?Member.premiumSince.getSeconds():`0${Member.premiumSince.getSeconds()}`}]`:`Not Boosting`}\``,
                     `> **Joined ➜ **<t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:d> <t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:T> (<t:${(Member.joinedAt.getTime()/1000).toFixed(0)}:R>)`,
                     `> **Platforms ➜ **${Member.presence!==null&&Member.presence.clientStatus.mobile?client.emojis.cache.get('858403427428335636'):client.emojis.cache.get('858406136033837126')} ${Member.presence!==null&&Member.presence.clientStatus.desktop?client.emojis.cache.get('858403427473948712'):client.emojis.cache.get('858406136046682163')} ${Member.presence!==null&&Member.presence.clientStatus.web?client.emojis.cache.get('858403427407495168'):client.emojis.cache.get('858406136121524225')}`,
                 ]
@@ -152,7 +151,8 @@ exports.run = async (client, message, args, FortniteAPIComClient,FortniteAPIIoCl
                 ]
                 UserInfoBase
                 .addField('Member Info',MemberInfo.join('\n'),false)
-                .addField('Member Info 2',MemberInfo2.join('\n'),false)
+                .addField('Permissions',`> ${Member.permissions!==null?Member.permissions.toArray().map(p => `\`${Permissions[p]}\``).join(' '):`\`No permissions\``}`,false)
+                .addField('Roles [\`${Member._roles.length+1}\`]',Member.roles.cache.map(r => r).join(' '),false)
                 .addField('Status',`> **${Member.presence!==null?Status[Member.presence.status].displayName:Status['offline'].displayName}**`,false)
                 .setColor(Member.presence!==null?Status[Member.presence.status].color:Status['offline'].color)
                 Banner.setColor(Member.presence!==null?Status[Member.presence.status].color:Status['offline'].color)

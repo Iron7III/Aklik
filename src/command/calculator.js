@@ -35,7 +35,13 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
         }
         return a;
     }
-    console.log(await Fibonacci(82))
+    /**
+    * @param {number} n
+    */
+    async function HanoiTowers(n){
+        return (2**n)-1;
+    }
+    console.log(await HanoiTowers(3))
 
     switch(args[0]){
         case 'collatz':
