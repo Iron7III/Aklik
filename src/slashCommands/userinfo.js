@@ -27,19 +27,19 @@ module.exports = {
         const statusTypeDefinition = {
             'online': {
                 color: '#3BA55B',
-                displayName: `${client.emojis.cache.get("864132043944362024")} Online`
+                displayName: `${client.emojis.cache.get("864132043944362024")} \`Online\``
             },
             'dnd': {
                 color: '#EB4245',
-                displayName: `${client.emojis.cache.get("864132043877384212")} Do Not Disturb`
+                displayName: `${client.emojis.cache.get("864132043877384212")} \`Do Not Disturb\``
             },
             'idle': {
                 color: '#F9A61A',
-                displayName: `${client.emojis.cache.get("864132043881316413")} Idle`
+                displayName: `${client.emojis.cache.get("864132043881316413")} \`Idle\``
             },
             'offline': {
                 color: '#737F8D',
-                displayName: `${client.emojis.cache.get("864132044081594369")} Offline`
+                displayName: `${client.emojis.cache.get("864132044081594369")} \`Offline\``
             }
         };
         const badgesTypeDefinition = {
