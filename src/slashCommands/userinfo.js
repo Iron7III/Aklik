@@ -115,6 +115,7 @@ module.exports = {
                 `> **Joined ➜ **<t:${(member.joinedAt.getTime()/1000).toFixed(0)}:d> <t:${(member.joinedAt.getTime()/1000).toFixed(0)}:T> **(**<t:${(member.joinedAt.getTime()/1000).toFixed(0)}:R>**)**`,
                 `> **Platforms ➜ **${member.presence!==null&&member.presence.clientStatus.mobile?client.emojis.cache.get('858403427428335636'):client.emojis.cache.get('858406136033837126')} ${member.presence!==null&&member.presence.clientStatus.desktop?client.emojis.cache.get('858403427473948712'):client.emojis.cache.get('858406136046682163')} ${member.presence!==null&&member.presence.clientStatus.web?client.emojis.cache.get('858403427407495168'):client.emojis.cache.get('858406136121524225')}`,
                 `> **Booster ➜ **${member.premiumSince!==null?`<t:${(member.premiumSince.getTime()/1000).toFixed(0)}:d> <t:${(member.premiumSince.getTime()/1000).toFixed(0)}:T> **(**<t:${(member.premiumSince.getTime()/1000).toFixed(0)}:R>**)**`:'\`Not boosting\`'}`,
+                `> **Status ➜ **${member.presence!==null?statusTypeDefinition[member.presence.status].displayName:statusTypeDefinition['offline'].displayName}`
             ];
             memberEmbed
             .addField('Member Info',memberDataList.join('\n'),false)

@@ -198,7 +198,7 @@ client.on("guildDelete", (guild) => {
         `> **Name ➜ **\`${guild.name}\``,
         `> **ID ➜ **\`${guild.id}\``,
         `> **Members ➜ **\`${guild.memberCount}\``,
-        `> **Owner ➜ **<@${guild.ownerId}> ${client.emojis.cache.get('860997112434786315')} ${guild.members.cache.get(guild.ownerId).premiumSince!=null?client.emojis.cache.get('860999928217206795'):` `} **|** \`${guild.ownerId}\``
+        `> **Owner ➜ **<@${guild.ownerId}> ${client.emojis.cache.get('860997112434786315')} **|** \`${guild.ownerId}\``
     ]
     const guildDeleteEmbed = new Discord.MessageEmbed()
         .setAuthor(`Left Server`,guild.iconURL({dynamic:true,size:512}))
