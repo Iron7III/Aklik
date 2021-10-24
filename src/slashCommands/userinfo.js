@@ -122,7 +122,7 @@ module.exports = {
             .addField('Permissions',`> ${member.permissions!==null?member.permissions.toArray().map(p => `\`${permissionTypeDefinition[p]}\``).join(' '):`\`No permissions\``}`,false)
             .addField(`Roles [\`${member._roles.length+1}\`]`,`> ${member.roles.cache.map(r => r).join(' ')}`,false)
             .setColor(user.hexAccentColor)
-            .setThumbnail(member.avatar!==null?`https://cdn.discordapp.com/guilds/${member.guild.id}/users/${member.id}.${member.avatar.startsWith('a_')?'gif':'png'}?size=1024`:user.defaultAvatarURL);
+            .setThumbnail(member.avatar!==null?`https://cdn.discordapp.com/guilds/${member.guild.id}/users/${member.id}/avatars/${member.avatar}.${member.avatar.startsWith('a_')?'gif':'png'}?size=1024`:user.defaultAvatarURL);
             embedsArray.push(memberEmbed)
         };
         interaction.reply({embeds: embedsArray});
