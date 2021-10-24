@@ -166,10 +166,10 @@ exports.run = async (client, message, args, FortniteAPIComClient, FortniteAPIIoC
             }
             return newsArray;
         }
-    var newsBR = await newsBR(args[0]?args[0]:'en');
+    var news = await newsBR(args[0]?args[0]:'en');
     const embed = new Discord.MessageEmbed()
         
-    splitNews.map(n => {
+    news.map(n => {
         const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
