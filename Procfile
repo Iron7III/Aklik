@@ -1,2 +1,2 @@
 worker: npm start
-web: node web/server.js
+web: node web/test.html
