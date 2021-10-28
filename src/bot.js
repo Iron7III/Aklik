@@ -1,12 +1,11 @@
 require('dotenv').config()
 const fs = require("fs");
-const express = require('express')
 const {assets} = require('./assets.json');
+console.bot = (arg) => {console.log(`[BOT] ${arg}`);};
 // Fortnite
 const FortniteAPICom = require("fortnite-api-com");
-const config = {apikey: "",language: "en"};
 const FortniteAPIIo = require("fortnite-api-io");
-var FortniteAPIComClient = new FortniteAPICom(config);
+var FortniteAPIComClient = new FortniteAPICom({apikey: "",language: "en"});
 const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7");
 // SWGoH
 const ApiSwgohHelp = require('api-swgoh-help');
@@ -30,7 +29,7 @@ client.slashCommands = new Discord.Collection();
 const slashCommandsFiles = fs.readdirSync('src/slashCommands').filter(file => file.endsWith('js'));
 for(const file of slashCommandsFiles){
     const slashCommand = require(`./slashCommands/${file}`);
-    console.log(`Slash Command \"${file}\" loaded.`)
+    console.bot(`Slash Command \"${file}\" loaded.`)
     client.slashCommands.set(slashCommand.data.name, slashCommand)
 }
 
@@ -56,7 +55,7 @@ function checkSnowflakeId(Id) {
 client.on('interactionCreate', async(interaction) => {
     if(!interaction.isCommand()) return;
     const slashCommands = client.slashCommands.get(interaction.commandName);
-    console.log(`[${client.user.username}] Command :: ${interaction.commandName} (${interaction.commandId})`);
+    console.bot(`Command :: ${interaction.commandName} (${interaction.commandId})`);
     if(!slashCommands) return;
     try{
         await slashCommands.run(client, interaction);
@@ -67,7 +66,7 @@ client.on('interactionCreate', async(interaction) => {
 
 // Discord Event :: ready
 client.on("ready", async () => {
-    console.log(`[${client.user.username}] Connected and ready up.`);
+    console.bot(`Connected and ready up.`);
     let acquiredToken = await swgoh.connect();
     var connectionTimestamp = Date.now()/1000;
     const readyEmbed = new Discord.MessageEmbed()
@@ -113,7 +112,7 @@ client.on("messageCreate", async message => {
     try {
         let file = require(`./command/${cmd}.js`);
         file.run(client, message, args, FortniteAPIComClient,FortniteAPIIoClient, {assets}, checkSnowflakeId, swgoh);
-        console.log(`[${client.user.username}] Used \'${cmd}\'.`);
+        console.bot(`Used \'${cmd}\'.`);
     } catch (e) {
         message.channel.send('Este comando no existe').then(msg => setTimeout(() => msg.delete(), 5000))
         console.log(e.stack)

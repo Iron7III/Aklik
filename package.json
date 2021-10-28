@@ -4,7 +4,9 @@
     "description": "Im a Discord BOT for moderation and other some uses.",
     "main": "bot.js",
     "scripts": {
-        "start": "node src/bot.js"
+        "startBot": "node src/bot.js",
+        "addSlashCommands": "node src/slashCommands.js",
+        "startWeb": "node web/server.js"
     },
     "keywords": [],
     "author": "",
@@ -14,7 +16,7 @@
         "api-swgoh-help": "^3.3.0",
         "axios": "^0.21.0",
         "canvas": "^2.6.1",
-        "discord.js": "^13.0.1",
+        "discord.js": "^13.2.0",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "fortnite-api-com": "^2.2.1",

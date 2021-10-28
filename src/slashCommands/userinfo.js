@@ -13,14 +13,13 @@ module.exports = {
         .setDescription('Set user\'s mention or id.')
         .setRequired(false)),
     async run(client, interaction){
-        console.log(interaction)
         var user, member;
-        if(!interaction.options._hoistedOptions[0]){
+        if(!interaction.options.getUser('user')){
             user=await interaction.user.fetch(true);
             member=interaction.member;
         } else {
-            user=await interaction.options._hoistedOptions[0].user.fetch(true);
-            member=interaction.options._hoistedOptions[0].member;
+            user=await interaction.options.getUser('user').fetch(true);
+            member=interaction.guild.members.resolve(interaction.options.getUser('user').id);
         }
         console.log(user)
         console.log(member)
