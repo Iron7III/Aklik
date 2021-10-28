@@ -24,9 +24,8 @@ app.use((req, res, next)=>{
     next();
 });
 
-app.get('/', (req, res)=>{
+/*app.get('/', (req, res)=>{
     console.web('User entering to the main web!');
     res.send('Hello, world!');
-});
-
+});*/
 // heroku local web
