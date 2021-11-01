@@ -10,7 +10,7 @@ app.use(function (req, res, next) {
 
 
 app.get('/', (req, res)=>{  
-  res.sendFile('index.html', {root :  __dirname})
+  res.sendFile('web/index.html')
   res.end();
 });
 
