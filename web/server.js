@@ -27,7 +27,8 @@ app.get('/', (req, res)=>{
     console.web(`Running on ${__dirname}`);
   	//res.sendFile(__dirname + 'bhjbhjbhjbhjbhj/views/layout.ejs');
     ejs.renderFile('index.ejs', function(err, str){
-       res.send(str);
+        console.web(str);
+        res.send(str);
     });
     res.end();
 });
