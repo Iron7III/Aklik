@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fs = require("fs");
-const {assets} = require('./assets.json');
+const {colors, assets} = require('./brand.json');
 console.bot = (arg) => {console.log(`[BOT] ${arg}`);};
 // Fortnite
 const FortniteAPICom = require("fortnite-api-com");
