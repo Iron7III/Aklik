@@ -1,2 +1,2 @@
-worker: npm startBot
-web: node web/server.js
+worker: npm run startBot
+web: npm run startWeb
