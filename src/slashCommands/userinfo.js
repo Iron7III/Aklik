@@ -108,7 +108,7 @@ module.exports = {
         .setThumbnail(user.avatar!==null?`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_')?'gif':'png'}?size=1024`:user.defaultAvatarURL);
         const memberEmbed = new Discord.MessageEmbed();
         var embedsArray = [userEmbed];
-        if(member!==undefined){
+        if(member!==null){
             var memberDataList = [
                 `> **Nickname ➜ **\`${member.nickname!==null?member.nickname:'No Nickname'}\``,
                 `> **Joined ➜ **<t:${(member.joinedAt.getTime()/1000).toFixed(0)}:d> <t:${(member.joinedAt.getTime()/1000).toFixed(0)}:T> **(**<t:${(member.joinedAt.getTime()/1000).toFixed(0)}:R>**)**`,

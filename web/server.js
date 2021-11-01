@@ -9,8 +9,8 @@ app.use(function (req, res, next) {
   });
 
 
-app.get('/', (req, res)=>{  
-  res.sendFile('web/index.html')
+app.get('/', (req, res)=>{
+  res.sendFile('web/index.html', {root : __dirname + '/views'});
   res.end();
 });
 
