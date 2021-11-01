@@ -8,6 +8,12 @@ app.use(function (req, res, next) {
     next();
   });
 
+
+app.get('/', (req, res)=>{  
+  res.send('Hello, world');
+  res.end();
+});
+
 const port = process.env.PORT || 80;
 app.listen(port, ()=>{
     console.web(`Running server on port: ${port}`);
