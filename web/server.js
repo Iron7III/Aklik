@@ -4,6 +4,7 @@ console.web = (arg) => {console.log(`[WEB] ${arg}`);};
 
 const path = require("path");
 const expressLayout = require("express-ejs-layouts");
+const fs = require("fs");
 
 app.use(function (req, res, next) {
   	console.log('Time:', Date.now());
