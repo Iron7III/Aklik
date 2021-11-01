@@ -6,6 +6,13 @@ const path = require("path");
 const expressLayout = require("express-ejs-layouts");
 const fs = require("fs");
 
+//to use the static files (styles and that stuff)
+app.use(express.static(path.join(__dirname, '/public')));
+
+//To use ejs
+app.set("view engine", "ejs");
+app.use(expressLayout);
+
 app.use(function (req, res, next) {
   	console.log('Time:', Date.now());
   	next();
@@ -14,7 +21,7 @@ app.use(function (req, res, next) {
 
 app.get('/', (req, res)=>{
   	//res.sendFile('web/index.html', {root : __dirname + '/views'});
-  	res.sendFile(fs.readFileSync('web/views/index.html'));
+  	res.render('/views/index.ejs');
   	res.end();
 });
 
