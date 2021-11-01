@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 app.get('/', (req, res)=>{
   	//res.sendFile('web/index.html', {root : __dirname + '/views'});
   	//res.render('/index.ejs');
-  	res.send('<b>Hola</b>');
+  	res.send('layout.ejs');
     res.end();
 });
 
