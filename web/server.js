@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 
 app.get('/', (req, res)=>{
   	//res.sendFile('web/index.html', {root : __dirname + '/views'});
-  	res.render('/views/index.ejs');
+  	res.render('/index.ejs');
   	res.end();
 });
 
