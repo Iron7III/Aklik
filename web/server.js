@@ -26,10 +26,16 @@ app.get('/', (req, res)=>{
   	//res.render('/index.ejs');
     console.web(`Running on ${__dirname}`);
   	//res.sendFile(__dirname + 'bhjbhjbhjbhjbhj/views/layout.ejs');
-    ejs.renderFile('index.ejs', function(err, str){
+    ejs.renderFile('/views/index.ejs', function(err, str){
         console.web(str);
         res.send(str);
     });
+    ejs.renderFile('views/index.ejs', function(err, str){
+      	console.web(str);
+  	});
+  	ejs.renderFile(__dirname + '/views/index.ejs', function(err, str){
+    	console.web(str);
+	});
     res.end();
 });
 
