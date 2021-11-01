@@ -1,1 +1,1 @@
-<?php require_once('views/index.html')?>
+<?php require_once('web/views/index.html')?>

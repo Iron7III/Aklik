@@ -13,6 +13,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set("view engine", "ejs");
 app.use(expressLayout);
 
+app.set("views", path.join(__dirname, '/views'));
+
 app.use(function (req, res, next) {
   	console.log('Time:', Date.now());
   	next();
