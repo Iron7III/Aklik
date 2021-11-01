@@ -8,7 +8,7 @@ app.use(function (req, res, next) {
     next();
   });
 app.get('/api/*', (req, res) => res.status(404).json({ code: 404 }));
-app.all('*', (req, res) => res.status(200).sendFile(`web/public/index.html`));
+//app.all('*', (req, res) => res.status(200).sendFile(`web/public/index.html`));
 
 
 
