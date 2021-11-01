@@ -10,7 +10,7 @@ app.use(function (req, res, next) {
 
 
 app.get('/', (req, res)=>{  
-  res.send('Hello, world');
+  res.send('index.html');
   res.end();
 });
 
