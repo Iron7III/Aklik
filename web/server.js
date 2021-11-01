@@ -23,8 +23,9 @@ app.use(function (req, res, next) {
 
 app.get('/', (req, res)=>{
   	//res.sendFile('web/index.html', {root : __dirname + '/views'});
-  	res.render('/index.ejs');
-  	res.end();
+  	//res.render('/index.ejs');
+  	res.send('<b>Hola</b>');
+    res.end();
 });
 
 const port = process.env.PORT || 80;
