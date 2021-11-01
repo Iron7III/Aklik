@@ -20,11 +20,15 @@ app.use(function (req, res, next) {
   	next();
 });
 
-
+const ejs = require('ejs');
 app.get('/', (req, res)=>{
   	//res.sendFile('web/index.html', {root : __dirname + '/views'});
   	//res.render('/index.ejs');
-  	res.sendFile('layout.ejs');
+    console.web(`Running on ${__dirname}`);
+  	res.sendFile(__dirname + '/views/layout.ejs');
+    /*ejs.renderFile('index.ejs', function(err, str){
+       res.send(str);
+    });*/
     res.end();
 });
 
