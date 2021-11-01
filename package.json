@@ -5,8 +5,7 @@
     "main": "bot.js",
     "scripts": {
         "startBot": "node src/bot.js",
-        "addSlashCommands": "node src/slashCommands.js",
-        "startWeb": "node web/server.js"
+        "addSlashCommands": "node src/slashCommands.js"
     },
     "keywords": [],
     "author": "",
