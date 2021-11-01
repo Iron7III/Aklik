@@ -10,7 +10,7 @@ app.use(function (req, res, next) {
 
 
 app.get('/', (req, res)=>{  
-  res.render('./index.html')
+  res.send('./index.html')
   res.end();
 });
 
