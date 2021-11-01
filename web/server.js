@@ -25,10 +25,10 @@ app.get('/', (req, res)=>{
   	//res.sendFile('web/index.html', {root : __dirname + '/views'});
   	//res.render('/index.ejs');
     console.web(`Running on ${__dirname}`);
-  	res.sendFile(__dirname + 'bhjbhjbhjbhjbhj/views/layout.ejs');
-    /*ejs.renderFile('index.ejs', function(err, str){
+  	//res.sendFile(__dirname + 'bhjbhjbhjbhjbhj/views/layout.ejs');
+    ejs.renderFile('index.ejs', function(err, str){
        res.send(str);
-    });*/
+    });
     res.end();
 });
 
