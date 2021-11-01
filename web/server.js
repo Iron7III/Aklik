@@ -28,7 +28,7 @@ app.get('/', (req, res)=>{
   	
   	ejs.renderFile(__dirname + '/views/layout.ejs', function(err, strLayout){
     	ejs.renderFile(__dirname + '/views/index.ejs', function(err, strIndex){
-        var a = strLayout.replace('<%body%>', strIndex);
+        var a = strLayout.replace('<b>BODY</b>', strIndex);
         res.send(a);
         console.web(strLayout);
         console.web(strIndex);
