@@ -6,7 +6,7 @@ console.bot = (arg) => {console.log(`[BOT] ${arg}`);};
 const FortniteAPICom = require("fortnite-api-com");
 const FortniteAPIIo = require("fortnite-api-io");
 var FortniteAPIComClient = new FortniteAPICom({apikey: "",language: "en"});
-const FortniteAPIIoClient = new FortniteAPIIo("1c43003c-41511d50-7062e583-6ea047a7");
+const FortniteAPIIoClient = new FortniteAPIIo(process.env.FORTNITEAPIIO_APIKEY);
 // SWGoH
 const ApiSwgohHelp = require('api-swgoh-help');
 const swgoh = new ApiSwgohHelp({

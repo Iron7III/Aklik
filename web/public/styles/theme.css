@@ -1,0 +1,129 @@
+/*DEFINE THE COLOR VARIABLES*/
+:root{
+    --backgroundColor: rgba(200, 50, 100, 0.5);
+    --transparentColor: rgba(0, 0, 0, 0);
+
+    --navTabColor: grey;
+    --navTabButtonColor: lightblue;
+    --navTabHighlightedColor: cornflowerblue;
+
+    --h1BgColor: rgb(200, 100, 50);
+    --paragraphBgColor: purple;
+}
+
+body {
+    margin: 0px;
+}
+
+canvas.back {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: var(--backgroundColor);
+    z-index: -2;
+}
+
+/*This is for adding a detail decoration to the background, to do...*/
+canvas.details {
+    background: var(--transparentColor);
+    z-index: -1;
+}
+
+div.webBody {
+    margin: 3%;     
+}
+
+/*nav Tab*/
+div.navTab {
+    position: sticky;
+    top: 0px;
+    background-color: var(--navTabColor);
+}
+
+div.navButton {
+    display: inline-block;
+    margin: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: var(--navTabButtonColor);
+    box-sizing: border-box;
+    border-radius: 4px;
+    transition: padding 200ms, background 1000ms;
+}
+
+.navButton:hover {
+    /*padding : 2px;*/
+    padding-left: 17px;
+    padding-right: 17px;
+    background-color: var(--navTabHighlightedColor);
+}
+
+/*Titles*/
+div.h1 {
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 30px;
+    border-radius: 30px;
+    background-color: var(--h1BgColor);
+}
+
+/*Curly containers*/
+div.curlyL {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+div.curlyR {
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+div.curlyDirR {
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 30px;
+}
+
+div.curlyDirL {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 5px;
+}
+
+div.curlyAnimated {
+    animation: curlyWave 2s infinite alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes curlyWave {
+    0% {
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    100% {
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+}
+
+/*Paragraphs*/
+div.paragraph {
+    display: inline-block;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 10px;
+    background-color: var(--paragraphBgColor);
+}

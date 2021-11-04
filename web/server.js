@@ -24,21 +24,6 @@ app.get('/', (req, res)=>{
     res.end();
 });
 
-/*
-const fs = require('fs');
-const ejs = require('ejs');
-app.get('/', (req, res)=>{
-  	ejs.renderFile(__dirname + '/views/layout.ejs', function(err, strLayout){
-    	ejs.renderFile(__dirname + '/views/index.ejs', function(err, strIndex){
-        var a = strLayout.replace('<b>BODY</b>', strIndex);
-        res.send(a);
-        console.web(strLayout);
-        console.web(strIndex);
-      });
-  	});
-    res.end();
-});*/
-
 const port = process.env.PORT || 80;
 app.listen(port, ()=>{
   	console.web(`Running server on port: ${port}`);
