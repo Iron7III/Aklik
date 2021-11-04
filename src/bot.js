@@ -58,7 +58,7 @@ client.on('interactionCreate', async(interaction) => {
     console.bot(`Command :: ${interaction.commandName} (${interaction.commandId})`);
     if(!slashCommands) return;
     try{
-        await slashCommands.run(client, interaction);
+        await slashCommands.run(client, interaction, colors);
     } catch (e) {
         console.error(e)
     }

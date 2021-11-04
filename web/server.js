@@ -4,22 +4,28 @@ console.web = (arg) => {console.log(`[WEB] ${arg}`);};
 
 const path = require("path");
 const expressLayout = require("express-ejs-layouts");
-const fs = require("fs");
+
 
 //to use the static files (styles and that stuff)
 app.use(express.static(path.join(__dirname, '/public')));
 
 //To use ejs
 app.set("view engine", "ejs");
-app.use(expressLayout);
-
 app.set("views", path.join(__dirname, '/views'));
+app.use(expressLayout);
 
 app.use(function (req, res, next) {
   	console.log('Time:', Date.now());
   	next();
 });
 
+app.get('/', (req, res)=>{
+    res.render('index.ejs');
+    res.end();
+});
+
+/*
+const fs = require('fs');
 const ejs = require('ejs');
 app.get('/', (req, res)=>{
   	ejs.renderFile(__dirname + '/views/layout.ejs', function(err, strLayout){
@@ -31,7 +37,7 @@ app.get('/', (req, res)=>{
       });
   	});
     res.end();
-});
+});*/
 
 const port = process.env.PORT || 80;
 app.listen(port, ()=>{

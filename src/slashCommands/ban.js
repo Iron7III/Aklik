@@ -16,8 +16,13 @@ module.exports = {
         .setName('reason')
         .setDescription('Write a reason for the ban.')
         .setRequired(false)),
-    async run(client, interaction){
+    async run(client, interaction, colors){
         const member = interaction.guild.members.resolve(interaction.options.getUser('user').id);
         const reason = interaction.options.getString('reason')?interaction.options.getString('reason'):'No reason.';
+        if(!member.bannable){
+            embed.setDescription(`_The member can't be banned._`).setColor('#ED4245')
+            interaction.channel.send({embeds: [embed]})
+                .then(msg => setTimeout(() => msg.delete(), 5000))
+        }
     }
 }

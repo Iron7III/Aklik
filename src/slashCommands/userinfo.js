@@ -12,7 +12,7 @@ module.exports = {
         .setName('user')
         .setDescription('Set user\'s mention or id.')
         .setRequired(false)),
-    async run(client, interaction){
+    async run(client, interaction, colors){
         var user, member;
         if(!interaction.options.getUser('user')){
             user=await interaction.user.fetch(true);
