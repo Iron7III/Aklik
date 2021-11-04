@@ -22,10 +22,6 @@ app.use(function (req, res, next) {
 
 const ejs = require('ejs');
 app.get('/', (req, res)=>{
-  	//res.sendFile('web/index.html', {root : __dirname + '/views'});
-  	//res.render('/index.ejs');
-    console.web(`Running on ${__dirname}`);
-  	
   	ejs.renderFile(__dirname + '/views/layout.ejs', function(err, strLayout){
     	ejs.renderFile(__dirname + '/views/index.ejs', function(err, strIndex){
         var a = strLayout.replace('<b>BODY</b>', strIndex);
