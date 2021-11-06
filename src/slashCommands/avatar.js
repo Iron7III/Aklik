@@ -23,7 +23,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
         .setAuthor(`${user.username}'s Avatar`,user.avatar!==null?`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_')?'gif':'png'}?size=512`:user.defaultAvatarURL)
         .setColor(colors.main)
-        .setThumbnail(user.avatar!==null?`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_')?'gif':'png'}?size=1024`:user.defaultAvatarURL);
+        .setImage(user.avatar!==null?`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_')?'gif':'png'}?size=1024`:user.defaultAvatarURL);
         interaction.reply({embeds: [embed]});
     }
 }
