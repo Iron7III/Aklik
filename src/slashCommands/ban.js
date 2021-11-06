@@ -16,7 +16,8 @@ module.exports = {
         .setName('reason')
         .setDescription('Write a reason for the ban.')
         .setRequired(false)),
-    async run(client, interaction, colors){
+    async run(client, interaction, colors)
+    {
         const member = interaction.guild.members.resolve(interaction.options.getUser('user').id);
         const reason = interaction.options.getString('reason')?interaction.options.getString('reason'):'No reason.';
         if(!member.bannable){

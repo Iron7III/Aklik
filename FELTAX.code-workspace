@@ -1,10 +1,35 @@
 {
-  "folders": [
-    {
-      "path": "."
-    }
-],
-"settings": {
-    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
-}
+  	"folders": [
+    	{
+    	 	"path": "."
+    	}
+	],
+	"settings": {
+		"files.autoSave": "afterDelay",
+		"git.enableSmartCommit": true,
+		"json.maxItemsComputed": 5000000000,
+		"editor.maxTokenizationLineLength": 2000000000,
+		"editor.largeFileOptimizations": false,
+		"RPC.problemsText": "- {count} problems",
+		"RPC.idleText": "AFK",
+		"RPC.idleTimeout": 600,
+		"workbench.iconTheme": "material-icon-theme",
+		"liveshare.allowGuestDebugControl": true,
+		"liveshare.alwaysFollowHost": true,
+		"liveshare.allowGuestTaskControl": true,
+		"editor.hover.above": false,
+		"editor.guides.bracketPairsHorizontal": "active",
+		"editor.guides.bracketPairs": true,
+		"editor.language.bracketPairs": [
+			["[", "]"],
+			["{", "}"],
+			["(", ")"],
+			["", ""]
+		],
+		"editor.language.colorizedBracketPairs": [
+			["[", "]"],
+			["{", "}"],
+			["(", ")"]
+		]
+	}
 }
