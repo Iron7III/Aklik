@@ -40,7 +40,8 @@
 
 ><h3><b>📢 - UPCOMING FEATURES</b></h3>
 - `setnick <@/id> <newNickname/empty>`
-- Upgrade `math` command and change to slash command.
+- Upgrade `math` command and change to / command.
+- Pass all the commands to / commands.
 <hr>
 
 ><h3><b>🗳️ - SUGGESTIONS</b></h3>
