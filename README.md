@@ -6,6 +6,7 @@
 <hr>
 
 ><h3><b>🔗 - USEFUL LINKS</b></h3>
+- **[WEB](https://feltax-web.herokuapp.com/)**
 - **[GitHub](https://github.com/Iron7III/Aklik)**
 - **[Support Discord Server](https://dsc.gg/feltax)**
 <hr>

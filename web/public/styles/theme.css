@@ -1,7 +1,7 @@
 /*DEFINE THE GLOBAL VARIABLES*/
 :root{
     /*COLOR*/
-    --backgroundColor: rgba(200, 50, 100, 0.5);
+    --backgroundColor: rgb(255, 255, 255);
     --transparentColor: rgba(0, 0, 0, 0);
 
     --navTabColor: grey;
