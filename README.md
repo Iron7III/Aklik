@@ -34,7 +34,7 @@
 | **`Iron`**   | CEO & Developer |
 | **`Alex`**   | Developer |
 | **`Aidar`**  | Contributor |
-| **`Victor`** | Contributor, Helper & Tester |
+| **`Victor`** | Contributor, DEV & Tester |
 | **`Shxdow`** | Helper |
 <hr>
 
