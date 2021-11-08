@@ -51,6 +51,13 @@ function checkSnowflakeId(Id) {
     }
 };
 
+// Channel Checker
+function nashe(Id) {
+    console.log(Discord.SnowflakeUtil.deconstruct(Id));
+};
+nashe('438390132538605589')
+nashe('861491919070167041')
+
 // Discord Event :: interactionCreate
 client.on('interactionCreate', async(interaction) => {
     if(!interaction.isCommand()) return;
