@@ -21,7 +21,9 @@ module.exports = {
         const member = interaction.guild.members.resolve(interaction.options.getUser('member').id);
         const reason = interaction.options.getString('reason')?interaction.options.getString('reason'):'No reason.';
         if(!member.bannable){
-            embed.setDescription(`_The member can't be banned._`).setColor(colors.main)
+            const memberNotBannable = new Discord.MessageEmbed()
+            .setDescription(`_The member can't be banned._`)
+            .setColor(colors.main)
             interaction.channel.send({embeds: [embed]})
                 .then(msg => setTimeout(() => msg.delete(), 5000))
         }
