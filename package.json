@@ -6,7 +6,8 @@
     "scripts": {
         "startBot": "node src/bot.js",
         "addSlashCommands": "node src/slashCommands.js",
-        "startWeb": "node web/server.js"
+        "startWeb": "node web/server.js",
+        "pushToGitHub": "git push origin main"
     },
     "keywords": [],
     "author": "",
