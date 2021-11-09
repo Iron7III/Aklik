@@ -18,7 +18,7 @@ module.exports = {
         .setRequired(false)),
     async run(client, interaction, colors)
     {
-        const member = interaction.guild.members.resolve(interaction.options.getUser('user').id);
+        const member = interaction.guild.members.resolve(interaction.options.getUser('member').id);
         const reason = interaction.options.getString('reason')?interaction.options.getString('reason'):'No reason.';
         if(!member.bannable){
             embed.setDescription(`_The member can't be banned._`).setColor(colors.main)

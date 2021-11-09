@@ -9,6 +9,8 @@
 - **[WEB](https://feltax-web.herokuapp.com/)**
 - **[GitHub](https://github.com/Iron7III/Aklik)**
 - **[Support Discord Server](https://dsc.gg/feltax)**
+
+[![Iron7III's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=Iron7&layout=compact)](https://github.com/Iron7III/Aklik)
 <hr>
 
 ><h3><b>🛡️ - TEAM INFORMATION</b></h3>
