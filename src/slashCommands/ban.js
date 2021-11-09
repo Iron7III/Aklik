@@ -24,7 +24,7 @@ module.exports = {
             const memberNotBannable = new Discord.MessageEmbed()
             .setDescription(`_The member can't be banned._`)
             .setColor(colors.main)
-            interaction.channel.send({embeds: [embed]})
+            interaction.channel.send({embeds: [memberNotBannable]})
                 .then(msg => setTimeout(() => msg.delete(), 5000))
         }
     }
